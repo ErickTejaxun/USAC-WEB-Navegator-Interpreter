@@ -1,0 +1,415 @@
+package ocl1_proyecto1;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.io.PrintWriter;
+import  olc1_proyecto1.Menu.*;
+import  olc1_proyecto1.sintactico.*;
+//import static olc1_proyecto1.Menu.path;
+parser code
+{:
+    
+	public static void main(String args[]) throws Exception{
+		//new sintactico(new Scanner(new FileInputStream(args[0]))).parse();
+		//new sintactico(new Scanner(System.in)).parse();
+		new sintactico(new Scanner(new java.io.FileReader(path))).parse();
+	}
+	public static int valorVariable(String nombre,int linea, int columna)
+	{	int valor=0;
+		boolean existe=false;
+		for(int n=0;n<Menu.variables.size();n++){
+			if(Menu.variables.get(n).nombre.equals(nombre))
+			{
+				valor=Integer.valueOf(Menu.variables.get(n).valor);
+				existe=true;
+			}
+		}
+		if(existe==true)
+		{
+				Errores nuevoError =new Errores();
+				nuevoError.setTexto(nombre);
+				nuevoError.setLinea(linea);
+				nuevoError.setColumna(columna);
+				nuevoError.setDescripcion("Comparacion con tipos diferentes");
+				System.out.println("No coinciden los tipos de variable-valor "+ nombre +" "+linea +" "+columna);
+				Menu.errores_semanticos.add(nuevoError);
+		}
+		return valor;
+	}
+	public static boolean comparacion(String valor1,String valor2,String comparacion)
+	{	boolean resultado=false;
+		if(comparacion.equals(">")){if(valor1.toString()>valor2.toString()){resultado=true}}
+		if(comparacion.equals("<")){if(valor1.toString()<valor2.toString()){resultado=true}}
+		if(comparacion.equals("=")){if(valor1.toString()==valor2.toString()){resultado=true}}
+		if(comparacion.equals("!=")){if(valor1!.toString()=valor2.toString()){resultado=true}}
+		if(comparacion.equals(">=")){if(valor1.toString()>=valor2.toString()){resultado=true}}
+		if(comparacion.equals("<=")){if(valor1.toString()<=valor2.toString()){resultado=true}}
+		return resultado;
+	}
+	public static void nuevaVariable(String nombre, String valor, String tipo, int linea, int columna){
+		variable nuevo =new variable();
+		int posicion=0;
+		nuevo.setNombre(nombre);
+		nuevo.setValor(valor);
+		nuevo.setTipo(tipo);
+		boolean existe=false;
+		for(int n=0;n<Menu.variables.size();n++){
+			if(Menu.variables.get(n).nombre.equals(nombre)){
+				existe=true;
+				posicion=n;
+			}
+		}
+		if(existe==false){
+		Menu.variables.add(nuevo);	
+		}else{
+			if(Menu.variables.get(posicion).tipo.equals(tipo)){
+				Menu.variables.set(posicion,nuevo);
+			}
+			else
+			{
+				Errores nuevoError =new Errores();
+				nuevoError.setTexto(nombre);
+				nuevoError.setLinea(linea);
+				nuevoError.setColumna(columna);
+				nuevoError.setDescripcion("No coinciden los tipos de variable-valor");
+				System.out.println("No coinciden los tipos de variable-valor "+ nombre +" "+linea +" "+columna);
+				Menu.errores_semanticos.add(nuevoError);
+			}
+			
+		}
+		
+		
+	}
+	public static double numerotemporal=0;
+	public static String textotemporal="";
+
+	
+	
+	public static String ConvertirObjectToString(Object Obj) {
+	String Str="";
+	if(Obj!=null){
+	Str = Obj.toString();
+	}
+	return Str;
+	}
+
+	
+	public static double ConvertirObjectToDouble(Object Obj) {
+	String Str = Obj.toString();
+	double NumDouble = Double.valueOf(Str).doubleValue();
+	return NumDouble;
+	}
+	
+	public static int ConvertirObjectToInt(Object Obj) {
+	int NumInt = Integer.parseInt(sintactico.ConvertirObjectToString(Obj));
+	return NumInt;
+	}
+	
+
+        public static void error_sintactico(Symbol s){
+		report_error("Error de sintaxis. Linea: " + (s.right + 1) +
+		" Columna: " + s.left + ". Texto: \"" + s.value + "\"", null);
+		Errores errores_sintacticos=new Errores();
+		errores_sintacticos.setTipo("Sintactico");
+		errores_sintacticos.setLinea(s.right+1);
+		errores_sintacticos.setColumna(s.left);
+		errores_sintacticos.setDescripcion(ConvertirObjectToString(s.value));
+		//sintactico.listaSintactico.add(errores_sintacticos);
+		Menu.errores_sintacticos.add(errores_sintacticos);
+		
+	}
+
+:}
+
+
+/*Terminlaes*/
+terminal String negacion,iniciophp,finphp,abrirparentesis,cerrarparentesis,abrircorchetes,cerrarcorchetes,cerrartitulo,inicio,fin,abrircabecera,cerrarcabecera,abrirtitulo,cerraratitulo,abrircuerpo,cerrarcuerpo,abrirespacio,cerrarespacio,abrirparrafo,cerrarparrafo,saltolinea,abrirtabla,cerrartabla,abrirfila,cerrarfila,abrircolumnacabecera,cerrarcolumnacabecera,abrircolumna,
+cerrarcolumna,id,urlw,urll,definicionvariable,echo,asignacion,punto,puntocoma,comilla,verdadero,falso,abrircorchete,cerrarcorchete,menorque,mayorque,menorigual,mayorigual,distinto,y,or,si,sino;
+terminal suma,resta,multiplicacion,division;
+terminal Integer numero;
+terminal Integer decimal;
+terminal String idVariable;
+
+
+/*Producciones :v :v y mas :v*/
+non terminal String NEGACION,EXPR_INICIO,DECLARACION_VARIABLE,IMPRESION,IF,ELSE,VALOR,COMPARADOR,PHP,OPCIONES_PHP;
+non terminal OPERADOR_ARITEMETICO;
+non terminal Boolean OPERACION_BOOLEANA;
+non terminal OPERACION_ARITMETICA, OPERACION_PARCIAL;
+non terminal Integer OPERACION_SUMA;
+non terminal Integer OPERACION_RESTA;
+non terminal Integer OPERACION_MULTIPLICACION;
+non terminal Integer OPERACION_DIVISION;
+non terminal Integer expr_h;
+non terminal String CONCATENACION2,CONTENIDO,TEXTO,CONTENIDO_CUERPO,HTML,CABECERA,COLUMNA,TITULO,PARRAFO,ESPACIO,TABLA,FILA,COLUMNACABECERA,LOGICO;
+non terminal String CHAR,CONCATENACION,IDR;
+
+precedence left suma;
+precedence left resta;
+precedence left multiplicacion;
+precedence left division;
+
+
+start with EXPR_INICIO;
+EXPR_INICIO::= HTML;
+
+
+OPERACION_ARITMETICA ::= OPERACION_ARITMETICA OPERACION_PARCIAL 
+						| OPERACION_PARCIAL;
+
+OPERACION_PARCIAL ::= OPERACION_SUMA:e {: System.out.println("= "+e); :} ;
+OPERACION_SUMA ::= OPERACION_SUMA:l suma OPERACION_RESTA:r {: numerotemporal=RESULT=new Integer(l.intValue() + r.intValue()); :}
+                  | OPERACION_RESTA:e {: numerotemporal=RESULT=e; :}
+                  ;
+				  
+OPERACION_RESTA ::= OPERACION_RESTA:l resta OPERACION_MULTIPLICACION:r {: numerotemporal=RESULT=new Integer(l.intValue() - r.intValue()); :}
+                  | OPERACION_MULTIPLICACION:e {: numerotemporal=RESULT=e; :}
+                  ;
+				  
+OPERACION_MULTIPLICACION ::= OPERACION_MULTIPLICACION:l multiplicacion OPERACION_DIVISION:r {: numerotemporal=RESULT=new Integer(l.intValue() * r.intValue()); :}
+                  | OPERACION_DIVISION:e {: numerotemporal=RESULT=e; :}
+                  ;
+OPERACION_DIVISION ::= OPERACION_DIVISION:l division expr_h:r {: numerotemporal=RESULT=new Integer(l.intValue() / r.intValue()); :}
+                  | expr_h:e {: numerotemporal=RESULT=e; :}
+;
+
+expr_h ::= abrirparentesis OPERACION_SUMA:e cerrarparentesis {: numerotemporal=RESULT=e; :}
+                  | numero:n {: numerotemporal=RESULT=n; :}
+				  | decimal:n{:	numerotemporal=RESULT=n;:};
+
+PHP::= iniciophp OPCIONES_PHP:resultado finphp{:RESULT=resultado;:};
+	   
+
+OPCIONES_PHP::= OPCIONES_PHP:texto1 DECLARACION_VARIABLE{:RESULT=texto1;:}
+				|OPCIONES_PHP:texto1 IMPRESION:texto2{:RESULT=texto1+texto2;:}
+				|OPCIONES_PHP:texto1 IF:texto2{:RESULT=texto1+texto2;:}
+				|{:RESULT="";:};
+				
+
+
+						
+DECLARACION_VARIABLE::=  
+					    definicionvariable idVariable:n1 asignacion comilla IDR:n2 comilla puntocoma {:RESULT="";nuevaVariable(String.valueOf(n1),String.valueOf(n2),"Cadena",n1right,n1left);:}
+					   | definicionvariable idVariable:n1 asignacion falso:n2 puntocoma {:RESULT="";nuevaVariable(String.valueOf(n1),String.valueOf(n2),"Boleano",n1right,n1left);:}
+					   | definicionvariable idVariable:n1 asignacion verdadero:n2 puntocoma {:RESULT="";nuevaVariable(String.valueOf(n1),String.valueOf(n2),"Boleano",n1right,n1left);:}
+					   | definicionvariable idVariable:n1 asignacion OPERACION_ARITMETICA puntocoma {:RESULT="";nuevaVariable(String.valueOf(n1),String.valueOf(numerotemporal),"Numero",n1right,n1left);:};
+
+					   
+					   
+/*CHAR::=idVariable:texto {:RESULT=texto.toString();:}
+	 |CHAR:texto1 idVariable:texto2 {:RESULT=texto1+" "+texto2;:};*/
+	 
+	 
+IMPRESION::= echo CONCATENACION:texto puntocoma {:
+			RESULT=texto;
+			System.out.println("\n --------------- \n "+textotemporal+"\n -------------\n");:};	
+			 
+CONCATENACION::= comilla IDR:texto comilla{:textotemporal=RESULT=new String(texto);:}
+				 |definicionvariable idVariable:nombre{:
+						boolean estado=false;
+						for(int n=0;n<variables.size();n++){
+							if(variables.get(n).nombre.equals(nombre)){
+								textotemporal=RESULT=new String(variables.get(n).valor);
+								estado=true;
+							}
+						}
+						if(estado==false){
+							System.out.println("La variable "+ nombre+" no existe en el ambito.");
+						}
+						
+				:}
+				|CONCATENACION:texto1 punto comilla idVariable:texto2 comilla  {:
+				textotemporal=RESULT=new String(texto1+" "+texto2);:}
+				|CONCATENACION:texto punto definicionvariable idVariable:nombre{:
+						boolean estado=false;
+						for(int n=0;n<variables.size();n++){
+							if(variables.get(n).nombre.equals(nombre)){
+								textotemporal=RESULT=new String(texto+variables.get(n).valor);
+								estado=true;
+							}
+						}
+						if(estado==false){
+							System.out.println("La variable "+ nombre+" no existe en el ambito.");
+							textotemporal=RESULT=new String(texto);
+						}
+						
+				:};	
+IDR ::= idVariable:texto{:textotemporal=RESULT=new String(texto);:}
+		|IDR:texto1 idVariable:texto2{:textotemporal=RESULT=texto1+" "+texto2;:};
+
+IF::=  si abrirparentesis OPERACION_BOOLEANA:valor cerrarparentesis abrircorchetes IMPRESION:texto cerrarcorchetes ELSE:textoelse{:
+		if(valor==true){
+				RESULT=texto;
+		}else
+		{
+			RESULT=textoelse;
+		}:}
+	  |si abrirparentesis OPERACION_BOOLEANA:valor cerrarparentesis abrircorchetes IMPRESION:texto cerrarcorchetes{:
+		if(valor==true){
+				RESULT=texto;
+		}else
+		{
+			RESULT="";
+		}
+		:}
+	  |si abrirparentesis OPERACION_BOOLEANA:valor cerrarparentesis abrircorchetes IF:textoif cerrarcorchetes ELSE:textoelse{:
+		if(valor==true){
+				RESULT=textoif;
+		}else
+		{
+			RESULT=textoelse;
+		}:}
+	  |si abrirparentesis OPERACION_BOOLEANA:valor cerrarparentesis abrircorchetes IF:textoif cerrarcorchetes{:
+		if(valor==true){
+				RESULT=texto;
+		}else
+		{
+			RESULT="";
+		}:} 
+	  ;
+
+  
+ELSE::=  sino abrircorchetes IMPRESION:texto cerrarcorchetes{:RESULT=texto;:}
+		|sino abrircorchetes IF:texto cerrarcorchetes{:RESULT=texto;:};
+
+OPERACION_BOOLEANA::= 				  
+					  VALOR:valor1  COMPARADOR:compararado VALOR:valor2{:RESULT=true;:}
+					  |VALOR:valor1  error:nuevo VALOR:valor2{:sintactico.error_sintactico((Symbol)nuevo);:}
+					 |falso{:RESULT=true;:}
+					 |verdadero{:RESULT=true;:}
+					 /*Aqui estaba haciendo el mate :v Digo recuperando errores*/
+				     |abrirparentesis  definicionvariable idVariable cerrarparentesis{:RESULT=true;:}
+					 |abrirparentesis  error:nuevo idVariable cerrarparentesis{:sintactico.error_sintactico((Symbol)nuevo);:}
+					 |abrirparentesis  definicionvariable id cerrarparentesis{:RESULT=true;:}
+					 |abrirparentesis  verdadero cerrarparentesis{:RESULT=true;:}
+					 |abrirparentesis  falso cerrarparentesis{:RESULT=true;:}
+					 |abrirparentesis VALOR COMPARADOR VALOR cerrarparentesis{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO VALOR COMPARADOR VALOR{:RESULT=true;:}
+					 |negacion abrirparentesis VALOR COMPARADOR VALOR cerrarparentesis{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO abrirparentesis VALOR COMPARADOR VALOR cerrarparentesis{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO falso{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO verdadero{:RESULT=true;:}
+				     |OPERACION_BOOLEANA LOGICO abrirparentesis  idVariable cerrarparentesis{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO abrirparentesis  id cerrarparentesis{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO abrirparentesis  verdadero cerrarparentesis{:RESULT=true;:}
+					 |OPERACION_BOOLEANA LOGICO abrirparentesis  falso cerrarparentesis{:RESULT=true;:};
+					  
+	
+					  
+COMPARADOR::= mayorque
+			 |menorque
+			 |menorigual
+			 |mayorigual
+			 |distinto
+			 |asignacion asignacion;
+NEGACION::=negacion|;
+LOGICO::= or|y;
+			 
+VALOR ::=   OPERACION_ARITMETICA
+		    | definicionvariable idVariable:valor{:
+			/*RESULT=sintactico.valorVariable(valor,valorright,valorleft);*/:}
+			|verdadero{:RESULT=true;:}
+			|falso{:RESULT=false;:}
+			|id{::};
+		
+HTML::= inicio abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:
+		RESULT=Menu.resultado="<html>\n<body>"+texto+"</body></html>";
+		:}
+		|inicio error:nuevo abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo  error:nuevo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio error:nuevo CONTENIDO_CUERPO  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio abrircuerpo CONTENIDO_CUERPO  error:nuevo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio  CABECERA:cabecera abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:
+		RESULT=Menu.resultado="<html>\n"+cabecera+"<body>"+texto+"</body></html>";
+		:}
+		|inicio  error:nuevo CABECERA:cabecera abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio  CABECERA:cabecera abrircuerpo  CONTENIDO_CUERPO:texto  cerrarcuerpo error:nuevo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio  CABECERA:cabecera error:nuevo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio  CABECERA:cabecera abrircuerpo CONTENIDO_CUERPO:texto  error:nuevo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio  CABECERA:cabecera ESPACIO:espacio abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:
+		RESULT=Menu.resultado="<html>\n"+cabecera+espacio+"<body>"+texto+"</body></html>";
+		:}
+		|inicio  CABECERA:cabecera ESPACIO:espacio error CONTENIDO_CUERPO:texto  cerrarcuerpo fin	{::}
+		|inicio  CABECERA:cabecera ESPACIO:espacio abrircuerpo CONTENIDO_CUERPO:texto  error:nuevo fin	{:sintactico.error_sintactico((Symbol)nuevo);:}	
+		|inicio ESPACIO:espacio CABECERA:cabecera  abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:
+		RESULT=Menu.resultado="<html>\n"+espacio+cabecera+"<body>"+texto+"</body></html>";
+		:}
+		|inicio ESPACIO:espacio CABECERA:cabecera  error:nuevo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio ESPACIO:espacio error:nuevo CABECERA:cabecera  abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}			
+		|inicio ESPACIO:espacio  CABECERA:cabecera  error:nuevo abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo fin{:sintactico.error_sintactico((Symbol)nuevo);:}			
+		|inicio ESPACIO:espacio CABECERA:cabecera  abrircuerpo CONTENIDO_CUERPO:texto  error:nuevo fin{:sintactico.error_sintactico((Symbol)nuevo);:}
+		|inicio ESPACIO:espacio CABECERA:cabecera  abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}		
+		|inicio ESPACIO:espacio1 abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo ESPACIO:espacio2 CABECERA:cabecera fin{:
+		RESULT=Menu.resultado="<html>\n"+espacio1+"<body>"+texto+"</body>"+espacio2+cabecera+"</html>";
+		:}
+		|inicio ESPACIO:espacio1 error:nuevo CONTENIDO_CUERPO:texto  cerrarcuerpo ESPACIO:espacio2 CABECERA:cabecera fin{:sintactico.error_sintactico((Symbol)nuevo);:}		
+		|inicio ESPACIO:espacio1 abrircuerpo CONTENIDO_CUERPO:texto  error:nuevo ESPACIO:espacio2 CABECERA:cabecera fin{:sintactico.error_sintactico((Symbol)nuevo);:}		
+		|inicio ESPACIO:espacio1 abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo ESPACIO:espacio2 CABECERA:cabecera error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}		
+		|inicio error:nuevo ESPACIO:espacio1 abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo ESPACIO:espacio2 CABECERA:cabecera fin{:sintactico.error_sintactico((Symbol)nuevo);:}		
+		|inicio ESPACIO:espacio1 abrircuerpo CONTENIDO_CUERPO:texto  cerrarcuerpo  CABECERA:cabecera ESPACIO:espacio2 fin{:
+		RESULT=Menu.resultado="<html>\n"+espacio1+"<body>"+texto+"</body>"+cabecera+espacio2+"</html>";
+		:};
+CABECERA::=abrircabecera TITULO:texto cerrarcabecera{:RESULT="<head>"+texto+"</head>";:}
+		   |abrircabecera TITULO:texto error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:};
+
+TITULO::= abrirtitulo CONTENIDO:texto cerrartitulo{:RESULT="<title>"+texto+"</title>"; Menu.titulopagina+=texto;:}
+			|abrirtitulo CONTENIDO:texto error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:};
+
+PARRAFO::= abrirparrafo CONTENIDO:texto cerrarparrafo{:RESULT="<p>"+texto+"</p>";:}
+		   |abrirparrafo CONTENIDO:texto error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}
+		   ;
+ESPACIO::= abrirespacio CONTENIDO_CUERPO:texto cerrarespacio{:RESULT="<div>"+texto+"</div>";:}
+			|abrirespacio CONTENIDO_CUERPO:texto error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}
+			|abrirespacio  cerrarespacio{:RESULT="<div></div>";:}
+			|abrirespacio  error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:};
+			
+TABLA::= abrirtabla FILA:textofilas cerrartabla{:RESULT="<table border="1">"+textofilas+"</table>";:};
+
+FILA::=abrirfila COLUMNA:textofilas cerrarfila{:RESULT="<tr>"+textofilas+"</tr>";:}
+		|abrirfila COLUMNA:textofilas error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}
+	   |abrirfila COLUMNACABECERA:texto2 cerrarfila{:RESULT="<tr>"+texto2+"</tr>";:}/*En negrita :v*/
+	   |abrirfila COLUMNACABECERA:texto2 error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}/*En negrita :v*/
+	   |FILA:textocolumna1 abrirfila COLUMNA:textocolumna2 cerrarfila{:RESULT=textocolumna1+"<tr>"+textocolumna2+"</tr>";:};
+
+
+COLUMNACABECERA::= abrircolumnacabecera CONTENIDO:texto cerrarcolumnacabecera{:RESULT="<th>"+texto+"</th>";:}
+		   |abrircolumnacabecera CONTENIDO:texto error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}
+		   | COLUMNACABECERA:texto1 abrircolumnacabecera CONTENIDO:texto2 cerrarcolumnacabecera{:RESULT=texto1+"<th>"+texto2+"</th>";:};
+				   
+				   
+COLUMNA::= abrircolumna CONTENIDO:texto cerrarcolumna{:RESULT="<td>"+texto+"</td>";:}
+		   |abrircolumna CONTENIDO:texto error:nuevo{:sintactico.error_sintactico((Symbol)nuevo);:}
+		   | COLUMNA:texto1 abrircolumna CONTENIDO:texto2 cerrarcolumna{:RESULT=texto1+"<td>"+texto2+"</td>";:};
+		   
+CONTENIDO_CUERPO::= 
+					 PARRAFO:texto{:RESULT=texto;:}
+					|ESPACIO:texto{:RESULT=texto;:}
+					|TABLA:texto{:RESULT=texto;:}
+					|saltolinea{:RESULT="<br></br>";:}
+					|CONTENIDO_CUERPO:texto1 CABECERA:texto2{:RESULT=texto1+texto2;:}
+					|CONTENIDO_CUERPO:texto1 TITULO:texto2{:RESULT=texto1+texto2;:}
+					|CONTENIDO_CUERPO:texto1 PARRAFO:texto2{:RESULT=texto1+texto2;:}
+					|CONTENIDO_CUERPO:texto1 ESPACIO:texto2{:RESULT=texto1+texto2;:}
+					|CONTENIDO_CUERPO:texto1 TABLA:texto2{:RESULT=texto1+texto2;:}
+					|CONTENIDO_CUERPO:texto1 saltolinea:texto2{:RESULT=texto1+"<br></br>";:}
+					;
+
+CONTENIDO::= TEXTO:texto {:RESULT=texto+" ";:}
+			 |PHP:texto {:RESULT=texto+" ";:}
+			 |CONTENIDO:texto1 TEXTO:texto2 {:RESULT=texto1+" "+texto2;:}
+			 /*|CONTENIDO:texto1 error:nuevo {:sintactico.error_sintactico((Symbol)nuevo);:}*/
+			 |CONTENIDO:texto1 PHP:texto2{:RESULT=texto1+" "+texto2;:}
+			 ;
+
+TEXTO::=  id:texto {:RESULT=texto+" ";:}
+		 |idVariable:texto {:RESULT=texto+" ";:}
+		 |numero:texto {:RESULT=texto.toString()+" ";:}
+		 |decimal:texto {:RESULT=texto.toString()+" ";:}
+		 |saltolinea{:RESULT="<div></div>";:};
+		 /*
+		 |TEXTO numero
+		 |TEXTO decimal
+		 |TEXTO id.
+		 |TEXTO idVariable;*/
+
+
+
