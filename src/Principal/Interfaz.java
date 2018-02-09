@@ -11,6 +11,7 @@ package Principal;
  */
 public class Interfaz extends javax.swing.JFrame {
 
+    public static  int auxContador = 0;
     /**
      * Creates new form Interfaz
      */
