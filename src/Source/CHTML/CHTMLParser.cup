@@ -3,6 +3,9 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.io.PrintWriter;
 import Principal.Interfaz.*;
+import Principal.Errores;
+import Principal.Interfaz;
+import Principal.tablaSimbolos;
 //import static olc1_proyecto1.Menu.path;
 parser code
 {:
@@ -36,14 +39,14 @@ parser code
 
 
 /*Terminlaes :v :v y más :v pro++ Gamer pro+, rank pro+ , primer nivel, nivel mundial, por tu salud.*/
-terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado;
-terminal Integer numero;
+terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado,inicioCjs,ruta,asignacion,pathComillas,puntoComa,finCjs,inicioCcss,finCcss,finEncabezado;
+/*terminal Integer numero;
 terminal Integer decimal;
-terminal String idVariable;
+terminal String idVariable;*/
 
 
 /*Producciones :v :v y mas :v*/
-non terminal String CHTML, ENCABEZADO;
+non terminal String CHTML,ENCABEZADO,DEFINICIONARCHIVOS;
 
 
 /*
@@ -55,9 +58,8 @@ precedence left division;*/
 /*Aquí comienza las producciones de la gramatica.*/
 start with CHTML;
 
-CHTML::= menorQue inicioChtml mayorQue  menorQue finChtml mayorQue  {:RESULT="<head></head>";:}
-		   |menorQue inicioChtml mayorQue  menorQue finChtml error:nuevo{:sintactico.erroresSintacticos((Symbol)nuevo);:};
+CHTML::= menorQue inicioChtml mayorQue ENCABEZADO menorQue finChtml mayorQue  {::};
 
 
-
+ENCABEZADO ::=  menorQue inicioEncabezado mayorQue {::};
 

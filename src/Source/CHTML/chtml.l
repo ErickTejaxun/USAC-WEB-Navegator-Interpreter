@@ -38,8 +38,6 @@ eofval: especifica un valor de retorno al final del archivo
 espacio = \t|\f|" "|\r|\n
 digito = [0-9][0-9]*
 decimal= {digito}"."{digito}
-simbolos1= "@"|":"|"!"|"¿"|"\""|"ñ"|","
-simbolos2= "("|")"|"*"|"-"|"+"|"."|"!"
 letra = [a-zA-Z]|"ñ"
 linea = [^\r\n\"\\]
 metodo = {id}"()"
@@ -47,10 +45,6 @@ rgb = "#"({digito}|{letra})+
 id = {letra}({letra}|{digito}|"_")*
 direccionWindows= ({letra}":"("\\"({linea})+)+) 
 direccionLinux=(("/"{linea}+))+
-archivocjs = {direccionWindows}"\\"\"{id}."cjs"\"
-            |{direccionLinux}"/"\"{id}."cjs"\"
-archivoccss = {direccionWindows}"\\"\"{id}."ccss"\"
-             |{direccionLinux}"/"\"{id}."ccss"\" 
 
 archivo = {direccionWindows}"\\"\"{id}."{id}"
             |{direccionLinux}"/"\"{id}."{id}"
@@ -62,7 +56,7 @@ rgbComillas =    "\""{rgb}"\""
 
 valorComillas =  {cadenaComillas} | "\""{digito}"\"" 
 
-%state COMENTARIO
+%state COMENTARIO, ENCABEZADO1, ENCABEZADO2
 %%
 
 
@@ -74,6 +68,13 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
 
 <YYINITIAL>
 {
+
+    /*----------  < ----------------*/
+    "<//-"	
+    {   
+        yybegin(COMENTARIO);
+    }
+
 
     /*----------  < ----------------*/
     "<"	
@@ -140,25 +141,23 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	
-
         
         return new Symbol(simbolos.finChtml, yychar, yyline, yytext()); 
     }
 
     "encabezado"
     {
+        //yybegin(ENCABEZADO1);
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("encabezado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("encabezado : Fin encabezado");
+        simbolo.setDescripcion("encabezado : Inicio encabezado");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
-
-        
+        Interfaz.tablaSimbolos_.add(simbolo);	        
         return new Symbol(simbolos.inicioEncabezado, yychar, yyline, yytext()); 
     } 
 
@@ -169,9 +168,10 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
 }
 
 
+
 /*Comentarios de chtml*/
 <COMENTARIO>{espacio} {}
-<COMENTARIO>[^"*/"] {System.out.println(yytext());}
+<COMENTARIO>[^"*/"] {System.out.print(yytext());}
 <COMENTARIO> "-//>"	 
             {
 						yybegin(YYINITIAL);	
