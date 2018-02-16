@@ -1,6 +1,9 @@
 package Source.CHTML;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
+import Principal.Errores;
+import Principal.Interfaz;
+import Principal.tablaSimbolos;
 /*
 Directivas:
 public: clase publica
@@ -113,10 +116,10 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("<CHTML>");
+        simbolo.setTipo("CHTML");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("<CHTML> : Inicio Documento");
+        simbolo.setDescripcion("CHTML : Inicio Documento");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	

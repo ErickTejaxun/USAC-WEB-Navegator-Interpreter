@@ -256,9 +256,12 @@ public void compilar(){
             p = new sintactico(s);
             p.parse();
             int numero= tablaSimbolos_.size();
-
-            for(int n=0;n<numero;n++){
-            System.out.println(tablaSimbolos_.get(n).columna + "  "+tablaSimbolos_.get(n).linea+ "  "+tablaSimbolos_.get(n).texto+ "  "+tablaSimbolos_.get(n).tipo+ "  "+tablaSimbolos_.get(n).descripcion);
+            System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
+            for(int n=0;n<numero;n++)
+            {
+                
+                System.out.println(tablaSimbolos_.get(n).columna + "\t"+tablaSimbolos_.get(n).linea+ "\t"+tablaSimbolos_.get(n).Valor+ "\t"+tablaSimbolos_.get(n).tipo+ "\t\t"+tablaSimbolos_.get(n).descripcion);
+            
             }
             System.out.println(numero);
 
