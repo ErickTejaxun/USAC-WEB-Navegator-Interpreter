@@ -43,28 +43,28 @@ public class Scanner implements java_cup.runtime.Scanner {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2,  2,  2, 2
+     0,  0,  1,  1,  2,  2,  3, 3
   };
 
   /** 
    * Translates characters to character classes
    */
   private static final char [] ZZ_CMAP = {
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  3,  5,  2,  2,  0,  0, 
+     0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  4, 13,  2,  3,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     1,  0,  0,  0,  0,  0,  0,  0,  0,  0, 23,  0,  0,  9,  0,  4, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  8,  0, 10,  0, 
-     0, 19, 20, 11,  7, 18, 16,  0, 12,  6,  0,  0, 15, 14, 17, 22, 
-     0,  0,  0,  0, 13,  0,  0,  0,  0,  0, 21,  0,  0,  0,  0,  0, 
-     0, 19, 20, 11,  7, 18, 16,  0, 12,  6,  0,  0, 15, 14, 17, 22, 
-     0,  0,  0,  0, 13,  0,  0,  0,  0,  0, 21,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  5,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+     1,  0,  9,  0,  0,  0,  0,  0,  0,  0, 41,  0,  0, 20,  0, 12, 
+     5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 10, 40, 19, 39, 21,  0, 
+     0, 30, 31, 22, 17, 29, 27,  6, 23, 16, 34,  6, 26, 25, 28, 33, 
+     6,  6, 37, 36, 24, 38,  6,  6,  6,  6, 32,  0, 11,  0,  0,  5, 
+     0, 30, 31, 22, 17, 29, 27,  6, 23, 16, 34,  6, 26, 25, 28, 33, 
+     6,  6, 37, 36, 24, 38,  6,  6,  6,  6, 32, 14,  0, 18,  0,  0, 
+     0,  0,  0,  0,  0, 13,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+     0,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+     0,  0,  0,  7,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+     0,  0,  0,  7,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   };
 
@@ -74,12 +74,15 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\3\0\1\1\1\2\1\3\1\4\1\5\3\1\1\6"+
-    "\1\7\1\6\12\0\1\10\3\0\1\11\1\12\10\0"+
-    "\1\13\1\0\1\14";
+    "\4\0\1\1\1\2\1\3\1\4\1\5\3\1\1\6"+
+    "\1\7\1\6\1\10\1\11\1\1\1\4\1\12\3\1"+
+    "\1\13\1\14\24\0\1\15\2\0\1\16\3\0\1\17"+
+    "\2\0\1\20\1\0\1\21\1\22\24\0\1\23\5\0"+
+    "\1\24\1\0\1\25\3\0\1\26\4\0\1\27\2\0"+
+    "\1\30";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[41];
+    int [] result = new int[100];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -104,15 +107,22 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\30\0\60\0\110\0\110\0\110\0\140\0\110"+
-    "\0\170\0\220\0\250\0\110\0\110\0\300\0\330\0\360"+
-    "\0\u0108\0\u0120\0\u0138\0\u0150\0\u0168\0\u0180\0\u0198\0\u01b0"+
-    "\0\110\0\u01c8\0\u01e0\0\u01f8\0\110\0\110\0\u0210\0\u0228"+
-    "\0\u0240\0\u0258\0\u0270\0\u0288\0\u02a0\0\u02b8\0\110\0\u02d0"+
-    "\0\110";
+    "\0\0\0\52\0\124\0\176\0\250\0\250\0\250\0\322"+
+    "\0\250\0\374\0\u0126\0\u0150\0\250\0\250\0\u017a\0\250"+
+    "\0\250\0\u01a4\0\250\0\250\0\u01ce\0\u01f8\0\u0222\0\250"+
+    "\0\250\0\u024c\0\u0276\0\u02a0\0\u02ca\0\u02f4\0\u031e\0\u0348"+
+    "\0\u0372\0\u039c\0\u03c6\0\u03f0\0\u041a\0\u0444\0\u046e\0\u0498"+
+    "\0\u04c2\0\u04ec\0\u0516\0\u0540\0\u056a\0\250\0\u0594\0\u05be"+
+    "\0\250\0\u05e8\0\u0612\0\u063c\0\250\0\u0666\0\u0690\0\250"+
+    "\0\u06ba\0\250\0\250\0\u06e4\0\u070e\0\u0738\0\u0762\0\u078c"+
+    "\0\u07b6\0\u07e0\0\u080a\0\u0834\0\u085e\0\u0888\0\u08b2\0\u08dc"+
+    "\0\u0906\0\u0930\0\u095a\0\u0984\0\u09ae\0\u09d8\0\u0a02\0\250"+
+    "\0\u0a2c\0\u0a56\0\u0a80\0\u0aaa\0\u0ad4\0\250\0\u0afe\0\250"+
+    "\0\u0b28\0\u0b52\0\u0b7c\0\250\0\u0ba6\0\u0bd0\0\u0bfa\0\u0c24"+
+    "\0\250\0\u0c4e\0\u0c78\0\250";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[41];
+    int [] result = new int[100];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -135,20 +145,45 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\4\2\5\1\6\1\4\1\0\2\4\1\7\1\4"+
-    "\1\10\1\11\4\4\1\12\1\4\1\13\5\4\1\14"+
-    "\2\15\1\6\1\4\4\14\1\16\15\14\3\4\1\0"+
-    "\1\6\1\4\1\0\22\4\34\0\1\17\37\0\1\20"+
-    "\21\0\1\21\42\0\1\22\12\0\1\23\27\0\1\24"+
-    "\40\0\1\25\33\0\1\26\21\0\1\27\20\0\1\30"+
-    "\34\0\1\31\34\0\1\32\22\0\1\33\41\0\1\34"+
-    "\16\0\1\35\34\0\1\36\23\0\1\37\40\0\1\40"+
-    "\17\0\1\41\35\0\1\42\22\0\1\43\37\0\1\44"+
-    "\20\0\1\45\34\0\1\46\23\0\1\47\17\0\1\50"+
-    "\46\0\1\51\1\0";
+    "\1\5\3\6\1\7\10\5\1\0\5\5\1\10\1\5"+
+    "\1\11\1\12\4\5\1\13\1\5\1\14\14\5\1\15"+
+    "\3\16\1\7\7\15\1\5\7\15\1\17\24\15\2\5"+
+    "\3\20\1\7\10\5\1\0\7\5\1\21\25\5\3\6"+
+    "\1\7\4\5\1\22\3\5\1\0\5\5\1\23\1\5"+
+    "\1\24\1\25\4\5\1\26\11\5\1\27\1\5\1\30"+
+    "\1\31\1\5\66\0\1\32\64\0\1\33\41\0\2\34"+
+    "\65\0\1\35\31\0\1\36\43\0\1\37\1\40\4\0"+
+    "\1\41\3\0\2\37\4\0\15\37\1\0\3\37\31\0"+
+    "\1\42\13\0\1\43\26\0\2\44\77\0\1\45\17\0"+
+    "\1\46\65\0\1\47\55\0\1\50\43\0\1\51\37\0"+
+    "\1\52\47\0\1\53\47\0\1\37\41\0\3\54\2\0"+
+    "\4\54\1\0\1\54\1\0\36\54\43\0\2\55\50\0"+
+    "\2\56\41\0\1\57\45\0\1\60\45\0\1\61\56\0"+
+    "\1\62\44\0\1\63\63\0\1\64\40\0\1\65\37\0"+
+    "\1\66\36\0\3\54\2\0\4\54\1\0\1\54\1\0"+
+    "\1\67\35\54\43\0\2\70\31\0\1\71\63\0\1\72"+
+    "\45\0\1\73\45\0\1\74\62\0\1\75\12\0\3\76"+
+    "\2\0\4\76\1\0\1\76\1\0\36\76\3\54\2\0"+
+    "\4\54\1\77\1\54\1\0\1\67\35\54\26\0\1\100"+
+    "\6\0\1\101\43\0\1\102\57\0\1\103\14\0\3\76"+
+    "\2\0\4\76\1\0\1\76\1\104\36\76\6\0\1\105"+
+    "\1\106\10\0\2\105\4\0\15\105\1\0\3\105\31\0"+
+    "\1\107\13\0\1\110\43\0\1\111\45\0\1\112\61\0"+
+    "\1\113\11\0\3\76\2\0\4\76\1\77\1\76\1\0"+
+    "\36\76\2\114\3\0\2\115\1\116\5\114\1\0\2\114"+
+    "\2\115\4\114\15\115\1\114\3\115\3\114\10\0\1\105"+
+    "\104\0\2\117\50\0\2\120\33\0\1\121\54\0\1\122"+
+    "\56\0\1\123\31\0\1\124\33\0\2\114\3\0\2\115"+
+    "\1\116\5\114\1\0\1\125\1\114\2\115\4\114\15\115"+
+    "\1\114\3\115\3\114\10\0\1\105\5\0\1\124\76\0"+
+    "\2\126\43\0\1\127\45\0\1\130\40\0\1\131\47\0"+
+    "\2\132\47\0\1\124\2\132\70\0\1\133\53\0\1\134"+
+    "\31\0\1\135\65\0\1\136\36\0\1\137\67\0\1\140"+
+    "\22\0\1\141\76\0\1\142\34\0\1\143\71\0\1\144"+
+    "\10\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[744];
+    int [] result = new int[3234];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -186,11 +221,14 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\3\0\3\11\1\1\1\11\3\1\2\11\1\1\12\0"+
-    "\1\11\3\0\2\11\10\0\1\11\1\0\1\11";
+    "\4\0\3\11\1\1\1\11\3\1\2\11\1\1\2\11"+
+    "\1\1\2\11\3\1\2\11\24\0\1\11\2\0\1\11"+
+    "\3\0\1\11\2\0\1\11\1\0\2\11\24\0\1\11"+
+    "\5\0\1\11\1\0\1\11\3\0\1\11\4\0\1\11"+
+    "\2\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[41];
+    int [] result = new int[100];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -271,6 +309,10 @@ public class Scanner implements java_cup.runtime.Scanner {
 	public static String txt_temporal="";
 	public static int linea=0;
 	public static int columna=0;
+
+
+
+    public static int flagInicio = 0;
 
 
   /**
@@ -648,15 +690,15 @@ public class Scanner implements java_cup.runtime.Scanner {
 			//Proyecto1_Compiladores.listaLexico.add(errorLexico);
 			//Menu.listaLexico=Proyecto1_Compiladores.listaLexico;
             }
-          case 13: break;
+          case 25: break;
           case 2: 
             { System.out.println("Salto de linea");
             }
-          case 14: break;
+          case 26: break;
           case 3: 
             { yychar=0;
             }
-          case 15: break;
+          case 27: break;
           case 4: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -671,7 +713,7 @@ public class Scanner implements java_cup.runtime.Scanner {
        
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
-          case 16: break;
+          case 28: break;
           case 5: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -687,24 +729,147 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 17: break;
+          case 29: break;
           case 6: 
             { System.out.print(yytext());
             }
-          case 18: break;
+          case 30: break;
           case 7: 
             { 
             }
-          case 19: break;
+          case 31: break;
           case 8: 
+            { System.out.println("Salto de linea--------------Encabezado1");
+            }
+          case 32: break;
+          case 9: 
+            { yybegin(ENCABEZADO2);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo(">");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        
+        
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
+            }
+          case 33: break;
+          case 10: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("cierreTag");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : cierre de etiqueta");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
+            }
+          case 34: break;
+          case 11: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("=");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+            }
+          case 35: break;
+          case 12: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+            
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+            }
+          case 36: break;
+          case 13: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("CJS");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("CJS : Inicio etiqueta CJS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+              
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.inicioCjs, yychar, yyline, yytext());
+            }
+          case 37: break;
+          case 14: 
             { yybegin(COMENTARIO);
             }
-          case 20: break;
-          case 9: 
+          case 38: break;
+          case 15: 
             { yybegin(YYINITIAL);
             }
-          case 21: break;
-          case 10: 
+          case 39: break;
+          case 16: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("CCSS");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("CCSS : Inicio etiqueta CCSS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);
+              
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.inicioCcss, yychar, yyline, yytext());
+            }
+          case 40: break;
+          case 17: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ruta");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ruta : Declaración ruta archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.ruta, yychar, yyline, yytext());
+            }
+          case 41: break;
+          case 18: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -718,8 +883,41 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.inicioChtml, yychar, yyline, yytext());
             }
-          case 22: break;
-          case 11: 
+          case 42: break;
+          case 19: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-cjs");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-cjs : finCJs");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.finCjs, yychar, yyline, yytext());
+            }
+          case 43: break;
+          case 20: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-CCSS");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-CCSS : fin etiqueta CCSS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.finCcss, yychar, yyline, yytext());
+            }
+          case 44: break;
+          case 21: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -733,22 +931,55 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.finChtml, yychar, yyline, yytext());
             }
-          case 23: break;
-          case 12: 
-            { //yybegin(ENCABEZADO1);
+          case 45: break;
+          case 22: 
+            { yybegin(ENCABEZADO1);
+        System.out.println("Saltar a estado ENCABEZADO1");
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("encabezado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("encabezado : Fin encabezado");
+        simbolo.setDescripcion("encabezado : Inicio encabezado");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	        
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioEncabezado, yychar, yyline, yytext());
             }
-          case 24: break;
+          case 46: break;
+          case 23: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("Path: Ruta a archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+            }
+          case 47: break;
+          case 24: 
+            { yybegin(YYINITIAL);
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("FIN-ENCABEZADO");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("FIN-ENCABEZADO : Fin Encabezado");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);	
+        
+        return new Symbol(simbolos.finEncabezado, yychar, yyline, yytext());
+            }
+          case 48: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

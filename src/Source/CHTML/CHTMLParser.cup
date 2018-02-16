@@ -61,5 +61,10 @@ start with CHTML;
 CHTML::= menorQue inicioChtml mayorQue ENCABEZADO menorQue finChtml mayorQue  {::};
 
 
-ENCABEZADO ::=  menorQue inicioEncabezado mayorQue {::};
+ENCABEZADO ::=  menorQue inicioEncabezado mayorQue DEFINICIONARCHIVOS menorQue finEncabezado mayorQue {::};
+
+
+DEFINICIONARCHIVOS::= DEFINICIONARCHIVOS menorQue inicioCjs ruta asignacion pathComillas puntoComa mayorQue menorQue finCjs mayorQue{::}
+					| DEFINICIONARCHIVOS menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue menorQue finCcss mayorQue{::}
+					|;
 

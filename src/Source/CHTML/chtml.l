@@ -21,6 +21,10 @@ eofval: especifica un valor de retorno al final del archivo
 	public static String txt_temporal="";
 	public static int linea=0;
 	public static int columna=0;
+
+
+
+    public static int flagInicio = 0;
 %}
 
 %class Scanner /*Nombre de la clase a generar.%cupsym simbolos*/
@@ -51,7 +55,7 @@ archivo = {direccionWindows}"\\"\"{id}."{id}"
 
 pathComillas = "\""{archivo}"\""           
 
-cadenaComillas = "\""{id}"\""  
+cadenaComillas = direccionWindows  
 rgbComillas =    "\""{rgb}"\""  
 
 valorComillas =  {cadenaComillas} | "\""{digito}"\"" 
@@ -79,6 +83,7 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
     /*----------  < ----------------*/
     "<"	
     {
+
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -146,8 +151,9 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
     }
 
     "encabezado"
-    {
-        //yybegin(ENCABEZADO1);
+    {        
+        yybegin(ENCABEZADO1);
+        System.out.println("Saltar a estado ENCABEZADO1");
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -157,14 +163,250 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
         simbolo.setDescripcion("encabezado : Inicio encabezado");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	        
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioEncabezado, yychar, yyline, yytext()); 
+       
     } 
 
     {espacio}
     {System.out.println("Salto de linea");}	
 
 
+}
+
+
+<ENCABEZADO1>
+{
+
+    {espacio}
+    {System.out.println("Salto de linea--------------Encabezado1");}	
+
+    /*----------  > ----------------*/
+    ">"	
+    {    
+        yybegin(ENCABEZADO2);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo(">");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        
+        
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }     
+}
+
+<ENCABEZADO2>
+{
+    {espacio}
+    {System.out.println("Salto de linea");}	
+
+
+    "<"	
+    {
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("<");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : Menor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+       
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
+    }
+
+    "CJS"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("CJS");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("CJS : Inicio etiqueta CJS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+              
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.inicioCjs, yychar, yyline, yytext());
+
+    }   
+
+    "ruta"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ruta");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ruta : Declaración ruta archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.ruta, yychar, yyline, yytext());
+
+    } 
+
+
+    "="
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("=");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    } 
+
+    {pathComillas}
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("Path: Ruta a archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+
+    }  
+
+    ";"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+            
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    } 
+
+    ">"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("cierreTag");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : cierre de etiqueta");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
+
+    }  
+
+    "fin-cjs"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-cjs");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-cjs : finCJs");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.finCjs, yychar, yyline, yytext());
+    } 
+
+    "CCSS"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("CCSS");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("CCSS : Inicio etiqueta CCSS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);
+              
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.inicioCcss, yychar, yyline, yytext());
+
+    } 
+    "fin-CCSS"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-CCSS");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-CCSS : fin etiqueta CCSS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.finCcss, yychar, yyline, yytext());
+
+    }  
+
+    "FIN-ENCABEZADO"	
+    {
+        yybegin(YYINITIAL);
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("FIN-ENCABEZADO");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("FIN-ENCABEZADO : Fin Encabezado");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);	
+        
+        return new Symbol(simbolos.finEncabezado, yychar, yyline, yytext()); 
+    }          
 }
 
 
