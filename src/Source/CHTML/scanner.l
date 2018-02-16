@@ -39,18 +39,13 @@ simbolos1= "@"|":"|"!"|"¿"|"\""|"ñ"|","
 simbolos2= "("|")"|"*"|"-"|"+"|"."|"!"
 letra = [a-zA-Z]|"ñ"
 linea = [^\r\n\"\\]
-
 metodo = {id}"()"
-
 rgb = "#"({digito}|{letra})+
-
 id = {letra}({letra}|{digito}|"_")*
 direccionWindows= ({letra}":"("\\"({linea})+)+) 
 direccionLinux=(("/"{linea}+))+
 archivocjs = {direccionWindows}"\\"\"{id}."cjs"\"
             |{direccionLinux}"/"\"{id}."cjs"\"
-
-
 archivoccss = {direccionWindows}"\\"\"{id}."ccss"\"
              |{direccionLinux}"/"\"{id}."ccss"\" 
 

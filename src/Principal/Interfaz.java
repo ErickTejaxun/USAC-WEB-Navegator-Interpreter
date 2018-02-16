@@ -5,6 +5,18 @@
  */
 package Principal;
 
+import Source.CHTML.Scanner;
+import Source.CHTML.sintactico;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author erick
@@ -12,6 +24,18 @@ package Principal;
 public class Interfaz extends javax.swing.JFrame {
 
     public static  int auxContador = 0;
+    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
+    public static ArrayList<Errores> erroresSintacticos = new ArrayList();
+    public static ArrayList<Errores> erroresLexicos = new ArrayList();
+    public static ArrayList<Errores> erroresSemanticos = new ArrayList();
+    public String analisisLexico="";      
+    public String analisisLexico_="";
+    public static String resultado="";
+    public String ELexico="";
+    public String analisisSintactico="";
+    public String analisisSemantico="";   
+    public Scanner s;
+    public sintactico p;    
     /**
      * Creates new form Interfaz
      */
@@ -28,21 +52,136 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        tablePanel = new javax.swing.JTabbedPane();
+        Panel = new javax.swing.JPanel();
+        panelContenido = new javax.swing.JPanel();
+        scroll = new java.awt.ScrollPane();
+        panelMenu = new javax.swing.JPanel();
+        Menu = new javax.swing.JPanel();
+        botonAtras = new javax.swing.JButton();
+        botonAdelante = new javax.swing.JButton();
+        botonIr = new javax.swing.JButton();
+        textRuta = new javax.swing.JTextField();
+        botonOpciones = new javax.swing.JButton();
+        botonHistorial = new javax.swing.JButton();
+        etiquetaNombre = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1, 53));
+        setSize(new java.awt.Dimension(1, 0));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
+
+        tablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        Panel.setLayout(new java.awt.BorderLayout(10, 0));
+
+        panelContenido.setBackground(new java.awt.Color(51, 204, 255));
+        panelContenido.setLayout(new java.awt.BorderLayout());
+        panelContenido.add(scroll, java.awt.BorderLayout.CENTER);
+
+        Panel.add(panelContenido, java.awt.BorderLayout.CENTER);
+
+        panelMenu.setBackground(new java.awt.Color(0, 255, 102));
+        panelMenu.setLayout(new java.awt.BorderLayout());
+
+        botonAtras.setText("<-");
+
+        botonAdelante.setText("->");
+
+        botonIr.setText("Ir a");
+        botonIr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonIrActionPerformed(evt);
+            }
+        });
+
+        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\prueba.html");
+
+        botonOpciones.setText("Opciones");
+        botonOpciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOpcionesActionPerformed(evt);
+            }
+        });
+
+        botonHistorial.setText("Historial");
+        botonHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonHistorialActionPerformed(evt);
+            }
+        });
+
+        etiquetaNombre.setText("Inicio");
+
+        javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
+        Menu.setLayout(MenuLayout);
+        MenuLayout.setHorizontalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etiquetaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+                    .addComponent(textRuta)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        MenuLayout.setVerticalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
+                .addComponent(etiquetaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonAtras, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
+
+        panelMenu.add(Menu, java.awt.BorderLayout.CENTER);
+
+        Panel.add(panelMenu, java.awt.BorderLayout.PAGE_START);
+
+        tablePanel.addTab("Inicio", Panel);
+
+        getContentPane().add(tablePanel);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonHistorialActionPerformed
+
+    private void botonOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonOpcionesActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+       
+    }//GEN-LAST:event_formKeyPressed
+
+    private void botonIrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIrActionPerformed
+        analizar();
+    }//GEN-LAST:event_botonIrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,7 +217,329 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
     }
+    
+public void analizar()
+{
+        tablaSimbolos_.clear();
+        erroresLexicos.clear();
+        erroresSintacticos.clear();
+
+        if(true)
+        {
+
+            compilar();
+            if((erroresLexicos.size()!=0)||(erroresSintacticos.size()!=0)||(erroresSemanticos.size()!=0)){
+            errores_consola();
+            }
+            if((erroresLexicos.size()==0)&&(erroresSintacticos.size()==0)&&(erroresSemanticos.size()==0)){
+            //Consola1.setText("");
+            }
+
+            imprimirReporteLexico();
+            imprimirResultado();
+            imprimirLexicos();
+            imprimirSintacticos();
+            imprimirSemanticos();
+        }
+    
+    
+}    
+public void compilar(){
+
+            
+        String path=this.textRuta.getText();        
+         try {
+
+             
+            s=new Scanner(new java.io.FileReader(path)); 
+              
+            p = new sintactico(s);
+            p.parse();
+            int numero= tablaSimbolos_.size();
+
+            for(int n=0;n<numero;n++){
+            System.out.println(tablaSimbolos_.get(n).columna + "  "+tablaSimbolos_.get(n).linea+ "  "+tablaSimbolos_.get(n).texto+ "  "+tablaSimbolos_.get(n).tipo+ "  "+tablaSimbolos_.get(n).descripcion);
+            }
+            System.out.println(numero);
+
+            
+//            Consola1.setText(p.textoConsola1);
+
+            
+            
+           
+            
+           
+        }
+        catch(Exception e) { System.out.println(e.getMessage());}
+    
+    
+
+}
+    
+    
+    
+    
+    public void imprimirReporteLexico(){
+          String directorioHtml=PathActual()+"\\Lexico.html";
+
+            if(tablaSimbolos_.isEmpty() && tablaSimbolos_.isEmpty()){
+                JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+            }else{
+                File html=new File(directorioHtml);
+                PrintWriter writer;
+
+                try {
+                    writer=new PrintWriter(html);
+                    String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                        + "<head>\n" + "<title>TABLA DE TOKENS</title>\n" + "</head>\n"
+                        + "<body>\n"
+                        + "<h1 align=\"center\">ANALISIS LEXICO </h1>\n"
+                        + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                        + "<table border=\"1\">\n"
+                        + "<tr>\n"
+                        + "<td>No.</td>\n"
+                        + "<td>Columna</td>\n"
+                        + "<td>Linea</td>\n"
+                        + "<td>Tipo</td>\n"
+                            + "<td>Descripcion</td>\n";
+
+                           for(int x=0;x<tablaSimbolos_.size();x++){
+                           texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).columna+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).linea+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).tipo+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).descripcion+"</td>\n";
+                           }
+
+                        texto+="</tr>\n"+                    
+                        "</table>\n"
+                        + "</body>"
+                        + "</html>";
+                    writer.print(texto);
+                    analisisLexico=texto;
+                    writer.close();
+                  //   abrirHtml(directorioHtml);
+                } catch (FileNotFoundException ex) {
+
+                }
+            } 
+    }    
+    
+    
+    public void imprimirResultado(){
+          String directorioHtml=PathActual()+"\\Resultado.html";
+
+            if(tablaSimbolos_.isEmpty() && tablaSimbolos_.isEmpty()){
+                JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+            }else{
+                File html=new File(directorioHtml);
+                PrintWriter writer;
+
+                try {
+                    writer=new PrintWriter(html);
+
+                    writer.print(Interfaz.resultado);
+                  //  resultado=Interfaz.resultado;
+                    writer.close();
+                  //   abrirHtml(directorioHtml);
+                } catch (FileNotFoundException ex) {
+
+                }
+            } 
+    }    
+    
+    public void imprimirLexicos(){
+         String directorioHtml=PathActual()+"\\Erores_lexicos.html";
+
+           if(Interfaz.erroresLexicos.isEmpty()){
+               //JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+           }else{
+               File html=new File(directorioHtml);
+               PrintWriter writer;
+
+               try {
+                   writer=new PrintWriter(html);
+                   String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                       + "<head>\n" + "<title>TABLA DE ERRORES</title>\n" + "</head>\n"
+                       + "<body>\n"
+                       + "<h1 align=\"center\">Errores Lexicos </h1>\n"
+                       + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                       + "<table border=\"1\">\n"
+                       + "<tr>\n"
+                       + "<td>No.</td>\n"
+                       + "<td>Columna</td>\n"
+                       + "<td>Linea</td>\n"
+                       + "<td>Tipo</td>\n"
+                           + "<td>Descripcion</td>\n";
+
+                          for(int x=0;x<erroresLexicos.size();x++){
+                          texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).columna+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).linea+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).tipo+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).descripcion+"</td>\n";
+                          }
+
+                       texto+="</tr>\n"+                    
+                       "</table>\n"
+                       + "</body>"
+                       + "</html>";
+                   writer.print(texto);
+                   this.ELexico=texto;
+                   writer.close();
+                 //   abrirHtml(directorioHtml);
+               } catch (FileNotFoundException ex) {
+
+               }
+           } 
+   }
+
+   public void imprimirSintacticos(){
+         String directorioHtml=PathActual()+"\\Erores_sintacticos.html";
+
+           if(Interfaz.erroresLexicos.isEmpty()){
+               //JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+           }else{
+               File html=new File(directorioHtml);
+               PrintWriter writer;
+
+               try {
+                   writer=new PrintWriter(html);
+                   String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                       + "<head>\n" + "<title>TABLA DE ERRORES</title>\n" + "</head>\n"
+                       + "<body>\n"
+                       + "<h1 align=\"center\">Errores Sintacticos </h1>\n"
+                       + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                       + "<table border=\"1\">\n"
+                       + "<tr>\n"
+                       + "<td>No.</td>\n"
+                       + "<td>Columna</td>\n"
+                       + "<td>Linea</td>\n"
+                       + "<td>Tipo</td>\n"
+                           + "<td>Descripcion</td>\n";
+
+                          for(int x=0;x<erroresSintacticos.size();x++){
+                          texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).columna+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).linea+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).tipo+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).descripcion+"</td>\n";
+                          }
+
+                       texto+="</tr>\n"+                    
+                       "</table>\n"
+                       + "</body>"
+                       + "</html>";
+                   writer.print(texto);
+                   analisisSintactico=texto;
+                   writer.close();
+                 //   abrirHtml(directorioHtml);
+               } catch (FileNotFoundException ex) {
+
+               }
+           } 
+   }
+
+   public void imprimirSemanticos(){
+         String directorioHtml=PathActual()+"\\Erores_semanticos.html";
+
+           if(Interfaz.erroresSemanticos.isEmpty()){
+              // JOptionPane.showMessageDialog(this,"No hay errores Semanticos");
+
+           }else{
+               File html=new File(directorioHtml);
+               PrintWriter writer;
+
+               try {
+                   writer=new PrintWriter(html);
+                   String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                       + "<head>\n" + "<title>TABLA De ERRORES</title>\n" + "</head>\n"
+                       + "<body>\n"
+                       + "<h1 align=\"center\">Errores Semanticos </h1>\n"
+                       + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                       + "<table border=\"1\">\n"
+                       + "<tr>\n"
+                       + "<td>No.</td>\n"
+                       + "<td>Columna</td>\n"
+                       + "<td>Linea</td>\n"
+                       + "<td>Tipo</td>\n"
+                           + "<td>Descripcion</td>\n";
+
+                          for(int x=0;x<erroresSemanticos.size();x++){
+                          texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).columna+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).linea+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).tipo+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).descripcion+"</td>\n";
+                          }
+
+                       texto+="</tr>\n"+                    
+                       "</table>\n"
+                       + "</body>"
+                       + "</html>";
+                   writer.print(texto);
+                   analisisSemantico=texto;
+                   writer.close();
+                 //   abrirHtml(directorioHtml);
+               } catch (FileNotFoundException ex) {
+
+               }
+           } 
+   }
+
+   
+    
+    
+    public String PathActual(){
+        String path="";
+         File miDir = new File (".");
+         try {
+           //System.out.println (miDir.getCanonicalPath());
+           path=miDir.getCanonicalPath();
+         }
+         catch(Exception e) {
+           e.printStackTrace();
+           }
+         return path;
+    }    
+    
+    public void errores_consola(){
+        String temporal="Linea           Columna           Descripcion                TIPO";
+        for(int x=0;x<erroresLexicos.size();x++){
+        temporal+="\n"+erroresLexicos.get(x).linea+"                "+erroresLexicos.get(x).columna+"          "+erroresLexicos.get(x).getDescripcion()+"       Lexico";
+        }
+        for(int x=0;x<erroresSintacticos.size();x++){
+        temporal+="\n"+erroresSintacticos.get(x).linea+"                "+erroresSintacticos.get(x).columna+"           "+erroresSintacticos.get(x).getDescripcion()+"       Sintactico";
+        }
+        for(int x=0;x<erroresSemanticos.size();x++){
+        temporal+="\n"+erroresSemanticos.get(x).linea+"               "+erroresSemanticos.get(x).columna+"              "+erroresSemanticos.get(x).getDescripcion()+"       Semantico";
+        }
+        
+        /*Imprimimos los errores*/
+        //Consola1.setText(temporal);
+        System.out.println(temporal);
+
+    }    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Menu;
+    private javax.swing.JPanel Panel;
+    private javax.swing.JButton botonAdelante;
+    private javax.swing.JButton botonAtras;
+    private javax.swing.JButton botonHistorial;
+    private javax.swing.JButton botonIr;
+    private javax.swing.JButton botonOpciones;
+    private javax.swing.JLabel etiquetaNombre;
+    private javax.swing.JPanel panelContenido;
+    private javax.swing.JPanel panelMenu;
+    private java.awt.ScrollPane scroll;
+    private javax.swing.JTabbedPane tablePanel;
+    private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables
 }

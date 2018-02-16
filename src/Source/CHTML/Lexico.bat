@@ -3,5 +3,5 @@ SET PATH=%JAVA_HOME%;%PATH%
 SET CLASSPATH=%JAVA_HOME%; 
 SET JFLEX_HOME= C:\libs\jflex-1.6.1
 cd C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\src\Source\CHTML
-java -jar jflex-1.6.1.jar CHTMLScanner.jflex 
+java -jar %JFLEX_HOME%\lib\jflex-1.6.1.jar chtml.l
 pause 
