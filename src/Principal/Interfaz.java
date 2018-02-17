@@ -306,6 +306,7 @@ public void compilar(){
                         + "<td>Columna</td>\n"
                         + "<td>Linea</td>\n"
                         + "<td>Tipo</td>\n"
+                        + "<td>Valor</td>\n"
                             + "<td>Descripcion</td>\n";
 
                            for(int x=0;x<tablaSimbolos_.size();x++){
@@ -313,6 +314,7 @@ public void compilar(){
                         + "<td>"+tablaSimbolos_.get(x).columna+"</td>\n"
                         + "<td>"+tablaSimbolos_.get(x).linea+"</td>\n"
                         + "<td>"+tablaSimbolos_.get(x).tipo+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).Valor+"</td>\n"
                         + "<td>"+tablaSimbolos_.get(x).descripcion+"</td>\n";
                            }
 

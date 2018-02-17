@@ -47,14 +47,19 @@ eofval: especifica un valor de retorno al final del archivo
 espacio = \t|\f|" "|\r|\n
 digito = [0-9][0-9]*
 decimal= {digito}"."{digito}
+simbolos1= "@"|":"|"!"|"¿"|"\""|"ñ"|","
+simbolos2= "("|")"|"*"|"-"|"+"|"."|"!"
 letra = ([a-zA-Z]|"ñ")
 linea = ([^\r\n\"\\])
-metodo = {id}"()"
-rgb = "#"({digito}|{letra})+
-id = {letra}({letra}|{digito}|"_")*
+id = ({letra}({letra}|{digito}|"_"|"-")*)
+rgb  = ("#"{id}| "#"{digito}{id})
+direccionWindows= ("\"" ({letra}":"("\\"({id})+)+"."{id}) "\"")
+direccionLinux=(("/"{linea}+))+
 
+idComillas = ("\""{id}"\"")
+rgbComillas = ("\""{rgb}"\"")
 
-%state COMENTARIO, ENCABEZADO1, ENCABEZADO2
+%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO
 %%
 
 
@@ -81,7 +86,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("<");
+        simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : Menor que");
@@ -98,7 +103,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo(">");
+        simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
@@ -116,7 +121,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("CHTML");
+        simbolo.setTipo("inicioChtml");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("CHTML : Inicio Documento");
@@ -133,7 +138,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("FIN-CHTML");
+        simbolo.setTipo("finChtml");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("FIN-CHTML : Fin Documento");
@@ -151,7 +156,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("encabezado");
+        simbolo.setTipo("inicioEncabezado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("encabezado : Inicio encabezado");
@@ -162,8 +167,167 @@ id = {letra}({letra}|{digito}|"_")*
        
     } 
 
+    "cuerpo"
+    {        
+        yybegin(CUERPO);
+        System.out.println("Saltar a estado CUERPO");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("cuerpo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("cuerpo : Inicio cuerpo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        return new Symbol(simbolos.inicioCuerpo, yychar, yyline, yytext()); 
+       
+    } 
+
+    "fin-cuerpo"
+    {        
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("fin-cuerpo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-cuerpo : Fin cuerpo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        return new Symbol(simbolos.finCuerpo, yychar, yyline, yytext()); 
+       
+    }          
+
     {espacio}
     {System.out.println("Salto de linea");}	
+
+
+}
+
+
+<CUERPO>
+{
+    {espacio}
+    {}	
+
+    ">"	
+    {    
+        yybegin(YYINITIAL);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        
+        
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }      
+
+    "fondo"	
+    {
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("fondo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fondo : declaracion fondo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+       
+        return new Symbol(simbolos.fondo, yychar, yyline, yytext()); 
+    }  
+
+    "="
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+             
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    }  
+
+    ";"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+            
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    }    
+
+
+    {rgbComillas}
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("rgb");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("rgb: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.rgb, yychar, yyline, yytext());
+
+    }
+
+    {idComillas}
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+
+    } 
+
+  
+
+             
 
 
 }
@@ -183,7 +347,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo(">");
+        simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
@@ -210,7 +374,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("<");
+        simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : Menor que");
@@ -226,7 +390,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("CJS");
+        simbolo.setTipo("inicioCjs");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("CJS : Inicio etiqueta CJS");
@@ -265,7 +429,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("=");
+        simbolo.setTipo("asignacion");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
@@ -305,7 +469,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo(">");
+        simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
@@ -324,7 +488,7 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("fin-cjs");
+        simbolo.setTipo("finCjs");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-cjs : finCJs");
@@ -342,12 +506,13 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("CCSS");
+        simbolo.setTipo("inicioCcss");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("CCSS : Inicio etiqueta CCSS");
         simbolo.setIndex(Interfaz.auxContador);
-        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
               
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -359,12 +524,13 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("fin-CCSS");
+        simbolo.setTipo("finCcss");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-CCSS : fin etiqueta CCSS");
         simbolo.setIndex(Interfaz.auxContador);
-        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
              
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -378,22 +544,23 @@ id = {letra}({letra}|{digito}|"_")*
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("FIN-ENCABEZADO");
+        simbolo.setTipo("finEncabezado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("FIN-ENCABEZADO : Fin Encabezado");
         simbolo.setIndex(Interfaz.auxContador);
-        simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);	
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
         
         return new Symbol(simbolos.finEncabezado, yychar, yyline, yytext()); 
     }  
 
-    {id}
+    {direccionWindows}
     {
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("path");
+        simbolo.setTipo("pathComillas");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("Path: Ruta a archivo");
