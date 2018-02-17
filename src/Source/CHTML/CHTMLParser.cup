@@ -66,5 +66,7 @@ ENCABEZADO ::=  menorQue inicioEncabezado mayorQue DEFINICIONARCHIVOS menorQue f
 
 DEFINICIONARCHIVOS::= DEFINICIONARCHIVOS menorQue inicioCjs ruta asignacion pathComillas puntoComa mayorQue menorQue finCjs mayorQue{::}
 					| DEFINICIONARCHIVOS menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue menorQue finCcss mayorQue{::}
+					| menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue menorQue finCcss mayorQue{::}
+					| menorQue inicioCjs ruta asignacion pathComillas puntoComa mayorQue menorQue finCjs mayorQue{::}
 					|;
 

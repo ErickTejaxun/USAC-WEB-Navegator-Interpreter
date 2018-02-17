@@ -14,6 +14,10 @@ char: agrega la variable int yychar, indica el indice del primer caracter del le
 ignorecase: validar, indistitntamente si la letra es mayuscula o minuscula
 eofval: especifica un valor de retorno al final del archivo
 */
+
+
+
+
 %%
 %{	public static ArrayList<Errores> listaLexico=new ArrayList();	
 	public static String urlAuxliar="";
@@ -37,28 +41,18 @@ eofval: especifica un valor de retorno al final del archivo
 %ignorecase /*Indiferente entre mayusculas y minusculas*/
 %eofval{
 	return new Symbol(simbolos.EOF,new String("Fin del archivo"));
+    /*({letra}":"("\\"({linea})+)+)*/
 %eofval}
 
 espacio = \t|\f|" "|\r|\n
 digito = [0-9][0-9]*
 decimal= {digito}"."{digito}
-letra = [a-zA-Z]|"ñ"
-linea = [^\r\n\"\\]
+letra = ([a-zA-Z]|"ñ")
+linea = ([^\r\n\"\\])
 metodo = {id}"()"
 rgb = "#"({digito}|{letra})+
 id = {letra}({letra}|{digito}|"_")*
-direccionWindows= ({letra}":"("\\"({linea})+)+) 
-direccionLinux=(("/"{linea}+))+
 
-archivo = {direccionWindows}"\\"\"{id}."{id}"
-            |{direccionLinux}"/"\"{id}."{id}"
-
-pathComillas = "\""{archivo}"\""           
-
-cadenaComillas = direccionWindows  
-rgbComillas =    "\""{rgb}"\""  
-
-valorComillas =  {cadenaComillas} | "\""{digito}"\"" 
 
 %state COMENTARIO, ENCABEZADO1, ENCABEZADO2
 %%
@@ -179,7 +173,7 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
 {
 
     {espacio}
-    {System.out.println("Salto de linea--------------Encabezado1");}	
+    {}	
 
     /*----------  > ----------------*/
     ">"	
@@ -205,7 +199,10 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
 <ENCABEZADO2>
 {
     {espacio}
-    {System.out.println("Salto de linea");}	
+    {}	
+
+
+
 
 
     "<"	
@@ -282,24 +279,7 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
 
     } 
 
-    {pathComillas}
-    {
-        Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
-        tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("path");
-        simbolo.setLinea(yyline);
-        simbolo.setColumna(yychar);
-        simbolo.setDescripcion("Path: Ruta a archivo");
-        simbolo.setIndex(Interfaz.auxContador);
-        simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
-               
-        
-        //Nos movemos al estado auxiliar para declaracion cjs
-        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
-
-    }  
+  
 
     ";"
     {
@@ -325,17 +305,17 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
         Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("cierreTag");
+        simbolo.setTipo(">");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("> : cierre de etiqueta");
+        simbolo.setDescripcion("> : Mayor que");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
 
 
         //Nos movemos al estado auxiliar para declaracion cjs
-        return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
 
     }  
 
@@ -406,7 +386,27 @@ valorComillas =  {cadenaComillas} | "\""{digito}"\""
         simbolo.setValor(yytext());                 Interfaz.tablaSimbolos_.add(simbolo);	
         
         return new Symbol(simbolos.finEncabezado, yychar, yyline, yytext()); 
-    }          
+    }  
+
+    {id}
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("Path: Ruta a archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+
+    }    
+
 }
 
 
