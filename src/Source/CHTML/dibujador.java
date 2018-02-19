@@ -28,6 +28,7 @@ public class dibujador
         
         String cadena = "digraph G\n" +
                         "{\n" +
+                        //"rankdir=LR;"+
                         dibujarArbol(raiz)+
                         "}";
         /*---------------------------------------------------------------------------------*/

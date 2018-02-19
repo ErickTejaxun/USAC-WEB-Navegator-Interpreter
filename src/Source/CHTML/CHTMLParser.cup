@@ -63,18 +63,22 @@ start with CHTML;
 
 
 /*1. Documento completo-----------ENCABEZADO CUERPO ---------------------------------------------------------------------------------------------------------------------*/
-CHTML::= INICIOCHTML:iz  FINCHTML:der {:Interfaz.raizChtml.setValue("DOCUMENTO");
+CHTML::= INICIOCHTML:iz  ENCABEZADO:cen FINCHTML:der {:
+										Interfaz.raizChtml.setValue("DOCUMENTO");
 										Interfaz.raizChtml.setLinea(Interfaz.contadorChtml++);
 										if(iz!=null){Interfaz.raizChtml.getHijos().add(iz);}
+										if(cen!=null){Interfaz.raizChtml.getHijos().add(cen);}
 										if(der!=null){Interfaz.raizChtml.getHijos().add(der);}:};
 
 
-INICIOCHTML::= menorQue:r1 inicioChtml:r2 mayorQue:r3 {: nodoChtml nuevo = new nodoChtml("INICIOCHTML",Interfaz.contadorChtml++);												
+INICIOCHTML::= menorQue:r1 inicioChtml:r2 mayorQue:r3 {: 
+												nodoChtml nuevo = new nodoChtml("INICIOCHTML",Interfaz.contadorChtml++);												
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("inicioChtml",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
 												RESULT=nuevo;:};			
-FINCHTML::= menorQue:r1 finChtml:r2 mayorQue:r3 {: nodoChtml nuevo = new nodoChtml("FINCHTML",Interfaz.contadorChtml++);
+FINCHTML::= menorQue:r1 finChtml:r2 mayorQue:r3 {: 
+												nodoChtml nuevo = new nodoChtml("FINCHTML",Interfaz.contadorChtml++);
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("finChtml",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
@@ -82,11 +86,26 @@ FINCHTML::= menorQue:r1 finChtml:r2 mayorQue:r3 {: nodoChtml nuevo = new nodoCht
 
 
 /*2. Encabezado --------------------------------------------------------------------------------------------------------------------------------*/
-ENCABEZADO::=  INICIOENCABEZADO  FINENCABEZADO  {::};
+ENCABEZADO::=  INICIOENCABEZADO:iz CONTENIDOENCABEZADO:cen FINENCABEZADO:der  {: 
+												nodoChtml nuevo = new nodoChtml("ENCABEZADO",Interfaz.contadorChtml++);												
+												if(iz!=null){nuevo.getHijos().add(iz);}
+												if(cen!=null){Interfaz.raizChtml.getHijos().add(cen);}
+												if(der!=null){nuevo.getHijos().add(der);}
+												RESULT=nuevo;:};
 
-INICIOENCABEZADO::= menorQue inicioEncabezado mayorQue;
+INICIOENCABEZADO::= menorQue inicioEncabezado mayorQue {: 
+												nodoChtml nuevo = new nodoChtml("INICIOENCABEZADO",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioEncabezado",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												RESULT=nuevo;:};
 
-FINENCABEZADO::= menorQue finEncabezado mayorQue ;
+FINENCABEZADO::= menorQue finEncabezado mayorQue {: 
+												nodoChtml nuevo = new nodoChtml("FINENCABEZADO",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finEncabezado",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												RESULT=nuevo;:};
 
 /*2.1 Contenido encabezado-----------------------*/
 CONTENIDOENCABEZADO::= ;
