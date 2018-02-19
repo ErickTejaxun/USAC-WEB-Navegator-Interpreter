@@ -57,13 +57,17 @@ rgb  = ("#"{id}| "#"{digito}{id})
 direccionWindows= ("\"" ({letra}":"("\\"({id})+)+"."{id}) "\"")
 direccionLinux=(("/"{linea}+))+
 
+path = ({letra}":"("\\"({id})+)+"."{id})
+
+
 idComillas = ("\""{id}"\""|"\""{digito}"\""|"\""{decimal}"\"") 
 rgbComillas = ("\""{rgb}"\"")
 valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
 
+metodo = {id}"()"
 
 
-%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS,TEXTO1,TEXTO2
+%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS,TEXTO1,TEXTO2,IMAGEN1,IMAGEN2
 %%
 
 
@@ -78,7 +82,7 @@ valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
 
     
     {espacio}
-    {//System.out.println("Salto de linea");}	
+    {System.out.println("Salto de linea");}	
 
 
     /*----------  < ----------------*/
@@ -91,7 +95,7 @@ valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
     /*----------  < ----------------*/
     "<"	
     {
-
+        cadena = "";
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -109,6 +113,7 @@ valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
     /*----------  > ----------------*/
     ">"	
     {
+        cadena = "";
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -272,8 +277,210 @@ valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
         Interfaz.tablaSimbolos_.add(simbolo);                                    
         return new Symbol(simbolos.finTexto, yychar, yyline, yytext());        
         
-    }              
+    }   
+
+    "imagen"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("imagen");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("imagen: Inicio imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+        yybegin(IMAGEN1);                                    
+        return new Symbol(simbolos.inicioImagen, yychar, yyline, yytext());        
+        
+    }   
+
+                
 }
+
+<IMAGEN1>
+{
+
+    "click"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("click");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("click : Evento Click");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                            
+        return new Symbol(simbolos.click, yychar, yyline, yytext());
+
+    }  
+
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    }   
+
+    {metodo}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("metodo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("metodo : Llamada a metodo");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.metodo, yychar, yyline, yytext());
+
+    } 
+
+    {direccionWindows}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("path : Direccion a imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+
+    }     
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    }    
+
+    ">"	
+    {    
+        yybegin(IMAGEN2);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    "ruta"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ruta");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ruta : Declaración ruta archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        return new Symbol(simbolos.ruta, yychar, yyline, yytext());
+
+    } 
+
+    {espacio}
+    {
+
+    }              
+
+
+}
+
+
+<IMAGEN2>
+{
+    {espacio}
+    {
+
+    }    
+
+    {path}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("path : Direccion a imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                          
+        return new Symbol(simbolos.path, yychar, yyline, yytext());
+        
+
+    }     
+
+
+    "<"	
+    {    
+         
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("menorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : MenorQue fin Imagen");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
+    }
+
+    "fin-imagen"
+    {
+        yybegin(YYINITIAL); 
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-imagen");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-imagen: Fin imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                                    
+        return new Symbol(simbolos.finImagen, yychar, yyline, yytext());        
+        
+    }      
+
+}
+
 
 <TEXTO1>
 {
