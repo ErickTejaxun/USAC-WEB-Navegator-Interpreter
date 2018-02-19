@@ -31,6 +31,7 @@ public class dibujador
                         //"rankdir=LR;"+
                         dibujarArbol(raiz)+
                         "}";
+        cadena = cadena.replace("\"\"","\"");
         /*---------------------------------------------------------------------------------*/
         try (  PrintWriter writer = new PrintWriter(direccionEntrada)) {
             writer.print(cadena);            
@@ -57,7 +58,7 @@ public class dibujador
     }
     public String dibujarArbol(nodoChtml raiz)
     {
-        String cadena = "N"+raiz.getLinea()+"[label=\""+raiz.getValue()+"\"]; \n";
+        String cadena = "N"+raiz.getLinea()+"[label=\""+raiz.getTipo()+"\"]; \n";
         
         if(!raiz.getHijos().isEmpty())
         {

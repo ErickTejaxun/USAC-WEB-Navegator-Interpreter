@@ -34,7 +34,22 @@ public class nodoChtml
     {
         this.value=value;
         this.linea = id;
+        this.tipo=value;
     }
+    public nodoChtml(String value, int id, nodoChtml hijo) 
+    {
+        this.value=value;
+        this.tipo=value;
+        this.linea = id;
+        this.hijos.add(hijo);
+    }    
+    
+    public nodoChtml(String tipo, int id, String value) 
+    {
+        this.tipo=tipo;
+        this.value=value;
+        this.linea = id;
+    }    
     public String getTipo() {
         return tipo;
     }

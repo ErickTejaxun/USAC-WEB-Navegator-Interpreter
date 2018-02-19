@@ -43,6 +43,7 @@ public class Scanner implements java_cup.runtime.Scanner {
   public static final int TITULO1 = 10;
   public static final int TITULO2 = 12;
   public static final int TITULO3 = 14;
+  public static final int ELEMENTOS = 16;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -51,22 +52,23 @@ public class Scanner implements java_cup.runtime.Scanner {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7, 7
+     0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7, 
+     8, 8
   };
 
   /** 
    * Translates characters to character classes
    */
   private static final char [] ZZ_CMAP = {
-     5,  5,  5,  5,  5,  5,  5,  5,  5,  1,  2, 42,  1,  1,  5,  5, 
+     5,  5,  5,  5,  5,  5,  5,  5,  5,  1,  2, 44,  1,  1,  5,  5, 
      5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 
      1,  5,  7, 15,  5,  5,  5,  5,  5,  5, 10,  5,  5, 11,  4, 16, 
-     3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  6, 38, 17, 37, 18,  5, 
-     5, 29, 30, 19, 32, 28, 24, 12, 20, 26, 39, 12, 23, 22, 27, 33, 
-    36, 12, 35, 41, 21, 34, 12, 12, 12, 12, 31,  5, 13,  5,  5, 14, 
-     5, 29, 30, 19, 32, 28, 24, 12, 20, 26, 39, 12, 23, 22, 27, 33, 
-    36, 12, 35, 41, 21, 34, 12, 12, 12, 12, 31,  5,  5,  5,  5,  5, 
-     5,  5,  5,  5,  5, 42,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 
+     3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  6, 39, 31, 38, 32,  5, 
+     5, 25, 36, 26, 24, 22, 35, 40, 27, 18, 41, 12, 34, 33, 28, 30, 
+    37, 20, 23, 43, 29, 21, 12, 12, 12, 12, 19,  5, 13,  5,  5, 14, 
+     5, 25, 36, 26, 24, 22, 35, 40, 27, 18, 41, 12, 34, 33, 28, 30, 
+    37, 20, 23, 43, 29, 21, 12, 12, 12, 12, 19,  5,  5,  5,  5,  5, 
+     5,  5,  5,  5,  5, 44,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 
      5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 
      5,  9,  5,  5,  5,  5,  5,  5,  5,  9,  5,  5,  5,  9,  5,  5, 
      5,  9,  5,  9,  5,  5,  5,  5,  5,  5,  9,  5,  5,  5,  5,  5, 
@@ -82,17 +84,20 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\10\0\1\1\1\2\1\3\1\4\1\5\3\1\1\6"+
-    "\1\7\1\6\1\10\1\1\1\4\1\11\4\1\1\12"+
-    "\1\13\1\1\1\14\1\1\1\15\1\16\1\17\1\20"+
-    "\31\0\1\21\3\0\1\22\3\0\1\23\4\0\1\24"+
-    "\1\0\1\25\2\0\1\26\1\27\1\0\1\30\11\0"+
-    "\1\31\1\32\4\0\1\33\12\0\1\34\5\0\1\35"+
-    "\1\36\2\0\1\37\4\0\1\40\1\41\1\42\4\0"+
-    "\1\43";
+    "\11\0\1\1\1\2\1\3\2\1\1\4\1\5\2\1"+
+    "\1\6\1\7\1\6\1\10\1\11\4\1\1\4\1\12"+
+    "\1\1\1\13\1\14\1\1\1\15\1\1\1\16\1\17"+
+    "\1\20\1\21\3\1\1\22\1\23\1\24\1\1\30\0"+
+    "\1\25\15\0\1\26\2\0\1\27\3\0\1\30\13\0"+
+    "\1\31\2\0\1\32\1\0\1\33\1\34\2\0\1\35"+
+    "\7\0\1\36\3\0\1\37\2\0\1\40\6\0\1\41"+
+    "\4\0\1\42\1\0\1\43\1\0\1\44\4\0\1\45"+
+    "\21\0\1\46\12\0\1\47\1\0\1\50\5\0\1\51"+
+    "\2\0\1\52\1\53\3\0\1\54\1\55\1\56\1\0"+
+    "\1\57\4\0\1\60";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[132];
+    int [] result = new int[203];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -117,26 +122,35 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\54\0\130\0\204\0\260\0\334\0\u0108\0\u0134"+
-    "\0\u0160\0\u0160\0\u0160\0\u018c\0\u0160\0\u01b8\0\u01e4\0\u0210"+
-    "\0\u0160\0\u0160\0\u023c\0\u0160\0\u0268\0\u0160\0\u0160\0\u0294"+
-    "\0\u02c0\0\u02ec\0\u0318\0\u0160\0\u0160\0\u0344\0\u0160\0\u0370"+
-    "\0\u0160\0\u0160\0\u0160\0\u0160\0\u039c\0\u03c8\0\u03f4\0\u0420"+
-    "\0\u044c\0\u0478\0\u04a4\0\u04d0\0\u04fc\0\u0528\0\u0554\0\u0580"+
-    "\0\u05ac\0\u05d8\0\u0604\0\u0630\0\u065c\0\u0688\0\u06b4\0\u06e0"+
-    "\0\u070c\0\u0738\0\u0764\0\u0790\0\u07bc\0\u0160\0\u07e8\0\u0814"+
-    "\0\u0840\0\u0160\0\u086c\0\u0898\0\u08c4\0\u0160\0\u08f0\0\u091c"+
-    "\0\u0948\0\u0974\0\u0160\0\u09a0\0\u0160\0\u09cc\0\u09f8\0\u0160"+
-    "\0\u0160\0\u0a24\0\u0160\0\u0a50\0\u0a7c\0\u0aa8\0\u0ad4\0\u0b00"+
-    "\0\u0b2c\0\u0b58\0\u0b84\0\u0bb0\0\u0160\0\u0160\0\u0bdc\0\u0c08"+
-    "\0\u0c34\0\u0c60\0\u0160\0\u0c8c\0\u0cb8\0\u0ce4\0\u0d10\0\u0d3c"+
-    "\0\u0d68\0\u0d94\0\u0dc0\0\u0dec\0\u0e18\0\u0160\0\u0e44\0\u0e70"+
-    "\0\u0e9c\0\u0ec8\0\u0ef4\0\u0160\0\u0160\0\u0f20\0\u0f4c\0\u0160"+
-    "\0\u0f78\0\u0fa4\0\u0fd0\0\u0ffc\0\u0160\0\u0160\0\u0160\0\u1028"+
-    "\0\u1054\0\u1080\0\u10ac\0\u0160";
+    "\0\0\0\56\0\134\0\212\0\270\0\346\0\u0114\0\u0142"+
+    "\0\u0170\0\u019e\0\u019e\0\u019e\0\u01cc\0\u01fa\0\u0228\0\u019e"+
+    "\0\u0256\0\u0284\0\u019e\0\u019e\0\u02b2\0\u019e\0\u019e\0\u02e0"+
+    "\0\u030e\0\u033c\0\u036a\0\u019e\0\u019e\0\u0398\0\u019e\0\u019e"+
+    "\0\u03c6\0\u019e\0\u03f4\0\u019e\0\u019e\0\u019e\0\u019e\0\u0422"+
+    "\0\u0450\0\u047e\0\u019e\0\u019e\0\u019e\0\u04ac\0\u04da\0\u0508"+
+    "\0\u0536\0\u0564\0\u0592\0\u05c0\0\u05ee\0\u061c\0\u064a\0\u0678"+
+    "\0\u06a6\0\u06d4\0\u0702\0\u0730\0\u075e\0\u078c\0\u07ba\0\u07e8"+
+    "\0\u0816\0\u0844\0\u0872\0\u08a0\0\u08ce\0\u08fc\0\u019e\0\u092a"+
+    "\0\u0958\0\u0986\0\u09b4\0\u09e2\0\u0a10\0\u0a3e\0\u0a6c\0\u0a9a"+
+    "\0\u0ac8\0\u0af6\0\u0b24\0\u0b52\0\u019e\0\u0b80\0\u0bae\0\u019e"+
+    "\0\u0bdc\0\u0c0a\0\u0c38\0\u019e\0\u0c66\0\u0c94\0\u0cc2\0\u0cf0"+
+    "\0\u0d1e\0\u0d4c\0\u0d7a\0\u0da8\0\u0dd6\0\u0e04\0\u0e32\0\u019e"+
+    "\0\u0e60\0\u0e8e\0\u019e\0\u0ebc\0\u019e\0\u019e\0\u0eea\0\u0f18"+
+    "\0\u019e\0\u0f46\0\u0f74\0\u0fa2\0\u0fd0\0\u0ffe\0\u102c\0\u105a"+
+    "\0\u019e\0\u1088\0\u10b6\0\u10e4\0\u019e\0\u1112\0\u1140\0\u019e"+
+    "\0\u116e\0\u119c\0\u11ca\0\u11f8\0\u1226\0\u1254\0\u019e\0\u1282"+
+    "\0\u12b0\0\u12de\0\u130c\0\u019e\0\u133a\0\u019e\0\u1368\0\u019e"+
+    "\0\u1396\0\u13c4\0\u13f2\0\u1420\0\u019e\0\u144e\0\u147c\0\u14aa"+
+    "\0\u14d8\0\u1506\0\u1534\0\u1562\0\u1590\0\u15be\0\u15ec\0\u161a"+
+    "\0\u1648\0\u1676\0\u16a4\0\u16d2\0\u1700\0\u172e\0\u019e\0\u175c"+
+    "\0\u178a\0\u17b8\0\u17e6\0\u1814\0\u1842\0\u1870\0\u189e\0\u18cc"+
+    "\0\u18fa\0\u019e\0\u1928\0\u019e\0\u1956\0\u1984\0\u19b2\0\u19e0"+
+    "\0\u1a0e\0\u019e\0\u1a3c\0\u1a6a\0\u019e\0\u019e\0\u1a98\0\u1ac6"+
+    "\0\u1af4\0\u019e\0\u019e\0\u019e\0\u1b22\0\u019e\0\u1b50\0\u1b7e"+
+    "\0\u1bac\0\u1bda\0\u019e";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[132];
+    int [] result = new int[203];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -159,58 +173,124 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\11\1\12\1\13\16\11\1\14\1\15\1\16\4\11"+
-    "\1\17\3\11\1\20\15\11\2\0\1\21\1\22\1\13"+
-    "\7\21\1\11\1\23\4\21\1\11\33\21\1\11\1\22"+
-    "\1\13\17\11\1\24\27\11\2\0\1\11\1\22\1\13"+
-    "\4\11\1\25\11\11\1\26\1\27\1\30\1\11\1\31"+
-    "\2\11\1\32\12\11\1\33\1\11\1\34\1\35\3\11"+
-    "\2\0\1\11\1\22\1\13\4\11\1\36\12\11\1\37"+
-    "\5\11\1\40\14\11\1\34\1\35\3\11\2\0\1\11"+
-    "\1\22\1\13\17\11\1\41\27\11\2\0\1\11\1\42"+
-    "\1\13\26\43\1\11\16\43\1\11\2\43\1\0\1\11"+
-    "\1\22\1\13\16\11\1\44\30\11\76\0\1\45\57\0"+
-    "\1\46\15\0\1\47\42\0\2\50\54\0\1\51\40\0"+
-    "\1\52\43\0\1\53\3\0\1\54\6\0\6\54\1\0"+
-    "\13\54\2\0\1\54\1\0\1\54\25\0\1\55\23\0"+
-    "\1\56\35\0\2\57\52\0\2\60\63\0\1\61\21\0"+
-    "\1\62\3\0\1\63\2\0\1\64\3\0\6\63\1\0"+
-    "\13\63\2\0\1\63\1\0\1\63\43\0\1\65\32\0"+
-    "\1\66\60\0\1\67\62\0\1\70\52\0\1\71\43\0"+
-    "\1\72\50\0\1\73\44\0\1\54\50\0\1\74\115\0"+
-    "\2\75\52\0\2\76\27\0\1\77\61\0\1\100\45\0"+
-    "\1\101\37\0\1\63\45\0\1\63\3\0\1\102\1\62"+
-    "\2\0\2\63\1\0\1\63\4\0\6\63\1\0\13\63"+
-    "\2\0\1\63\1\0\1\63\5\0\1\64\4\0\1\103"+
-    "\3\0\1\104\6\0\6\104\1\0\13\104\2\0\1\104"+
-    "\1\0\1\104\35\0\1\105\33\0\1\106\66\0\1\107"+
-    "\70\0\1\110\23\0\1\111\75\0\1\112\40\0\1\113"+
-    "\46\0\1\114\106\0\2\115\44\0\1\116\24\0\1\117"+
-    "\75\0\1\120\27\0\1\104\45\0\1\104\3\0\1\121"+
-    "\1\103\2\0\2\104\1\0\1\104\4\0\6\104\1\0"+
-    "\13\104\2\0\1\104\1\0\1\104\42\0\1\122\42\0"+
-    "\1\123\70\0\1\124\32\0\1\125\66\0\1\126\25\0"+
-    "\1\127\3\0\1\130\6\0\6\130\1\0\13\130\2\0"+
-    "\1\130\1\0\1\130\31\0\1\131\47\0\1\132\1\0"+
-    "\1\133\6\0\1\134\60\0\1\135\53\0\1\136\36\0"+
-    "\1\137\15\0\1\140\45\0\1\141\30\0\1\130\45\0"+
-    "\1\130\1\142\3\0\1\127\2\0\2\130\1\114\1\130"+
-    "\4\0\6\130\1\0\13\130\2\0\1\130\1\0\1\130"+
-    "\43\0\1\143\35\0\1\144\23\0\1\145\35\0\2\146"+
-    "\54\0\1\147\45\0\1\150\62\0\1\151\56\0\1\152"+
-    "\24\0\1\153\3\0\1\154\6\0\6\154\1\0\13\154"+
-    "\2\0\1\154\1\0\1\154\52\0\2\155\52\0\2\156"+
-    "\27\0\1\157\51\0\1\160\56\0\1\161\70\0\1\162"+
-    "\45\0\1\163\27\0\1\154\45\0\1\154\3\0\1\164"+
-    "\1\153\2\0\2\154\1\0\1\154\4\0\6\154\1\0"+
-    "\13\154\2\0\1\154\1\0\1\154\52\0\2\165\44\0"+
-    "\1\166\46\0\1\167\45\0\1\170\70\0\1\171\47\0"+
-    "\1\172\42\0\1\173\62\0\1\174\56\0\1\175\53\0"+
-    "\1\176\53\0\1\177\46\0\1\200\56\0\1\201\51\0"+
-    "\1\202\56\0\1\203\54\0\1\204\12\0";
+    "\1\12\1\13\1\14\23\12\1\15\3\12\1\16\4\12"+
+    "\1\17\1\20\2\12\1\21\1\12\1\22\6\12\2\0"+
+    "\1\23\1\24\1\14\7\23\1\12\1\25\4\23\1\12"+
+    "\35\23\1\12\1\24\1\14\35\12\1\26\13\12\2\0"+
+    "\1\12\1\27\1\14\4\12\1\30\17\12\1\31\2\12"+
+    "\1\32\2\12\1\33\1\12\1\34\1\35\2\12\1\36"+
+    "\2\12\1\37\1\40\4\12\2\0\1\12\1\24\1\14"+
+    "\4\12\1\41\30\12\1\42\2\12\1\43\2\12\1\37"+
+    "\1\40\4\12\2\0\1\12\1\24\1\14\35\12\1\44"+
+    "\13\12\2\0\1\12\1\45\1\14\16\46\1\12\30\46"+
+    "\1\12\2\46\1\0\1\12\1\24\1\14\34\12\1\47"+
+    "\14\12\2\0\1\12\1\24\1\14\4\12\1\50\11\12"+
+    "\2\51\6\12\1\52\6\12\1\53\5\12\1\54\1\55"+
+    "\1\56\3\12\114\0\1\57\46\0\1\60\5\0\1\61"+
+    "\42\0\1\62\56\0\2\63\64\0\1\64\44\0\1\65"+
+    "\45\0\1\66\3\0\1\67\5\0\15\67\2\0\5\67"+
+    "\2\0\2\67\1\0\1\67\27\0\1\70\62\0\1\71"+
+    "\16\0\1\72\25\0\2\73\54\0\2\74\43\0\1\75"+
+    "\3\0\1\76\2\0\1\77\2\0\15\76\2\0\5\76"+
+    "\2\0\2\76\1\0\1\76\40\0\1\100\27\0\1\101"+
+    "\3\0\1\102\4\0\1\103\1\104\5\102\1\105\1\102"+
+    "\1\106\4\102\2\0\5\102\2\0\2\102\1\0\1\102"+
+    "\32\0\1\107\61\0\1\110\5\0\1\111\42\0\1\112"+
+    "\60\0\1\113\51\0\1\114\64\0\1\115\40\0\1\116"+
+    "\71\0\1\117\55\0\1\120\41\0\1\121\46\0\1\67"+
+    "\52\0\1\122\104\0\1\123\72\0\2\124\54\0\2\125"+
+    "\37\0\1\126\54\0\1\127\32\0\1\76\47\0\1\76"+
+    "\3\0\1\130\1\75\2\0\2\76\1\0\1\76\3\0"+
+    "\15\76\2\0\5\76\2\0\2\76\1\0\1\76\5\0"+
+    "\1\77\4\0\1\131\3\0\1\132\5\0\15\132\2\0"+
+    "\5\132\2\0\2\132\1\0\1\132\36\0\1\133\32\0"+
+    "\1\102\47\0\1\102\3\0\1\134\1\101\2\0\2\102"+
+    "\1\0\1\102\3\0\15\102\2\0\5\102\2\0\2\102"+
+    "\1\0\1\102\25\0\1\135\35\0\1\102\3\0\1\134"+
+    "\1\101\2\0\2\102\1\0\1\102\3\0\1\102\1\136"+
+    "\13\102\2\0\5\102\2\0\2\102\1\0\1\102\5\0"+
+    "\1\102\3\0\1\134\1\101\2\0\2\102\1\0\1\102"+
+    "\3\0\4\102\1\137\10\102\2\0\5\102\2\0\2\102"+
+    "\1\0\1\102\5\0\1\102\3\0\1\134\1\101\2\0"+
+    "\2\102\1\0\1\102\3\0\4\102\1\140\10\102\2\0"+
+    "\5\102\2\0\2\102\1\0\1\102\34\0\1\141\44\0"+
+    "\2\142\12\0\1\143\45\0\1\144\61\0\1\145\53\0"+
+    "\1\146\67\0\1\147\27\0\1\150\55\0\1\151\70\0"+
+    "\1\152\67\0\1\153\32\0\1\154\71\0\1\155\76\0"+
+    "\2\156\27\0\1\157\43\0\1\160\53\0\1\132\47\0"+
+    "\1\132\3\0\1\161\1\131\2\0\2\132\1\0\1\132"+
+    "\3\0\15\132\2\0\5\132\2\0\2\132\1\0\1\132"+
+    "\32\0\1\162\51\0\1\163\34\0\1\102\3\0\1\134"+
+    "\1\101\2\0\2\102\1\0\1\102\3\0\2\102\1\164"+
+    "\12\102\2\0\5\102\2\0\2\102\1\0\1\102\5\0"+
+    "\1\102\3\0\1\134\1\101\2\0\2\102\1\0\1\102"+
+    "\3\0\5\102\1\165\7\102\2\0\5\102\2\0\2\102"+
+    "\1\0\1\102\5\0\1\102\3\0\1\134\1\101\2\0"+
+    "\2\102\1\0\1\102\3\0\12\102\1\166\2\102\2\0"+
+    "\5\102\2\0\2\102\1\0\1\102\35\0\1\167\56\0"+
+    "\1\170\57\0\1\171\64\0\1\172\54\0\1\173\56\0"+
+    "\1\174\52\0\1\175\45\0\1\176\12\0\1\177\52\0"+
+    "\1\200\23\0\1\201\3\0\1\202\5\0\15\202\2\0"+
+    "\5\202\2\0\2\202\1\0\1\202\44\0\1\203\41\0"+
+    "\1\204\3\0\1\205\2\0\1\206\56\0\1\207\44\0"+
+    "\1\210\33\0\1\102\3\0\1\134\1\101\2\0\2\102"+
+    "\1\0\1\102\3\0\3\102\1\211\11\102\2\0\5\102"+
+    "\2\0\2\102\1\0\1\102\5\0\1\102\3\0\1\134"+
+    "\1\101\2\0\2\102\1\0\1\102\3\0\4\102\1\212"+
+    "\10\102\2\0\5\102\2\0\2\102\1\0\1\102\5\0"+
+    "\1\102\3\0\1\134\1\101\2\0\2\102\1\0\1\102"+
+    "\3\0\13\102\1\213\1\102\2\0\5\102\2\0\2\102"+
+    "\1\0\1\102\40\0\1\214\45\0\1\215\65\0\1\216"+
+    "\45\0\1\217\65\0\1\220\44\0\1\221\5\0\1\222"+
+    "\53\0\1\223\35\0\1\202\47\0\1\202\1\224\3\0"+
+    "\1\201\2\0\2\202\1\154\1\202\3\0\15\202\2\0"+
+    "\5\202\2\0\2\202\1\0\1\202\40\0\1\225\53\0"+
+    "\1\226\53\0\1\227\16\0\1\230\25\0\2\231\54\0"+
+    "\2\232\36\0\1\102\3\0\1\134\1\101\2\0\2\102"+
+    "\1\0\1\102\2\0\1\232\1\233\14\102\2\0\5\102"+
+    "\2\0\2\102\1\0\1\102\5\0\1\102\3\0\1\134"+
+    "\1\101\2\0\2\102\1\0\1\102\3\0\10\102\1\234"+
+    "\4\102\2\0\5\102\2\0\2\102\1\0\1\102\5\0"+
+    "\1\102\3\0\1\134\1\101\2\0\2\102\1\0\1\102"+
+    "\3\0\5\102\1\235\7\102\2\0\5\102\2\0\2\102"+
+    "\1\0\1\102\33\0\1\236\47\0\1\237\60\0\1\240"+
+    "\64\0\1\241\54\0\1\242\31\0\1\243\3\0\1\244"+
+    "\5\0\15\244\2\0\5\244\2\0\2\244\1\0\1\244"+
+    "\34\0\1\245\75\0\2\246\54\0\2\247\37\0\1\250"+
+    "\46\0\1\251\32\0\1\102\3\0\1\134\1\101\2\0"+
+    "\2\102\1\0\1\102\3\0\4\102\1\252\10\102\2\0"+
+    "\5\102\2\0\2\102\1\0\1\102\5\0\1\102\3\0"+
+    "\1\134\1\101\2\0\2\102\1\0\1\102\3\0\11\102"+
+    "\1\253\3\102\2\0\5\102\2\0\2\102\1\0\1\102"+
+    "\5\0\1\102\3\0\1\134\1\101\2\0\2\102\1\0"+
+    "\1\102\3\0\7\102\1\254\5\102\2\0\5\102\2\0"+
+    "\2\102\1\0\1\102\32\0\1\255\56\0\1\256\53\0"+
+    "\1\257\67\0\1\260\42\0\1\261\40\0\1\244\47\0"+
+    "\1\244\3\0\1\262\1\243\2\0\2\244\1\0\1\244"+
+    "\3\0\15\244\2\0\5\244\2\0\2\244\1\0\1\244"+
+    "\33\0\1\263\76\0\2\264\27\0\1\265\57\0\1\266"+
+    "\31\0\1\102\3\0\1\134\1\101\2\0\2\102\1\0"+
+    "\1\102\3\0\5\102\1\267\7\102\2\0\5\102\2\0"+
+    "\2\102\1\0\1\102\5\0\1\102\3\0\1\134\1\101"+
+    "\2\0\2\102\1\0\1\102\3\0\7\102\1\270\5\102"+
+    "\2\0\5\102\2\0\2\102\1\0\1\102\5\0\1\102"+
+    "\3\0\1\134\1\101\2\0\2\102\1\0\1\102\3\0"+
+    "\6\102\1\271\6\102\2\0\5\102\2\0\2\102\1\0"+
+    "\1\102\40\0\1\272\47\0\1\273\72\0\1\274\52\0"+
+    "\1\275\55\0\1\276\57\0\1\277\53\0\1\300\43\0"+
+    "\1\301\30\0\1\102\3\0\1\134\1\101\2\0\2\102"+
+    "\1\0\1\102\3\0\6\102\1\253\6\102\2\0\5\102"+
+    "\2\0\2\102\1\0\1\102\5\0\1\102\3\0\1\302"+
+    "\1\101\2\0\2\102\1\0\1\102\3\0\15\102\2\0"+
+    "\5\102\2\0\2\102\1\0\1\102\5\0\1\102\3\0"+
+    "\1\134\1\101\2\0\2\102\1\0\1\102\3\0\14\102"+
+    "\1\270\2\0\5\102\2\0\2\102\1\0\1\102\40\0"+
+    "\1\303\55\0\1\304\45\0\1\305\65\0\1\306\50\0"+
+    "\1\307\47\0\1\310\41\0\1\302\77\0\1\311\54\0"+
+    "\1\312\63\0\1\313\17\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[4312];
+    int [] result = new int[7176];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -248,15 +328,18 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\10\0\3\11\1\1\1\11\3\1\2\11\1\1\1\11"+
-    "\1\1\2\11\4\1\2\11\1\1\1\11\1\1\4\11"+
-    "\31\0\1\11\3\0\1\11\3\0\1\11\4\0\1\11"+
-    "\1\0\1\11\2\0\2\11\1\0\1\11\11\0\2\11"+
-    "\4\0\1\11\12\0\1\11\5\0\2\11\2\0\1\11"+
-    "\4\0\3\11\4\0\1\11";
+    "\11\0\3\11\3\1\1\11\2\1\2\11\1\1\2\11"+
+    "\4\1\2\11\1\1\2\11\1\1\1\11\1\1\4\11"+
+    "\3\1\3\11\1\1\30\0\1\11\15\0\1\11\2\0"+
+    "\1\11\3\0\1\11\13\0\1\11\2\0\1\11\1\0"+
+    "\2\11\2\0\1\11\7\0\1\11\3\0\1\11\2\0"+
+    "\1\11\6\0\1\11\4\0\1\11\1\0\1\11\1\0"+
+    "\1\11\4\0\1\11\21\0\1\11\12\0\1\11\1\0"+
+    "\1\11\5\0\1\11\2\0\2\11\3\0\3\11\1\0"+
+    "\1\11\4\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[132];
+    int [] result = new int[203];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -720,15 +803,15 @@ public class Scanner implements java_cup.runtime.Scanner {
 			//Proyecto1_Compiladores.listaLexico.add(errorLexico);
 			//Menu.listaLexico=Proyecto1_Compiladores.listaLexico;
             }
-          case 36: break;
+          case 49: break;
           case 2: 
             { System.out.println("Salto de linea");
             }
-          case 37: break;
+          case 50: break;
           case 3: 
             { yychar=0;
             }
-          case 38: break;
+          case 51: break;
           case 4: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -743,7 +826,7 @@ public class Scanner implements java_cup.runtime.Scanner {
        
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
-          case 39: break;
+          case 52: break;
           case 5: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -757,15 +840,15 @@ public class Scanner implements java_cup.runtime.Scanner {
         Interfaz.tablaSimbolos_.add(simbolo);	        
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 40: break;
+          case 53: break;
           case 6: 
             { System.out.print(yytext());
             }
-          case 41: break;
+          case 54: break;
           case 7: 
             { 
             }
-          case 42: break;
+          case 55: break;
           case 8: 
             { yybegin(ENCABEZADO2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
@@ -783,8 +866,12 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 43: break;
+          case 56: break;
           case 9: 
+            { cadena = "";
+            }
+          case 57: break;
+          case 10: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -800,8 +887,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 44: break;
-          case 10: 
+          case 58: break;
+          case 11: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -817,8 +904,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
             }
-          case 45: break;
-          case 11: 
+          case 59: break;
+          case 12: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -834,8 +921,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
             }
-          case 46: break;
-          case 12: 
+          case 60: break;
+          case 13: 
             { yybegin(YYINITIAL);                           
         System.out.println("Saltar a estado ENCABEZADO2");
         Interfaz.auxContador++;                                
@@ -852,8 +939,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 47: break;
-          case 13: 
+          case 61: break;
+          case 14: 
             { yybegin(TITULO2);                           
         System.out.println("Saltar a estado TITULO2");
         Interfaz.auxContador++;                                
@@ -870,12 +957,12 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 48: break;
-          case 14: 
+          case 62: break;
+          case 15: 
             { cadena  = cadena + yytext();
             }
-          case 49: break;
-          case 15: 
+          case 63: break;
+          case 16: 
             { if(!yytext().equals("<"))
         {
             cadena  = cadena + yytext();
@@ -898,12 +985,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
-            return new Symbol(simbolos.cadena, yychar, yyline, yytext()); 
+            return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
 
         }
             }
-          case 50: break;
-          case 16: 
+          case 64: break;
+          case 17: 
             { yybegin(ENCABEZADO2);  
         System.out.println("----------------------------------------------Saliendo de titulo3");                         
         System.out.println("Saltar a estado ENCABEZADO2");
@@ -919,8 +1006,66 @@ public class Scanner implements java_cup.runtime.Scanner {
         Interfaz.tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
-          case 51: break;
-          case 17: 
+          case 65: break;
+          case 18: 
+            { yybegin(YYINITIAL);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
+            }
+          case 66: break;
+          case 19: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+            }
+          case 67: break;
+          case 20: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+            }
+          case 68: break;
+          case 21: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id Ccss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+            }
+          case 69: break;
+          case 22: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -936,8 +1081,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.inicioCjs, yychar, yyline, yytext());
             }
-          case 52: break;
-          case 18: 
+          case 70: break;
+          case 23: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -953,33 +1098,30 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.id, yychar, yyline, yytext());
             }
-          case 53: break;
-          case 19: 
-            { yybegin(COMENTARIO);
-            }
-          case 54: break;
-          case 20: 
-            { yybegin(YYINITIAL);
-            }
-          case 55: break;
-          case 21: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+          case 71: break;
+          case 24: 
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
-        simbolo.setTipo("inicioCcss");
+        simbolo.setTipo("id");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("CCSS : Inicio etiqueta CCSS");
-        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
-              
-        
-        //Nos movemos al estado auxiliar para declaracion cjs
-        return new Symbol(simbolos.inicioCcss, yychar, yyline, yytext());
+
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
             }
-          case 56: break;
-          case 22: 
+          case 72: break;
+          case 25: 
+            { yybegin(COMENTARIO);
+            }
+          case 73: break;
+          case 26: 
+            { yybegin(YYINITIAL);
+            }
+          case 74: break;
+          case 27: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -995,8 +1137,25 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.ruta, yychar, yyline, yytext());
             }
-          case 57: break;
-          case 23: 
+          case 75: break;
+          case 28: 
+            { Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("inicioCcss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("CCSS : Inicio etiqueta CCSS");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+              
+        
+        //Nos movemos al estado auxiliar para declaracion cjs
+        return new Symbol(simbolos.inicioCcss, yychar, yyline, yytext());
+            }
+          case 76: break;
+          case 29: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -1012,8 +1171,22 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.rgb, yychar, yyline, yytext());
             }
-          case 58: break;
-          case 24: 
+          case 77: break;
+          case 30: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alto");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+            }
+          case 78: break;
+          case 31: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -1027,8 +1200,23 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.inicioChtml, yychar, yyline, yytext());
             }
-          case 59: break;
-          case 25: 
+          case 79: break;
+          case 32: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("inicioPanel");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("panel: Declaracion panel");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        yybegin(ELEMENTOS);        
+        return new Symbol(simbolos.inicioPanel, yychar, yyline, yytext());
+            }
+          case 80: break;
+          case 33: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -1042,8 +1230,36 @@ public class Scanner implements java_cup.runtime.Scanner {
        
         return new Symbol(simbolos.fondo, yychar, yyline, yytext());
             }
-          case 60: break;
-          case 26: 
+          case 81: break;
+          case 34: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ancho");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+            }
+          case 82: break;
+          case 35: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("grupo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+            }
+          case 83: break;
+          case 36: 
             { yybegin(CUERPO);
         System.out.println("Saltar a estado CUERPO");
         Interfaz.auxContador++;                                
@@ -1058,8 +1274,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioCuerpo, yychar, yyline, yytext());
             }
-          case 61: break;
-          case 27: 
+          case 84: break;
+          case 37: 
             { yybegin(TITULO1);
         System.out.println("Saltar a estado CUERPO");
         Interfaz.auxContador++;                                
@@ -1074,8 +1290,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioTitulo, yychar, yyline, yytext());
             }
-          case 62: break;
-          case 28: 
+          case 85: break;
+          case 38: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -1091,8 +1307,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.finCjs, yychar, yyline, yytext());
             }
-          case 63: break;
-          case 29: 
+          case 86: break;
+          case 39: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -1108,8 +1324,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
             }
-          case 64: break;
-          case 30: 
+          case 87: break;
+          case 40: 
             { Interfaz.auxContador++;
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
@@ -1125,8 +1341,22 @@ public class Scanner implements java_cup.runtime.Scanner {
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.finCcss, yychar, yyline, yytext());
             }
-          case 65: break;
-          case 31: 
+          case 88: break;
+          case 41: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+            }
+          case 89: break;
+          case 42: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -1140,22 +1370,36 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.finChtml, yychar, yyline, yytext());
             }
-          case 66: break;
-          case 32: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
-        tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("fin-cuerpo");
+          case 90: break;
+          case 43: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("finPanel");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("fin-cuerpo : Fin cuerpo");
-        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setDescripcion("fin-panel: Cierre panel");
+        simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
-        return new Symbol(simbolos.finCuerpo, yychar, yyline, yytext());
+        Interfaz.tablaSimbolos_.add(simbolo);
+                          
+        return new Symbol(simbolos.finPanel, yychar, yyline, yytext());
             }
-          case 67: break;
-          case 33: 
+          case 91: break;
+          case 44: 
+            { //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("valorAlineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+            }
+          case 92: break;
+          case 45: 
             { yybegin(ENCABEZADO1);
         System.out.println("Saltar a estado ENCABEZADO1");
         Interfaz.auxContador++;                                
@@ -1170,8 +1414,22 @@ public class Scanner implements java_cup.runtime.Scanner {
         Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioEncabezado, yychar, yyline, yytext());
             }
-          case 68: break;
-          case 34: 
+          case 93: break;
+          case 46: 
+            { Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("fin-cuerpo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-cuerpo : Fin cuerpo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        return new Symbol(simbolos.finCuerpo, yychar, yyline, yytext());
+            }
+          case 94: break;
+          case 47: 
             { Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -1184,8 +1442,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.finTitulo, yychar, yyline, yytext());
             }
-          case 69: break;
-          case 35: 
+          case 95: break;
+          case 48: 
             { yybegin(YYINITIAL);
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -1200,7 +1458,7 @@ public class Scanner implements java_cup.runtime.Scanner {
         
         return new Symbol(simbolos.finEncabezado, yychar, yyline, yytext());
             }
-          case 70: break;
+          case 96: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

@@ -59,10 +59,11 @@ direccionLinux=(("/"{linea}+))+
 
 idComillas = ("\""{id}"\"")
 rgbComillas = ("\""{rgb}"\"")
+valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
 
 
 
-%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3
+%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS
 %%
 
 
@@ -205,7 +206,41 @@ rgbComillas = ("\""{rgb}"\"")
         Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.finCuerpo, yychar, yyline, yytext()); 
        
-    }    
+    }  
+
+
+    "panel"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("inicioPanel");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("panel: Declaracion panel");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        yybegin(ELEMENTOS);        
+        return new Symbol(simbolos.inicioPanel, yychar, yyline, yytext());        
+        
+    } 
+
+    "fin-panel"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("finPanel");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-panel: Cierre panel");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                          
+        return new Symbol(simbolos.finPanel, yychar, yyline, yytext());        
+        
+    }          
 }
 
 
@@ -269,7 +304,7 @@ rgbComillas = ("\""{rgb}"\"")
             simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
-            return new Symbol(simbolos.cadena, yychar, yyline, yytext()); 
+            return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
 
         }                       
     } 
@@ -425,12 +460,186 @@ rgbComillas = ("\""{rgb}"\"")
 
     } 
 
-  
 
              
-
-
 }
+
+<ELEMENTOS>
+{
+
+
+    "id"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id Ccss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+
+    }
+
+    "grupo"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("grupo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+
+    } 
+
+    "alto"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alto");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+
+    }     
+
+
+    "ancho"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ancho");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+
+    } 
+
+    "alineado"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+
+    }  
+      
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    } 
+
+    {valorAlineado}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("valorAlineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+
+    }         
+
+
+    {idComillas}
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+
+    } 
+
+
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    } 
+                
+
+    ">"	
+    {    
+        yybegin(YYINITIAL);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    {espacio}
+    {
+
+    }
+}
+
 
 
 <ENCABEZADO1>
@@ -465,7 +674,7 @@ rgbComillas = ("\""{rgb}"\"")
 <ENCABEZADO2>
 {
     {espacio}
-    {}
+    { cadena = "";}
 
     "fin-titulo"
     {        

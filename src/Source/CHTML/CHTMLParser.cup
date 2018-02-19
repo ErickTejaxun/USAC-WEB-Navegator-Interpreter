@@ -41,7 +41,8 @@ parser code
 
 /*Terminlaes :v :v y más :v pro++ Gamer pro+, rank pro+ , primer nivel, nivel mundial, por tu salud.*/
 terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado,inicioCjs,ruta,asignacion,pathComillas,puntoComa;
-terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id, inicioTitulo, finTitulo, cadena;
+terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id, inicioTitulo, finTitulo, cadena,
+inicioPanel,idCcss,grupo,alto,ancho,alineado,valorAlineado,finPanel;
 /*terminal Integer numero;
 terminal Integer decimal;
 terminal String idVariable;*/
@@ -49,7 +50,7 @@ terminal String idVariable;*/
 
 /*Producciones :v :v y mas :v*/
 non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  LISTAARCHIVOS, DEFCCSS, DEFCJS,DEFARCHIVO,CONTENIDOENCABEZADO,
-INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO;
+INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO,PANEL,ELEMENTO, ELEMENTOS, ELEMENTOS1,CONTENIDOCUERPO;
 
 
 /*
@@ -171,12 +172,12 @@ DEFCCSS::= menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue m
 												:};	
 												
 																							
-TITULO ::= menorQue inicioTitulo mayorQue cadena menorQue finTitulo mayorQue{: 
+TITULO ::= menorQue inicioTitulo mayorQue cadena:valCadena menorQue finTitulo mayorQue{: 
 												nodoChtml nuevo = new nodoChtml("TITULO",Interfaz.contadorChtml++);												
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("inicioTitulo",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
-												nuevo.getHijos().add(new nodoChtml("cadena",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("cadena",Interfaz.contadorChtml++, new nodoChtml(valCadena,Interfaz.contadorChtml++)));
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("finTitulo",Interfaz.contadorChtml++));	
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																							
@@ -184,13 +185,14 @@ TITULO ::= menorQue inicioTitulo mayorQue cadena menorQue finTitulo mayorQue{:
 												:};	
 
 /*3. Cuerpo ---------------------------------------------------------------------------------------------------------------------------------------------*/
-CUERPO ::= menorQue inicioCuerpo  ESTILOCUERPO:estilo mayorQue  menorQue finCuerpo mayorQue
+CUERPO ::= menorQue inicioCuerpo  ESTILOCUERPO:estilo mayorQue CONTENIDOCUERPO:contenido menorQue finCuerpo mayorQue
 												{: 
 												nodoChtml nuevo = new nodoChtml("CUERPO",Interfaz.contadorChtml++);												
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("inicioCuerpo",Interfaz.contadorChtml++));
 												if(estilo!=null){nuevo.getHijos().add(estilo);}
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												if(contenido!=null){nuevo.getHijos().add(contenido);}
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));																							
 												nuevo.getHijos().add(new nodoChtml("finCuerpo",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
@@ -224,3 +226,92 @@ ESTILOCUERPO::=  fondo asignacion rgb puntoComa{:
 												nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));																							
 												RESULT=nuevo;
 												:}; 
+
+
+CONTENIDOCUERPO::= PANEL:panel{: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
+							if(panel!=null){nuevo.getHijos().add(panel);}																																													
+							RESULT=nuevo;
+							:};
+
+
+/*3.1-----------------------panel----------------------*/												
+
+PANEL::= menorQue inicioPanel  ELEMENTOS:elementos mayorQue menorQue finPanel mayorQue
+												{: 
+												nodoChtml nuevo = new nodoChtml("PANEL",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioPanel",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												if(elementos!=null){nuevo.getHijos().add(elementos);}	
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finPanel",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																																													
+												RESULT=nuevo;
+												:};
+
+ELEMENTOS::= ELEMENTOS1:r{:
+						nodoChtml nuevo = new nodoChtml("ELEMENTOS",Interfaz.contadorChtml++);
+						if(r!=null){nuevo.getHijos().add(r);}							
+						RESULT= nuevo;
+						:}
+			|			{:
+						nodoChtml nuevo = new nodoChtml("ELEMENTOS",Interfaz.contadorChtml++);												
+						RESULT= nuevo;
+						:};
+
+ELEMENTOS1::= ELEMENTOS1:iz ELEMENTO:der 
+							{:
+							nodoChtml nuevo = new nodoChtml("ELEMENTOS1",Interfaz.contadorChtml++);
+							if(iz!=null){nuevo.getHijos().add(iz);}
+							if(der!=null){nuevo.getHijos().add(der);}
+							RESULT= nuevo;
+							:}
+			| ELEMENTO:r	    {:
+							nodoChtml nuevo = new nodoChtml("ELEMENTO",Interfaz.contadorChtml++);
+							if(r!=null){nuevo.getHijos().add(r);}							
+							RESULT= nuevo;
+							:};
+
+ELEMENTO::= idCcss asignacion id:id puntoComa 	{: 
+											nodoChtml nuevo = new nodoChtml("ELEMENTO",Interfaz.contadorChtml++);												
+											nuevo.getHijos().add(new nodoChtml("idCcss",Interfaz.contadorChtml++));
+											nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+											nuevo.getHijos().add(new nodoChtml("id",Interfaz.contadorChtml++, new nodoChtml(id,Interfaz.contadorChtml++)));
+											nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));																																													
+											RESULT=nuevo;
+											:}
+		|   grupo asignacion id:id puntoComa	{: 
+											nodoChtml nuevo = new nodoChtml("ELEMENTO",Interfaz.contadorChtml++);												
+											nuevo.getHijos().add(new nodoChtml("grupo",Interfaz.contadorChtml++));
+											nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+											nuevo.getHijos().add(new nodoChtml("id",Interfaz.contadorChtml++, new nodoChtml(id,Interfaz.contadorChtml++)));
+											nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));																																													
+											RESULT=nuevo;
+											:}
+
+		|   alto asignacion id:id puntoComa{: 
+										nodoChtml nuevo = new nodoChtml("ELEMENTO",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("alto",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("id",Interfaz.contadorChtml++, new nodoChtml(id,Interfaz.contadorChtml++)));
+										nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));																																													
+										RESULT=nuevo;
+										:} 	
+		|   ancho asignacion id:id puntoComa{: 
+										nodoChtml nuevo = new nodoChtml("ELEMENTO",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("ancho",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("id",Interfaz.contadorChtml++, new nodoChtml(id,Interfaz.contadorChtml++)));
+										nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));																																													
+										RESULT=nuevo;
+										:} 			
+		|   alineado asignacion valorAlineado:id puntoComa
+										{: 
+										nodoChtml nuevo = new nodoChtml("ELEMENTO",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("alineado",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("valorAlineado",Interfaz.contadorChtml++, new nodoChtml(id,Interfaz.contadorChtml++)));
+										nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));																																													
+										RESULT=nuevo;
+										:} 	;
