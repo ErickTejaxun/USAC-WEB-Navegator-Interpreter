@@ -32,6 +32,7 @@ public class dibujador
                         dibujarArbol(raiz)+
                         "}";
         cadena = cadena.replace("\"\"","\"");
+        cadena = cadena.replace("\\","\\\\");
         /*---------------------------------------------------------------------------------*/
         try (  PrintWriter writer = new PrintWriter(direccionEntrada)) {
             writer.print(cadena);            
