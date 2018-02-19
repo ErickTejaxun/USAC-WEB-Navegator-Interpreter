@@ -6,10 +6,13 @@
 package Principal;
 
 import Source.CHTML.Scanner;
+import Source.CHTML.dibujador;
+import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -35,7 +38,9 @@ public class Interfaz extends javax.swing.JFrame {
     public String analisisSintactico="";
     public String analisisSemantico="";   
     public Scanner s;
-    public sintactico p;    
+    public sintactico p;
+    public static nodoChtml raizChtml = new nodoChtml();
+    public static int contadorChtml=0;
     /**
      * Creates new form Interfaz
      */
@@ -180,7 +185,11 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void botonIrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIrActionPerformed
-        analizar();
+        try {
+            analizar();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonIrActionPerformed
 
     /**
@@ -218,7 +227,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
     }
     
-public void analizar()
+public void analizar() throws IOException
 {
         tablaSimbolos_.clear();
         erroresLexicos.clear();
@@ -234,7 +243,10 @@ public void analizar()
             if((erroresLexicos.size()==0)&&(erroresSintacticos.size()==0)&&(erroresSemanticos.size()==0)){
             //Consola1.setText("");
             }
-
+            
+            dibujador aux = new dibujador();
+            aux.generarGrafica(raizChtml);
+            
             imprimirReporteLexico();
             imprimirResultado();
             imprimirLexicos();

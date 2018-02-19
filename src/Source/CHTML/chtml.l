@@ -29,6 +29,7 @@ eofval: especifica un valor de retorno al final del archivo
 
 
     public static int flagInicio = 0;
+    public String cadena = "";
 %}
 
 %class Scanner /*Nombre de la clase a generar.%cupsym simbolos*/
@@ -49,7 +50,7 @@ digito = [0-9][0-9]*
 decimal= {digito}"."{digito}
 simbolos1= "@"|":"|"!"|"¿"|"\""|"ñ"|","
 simbolos2= "("|")"|"*"|"-"|"+"|"."|"!"
-letra = ([a-zA-Z]|"ñ")
+letra = ([a-zA-Z]|"ñ"|"á"|"é"|"í"|"ó"|"ú")
 linea = ([^\r\n\"\\])
 id = ({letra}({letra}|{digito}|"_"|"-")*)
 rgb  = ("#"{id}| "#"{digito}{id})
@@ -59,7 +60,9 @@ direccionLinux=(("/"{linea}+))+
 idComillas = ("\""{id}"\"")
 rgbComillas = ("\""{rgb}"\"")
 
-%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO
+
+
+%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3
 %%
 
 
@@ -71,6 +74,11 @@ rgbComillas = ("\""{rgb}"\"")
 
 <YYINITIAL>
 {
+
+    
+    {espacio}
+    {System.out.println("Salto de linea");}	
+
 
     /*----------  < ----------------*/
     "<//-"	
@@ -109,9 +117,7 @@ rgbComillas = ("\""{rgb}"\"")
         simbolo.setDescripcion("> : Mayor que");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
-
-        
+        Interfaz.tablaSimbolos_.add(simbolo);	        
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
     }    
 
@@ -199,10 +205,104 @@ rgbComillas = ("\""{rgb}"\"")
         Interfaz.tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.finCuerpo, yychar, yyline, yytext()); 
        
-    }          
+    }    
+}
+
+
+<TITULO1>
+{
 
     {espacio}
-    {System.out.println("Salto de linea");}	
+    {}
+
+    ">"	
+    {    
+        yybegin(TITULO2);                           
+        System.out.println("Saltar a estado TITULO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        
+        
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }    
+
+
+}
+
+
+
+<TITULO2>
+{
+    {espacio}
+    {cadena  = cadena + yytext();}	
+
+
+    [^]
+    {  
+        if(!yytext().equals("<"))
+        {
+            cadena  = cadena + yytext();
+            //System.out.println(cadena);
+        }
+        else 
+        {
+
+            //cadena = cadena + yytext();
+            
+            yybegin(TITULO3);
+            Interfaz.auxContador++;                                
+            //Generamos la entrada en la tabla de simbolos.
+            tablaSimbolos simbolo=new tablaSimbolos();
+            simbolo.setTipo("cadena");
+            simbolo.setLinea(yyline);
+            simbolo.setColumna(yychar);
+            simbolo.setDescripcion("Cadena : cadena de texto");
+            simbolo.setIndex(Interfaz.auxContador);
+            simbolo.setValor(cadena);                 
+            Interfaz.tablaSimbolos_.add(simbolo);
+            yypushback(1);	                
+            return new Symbol(simbolos.cadena, yychar, yyline, yytext()); 
+
+        }                       
+    } 
+
+
+   
+
+
+}
+
+<TITULO3>
+{
+
+    {espacio}
+    {}
+
+    "<"	
+    {    
+        yybegin(ENCABEZADO2);  
+        System.out.println("----------------------------------------------Saliendo de titulo3");                         
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("menorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : Menor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }    
 
 
 }
@@ -336,8 +436,7 @@ rgbComillas = ("\""{rgb}"\"")
 <ENCABEZADO1>
 {
 
-    {espacio}
-    {}	
+
 
     /*----------  > ----------------*/
     ">"	
@@ -357,7 +456,10 @@ rgbComillas = ("\""{rgb}"\"")
         
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
-    }     
+    }  
+
+    {espacio}
+    {}	       
 }
 
 <ENCABEZADO2>
@@ -365,7 +467,39 @@ rgbComillas = ("\""{rgb}"\"")
     {espacio}
     {}	
 
+    "titulo"
+    {        
+        yybegin(TITULO1);
+        System.out.println("Saltar a estado CUERPO");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("titulo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("titulo : Inicio titulo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        return new Symbol(simbolos.inicioTitulo, yychar, yyline, yytext()); 
+       
+    }
 
+    "fin-titulo"
+    {        
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("fin-titulo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-titulo : Fin titulo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        return new Symbol(simbolos.finTitulo, yychar, yyline, yytext()); 
+       
+    }      
 
 
 
@@ -572,7 +706,9 @@ rgbComillas = ("\""{rgb}"\"")
         //Nos movemos al estado auxiliar para declaracion cjs
         return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
 
-    }    
+    }   
+
+    
 
 }
 

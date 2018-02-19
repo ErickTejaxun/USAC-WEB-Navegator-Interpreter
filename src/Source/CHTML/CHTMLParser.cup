@@ -6,10 +6,11 @@ import Principal.Interfaz.*;
 import Principal.Errores;
 import Principal.Interfaz;
 import Principal.tablaSimbolos;
+import Source.CHTML.nodoChtml;
 //import static olc1_proyecto1.Menu.path;
 parser code
 {:
-
+	
 	public static String ConvertirObjectToString(Object Obj)
 	 {
 		String Str="";
@@ -40,14 +41,15 @@ parser code
 
 /*Terminlaes :v :v y más :v pro++ Gamer pro+, rank pro+ , primer nivel, nivel mundial, por tu salud.*/
 terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado,inicioCjs,ruta,asignacion,pathComillas,puntoComa;
-terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id;
+terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id, inicioTitulo, finTitulo, cadena;
 /*terminal Integer numero;
 terminal Integer decimal;
 terminal String idVariable;*/
 
 
 /*Producciones :v :v y mas :v*/
-non terminal String CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, CONTENIDOCUERPO;
+non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  CONTENIDOENCABEZADO, DEFCCSS, DEFCJS,
+INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO;
 
 
 /*
@@ -59,23 +61,35 @@ precedence left division;*/
 /*Aquí comienza las producciones de la gramatica.*/
 start with CHTML;
 
-CHTML::= menorQue inicioChtml mayorQue ENCABEZADO  CUERPO menorQue finChtml mayorQue  {::};
+
+/*1. Documento completo-----------ENCABEZADO CUERPO ---------------------------------------------------------------------------------------------------------------------*/
+CHTML::= INICIOCHTML:iz  FINCHTML:der {:Interfaz.raizChtml.setValue("DOCUMENTO");
+										Interfaz.raizChtml.setLinea(Interfaz.contadorChtml++);
+										if(iz!=null){Interfaz.raizChtml.getHijos().add(iz);}
+										if(der!=null){Interfaz.raizChtml.getHijos().add(der);}:};
 
 
-ENCABEZADO ::=  menorQue inicioEncabezado mayorQue DEFINICIONARCHIVOS menorQue finEncabezado mayorQue {::};
+INICIOCHTML::= menorQue:r1 inicioChtml:r2 mayorQue:r3 {: nodoChtml nuevo = new nodoChtml("INICIOCHTML",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioChtml",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												RESULT=nuevo;:};			
+FINCHTML::= menorQue:r1 finChtml:r2 mayorQue:r3 {: nodoChtml nuevo = new nodoChtml("FINCHTML",Interfaz.contadorChtml++);
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finChtml",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												RESULT=nuevo;:};	
 
 
-DEFINICIONARCHIVOS::= DEFINICIONARCHIVOS menorQue inicioCjs ruta asignacion pathComillas puntoComa mayorQue menorQue finCjs mayorQue{::}
-					| DEFINICIONARCHIVOS menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue menorQue finCcss mayorQue{::}
-					| menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue menorQue finCcss mayorQue{::}
-					| menorQue inicioCjs ruta asignacion pathComillas puntoComa mayorQue menorQue finCjs mayorQue{::};
-				
+/*2. Encabezado --------------------------------------------------------------------------------------------------------------------------------*/
+ENCABEZADO::=  INICIOENCABEZADO  FINENCABEZADO  {::};
 
-CUERPO ::= menorQue inicioCuerpo  ESTILOCUERPO mayorQue  menorQue finCuerpo mayorQue{::};
+INICIOENCABEZADO::= menorQue inicioEncabezado mayorQue;
 
-ESTILOCUERPO::=  fondo asignacion rgb puntoComa 
-				| fondo asignacion id puntoComa 
-				|;
+FINENCABEZADO::= menorQue finEncabezado mayorQue ;
+
+/*2.1 Contenido encabezado-----------------------*/
+CONTENIDOENCABEZADO::= ;
 
 
 

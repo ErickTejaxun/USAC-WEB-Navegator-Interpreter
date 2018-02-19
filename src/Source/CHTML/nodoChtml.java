@@ -5,6 +5,8 @@
  */
 package Source.CHTML;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -17,12 +19,22 @@ public class nodoChtml
     private String value;
     private int columna;
     private int linea;    
-    private nodoChtml hijoD;
-    private nodoChtml hijoI;
+    private ArrayList<nodoChtml> hijos = new ArrayList();
 
-    public nodoChtml() {
+    public nodoChtml() 
+    {
+        this.value="";
     }
-
+    
+    public nodoChtml(String value) 
+    {
+        this.value=value;
+    }
+    public nodoChtml(String value, int id) 
+    {
+        this.value=value;
+        this.linea = id;
+    }
     public String getTipo() {
         return tipo;
     }
@@ -39,12 +51,8 @@ public class nodoChtml
         return linea;
     }
 
-    public nodoChtml getHijoD() {
-        return hijoD;
-    }
-
-    public nodoChtml getHijoI() {
-        return hijoI;
+    public ArrayList<nodoChtml> getHijos() {
+        return hijos;
     }
 
     public void setTipo(String tipo) {
@@ -63,14 +71,11 @@ public class nodoChtml
         this.linea = linea;
     }
 
-    public void setHijoD(nodoChtml hijoD) {
-        this.hijoD = hijoD;
+    public void setHijos(ArrayList<nodoChtml> hijos) {
+        this.hijos = hijos;
     }
 
-    public void setHijoI(nodoChtml hijoI) {
-        this.hijoI = hijoI;
-    }
-    
+
     
     
 }
