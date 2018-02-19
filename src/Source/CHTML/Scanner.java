@@ -886,7 +886,7 @@ public class Scanner implements java_cup.runtime.Scanner {
 
             //cadena = cadena + yytext();
             
-            yybegin(TITULO3);
+            yybegin(ENCABEZADO2);
             Interfaz.auxContador++;                                
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
@@ -913,7 +913,7 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("< : Menor que");
+        simbolo.setDescripcion("< : Menor que titulo");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                

@@ -48,7 +48,7 @@ terminal String idVariable;*/
 
 
 /*Producciones :v :v y mas :v*/
-non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  CONTENIDOENCABEZADO, DEFCCSS, DEFCJS,
+non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  LISTAARCHIVOS, DEFCCSS, DEFCJS,TIPOARCHIVO,CONTENIDOENCABEZADO,
 INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO;
 
 
@@ -89,7 +89,7 @@ FINCHTML::= menorQue:r1 finChtml:r2 mayorQue:r3 {:
 ENCABEZADO::=  INICIOENCABEZADO:iz CONTENIDOENCABEZADO:cen FINENCABEZADO:der  {: 
 												nodoChtml nuevo = new nodoChtml("ENCABEZADO",Interfaz.contadorChtml++);												
 												if(iz!=null){nuevo.getHijos().add(iz);}
-												if(cen!=null){Interfaz.raizChtml.getHijos().add(cen);}
+												if(cen!=null){nuevo.getHijos().add(cen);}
 												if(der!=null){nuevo.getHijos().add(der);}
 												RESULT=nuevo;:};
 
@@ -107,8 +107,78 @@ FINENCABEZADO::= menorQue finEncabezado mayorQue {:
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
 												RESULT=nuevo;:};
 
+
 /*2.1 Contenido encabezado-----------------------*/
-CONTENIDOENCABEZADO::= ;
+
+CONTENIDOENCABEZADO::= LISTAARCHIVOS:iz TITULO:der {:
+										nodoChtml nuevo = new nodoChtml("CONTENIDOENCABEZADO",Interfaz.contadorChtml++);												
+										if(iz!=null){nuevo.getHijos().add(iz);}								
+										if(der!=null){nuevo.getHijos().add(der);}																								
+										RESULT=nuevo;
+										:};
+					
 
 
+LISTAARCHIVOS::= LISTAARCHIVOS:iz TIPOARCHIVO:der{:
+												nodoChtml nuevo = new nodoChtml("LISTAARCHIVOS",Interfaz.contadorChtml++);												
+												if(iz!=null){nuevo.getHijos().add(iz);}
+												if(der!=null){nuevo.getHijos().add(der);}							
+												RESULT=nuevo;
+												:}
+				| {::};
+
+TIPOARCHIVO::= DEFCJS:r{:
+							nodoChtml nuevo = new nodoChtml("TIPOARCHIVO",Interfaz.contadorChtml++);							
+							if(r!=null){nuevo.getHijos().add(r);}							
+							RESULT=nuevo;
+							:}
+				|DEFCCSS:r {:
+							nodoChtml nuevo = new nodoChtml("TIPOARCHIVO",Interfaz.contadorChtml++);							
+							if(r!=null){nuevo.getHijos().add(r);}							
+							RESULT=nuevo;
+							:};
+							
+
+DEFCJS::= menorQue inicioCjs ruta asignacion pathComillas puntoComa mayorQue menorQue finCjs mayorQue  
+												{: 
+												nodoChtml nuevo = new nodoChtml("DEFCJS",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioCjs",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("ruta",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("pathComillas",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));	
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finCjs",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																							
+												RESULT=nuevo;
+												:};
+
+DEFCCSS::= menorQue inicioCcss ruta asignacion pathComillas puntoComa mayorQue menorQue finCcss mayorQue
+												{: 
+												nodoChtml nuevo = new nodoChtml("DEFCJS",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioCcss",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("ruta",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("asignacion",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("pathComillas",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));	
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finCcss",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																							
+												RESULT=nuevo;
+												:};	
+												
+																							
+TITULO ::= menorQue inicioTitulo mayorQue cadena menorQue finTitulo mayorQue{: 
+												nodoChtml nuevo = new nodoChtml("TITULO",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioTitulo",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("cadena",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finTitulo",Interfaz.contadorChtml++));	
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																							
+												RESULT=nuevo;
+												:};	
 

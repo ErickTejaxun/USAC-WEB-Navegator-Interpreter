@@ -257,7 +257,7 @@ rgbComillas = ("\""{rgb}"\"")
 
             //cadena = cadena + yytext();
             
-            yybegin(TITULO3);
+            yybegin(ENCABEZADO2);
             Interfaz.auxContador++;                                
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
@@ -297,7 +297,7 @@ rgbComillas = ("\""{rgb}"\"")
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("< : Menor que");
+        simbolo.setDescripcion("< : Menor que titulo");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                
@@ -465,7 +465,23 @@ rgbComillas = ("\""{rgb}"\"")
 <ENCABEZADO2>
 {
     {espacio}
-    {}	
+    {}
+
+    "fin-titulo"
+    {        
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("fin-titulo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-titulo : Fin titulo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        return new Symbol(simbolos.finTitulo, yychar, yyline, yytext()); 
+       
+    }      	
 
     "titulo"
     {        
@@ -485,21 +501,7 @@ rgbComillas = ("\""{rgb}"\"")
        
     }
 
-    "fin-titulo"
-    {        
-        Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
-        tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("fin-titulo");
-        simbolo.setLinea(yyline);
-        simbolo.setColumna(yychar);
-        simbolo.setDescripcion("fin-titulo : Fin titulo");
-        simbolo.setIndex(Interfaz.auxContador);
-        simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
-        return new Symbol(simbolos.finTitulo, yychar, yyline, yytext()); 
-       
-    }      
+    
 
 
 
