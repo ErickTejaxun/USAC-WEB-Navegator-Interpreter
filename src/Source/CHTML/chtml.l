@@ -67,7 +67,8 @@ valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
 metodo = {id}"()"
 
 
-%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS,TEXTO1,TEXTO2,IMAGEN1,IMAGEN2, BOTON1, BOTON2, ENLACE1,ENLACE2
+%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS,TEXTO1,TEXTO2
+%state IMAGEN1,IMAGEN2, BOTON1, BOTON2, ENLACE1,ENLACE2,T1,T2,T3,T4,T5,T6,T7,TB,TB2,TI,TI2,TB3
 %%
 
 
@@ -356,9 +357,1357 @@ metodo = {id}"()"
         Interfaz.tablaSimbolos_.add(simbolo);                                 
         return new Symbol(simbolos.finEnlace, yychar, yyline, yytext());        
         
+    }     
+    
+    "tabla"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("enlace");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("enlace: Inicio enlace");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+        yybegin(T1);                                    
+        return new Symbol(simbolos.inicioEnlace, yychar, yyline, yytext());        
+        
     }           
 
                 
+}
+
+<T1>
+{
+
+
+    "id"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id Ccss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+
+    }
+
+    "grupo"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("grupo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+
+    } 
+
+    "alto"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alto");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+
+    }     
+
+
+    "ancho"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ancho");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+
+    } 
+
+    "alineado"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+
+    }  
+      
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    } 
+
+    {valorAlineado}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("valorAlineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+
+    }         
+
+
+    {idComillas}
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+
+    } 
+
+
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    } 
+                
+
+    ">"	
+    {    
+        yybegin(T2);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    {espacio}
+    {
+
+    }
+}
+
+
+<T2>
+{
+
+    {espacio}
+    {
+
+    }  
+
+    "<"	
+    {
+        cadena = "";
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("menorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : Menor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        System.out.println("*****************************************************************");
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
+    }    
+
+
+    "fin-tabla"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-tabla");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-tabla: Fin tabla");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                                 
+        return new Symbol(simbolos.finTabla, yychar, yyline, yytext());        
+        
+    } 
+
+
+    "fil_t"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fil_t");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fil_t: Inicio fila");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo); 
+        yybegin(T3);                                
+        return new Symbol(simbolos.inicioFila, yychar, yyline, yytext());        
+        
+    }     
+
+
+}
+
+<T3>
+{
+
+
+    "id"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id Ccss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+
+    }
+
+    "grupo"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("grupo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+
+    } 
+
+    "alto"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alto");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+
+    }     
+
+
+    "ancho"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ancho");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+
+    } 
+
+    "alineado"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+
+    }  
+      
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    } 
+
+    {valorAlineado}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("valorAlineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+
+    }         
+
+
+    {idComillas}
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+
+    } 
+
+
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    } 
+                
+
+    ">"	
+    {    
+        yybegin(T4);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    {espacio}
+    {
+
+    }
+}
+
+
+
+<T4>
+{
+    {espacio}
+    {
+
+    }  
+
+    "<"	
+    {
+        cadena = "";
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("menorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : Menor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        System.out.println("*****************************************************************");
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
+    }  
+
+
+    ">"	
+    {
+        cadena = "";
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	        
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }
+
+
+    "fin-fil_t"
+    {        
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("fin-fil_t");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-fil_t : Fin Fila");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);   
+        yybegin(T2);     	        
+        return new Symbol(simbolos.finFila, yychar, yyline, yytext());        
+    } 
+
+    "cb"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("cb");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("cb: Inicio Celda cabecera");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+        yybegin(T5);                                    
+        return new Symbol(simbolos.inicioCeldaCabecera, yychar, yyline, yytext());                
+    }
+
+    "ct"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ct");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ct: Inicio Celda");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+        yybegin(T5);                                    
+        return new Symbol(simbolos.inicioCelda, yychar, yyline, yytext());                
+    }    
+
+}
+
+<T5>
+{
+
+
+    "id"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id Ccss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+
+    }
+
+    "grupo"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("grupo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+
+    } 
+
+    "alto"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alto");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+
+    }     
+
+
+    "ancho"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ancho");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+
+    } 
+
+    "alineado"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+
+    }  
+      
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    } 
+
+    {valorAlineado}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("valorAlineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+
+    }         
+
+
+    {idComillas}
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+
+    } 
+
+
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    } 
+                
+
+    ">"	
+    {    
+        yybegin(T6);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    {espacio}
+    {
+
+    }
+}
+
+<T6>
+{
+    {espacio}
+    {cadena  = cadena + yytext();}	
+
+
+    [^]
+    {  
+        if(!yytext().equals("<"))
+        {
+            cadena  = cadena + yytext();
+            //System.out.println(cadena);
+        }
+        else 
+        {
+
+            //cadena = cadena + yytext();
+            
+            yybegin(T7);
+            Interfaz.auxContador++;                                
+            //Generamos la entrada en la tabla de simbolos.
+            tablaSimbolos simbolo=new tablaSimbolos();
+            simbolo.setTipo("cadena");
+            simbolo.setLinea(yyline);
+            simbolo.setColumna(yychar);
+            simbolo.setDescripcion("Cadena : cadena de texto");
+            simbolo.setIndex(Interfaz.auxContador);
+            simbolo.setValor(cadena);                 
+            Interfaz.tablaSimbolos_.add(simbolo);
+            yypushback(1);	                
+            return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
+
+        }                       
+    }     
+}
+
+
+<T7>
+{
+    "fin-cb"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("finCelda");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("finCelda : Fin Celda");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);    
+        yybegin(T4);                        
+        return new Symbol(simbolos.finCelda, yychar, yyline, yytext());
+
+    } 
+
+    "fin-ct"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("finCeldaCabecera");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("finCeldaCabecera : Fin cabecera");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);    
+        yybegin(T4);                        
+        return new Symbol(simbolos.finCeldaCabecera, yychar, yyline, yytext());
+
+    }            
+
+    "imagen"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("imagen");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("imagen : Inicio imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);    
+        yybegin(TI);                        
+        return new Symbol(simbolos.inicioImagen, yychar, yyline, yytext());
+
+    }   
+
+
+    "boton"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("boton");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("boton : Inicio boton");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);    
+        yybegin(TB);                        
+        return new Symbol(simbolos.inicioBoton, yychar, yyline, yytext());
+
+    }              
+    
+}
+
+/*ffffffffffffffffffffffffffffffffffffffff*/
+<TB>
+{
+    "click"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("click");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("click : Evento Click");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                            
+        return new Symbol(simbolos.click, yychar, yyline, yytext());
+
+    }  
+
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    }   
+
+    {metodo}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("metodo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("metodo : Llamada a metodo");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.metodo, yychar, yyline, yytext());
+
+    } 
+
+    {direccionWindows}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("path : Direccion a imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+
+    }     
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    }    
+
+    ">"	
+    {    
+        yybegin(TB2);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    "ruta"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ruta");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ruta : Declaración ruta archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        return new Symbol(simbolos.ruta, yychar, yyline, yytext());
+
+    } 
+
+
+
+    "id"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id Ccss");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+
+    }
+
+    "grupo"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("grupo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+
+    } 
+
+    "alto"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alto");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+
+    }     
+
+
+    "ancho"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ancho");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+
+    } 
+
+    "alineado"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("alineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+
+    }  
+      
+
+
+    {valorAlineado}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("valorAlineado");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+
+    }         
+
+
+    {idComillas}
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("id");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+
+    } 
+
+    
+                
+
+    {espacio}
+    {
+
+    }              
+
+
+}
+
+<TB2>
+{
+
+    {espacio}
+    {cadena  = cadena + yytext();}	
+
+
+    [^]
+    {  
+        if(!yytext().equals("<"))
+        {
+            cadena  = cadena + yytext();
+            //System.out.println(cadena);
+        }
+        else 
+        {
+
+            //cadena = cadena + yytext();
+            
+            yybegin(TB3);
+            Interfaz.auxContador++;                                
+            //Generamos la entrada en la tabla de simbolos.
+            tablaSimbolos simbolo=new tablaSimbolos();
+            simbolo.setTipo("cadena");
+            simbolo.setLinea(yyline);
+            simbolo.setColumna(yychar);
+            simbolo.setDescripcion("Cadena : cadena de texto");
+            simbolo.setIndex(Interfaz.auxContador);
+            simbolo.setValor(cadena);                 
+            Interfaz.tablaSimbolos_.add(simbolo);
+            yypushback(1);	                
+            return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
+
+        }                       
+    } 
+
+
+}
+
+<TB3>
+{
+    "<"	
+    {    
+         
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("menorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : MenorQue inicio Imagen");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
+    }
+
+    "fin-boton"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-boton");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-boton: Fin boton");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);            
+        return new Symbol(simbolos.finBoton, yychar, yyline, yytext());        
+        
+    }  
+
+
+    ">"	
+    {    
+        yybegin(T6);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }  
+
+    {espacio}
+    {
+
+    }         
+
+}
+
+
+
+<TI>
+{
+
+    "click"
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("click");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("click : Evento Click");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                            
+        return new Symbol(simbolos.click, yychar, yyline, yytext());
+
+    }  
+
+    "="
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("asignacion");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                
+        Interfaz.tablaSimbolos_.add(simbolo);
+                             
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+
+    }   
+
+    {metodo}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("metodo");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("metodo : Llamada a metodo");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.metodo, yychar, yyline, yytext());
+
+    } 
+
+    {direccionWindows}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("path : Direccion a imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                            
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+
+    }     
+
+    ";"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("puntoComa");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+                    
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+
+    }    
+
+    ">"	
+    {    
+        yybegin(TI2);                           
+        System.out.println("Saltar a estado ENCABEZADO2");
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    "ruta"
+    {
+        Interfaz.auxContador++;
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("ruta");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("ruta : Declaración ruta archivo");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);
+               
+        return new Symbol(simbolos.ruta, yychar, yyline, yytext());
+
+    } 
+
+    {espacio}
+    {
+
+    }              
+
+
+}
+
+
+<TI2>
+{
+    {espacio}
+    {
+
+    }    
+
+    {path}
+    {
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("path");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("path : Direccion a imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                          
+        return new Symbol(simbolos.path, yychar, yyline, yytext());
+        
+
+    }     
+
+
+    "<"	
+    {    
+         
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("menorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("< : MenorQue inicio Imagen");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	                
+        return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
+    }
+
+    "fin-imagen"
+    {        
+        //Generamos la entrada en la tabla de simbolos
+        tablaSimbolos simbolo = new tablaSimbolos();
+        simbolo.setTipo("fin-imagen");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("fin-imagen: Fin imagen");
+        simbolo.setIndex(Interfaz.auxContador++);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);                                    
+        return new Symbol(simbolos.finImagen, yychar, yyline, yytext());        
+        
+    }  
+
+
+    ">"	
+    {    
+         
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo("mayorQue");
+        simbolo.setLinea(yyline);
+        simbolo.setColumna(yychar);
+        simbolo.setDescripcion("> : mayorQue fin Imagen");
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(yytext());                 
+        Interfaz.tablaSimbolos_.add(simbolo);	
+        yybegin(T6);                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    }        
+
 }
 
 

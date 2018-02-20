@@ -43,7 +43,8 @@ parser code
 terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado,inicioCjs,ruta,asignacion,pathComillas,puntoComa;
 terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id, inicioTitulo, finTitulo, cadena,
 inicioPanel,idCcss,grupo,alto,ancho,alineado,valorAlineado,finPanel, inicioTexto, finTexto,finImagen, inicioImagen,metodo, click, path,
-inicioBoton,finBoton, inicioEnlace, finEnlace;
+inicioBoton,finBoton, inicioEnlace, finEnlace, inicioTabla, finTabla, inicioCelda, finCelda, inicioCeldaCabecera, finCeldaCabecera,
+inicioFila, finFila;
 /*terminal Integer numero;
 terminal Integer decimal;
 terminal String idVariable;*/
