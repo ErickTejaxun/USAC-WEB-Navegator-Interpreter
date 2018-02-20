@@ -51,8 +51,9 @@ terminal String idVariable;*/
 
 /*Producciones :v :v y mas :v*/
 non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  LISTAARCHIVOS, DEFCCSS, DEFCJS,DEFARCHIVO,CONTENIDOENCABEZADO,
-INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO,PANEL,ELEMENTO, ELEMENTOS, ELEMENTOS1,CONTENIDOCUERPO,ELEMENTOSCUERPO,ELEMENTOSCUERPO1,
- ELEMENTOC,TEXTO,CONTENIDOCUERPO1, IMAGEN,EI,EI1,CLICK,RUTA;
+INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO,PANEL,ELEMENTO, ELEMENTOS, ELEMENTOS1,CONTENIDOCUERPO,ELEMENTOSCUERPO,ELEMENTOSCUERPO1,ATRIBUTOS,
+ATRIBUTOS1,
+ ELEMENTOC,TEXTO,CONTENIDOCUERPO1, IMAGEN,EI,EI1,CLICK,RUTA,BOTON;
 
 
 /*
@@ -278,7 +279,14 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							if(cuerpo!=null){nuevo.getHijos().add(cuerpo);}	
 							if(texto!=null){nuevo.getHijos().add(texto);}																																													
 							RESULT=nuevo;
-							:}							
+							:}	
+				| CONTENIDOCUERPO:cuerpo BOTON:b
+							{: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
+							if(cuerpo!=null){nuevo.getHijos().add(cuerpo);}	
+							if(b!=null){nuevo.getHijos().add(b);}																																													
+							RESULT=nuevo;
+							:}														
 				| PANEL:panel
 							{: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);																			
@@ -294,7 +302,8 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
 							if(texto!=null){nuevo.getHijos().add(texto);}																																																				
 							RESULT=nuevo;
-							:};
+							:}
+				| BOTON	;
 				
 
 /*3.1-----------------------panel----------------------*/												
@@ -323,15 +332,37 @@ PANEL::= menorQue inicioPanel  ELEMENTOS:elementos mayorQue CONTENIDOCUERPO:cont
 												nuevo.getHijos().add(new nodoChtml("finPanel",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																																													
 												RESULT=nuevo;
-												:}												;
+												:}
+ 		| menorQue inicioPanel  mayorQue CONTENIDOCUERPO:contenido menorQue finPanel mayorQue
+												{: 
+												nodoChtml nuevo = new nodoChtml("PANEL",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioPanel",Interfaz.contadorChtml++));
+												//if(elementos!=null){nuevo.getHijos().add(elementos);}	
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));												
+												if(contenido!=null){nuevo.getHijos().add(contenido);}	
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finPanel",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																																													
+												RESULT=nuevo;
+												:}
+		|menorQue inicioPanel mayorQue  menorQue finPanel mayorQue
+												{: 
+												nodoChtml nuevo = new nodoChtml("PANEL",Interfaz.contadorChtml++);												
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("inicioPanel",Interfaz.contadorChtml++));
+												//if(elementos!=null){nuevo.getHijos().add(elementos);}	
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																									
+												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("finPanel",Interfaz.contadorChtml++));
+												nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																																													
+												RESULT=nuevo;
+												:}												
+												;
 
 ELEMENTOS::= ELEMENTOS1:r{:
 						nodoChtml nuevo = new nodoChtml("ELEMENTOS",Interfaz.contadorChtml++);
 						if(r!=null){nuevo.getHijos().add(r);}							
-						RESULT= nuevo;
-						:}
-			|			{:
-						nodoChtml nuevo = new nodoChtml("ELEMENTOS",Interfaz.contadorChtml++);												
 						RESULT= nuevo;
 						:};
 
@@ -404,7 +435,20 @@ TEXTO::= menorQue inicioTexto ELEMENTOS:elementos mayorQue cadena:cad menorQue f
 										nuevo.getHijos().add(new nodoChtml("finTexto",Interfaz.contadorChtml++));
 										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
 										RESULT=nuevo;
-										:} 	;
+										:} 	
+										
+		| menorQue inicioTexto  mayorQue cadena:cad menorQue finTexto mayorQue
+										{: 
+										nodoChtml nuevo = new nodoChtml("TEXTO",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("inicioTexto",Interfaz.contadorChtml++));										
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("cadena",Interfaz.contadorChtml++, new nodoChtml(cad,Interfaz.contadorChtml++)));																																													
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("finTexto",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										RESULT=nuevo;
+										:} 										;
 
 IMAGEN::= menorQue inicioImagen  mayorQue path:ruta menorQue finImagen mayorQue{: 
 										nodoChtml nuevo = new nodoChtml("IMAGEN",Interfaz.contadorChtml++);												
@@ -453,7 +497,55 @@ IMAGEN::= menorQue inicioImagen  mayorQue path:ruta menorQue finImagen mayorQue{
 										nuevo.getHijos().add(new nodoChtml("finImagen",Interfaz.contadorChtml++));
 										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
 										RESULT=nuevo;
-										:};									
+										:};	
+
+
+BOTON::= menorQue inicioBoton ATRIBUTOS:atrib mayorQue cadena:cad menorQue finBoton mayorQue
+										{: 
+										nodoChtml nuevo = new nodoChtml("BOTON",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("inicioBoton",Interfaz.contadorChtml++));
+										if(atrib!=null){nuevo.getHijos().add(atrib);}	
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("cadena",Interfaz.contadorChtml++, new nodoChtml(cad,Interfaz.contadorChtml++)));																																													
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("finBoton",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										RESULT=nuevo;
+										:};
+
+ATRIBUTOS::=  ATRIBUTOS1:e{:
+			nodoChtml nuevo = new nodoChtml("ATRIBUTOS",Interfaz.contadorChtml++);												
+			if(e!=null){nuevo.getHijos().add(e);}			
+			RESULT=nuevo;:};
+
+ATRIBUTOS1::= ATRIBUTOS1:a CLICK:c{:
+								nodoChtml nuevo = new nodoChtml("ATRIBUTOS1",Interfaz.contadorChtml++);												
+								if(a!=null){nuevo.getHijos().add(a);}			
+								if(c!=null){nuevo.getHijos().add(c);}			
+								RESULT=nuevo;:}
+			| ATRIBUTOS1:a RUTA:c{:
+								nodoChtml nuevo = new nodoChtml("ATRIBUTOS1",Interfaz.contadorChtml++);												
+								if(a!=null){nuevo.getHijos().add(a);}			
+								if(c!=null){nuevo.getHijos().add(c);}			
+								RESULT=nuevo;:}
+			| ATRIBUTOS1:a ELEMENTO:c{:
+								nodoChtml nuevo = new nodoChtml("ATRIBUTOS1",Interfaz.contadorChtml++);												
+								if(a!=null){nuevo.getHijos().add(a);}			
+								if(c!=null){nuevo.getHijos().add(c);}			
+								RESULT=nuevo;:}
+			| CLICK:e{:
+				nodoChtml nuevo = new nodoChtml("ATRIBUTOS",Interfaz.contadorChtml++);												
+				if(e!=null){nuevo.getHijos().add(e);}			
+				RESULT=nuevo;:}
+			| RUTA:e{:
+				nodoChtml nuevo = new nodoChtml("ATRIBUTOS",Interfaz.contadorChtml++);												
+				if(e!=null){nuevo.getHijos().add(e);}			
+				RESULT=nuevo;:}
+			| ELEMENTO:e{:
+				nodoChtml nuevo = new nodoChtml("ATRIBUTOS",Interfaz.contadorChtml++);												
+				if(e!=null){nuevo.getHijos().add(e);}			
+				RESULT=nuevo;:};
 
 EI::= EI1:e{:
 			nodoChtml nuevo = new nodoChtml("EI",Interfaz.contadorChtml++);												
@@ -497,3 +589,4 @@ RUTA::= ruta asignacion pathComillas:path puntoComa{:
 										nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));
 										RESULT=nuevo;
 										:};
+
