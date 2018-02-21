@@ -328,7 +328,11 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							if(t!=null){nuevo.getHijos().add(t);}																																																				
 							RESULT=nuevo;
 							:}
-				|TABLA;
+				|TABLA:t{: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
+							if(t!=null){nuevo.getHijos().add(t);}																																																				
+							RESULT=nuevo;
+							:};
 				
 
 /*3.1-----------------------panel----------------------*/												
@@ -678,8 +682,29 @@ RUTA::= ruta asignacion pathComillas:path puntoComa{:
 
 /*TABLA-------------------------------------------------------------------------------*/
 
-TABLA::= menorQue inicioTabla ELEMENTOS mayorQue  menorQue finTabla mayorQue
-		| menorQue inicioTabla mayorQue  menorQue finTabla mayorQue;
+TABLA::= menorQue inicioTabla ELEMENTOS:e mayorQue  menorQue finTabla mayorQue
+										{:
+										nodoChtml nuevo = new nodoChtml("TABLA",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("inicioTabla",Interfaz.contadorChtml++));
+										if(e!=null){nuevo.getHijos().add(e);}											
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										//if(contenido!=null){nuevo.getHijos().add(contenido);}									
+										nuevo.getHijos().add(new nodoChtml("finTabla",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										RESULT=nuevo;
+										:}
+		| menorQue inicioTabla mayorQue  menorQue finTabla mayorQue
+										{:
+										nodoChtml nuevo = new nodoChtml("TABLA",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("inicioTabla",Interfaz.contadorChtml++));																				
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										//if(contenido!=null){nuevo.getHijos().add(contenido);}									
+										nuevo.getHijos().add(new nodoChtml("finTabla",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										RESULT=nuevo;
+										:}		;
 
 LISTAFILA::= LISTAFILA FILA
 			| FILA;
