@@ -36,6 +36,12 @@ public class nodoChtml
         this.linea = id;
         this.tipo=value;
     }
+    public nodoChtml(String value, int id, int x) 
+    {
+        this.value=value;
+        this.linea = id;
+        this.tipo=value;
+    }    
     public nodoChtml(String value, int id, nodoChtml hijo) 
     {
         this.value=value;

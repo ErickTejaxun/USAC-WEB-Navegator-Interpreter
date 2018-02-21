@@ -44,7 +44,7 @@ terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado,inic
 terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id, inicioTitulo, finTitulo, cadena,
 inicioPanel,idCcss,grupo,alto,ancho,alineado,valorAlineado,finPanel, inicioTexto, finTexto,finImagen, inicioImagen,metodo, click, path,
 inicioBoton,finBoton, inicioEnlace, finEnlace, inicioTabla, finTabla, inicioCelda, finCelda, inicioCeldaCabecera, finCeldaCabecera,
-inicioFila, finFila;
+inicioFila, finFila, inicioCajaArea, finCajaArea;
 /*terminal Integer numero;
 terminal Integer decimal;
 terminal String idVariable;*/
@@ -54,7 +54,7 @@ terminal String idVariable;*/
 non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  LISTAARCHIVOS, DEFCCSS, DEFCJS,DEFARCHIVO,CONTENIDOENCABEZADO,
 INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO,PANEL,ELEMENTO, ELEMENTOS, ELEMENTOS1,CONTENIDOCUERPO,ELEMENTOSCUERPO,ELEMENTOSCUERPO1,ATRIBUTOS,
 ATRIBUTOS1,ELEMENTOC,TEXTO,CONTENIDOCUERPO1, IMAGEN,EI,EI1,CLICK,RUTA,BOTON, ENLACE,AE,AE1,
-TABLA, LISTAFILA, FILA, LISTACELDA, CELDA, CELDAC, CONTENIDOCELDA,CADENA;
+TABLA, LISTAFILA, FILA, LISTACELDA, CELDA, CELDAC, CONTENIDOCELDA,CADENA,TEXTOA;
 
 
 /*
@@ -259,7 +259,7 @@ ESTILOCUERPO::=  fondo asignacion rgb puntoComa{:
 												RESULT=nuevo;
 												:}; 
 
-
+/*TODOS LOS ELEMENTOS QUE PUEDEN VENIR DENTRO DEL CUERPO O DENTRO DE UN PANEL :V :V Y MÁS :V*/
 CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							{: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
@@ -301,7 +301,15 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							if(cuerpo!=null){nuevo.getHijos().add(cuerpo);}	
 							if(b!=null){nuevo.getHijos().add(b);}																																													
 							RESULT=nuevo;
-							:}																												
+							:}	
+
+				| CONTENIDOCUERPO:cuerpo TEXTOA:b
+							{: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
+							if(cuerpo!=null){nuevo.getHijos().add(cuerpo);}	
+							if(b!=null){nuevo.getHijos().add(b);}																																													
+							RESULT=nuevo;
+							:}																																		
 				| PANEL:panel
 							{: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);																			
@@ -329,6 +337,11 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							RESULT=nuevo;
 							:}
 				|TABLA:t{: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
+							if(t!=null){nuevo.getHijos().add(t);}																																																				
+							RESULT=nuevo;
+							:}
+				|TEXTOA:t {: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
 							if(t!=null){nuevo.getHijos().add(t);}																																																				
 							RESULT=nuevo;
@@ -700,7 +713,7 @@ TABLA::= menorQue inicioTabla ELEMENTOS:e mayorQue LISTAFILA:contenido menorQue 
 										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 										nuevo.getHijos().add(new nodoChtml("inicioTabla",Interfaz.contadorChtml++));																				
 										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
-										//if(contenido!=null){nuevo.getHijos().add(contenido);}									
+										if(contenido!=null){nuevo.getHijos().add(contenido);}									
 										nuevo.getHijos().add(new nodoChtml("finTabla",Interfaz.contadorChtml++));
 										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
 										RESULT=nuevo;
@@ -846,3 +859,7 @@ CONTENIDOCELDA::= CONTENIDOCELDA:l IMAGEN:b
 CADENA::= cadena:cad  {:nodoChtml nuevo = new nodoChtml("CADENA", Interfaz.contadorChtml++);
 						nuevo.getHijos().add(new nodoChtml(cad,Interfaz.contadorChtml++));
 						RESULT= nuevo;:};
+
+
+TEXTOA::= menorQue inicioCajaArea ELEMENTOS mayorQue cadena menorQue finCajaArea mayorQue
+		| menorQue inicioCajaArea mayorQue cadena menorQue finCajaArea mayorQue;
