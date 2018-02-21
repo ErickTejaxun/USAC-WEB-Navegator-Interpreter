@@ -832,7 +832,6 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	
-        System.out.println("*****************************************************************");
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext()); 
     }  
 
@@ -846,7 +845,7 @@ metodo = {id}"()"
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setDescripcion("> : Mayor que T4");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	        
@@ -881,7 +880,8 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
-        yybegin(T5);                                    
+        yybegin(T5);   
+        System.out.println("SALTAR A T5");
         return new Symbol(simbolos.inicioCeldaCabecera, yychar, yyline, yytext());                
     }
 
@@ -896,7 +896,8 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
-        yybegin(T5);                                    
+        yybegin(T5);    
+        System.out.println("SALTAR A T5");                                
         return new Symbol(simbolos.inicioCelda, yychar, yyline, yytext());                
     }    
 
@@ -913,11 +914,10 @@ metodo = {id}"()"
         simbolo.setTipo("id Ccss");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("id : Identificador grupo ccss");
+        simbolo.setDescripcion("id : Identificador grupo ccss T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
-                            
+        Interfaz.tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
 
     }
@@ -929,7 +929,7 @@ metodo = {id}"()"
         simbolo.setTipo("grupo");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("grupo : grupo ccss");
+        simbolo.setDescripcion("grupo : grupo ccss T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -945,7 +945,7 @@ metodo = {id}"()"
         simbolo.setTipo("alto");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("alto : Altura objeto");
+        simbolo.setDescripcion("alto : Altura objeto T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -962,7 +962,7 @@ metodo = {id}"()"
         simbolo.setTipo("ancho");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("ancho : Anchura objeto");
+        simbolo.setDescripcion("ancho : Anchura objeto T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -978,7 +978,7 @@ metodo = {id}"()"
         simbolo.setTipo("alineado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("alineado : Alineación objeto");
+        simbolo.setDescripcion("alineado : Alineación objeto T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -994,7 +994,7 @@ metodo = {id}"()"
         simbolo.setTipo("asignacion");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("= : Asignacion");
+        simbolo.setDescripcion("= : Asignacion T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -1010,7 +1010,7 @@ metodo = {id}"()"
         simbolo.setTipo("valorAlineado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("valorAlineado : Alineación");
+        simbolo.setDescripcion("valorAlineado : Alineación T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -1027,7 +1027,7 @@ metodo = {id}"()"
         simbolo.setTipo("id");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("id: Posible nombre de color.");
+        simbolo.setDescripcion("id: Posible nombre de color. T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -1045,7 +1045,7 @@ metodo = {id}"()"
         simbolo.setTipo("puntoComa");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("; : Punto coma");
+        simbolo.setDescripcion("; : Punto coma T5");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
@@ -1058,14 +1058,14 @@ metodo = {id}"()"
     ">"	
     {    
         yybegin(T6);                           
-        System.out.println("Saltar a estado ENCABEZADO2");
+        System.out.println("Saltar a T6");
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setDescripcion("> : Mayor que T5");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                
@@ -1128,7 +1128,7 @@ metodo = {id}"()"
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("< : MenorQue inicio Imagen");
+        simbolo.setDescripcion("< : MenorQue T7");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                
@@ -1146,8 +1146,10 @@ metodo = {id}"()"
         simbolo.setDescripcion("finCelda : Fin Celda");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                  
-        return new Symbol(simbolos.finCelda, yychar, yyline, yytext());
+        Interfaz.tablaSimbolos_.add(simbolo);
+        yybegin(T4);       
+        System.out.println("SALTAR A T4");                           
+        return new Symbol(simbolos.finCeldaCabecera, yychar, yyline, yytext());
 
     } 
 
@@ -1162,27 +1164,12 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);    
-                               
-        return new Symbol(simbolos.finCeldaCabecera, yychar, yyline, yytext());
+        yybegin(T4);  
+        System.out.println("SALTAR A T4");                               
+        return new Symbol(simbolos.finCelda, yychar, yyline, yytext());
 
     }            
 
-    ">"	
-    {
-        cadena = "";
-        Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
-        tablaSimbolos simbolo=new tablaSimbolos();
-        simbolo.setTipo("mayorQue");
-        simbolo.setLinea(yyline);
-        simbolo.setColumna(yychar);
-        simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
-        simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
-        yybegin(T4);         
-        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
-    }
 
 
     "imagen"
@@ -1516,7 +1503,7 @@ metodo = {id}"()"
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("< : MenorQue inicio Imagen");
+        simbolo.setDescripcion("< : MenorQue inicio TB3");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                
@@ -1530,7 +1517,7 @@ metodo = {id}"()"
         simbolo.setTipo("fin-boton");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("fin-boton: Fin boton");
+        simbolo.setDescripcion("fin-boton: Fin boton TB3");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);            
@@ -1549,7 +1536,7 @@ metodo = {id}"()"
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("> : Mayor que");
+        simbolo.setDescripcion("> : Mayor que TB3");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                
@@ -1704,7 +1691,7 @@ metodo = {id}"()"
         simbolo.setTipo("path");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("path : Direccion a imagen");
+        simbolo.setDescripcion("path : Direccion a imagen TI2");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);                          
@@ -1723,7 +1710,7 @@ metodo = {id}"()"
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("< : MenorQue inicio Imagen");
+        simbolo.setDescripcion("< : MenorQue inicio TI2");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	                
@@ -1737,7 +1724,7 @@ metodo = {id}"()"
         simbolo.setTipo("fin-imagen");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("fin-imagen: Fin imagen");
+        simbolo.setDescripcion("fin-imagen: Fin imagen TI2");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);                                    
@@ -1755,7 +1742,7 @@ metodo = {id}"()"
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
-        simbolo.setDescripcion("> : mayorQue fin Imagen");
+        simbolo.setDescripcion("> : mayorQue fin Imagen TI2");
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	

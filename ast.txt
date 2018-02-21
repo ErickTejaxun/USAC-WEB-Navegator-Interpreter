@@ -1,14 +1,14 @@
 digraph G
 {
-N419[label="DOCUMENTO"]; 
+N532[label="DOCUMENTO"]; 
 N0[label="INICIOCHTML"]; 
 N74[label="ENCABEZADO"]; 
-N408[label="CUERPO"]; 
-N415[label="FINCHTML"]; 
-N419->N0 ; 
-N419->N74 ; 
-N419->N408 ; 
-N419->N415 ; 
+N521[label="CUERPO"]; 
+N528[label="FINCHTML"]; 
+N532->N0 ; 
+N532->N74 ; 
+N532->N521 ; 
+N532->N528 ; 
 N0[label="INICIOCHTML"]; 
 N1[label="menorQue"]; 
 N2[label="inicioChtml"]; 
@@ -230,25 +230,25 @@ N70->N73 ;
 N71[label="menorQue"]; 
 N72[label="finEncabezado"]; 
 N73[label="mayorQue"]; 
-N408[label="CUERPO"]; 
-N409[label="menorQue"]; 
-N410[label="inicioCuerpo"]; 
+N521[label="CUERPO"]; 
+N522[label="menorQue"]; 
+N523[label="inicioCuerpo"]; 
 N75[label="ESTILOCUERPO"]; 
-N411[label="mayorQue"]; 
-N407[label="CONTENIDOCUERPO"]; 
-N412[label="menorQue"]; 
-N413[label="finCuerpo"]; 
-N414[label="mayorQue"]; 
-N408->N409 ; 
-N408->N410 ; 
-N408->N75 ; 
-N408->N411 ; 
-N408->N407 ; 
-N408->N412 ; 
-N408->N413 ; 
-N408->N414 ; 
-N409[label="menorQue"]; 
-N410[label="inicioCuerpo"]; 
+N524[label="mayorQue"]; 
+N520[label="CONTENIDOCUERPO"]; 
+N525[label="menorQue"]; 
+N526[label="finCuerpo"]; 
+N527[label="mayorQue"]; 
+N521->N522 ; 
+N521->N523 ; 
+N521->N75 ; 
+N521->N524 ; 
+N521->N520 ; 
+N521->N525 ; 
+N521->N526 ; 
+N521->N527 ; 
+N522[label="menorQue"]; 
+N523[label="inicioCuerpo"]; 
 N75[label="ESTILOCUERPO"]; 
 N76[label="fondo"]; 
 N77[label="asignacion"]; 
@@ -265,12 +265,12 @@ N79[label="azul"];
 N78->N79 ; 
 N79[label="azul"]; 
 N80[label="puntoComa"]; 
-N411[label="mayorQue"]; 
-N407[label="CONTENIDOCUERPO"]; 
+N524[label="mayorQue"]; 
+N520[label="CONTENIDOCUERPO"]; 
 N293[label="CONTENIDOCUERPO"]; 
-N401[label="TABLA"]; 
-N407->N293 ; 
-N407->N401 ; 
+N514[label="TABLA"]; 
+N520->N293 ; 
+N520->N514 ; 
 N293[label="CONTENIDOCUERPO"]; 
 N261[label="CONTENIDOCUERPO"]; 
 N284[label="ENLACE"]; 
@@ -908,23 +908,23 @@ N289[label="Informacion"];
 N290[label="menorQue"]; 
 N291[label="finEnlace"]; 
 N292[label="mayorQue"]; 
-N401[label="TABLA"]; 
-N402[label="menorQue"]; 
-N403[label="inicioTabla"]; 
+N514[label="TABLA"]; 
+N515[label="menorQue"]; 
+N516[label="inicioTabla"]; 
 N308[label="ELEMENTOS"]; 
-N404[label="mayorQue"]; 
-N400[label="LISTAFILA"]; 
-N405[label="finTabla"]; 
-N406[label="mayorQue"]; 
-N401->N402 ; 
-N401->N403 ; 
-N401->N308 ; 
-N401->N404 ; 
-N401->N400 ; 
-N401->N405 ; 
-N401->N406 ; 
-N402[label="menorQue"]; 
-N403[label="inicioTabla"]; 
+N517[label="mayorQue"]; 
+N513[label="LISTAFILA"]; 
+N518[label="finTabla"]; 
+N519[label="mayorQue"]; 
+N514->N515 ; 
+N514->N516 ; 
+N514->N308 ; 
+N514->N517 ; 
+N514->N513 ; 
+N514->N518 ; 
+N514->N519 ; 
+N515[label="menorQue"]; 
+N516[label="inicioTabla"]; 
 N308[label="ELEMENTOS"]; 
 N307[label="ELEMENTOS1"]; 
 N308->N307 ; 
@@ -968,42 +968,60 @@ N305[label="tabla-detalle"];
 N304->N305 ; 
 N305[label="tabla-detalle"]; 
 N306[label="puntoComa"]; 
-N404[label="mayorQue"]; 
-N400[label="LISTAFILA"]; 
-N377[label="LISTAFILA"]; 
-N393[label="FILA"]; 
-N400->N377 ; 
-N400->N393 ; 
-N377[label="LISTAFILA"]; 
-N354[label="LISTAFILA"]; 
-N370[label="FILA"]; 
-N377->N354 ; 
-N377->N370 ; 
-N354[label="LISTAFILA"]; 
-N331[label="LISTAFILA"]; 
-N347[label="FILA"]; 
-N354->N331 ; 
-N354->N347 ; 
-N331[label="LISTAFILA"]; 
-N324[label="FILA"]; 
-N331->N324 ; 
-N324[label="FILA"]; 
-N325[label="menorQue"]; 
-N326[label="inicioFila"]; 
-N323[label="ELEMENTOS"]; 
-N327[label="mayorQue"]; 
+N517[label="mayorQue"]; 
+N513[label="LISTAFILA"]; 
+N506[label="FILA"]; 
+N513->N506 ; 
+N506[label="FILA"]; 
+N507[label="menorQue"]; 
+N508[label="inicioFila"]; 
+N509[label="mayorQue"]; 
+N505[label="LISTACELDA"]; 
+N510[label="menorQue"]; 
+N511[label="finFila"]; 
+N512[label="mayorQue"]; 
+N506->N507 ; 
+N506->N508 ; 
+N506->N509 ; 
+N506->N505 ; 
+N506->N510 ; 
+N506->N511 ; 
+N506->N512 ; 
+N507[label="menorQue"]; 
+N508[label="inicioFila"]; 
+N509[label="mayorQue"]; 
+N505[label="LISTACELDA"]; 
+N360[label="LISTACELDA"]; 
+N498[label="CELDA"]; 
+N505->N360 ; 
+N505->N498 ; 
+N360[label="LISTACELDA"]; 
+N334[label="LISTACELDA"]; 
+N353[label="CELDA"]; 
+N360->N334 ; 
+N360->N353 ; 
+N334[label="LISTACELDA"]; 
+N327[label="CELDAC"]; 
+N334->N327 ; 
+N327[label="CELDAC"]; 
 N328[label="menorQue"]; 
-N329[label="finFila"]; 
+N329[label="inicioCeldaCabecera"]; 
+N323[label="ELEMENTOS"]; 
 N330[label="mayorQue"]; 
-N324->N325 ; 
-N324->N326 ; 
-N324->N323 ; 
-N324->N327 ; 
-N324->N328 ; 
-N324->N329 ; 
-N324->N330 ; 
-N325[label="menorQue"]; 
-N326[label="inicioFila"]; 
+N326[label="CONTENIDOCELDA"]; 
+N331[label="menorQue"]; 
+N332[label="finCeldaCabecera"]; 
+N333[label="mayorQue"]; 
+N327->N328 ; 
+N327->N329 ; 
+N327->N323 ; 
+N327->N330 ; 
+N327->N326 ; 
+N327->N331 ; 
+N327->N332 ; 
+N327->N333 ; 
+N328[label="menorQue"]; 
+N329[label="inicioCeldaCabecera"]; 
 N323[label="ELEMENTOS"]; 
 N322[label="ELEMENTOS1"]; 
 N323->N322 ; 
@@ -1027,9 +1045,9 @@ N309->N314 ;
 N310[label="idCcss"]; 
 N311[label="asignacion"]; 
 N312[label="id"]; 
-N313[label="tabla1"]; 
+N313[label="cb1"]; 
 N312->N313 ; 
-N313[label="tabla1"]; 
+N313[label="cb1"]; 
 N314[label="puntoComa"]; 
 N316[label="ELEMENTO"]; 
 N317[label="grupo"]; 
@@ -1043,219 +1061,540 @@ N316->N321 ;
 N317[label="grupo"]; 
 N318[label="asignacion"]; 
 N319[label="id"]; 
-N320[label="tabla-detalle"]; 
+N320[label="cabecera-detalle"]; 
 N319->N320 ; 
-N320[label="tabla-detalle"]; 
+N320[label="cabecera-detalle"]; 
 N321[label="puntoComa"]; 
-N327[label="mayorQue"]; 
-N328[label="menorQue"]; 
-N329[label="finFila"]; 
 N330[label="mayorQue"]; 
-N347[label="FILA"]; 
-N348[label="menorQue"]; 
-N349[label="inicioFila"]; 
-N346[label="ELEMENTOS"]; 
-N350[label="mayorQue"]; 
-N351[label="menorQue"]; 
-N352[label="finFila"]; 
-N353[label="mayorQue"]; 
-N347->N348 ; 
-N347->N349 ; 
-N347->N346 ; 
-N347->N350 ; 
-N347->N351 ; 
-N347->N352 ; 
-N347->N353 ; 
-N348[label="menorQue"]; 
-N349[label="inicioFila"]; 
-N346[label="ELEMENTOS"]; 
-N345[label="ELEMENTOS1"]; 
-N346->N345 ; 
-N345[label="ELEMENTOS1"]; 
-N338[label="ELEMENTO"]; 
-N339[label="ELEMENTO"]; 
-N345->N338 ; 
-N345->N339 ; 
-N338[label="ELEMENTO"]; 
-N332[label="ELEMENTO"]; 
-N338->N332 ; 
-N332[label="ELEMENTO"]; 
-N333[label="idCcss"]; 
-N334[label="asignacion"]; 
-N335[label="id"]; 
-N337[label="puntoComa"]; 
-N332->N333 ; 
-N332->N334 ; 
-N332->N335 ; 
-N332->N337 ; 
-N333[label="idCcss"]; 
-N334[label="asignacion"]; 
-N335[label="id"]; 
-N336[label="tabla1"]; 
+N326[label="CONTENIDOCELDA"]; 
+N324[label="CADENA"]; 
+N326->N324 ; 
+N324[label="CADENA"]; 
+N325[label=" No. "]; 
+N324->N325 ; 
+N325[label=" No. "]; 
+N331[label="menorQue"]; 
+N332[label="finCeldaCabecera"]; 
+N333[label="mayorQue"]; 
+N353[label="CELDA"]; 
+N354[label="menorQue"]; 
+N355[label="inicioCelda"]; 
+N349[label="ELEMENTOS"]; 
+N356[label="mayorQue"]; 
+N352[label="CONTENIDOCELDA"]; 
+N357[label="menorQue"]; 
+N358[label="finCelda"]; 
+N359[label="mayorQue"]; 
+N353->N354 ; 
+N353->N355 ; 
+N353->N349 ; 
+N353->N356 ; 
+N353->N352 ; 
+N353->N357 ; 
+N353->N358 ; 
+N353->N359 ; 
+N354[label="menorQue"]; 
+N355[label="inicioCelda"]; 
+N349[label="ELEMENTOS"]; 
+N348[label="ELEMENTOS1"]; 
+N349->N348 ; 
+N348[label="ELEMENTOS1"]; 
+N341[label="ELEMENTO"]; 
+N342[label="ELEMENTO"]; 
+N348->N341 ; 
+N348->N342 ; 
+N341[label="ELEMENTO"]; 
+N335[label="ELEMENTO"]; 
+N341->N335 ; 
+N335[label="ELEMENTO"]; 
+N336[label="idCcss"]; 
+N337[label="asignacion"]; 
+N338[label="id"]; 
+N340[label="puntoComa"]; 
 N335->N336 ; 
-N336[label="tabla1"]; 
-N337[label="puntoComa"]; 
-N339[label="ELEMENTO"]; 
-N340[label="grupo"]; 
-N341[label="asignacion"]; 
-N342[label="id"]; 
-N344[label="puntoComa"]; 
-N339->N340 ; 
-N339->N341 ; 
-N339->N342 ; 
-N339->N344 ; 
-N340[label="grupo"]; 
-N341[label="asignacion"]; 
-N342[label="id"]; 
-N343[label="tabla-detalle"]; 
+N335->N337 ; 
+N335->N338 ; 
+N335->N340 ; 
+N336[label="idCcss"]; 
+N337[label="asignacion"]; 
+N338[label="id"]; 
+N339[label="ct1"]; 
+N338->N339 ; 
+N339[label="ct1"]; 
+N340[label="puntoComa"]; 
+N342[label="ELEMENTO"]; 
+N343[label="grupo"]; 
+N344[label="asignacion"]; 
+N345[label="id"]; 
+N347[label="puntoComa"]; 
 N342->N343 ; 
-N343[label="tabla-detalle"]; 
-N344[label="puntoComa"]; 
-N350[label="mayorQue"]; 
-N351[label="menorQue"]; 
-N352[label="finFila"]; 
-N353[label="mayorQue"]; 
-N370[label="FILA"]; 
-N371[label="menorQue"]; 
-N372[label="inicioFila"]; 
-N369[label="ELEMENTOS"]; 
-N373[label="mayorQue"]; 
-N374[label="menorQue"]; 
-N375[label="finFila"]; 
-N376[label="mayorQue"]; 
-N370->N371 ; 
-N370->N372 ; 
-N370->N369 ; 
-N370->N373 ; 
-N370->N374 ; 
-N370->N375 ; 
-N370->N376 ; 
-N371[label="menorQue"]; 
-N372[label="inicioFila"]; 
-N369[label="ELEMENTOS"]; 
-N368[label="ELEMENTOS1"]; 
-N369->N368 ; 
-N368[label="ELEMENTOS1"]; 
+N342->N344 ; 
+N342->N345 ; 
+N342->N347 ; 
+N343[label="grupo"]; 
+N344[label="asignacion"]; 
+N345[label="id"]; 
+N346[label="celda-detalle"]; 
+N345->N346 ; 
+N346[label="celda-detalle"]; 
+N347[label="puntoComa"]; 
+N356[label="mayorQue"]; 
+N352[label="CONTENIDOCELDA"]; 
+N350[label="CADENA"]; 
+N352->N350 ; 
+N350[label="CADENA"]; 
+N351[label=" Caracteristicas "]; 
+N350->N351 ; 
+N351[label=" Caracteristicas "]; 
+N357[label="menorQue"]; 
+N358[label="finCelda"]; 
+N359[label="mayorQue"]; 
+N498[label="CELDA"]; 
+N499[label="menorQue"]; 
+N500[label="inicioCelda"]; 
+N375[label="ELEMENTOS"]; 
+N501[label="mayorQue"]; 
+N497[label="CONTENIDOCELDA"]; 
+N502[label="menorQue"]; 
+N503[label="finCelda"]; 
+N504[label="mayorQue"]; 
+N498->N499 ; 
+N498->N500 ; 
+N498->N375 ; 
+N498->N501 ; 
+N498->N497 ; 
+N498->N502 ; 
+N498->N503 ; 
+N498->N504 ; 
+N499[label="menorQue"]; 
+N500[label="inicioCelda"]; 
+N375[label="ELEMENTOS"]; 
+N374[label="ELEMENTOS1"]; 
+N375->N374 ; 
+N374[label="ELEMENTOS1"]; 
+N367[label="ELEMENTO"]; 
+N368[label="ELEMENTO"]; 
+N374->N367 ; 
+N374->N368 ; 
+N367[label="ELEMENTO"]; 
 N361[label="ELEMENTO"]; 
-N362[label="ELEMENTO"]; 
-N368->N361 ; 
-N368->N362 ; 
+N367->N361 ; 
 N361[label="ELEMENTO"]; 
-N355[label="ELEMENTO"]; 
-N361->N355 ; 
-N355[label="ELEMENTO"]; 
-N356[label="idCcss"]; 
-N357[label="asignacion"]; 
-N358[label="id"]; 
-N360[label="puntoComa"]; 
-N355->N356 ; 
-N355->N357 ; 
-N355->N358 ; 
-N355->N360 ; 
-N356[label="idCcss"]; 
-N357[label="asignacion"]; 
-N358[label="id"]; 
-N359[label="tabla1"]; 
-N358->N359 ; 
-N359[label="tabla1"]; 
-N360[label="puntoComa"]; 
-N362[label="ELEMENTO"]; 
-N363[label="grupo"]; 
-N364[label="asignacion"]; 
-N365[label="id"]; 
-N367[label="puntoComa"]; 
-N362->N363 ; 
-N362->N364 ; 
-N362->N365 ; 
-N362->N367 ; 
-N363[label="grupo"]; 
-N364[label="asignacion"]; 
-N365[label="id"]; 
-N366[label="tabla-detalle"]; 
-N365->N366 ; 
-N366[label="tabla-detalle"]; 
-N367[label="puntoComa"]; 
-N373[label="mayorQue"]; 
-N374[label="menorQue"]; 
-N375[label="finFila"]; 
-N376[label="mayorQue"]; 
-N393[label="FILA"]; 
-N394[label="menorQue"]; 
-N395[label="inicioFila"]; 
-N392[label="ELEMENTOS"]; 
-N396[label="mayorQue"]; 
-N397[label="menorQue"]; 
-N398[label="finFila"]; 
-N399[label="mayorQue"]; 
-N393->N394 ; 
-N393->N395 ; 
+N362[label="idCcss"]; 
+N363[label="asignacion"]; 
+N364[label="id"]; 
+N366[label="puntoComa"]; 
+N361->N362 ; 
+N361->N363 ; 
+N361->N364 ; 
+N361->N366 ; 
+N362[label="idCcss"]; 
+N363[label="asignacion"]; 
+N364[label="id"]; 
+N365[label="ct1"]; 
+N364->N365 ; 
+N365[label="ct1"]; 
+N366[label="puntoComa"]; 
+N368[label="ELEMENTO"]; 
+N369[label="grupo"]; 
+N370[label="asignacion"]; 
+N371[label="id"]; 
+N373[label="puntoComa"]; 
+N368->N369 ; 
+N368->N370 ; 
+N368->N371 ; 
+N368->N373 ; 
+N369[label="grupo"]; 
+N370[label="asignacion"]; 
+N371[label="id"]; 
+N372[label="celda-detalle"]; 
+N371->N372 ; 
+N372[label="celda-detalle"]; 
+N373[label="puntoComa"]; 
+N501[label="mayorQue"]; 
+N497[label="CONTENIDOCELDA"]; 
+N494[label="CONTENIDOCELDA"]; 
+N495[label="CADENA"]; 
+N497->N494 ; 
+N497->N495 ; 
+N494[label="CONTENIDOCELDA"]; 
+N469[label="CONTENIDOCELDA"]; 
+N485[label="IMAGEN"]; 
+N494->N469 ; 
+N494->N485 ; 
+N469[label="CONTENIDOCELDA"]; 
+N466[label="CONTENIDOCELDA"]; 
+N467[label="CADENA"]; 
+N469->N466 ; 
+N469->N467 ; 
+N466[label="CONTENIDOCELDA"]; 
+N441[label="CONTENIDOCELDA"]; 
+N457[label="IMAGEN"]; 
+N466->N441 ; 
+N466->N457 ; 
+N441[label="CONTENIDOCELDA"]; 
+N438[label="CONTENIDOCELDA"]; 
+N439[label="CADENA"]; 
+N441->N438 ; 
+N441->N439 ; 
+N438[label="CONTENIDOCELDA"]; 
+N406[label="CONTENIDOCELDA"]; 
+N429[label="BOTON"]; 
+N438->N406 ; 
+N438->N429 ; 
+N406[label="CONTENIDOCELDA"]; 
+N403[label="CONTENIDOCELDA"]; 
+N404[label="CADENA"]; 
+N406->N403 ; 
+N406->N404 ; 
+N403[label="CONTENIDOCELDA"]; 
+N378[label="CONTENIDOCELDA"]; 
+N394[label="IMAGEN"]; 
+N403->N378 ; 
+N403->N394 ; 
+N378[label="CONTENIDOCELDA"]; 
+N376[label="CADENA"]; 
+N378->N376 ; 
+N376[label="CADENA"]; 
+N377[label="             "]; 
+N376->N377 ; 
+N377[label="             "]; 
+N394[label="IMAGEN"]; 
+N395[label="menorQue"]; 
+N396[label="inicioImagen"]; 
+N393[label="EI"]; 
+N397[label="mayorQue"]; 
+N398[label="path"]; 
+N400[label="menorQue"]; 
+N401[label="finImagen"]; 
+N402[label="mayorQue"]; 
+N394->N395 ; 
+N394->N396 ; 
+N394->N393 ; 
+N394->N397 ; 
+N394->N398 ; 
+N394->N400 ; 
+N394->N401 ; 
+N394->N402 ; 
+N395[label="menorQue"]; 
+N396[label="inicioImagen"]; 
+N393[label="EI"]; 
+N392[label="EI1"]; 
 N393->N392 ; 
-N393->N396 ; 
-N393->N397 ; 
-N393->N398 ; 
-N393->N399 ; 
-N394[label="menorQue"]; 
-N395[label="inicioFila"]; 
-N392[label="ELEMENTOS"]; 
-N391[label="ELEMENTOS1"]; 
-N392->N391 ; 
-N391[label="ELEMENTOS1"]; 
-N384[label="ELEMENTO"]; 
-N385[label="ELEMENTO"]; 
-N391->N384 ; 
-N391->N385 ; 
-N384[label="ELEMENTO"]; 
-N378[label="ELEMENTO"]; 
-N384->N378 ; 
-N378[label="ELEMENTO"]; 
-N379[label="idCcss"]; 
-N380[label="asignacion"]; 
-N381[label="id"]; 
-N383[label="puntoComa"]; 
-N378->N379 ; 
-N378->N380 ; 
-N378->N381 ; 
-N378->N383 ; 
-N379[label="idCcss"]; 
-N380[label="asignacion"]; 
-N381[label="id"]; 
-N382[label="tabla1"]; 
-N381->N382 ; 
-N382[label="tabla1"]; 
-N383[label="puntoComa"]; 
-N385[label="ELEMENTO"]; 
-N386[label="grupo"]; 
-N387[label="asignacion"]; 
-N388[label="id"]; 
-N390[label="puntoComa"]; 
-N385->N386 ; 
-N385->N387 ; 
-N385->N388 ; 
-N385->N390 ; 
-N386[label="grupo"]; 
-N387[label="asignacion"]; 
-N388[label="id"]; 
-N389[label="tabla-detalle"]; 
-N388->N389 ; 
-N389[label="tabla-detalle"]; 
-N390[label="puntoComa"]; 
-N396[label="mayorQue"]; 
-N397[label="menorQue"]; 
-N398[label="finFila"]; 
-N399[label="mayorQue"]; 
-N405[label="finTabla"]; 
-N406[label="mayorQue"]; 
-N412[label="menorQue"]; 
-N413[label="finCuerpo"]; 
-N414[label="mayorQue"]; 
-N415[label="FINCHTML"]; 
-N416[label="menorQue"]; 
-N417[label="finChtml"]; 
-N418[label="mayorQue"]; 
-N415->N416 ; 
-N415->N417 ; 
-N415->N418 ; 
-N416[label="menorQue"]; 
-N417[label="finChtml"]; 
-N418[label="mayorQue"]; 
+N392[label="EI1"]; 
+N385[label="EI1"]; 
+N386[label="RUTA"]; 
+N392->N385 ; 
+N392->N386 ; 
+N385[label="EI1"]; 
+N379[label="CLICK"]; 
+N385->N379 ; 
+N379[label="CLICK"]; 
+N380[label="click"]; 
+N381[label="asignacion"]; 
+N382[label="metodo"]; 
+N384[label="puntoComa"]; 
+N379->N380 ; 
+N379->N381 ; 
+N379->N382 ; 
+N379->N384 ; 
+N380[label="click"]; 
+N381[label="asignacion"]; 
+N382[label="metodo"]; 
+N383[label="saludar()"]; 
+N382->N383 ; 
+N383[label="saludar()"]; 
+N384[label="puntoComa"]; 
+N386[label="RUTA"]; 
+N387[label="ruta"]; 
+N388[label="asignacion"]; 
+N389[label="path"]; 
+N391[label="puntoComa"]; 
+N386->N387 ; 
+N386->N388 ; 
+N386->N389 ; 
+N386->N391 ; 
+N387[label="ruta"]; 
+N388[label="asignacion"]; 
+N389[label="path"]; 
+N390[label="C:\\Users\\imageng.jpg"]; 
+N389->N390 ; 
+N390[label="C:\\Users\\imageng.jpg"]; 
+N391[label="puntoComa"]; 
+N397[label="mayorQue"]; 
+N398[label="path"]; 
+N399[label="C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\archivo.jpg"]; 
+N398->N399 ; 
+N399[label="C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\archivo.jpg"]; 
+N400[label="menorQue"]; 
+N401[label="finImagen"]; 
+N402[label="mayorQue"]; 
+N404[label="CADENA"]; 
+N405[label="                                 ¿Guardar de todos modos?             "]; 
+N404->N405 ; 
+N405[label="                                 ¿Guardar de todos modos?             "]; 
+N429[label="BOTON"]; 
+N430[label="menorQue"]; 
+N431[label="inicioBoton"]; 
+N428[label="ATRIBUTOS"]; 
+N432[label="mayorQue"]; 
+N433[label="cadena"]; 
+N435[label="menorQue"]; 
+N436[label="finBoton"]; 
+N437[label="mayorQue"]; 
+N429->N430 ; 
+N429->N431 ; 
+N429->N428 ; 
+N429->N432 ; 
+N429->N433 ; 
+N429->N435 ; 
+N429->N436 ; 
+N429->N437 ; 
+N430[label="menorQue"]; 
+N431[label="inicioBoton"]; 
+N428[label="ATRIBUTOS"]; 
+N427[label="ATRIBUTOS1"]; 
+N428->N427 ; 
+N427[label="ATRIBUTOS1"]; 
+N420[label="ATRIBUTOS1"]; 
+N421[label="CLICK"]; 
+N427->N420 ; 
+N427->N421 ; 
+N420[label="ATRIBUTOS1"]; 
+N413[label="ATRIBUTOS"]; 
+N414[label="ELEMENTO"]; 
+N420->N413 ; 
+N420->N414 ; 
+N413[label="ATRIBUTOS"]; 
+N407[label="ELEMENTO"]; 
+N413->N407 ; 
+N407[label="ELEMENTO"]; 
+N408[label="idCcss"]; 
+N409[label="asignacion"]; 
+N410[label="id"]; 
+N412[label="puntoComa"]; 
+N407->N408 ; 
+N407->N409 ; 
+N407->N410 ; 
+N407->N412 ; 
+N408[label="idCcss"]; 
+N409[label="asignacion"]; 
+N410[label="id"]; 
+N411[label="boton1"]; 
+N410->N411 ; 
+N411[label="boton1"]; 
+N412[label="puntoComa"]; 
+N414[label="ELEMENTO"]; 
+N415[label="grupo"]; 
+N416[label="asignacion"]; 
+N417[label="id"]; 
+N419[label="puntoComa"]; 
+N414->N415 ; 
+N414->N416 ; 
+N414->N417 ; 
+N414->N419 ; 
+N415[label="grupo"]; 
+N416[label="asignacion"]; 
+N417[label="id"]; 
+N418[label="boton-texto1"]; 
+N417->N418 ; 
+N418[label="boton-texto1"]; 
+N419[label="puntoComa"]; 
+N421[label="CLICK"]; 
+N422[label="click"]; 
+N423[label="asignacion"]; 
+N424[label="metodo"]; 
+N426[label="puntoComa"]; 
+N421->N422 ; 
+N421->N423 ; 
+N421->N424 ; 
+N421->N426 ; 
+N422[label="click"]; 
+N423[label="asignacion"]; 
+N424[label="metodo"]; 
+N425[label="guardar()"]; 
+N424->N425 ; 
+N425[label="guardar()"]; 
+N426[label="puntoComa"]; 
+N432[label="mayorQue"]; 
+N433[label="cadena"]; 
+N434[label="                                 ¿Guardar de todos modos?                              boton cerote            "]; 
+N433->N434 ; 
+N434[label="                                 ¿Guardar de todos modos?                              boton cerote            "]; 
+N435[label="menorQue"]; 
+N436[label="finBoton"]; 
+N437[label="mayorQue"]; 
+N439[label="CADENA"]; 
+N440[label="                                 ¿Guardar de todos modos?                              boton cerote                          "]; 
+N439->N440 ; 
+N440[label="                                 ¿Guardar de todos modos?                              boton cerote                          "]; 
+N457[label="IMAGEN"]; 
+N458[label="menorQue"]; 
+N459[label="inicioImagen"]; 
+N456[label="EI"]; 
+N460[label="mayorQue"]; 
+N461[label="path"]; 
+N463[label="menorQue"]; 
+N464[label="finImagen"]; 
+N465[label="mayorQue"]; 
+N457->N458 ; 
+N457->N459 ; 
+N457->N456 ; 
+N457->N460 ; 
+N457->N461 ; 
+N457->N463 ; 
+N457->N464 ; 
+N457->N465 ; 
+N458[label="menorQue"]; 
+N459[label="inicioImagen"]; 
+N456[label="EI"]; 
+N455[label="EI1"]; 
+N456->N455 ; 
+N455[label="EI1"]; 
+N448[label="EI1"]; 
+N449[label="RUTA"]; 
+N455->N448 ; 
+N455->N449 ; 
+N448[label="EI1"]; 
+N442[label="CLICK"]; 
+N448->N442 ; 
+N442[label="CLICK"]; 
+N443[label="click"]; 
+N444[label="asignacion"]; 
+N445[label="metodo"]; 
+N447[label="puntoComa"]; 
+N442->N443 ; 
+N442->N444 ; 
+N442->N445 ; 
+N442->N447 ; 
+N443[label="click"]; 
+N444[label="asignacion"]; 
+N445[label="metodo"]; 
+N446[label="saludar()"]; 
+N445->N446 ; 
+N446[label="saludar()"]; 
+N447[label="puntoComa"]; 
+N449[label="RUTA"]; 
+N450[label="ruta"]; 
+N451[label="asignacion"]; 
+N452[label="path"]; 
+N454[label="puntoComa"]; 
+N449->N450 ; 
+N449->N451 ; 
+N449->N452 ; 
+N449->N454 ; 
+N450[label="ruta"]; 
+N451[label="asignacion"]; 
+N452[label="path"]; 
+N453[label="C:\\Users\\imageng.jpg"]; 
+N452->N453 ; 
+N453[label="C:\\Users\\imageng.jpg"]; 
+N454[label="puntoComa"]; 
+N460[label="mayorQue"]; 
+N461[label="path"]; 
+N462[label="C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\archivo.jpg"]; 
+N461->N462 ; 
+N462[label="C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\archivo.jpg"]; 
+N463[label="menorQue"]; 
+N464[label="finImagen"]; 
+N465[label="mayorQue"]; 
+N467[label="CADENA"]; 
+N468[label="                                 ¿Guardar de todos modos?                              boton cerote                                      "]; 
+N467->N468 ; 
+N468[label="                                 ¿Guardar de todos modos?                              boton cerote                                      "]; 
+N485[label="IMAGEN"]; 
+N486[label="menorQue"]; 
+N487[label="inicioImagen"]; 
+N484[label="EI"]; 
+N488[label="mayorQue"]; 
+N489[label="path"]; 
+N491[label="menorQue"]; 
+N492[label="finImagen"]; 
+N493[label="mayorQue"]; 
+N485->N486 ; 
+N485->N487 ; 
+N485->N484 ; 
+N485->N488 ; 
+N485->N489 ; 
+N485->N491 ; 
+N485->N492 ; 
+N485->N493 ; 
+N486[label="menorQue"]; 
+N487[label="inicioImagen"]; 
+N484[label="EI"]; 
+N483[label="EI1"]; 
+N484->N483 ; 
+N483[label="EI1"]; 
+N476[label="EI1"]; 
+N477[label="RUTA"]; 
+N483->N476 ; 
+N483->N477 ; 
+N476[label="EI1"]; 
+N470[label="CLICK"]; 
+N476->N470 ; 
+N470[label="CLICK"]; 
+N471[label="click"]; 
+N472[label="asignacion"]; 
+N473[label="metodo"]; 
+N475[label="puntoComa"]; 
+N470->N471 ; 
+N470->N472 ; 
+N470->N473 ; 
+N470->N475 ; 
+N471[label="click"]; 
+N472[label="asignacion"]; 
+N473[label="metodo"]; 
+N474[label="saludar()"]; 
+N473->N474 ; 
+N474[label="saludar()"]; 
+N475[label="puntoComa"]; 
+N477[label="RUTA"]; 
+N478[label="ruta"]; 
+N479[label="asignacion"]; 
+N480[label="path"]; 
+N482[label="puntoComa"]; 
+N477->N478 ; 
+N477->N479 ; 
+N477->N480 ; 
+N477->N482 ; 
+N478[label="ruta"]; 
+N479[label="asignacion"]; 
+N480[label="path"]; 
+N481[label="C:\\Users\\imageng.jpg"]; 
+N480->N481 ; 
+N481[label="C:\\Users\\imageng.jpg"]; 
+N482[label="puntoComa"]; 
+N488[label="mayorQue"]; 
+N489[label="path"]; 
+N490[label="C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\archivo.jpg"]; 
+N489->N490 ; 
+N490[label="C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\archivo.jpg"]; 
+N491[label="menorQue"]; 
+N492[label="finImagen"]; 
+N493[label="mayorQue"]; 
+N495[label="CADENA"]; 
+N496[label="                                 ¿Guardar de todos modos?                              boton cerote                                                                                  "]; 
+N495->N496 ; 
+N496[label="                                 ¿Guardar de todos modos?                              boton cerote                                                                                  "]; 
+N502[label="menorQue"]; 
+N503[label="finCelda"]; 
+N504[label="mayorQue"]; 
+N510[label="menorQue"]; 
+N511[label="finFila"]; 
+N512[label="mayorQue"]; 
+N518[label="finTabla"]; 
+N519[label="mayorQue"]; 
+N525[label="menorQue"]; 
+N526[label="finCuerpo"]; 
+N527[label="mayorQue"]; 
+N528[label="FINCHTML"]; 
+N529[label="menorQue"]; 
+N530[label="finChtml"]; 
+N531[label="mayorQue"]; 
+N528->N529 ; 
+N528->N530 ; 
+N528->N531 ; 
+N529[label="menorQue"]; 
+N530[label="finChtml"]; 
+N531[label="mayorQue"]; 
 }
