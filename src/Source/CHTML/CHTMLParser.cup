@@ -682,19 +682,19 @@ RUTA::= ruta asignacion pathComillas:path puntoComa{:
 
 /*TABLA-------------------------------------------------------------------------------*/
 
-TABLA::= menorQue inicioTabla ELEMENTOS:e mayorQue  menorQue finTabla mayorQue
+TABLA::= menorQue inicioTabla ELEMENTOS:e mayorQue LISTAFILA:contenido menorQue finTabla mayorQue
 										{:
 										nodoChtml nuevo = new nodoChtml("TABLA",Interfaz.contadorChtml++);												
 										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 										nuevo.getHijos().add(new nodoChtml("inicioTabla",Interfaz.contadorChtml++));
 										if(e!=null){nuevo.getHijos().add(e);}											
 										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
-										//if(contenido!=null){nuevo.getHijos().add(contenido);}									
+										if(contenido!=null){nuevo.getHijos().add(contenido);}									
 										nuevo.getHijos().add(new nodoChtml("finTabla",Interfaz.contadorChtml++));
 										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
 										RESULT=nuevo;
 										:}
-		| menorQue inicioTabla mayorQue  menorQue finTabla mayorQue
+		| menorQue inicioTabla mayorQue LISTAFILA:contenido menorQue finTabla mayorQue
 										{:
 										nodoChtml nuevo = new nodoChtml("TABLA",Interfaz.contadorChtml++);												
 										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
@@ -706,22 +706,54 @@ TABLA::= menorQue inicioTabla ELEMENTOS:e mayorQue  menorQue finTabla mayorQue
 										RESULT=nuevo;
 										:}		;
 
-LISTAFILA::= LISTAFILA FILA
-			| FILA;
+LISTAFILA::= LISTAFILA:l FILA:f 										
+								{:
+								nodoChtml nuevo = new nodoChtml("LISTAFILA",Interfaz.contadorChtml++);												
+								if(l!=null){nuevo.getHijos().add(l);}									
+								if(f!=null){nuevo.getHijos().add(f);}	
+								RESULT=nuevo;
+								:}
+			| FILA:f								
+					{:
+					nodoChtml nuevo = new nodoChtml("LISTAFILA",Interfaz.contadorChtml++);																									
+					if(f!=null){nuevo.getHijos().add(f);}	
+					RESULT=nuevo;
+					:};
 
-FILA::= menorQue inicioFila mayorQue LISTACELDA menorQue finFila mayorQue
-		| menorQue inicioFila ELEMENTOS mayorQue LISTACELDA menorQue finFila mayorQue ;
+FILA::=   menorQue inicioFila mayorQue  menorQue finFila mayorQue									
+										{:
+										nodoChtml nuevo = new nodoChtml("FILA",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("inicioFila",Interfaz.contadorChtml++));																				
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										//if(contenido!=null){nuevo.getHijos().add(contenido);}									
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("finFila",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										RESULT=nuevo;
+										:}	
+		| menorQue inicioFila ELEMENTOS:elementos mayorQue  menorQue finFila mayorQue										
+										{:
+										nodoChtml nuevo = new nodoChtml("FILA",Interfaz.contadorChtml++);												
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("inicioFila",Interfaz.contadorChtml++));																				
+										if(elementos!=null){nuevo.getHijos().add(elementos);}	
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));																		
+										nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("finFila",Interfaz.contadorChtml++));
+										nuevo.getHijos().add(new nodoChtml("mayorQue",Interfaz.contadorChtml++));
+										RESULT=nuevo;
+										:} ;
 
-LISTACELDA::= LISTACELDA CELDA
-			| LISTACELDA CELDAC
-			| CELDA	
+LISTACELDA::=
+			  CELDA	
 			| CELDAC ;
 
-CELDA::= menorQue inicioCelda mayorQue CONTENIDOCELDA menorQue finCelda mayorQue
-		| menorQue inicioCelda ELEMENTOS mayorQue CONTENIDOCELDA menorQue finCelda mayorQue;
+CELDA::= menorQue inicioCelda mayorQue  menorQue finCelda mayorQue
+		| menorQue inicioCelda ELEMENTOS mayorQue  menorQue finCelda mayorQue;
 
-CELDAC::= menorQue inicioCeldaCabecera mayorQue CONTENIDOCELDA menorQue finCeldaCabecera mayorQue
-		| menorQue inicioCeldaCabecera  ELEMENTOS mayorQue CONTENIDOCELDA menorQue finCeldaCabecera mayorQue;
+CELDAC::= menorQue inicioCeldaCabecera mayorQue cadena  menorQue finCeldaCabecera mayorQue
+		| menorQue inicioCeldaCabecera  ELEMENTOS mayorQue cadena menorQue finCeldaCabecera mayorQue;
 
 CONTENIDOCELDA::= IMAGEN
 				| cadena 
