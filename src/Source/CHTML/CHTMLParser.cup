@@ -53,7 +53,8 @@ terminal String idVariable;*/
 /*Producciones :v :v y mas :v*/
 non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  LISTAARCHIVOS, DEFCCSS, DEFCJS,DEFARCHIVO,CONTENIDOENCABEZADO,
 INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO,PANEL,ELEMENTO, ELEMENTOS, ELEMENTOS1,CONTENIDOCUERPO,ELEMENTOSCUERPO,ELEMENTOSCUERPO1,ATRIBUTOS,
-ATRIBUTOS1,ELEMENTOC,TEXTO,CONTENIDOCUERPO1, IMAGEN,EI,EI1,CLICK,RUTA,BOTON, ENLACE,AE,AE1;
+ATRIBUTOS1,ELEMENTOC,TEXTO,CONTENIDOCUERPO1, IMAGEN,EI,EI1,CLICK,RUTA,BOTON, ENLACE,AE,AE1,
+TABLA, LISTAFILA, FILA, LISTACELDA, CELDA, CELDAC, CONTENIDOCELDA;
 
 
 /*
@@ -163,7 +164,7 @@ DEFCJS::= menorQue inicioCjs ruta asignacion pathComillas:path puntoComa mayorQu
 
 DEFCCSS::= menorQue inicioCcss ruta asignacion pathComillas:path puntoComa mayorQue menorQue finCcss mayorQue
 												{: 
-												nodoChtml nuevo = new nodoChtml("DEFCJS",Interfaz.contadorChtml++);												
+												nodoChtml nuevo = new nodoChtml("DEFCCSS",Interfaz.contadorChtml++);												
 												nuevo.getHijos().add(new nodoChtml("menorQue",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("inicioCcss",Interfaz.contadorChtml++));
 												nuevo.getHijos().add(new nodoChtml("ruta",Interfaz.contadorChtml++));
@@ -293,7 +294,14 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							if(cuerpo!=null){nuevo.getHijos().add(cuerpo);}	
 							if(b!=null){nuevo.getHijos().add(b);}																																													
 							RESULT=nuevo;
-							:}																					
+							:}	
+				| CONTENIDOCUERPO:cuerpo TABLA:b
+							{: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
+							if(cuerpo!=null){nuevo.getHijos().add(cuerpo);}	
+							if(b!=null){nuevo.getHijos().add(b);}																																													
+							RESULT=nuevo;
+							:}																												
 				| PANEL:panel
 							{: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);																			
@@ -319,7 +327,8 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO",Interfaz.contadorChtml++);												
 							if(t!=null){nuevo.getHijos().add(t);}																																																				
 							RESULT=nuevo;
-							:};
+							:}
+				|TABLA;
 				
 
 /*3.1-----------------------panel----------------------*/												
@@ -664,4 +673,33 @@ RUTA::= ruta asignacion pathComillas:path puntoComa{:
 										nuevo.getHijos().add(new nodoChtml("puntoComa",Interfaz.contadorChtml++));
 										RESULT=nuevo;
 										:};
+
+
+
+/*TABLA-------------------------------------------------------------------------------*/
+
+TABLA::= menorQue inicioTabla ELEMENTOS mayorQue  menorQue finTabla mayorQue
+		| menorQue inicioTabla mayorQue  menorQue finTabla mayorQue;
+
+LISTAFILA::= LISTAFILA FILA
+			| FILA;
+
+FILA::= menorQue inicioFila mayorQue LISTACELDA menorQue finFila mayorQue
+		| menorQue inicioFila ELEMENTOS mayorQue LISTACELDA menorQue finFila mayorQue ;
+
+LISTACELDA::= LISTACELDA CELDA
+			| LISTACELDA CELDAC
+			| CELDA	
+			| CELDAC ;
+
+CELDA::= menorQue inicioCelda mayorQue CONTENIDOCELDA menorQue finCelda mayorQue
+		| menorQue inicioCelda ELEMENTOS mayorQue CONTENIDOCELDA menorQue finCelda mayorQue;
+
+CELDAC::= menorQue inicioCeldaCabecera mayorQue CONTENIDOCELDA menorQue finCeldaCabecera mayorQue
+		| menorQue inicioCeldaCabecera  ELEMENTOS mayorQue CONTENIDOCELDA menorQue finCeldaCabecera mayorQue;
+
+CONTENIDOCELDA::= IMAGEN
+				| cadena 
+				| BOTON;
+
 
