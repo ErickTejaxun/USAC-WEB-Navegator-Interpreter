@@ -59,7 +59,7 @@ public class dibujador
     }
     public String dibujarArbol(nodoChtml raiz)
     {
-        String cadena = "N"+raiz.hashCode()+"[label=\""+raiz.getTipo()+"\"]; \n";
+        String cadena = "N"+raiz.hashCode()+"[label=\""+raiz.getValue()+"\"]; \n";
         
         if(!raiz.getHijos().isEmpty())
         {
