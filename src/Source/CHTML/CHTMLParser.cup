@@ -177,7 +177,7 @@ CUERPO ::= menorQue inicioCuerpo  ESTILOCUERPO:estilo mayorQue CONTENIDOCUERPO:c
 												:}
 		|	menorQue inicioCuerpo mayorQue CONTENIDOCUERPO:contenido  menorQue finCuerpo mayorQue
 												{: 
-												nodoChtml nuevo = new nodoChtml("CUERPO");												
+												nodoChtml nuevo = new nodoChtml("CONTENIDO");												
 												nuevo.add(contenido);
 												RESULT=nuevo;
 												:}															
@@ -226,11 +226,9 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							RESULT=nuevo;
 							:}
 				| CONTENIDOCUERPO:cuerpo ENLACE:b
-							{: 
-							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO");												
-							nuevo.add(cuerpo);	
-							nuevo.add(b);																																													
-							RESULT=nuevo;
+							{: 											
+							cuerpo.add(b);																																																				
+							RESULT=cuerpo;
 							:}	
 				| CONTENIDOCUERPO:cuerpo TABLA:b
 							{: 
@@ -268,9 +266,9 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							nuevo.add(t);																																																				
 							RESULT=nuevo;
 							:}
-				| ENLACE:t {: 
-							nodoChtml nuevo = new nodoChtml("CONTENIDOCUERPO");												
-							nuevo.add(t);																																																				
+				|ENLACE:t {:	
+							nodoChtml nuevo = new nodoChtml("CONTENIDO");						 																																																															
+							nuevo.add(t);
 							RESULT=nuevo;
 							:}
 				|TABLA:t{: 
@@ -333,29 +331,34 @@ ELEMENTOS1::= ELEMENTOS1:iz ELEMENTO:der
 							:};
 
 ELEMENTO::= idCcss asignacion id:id puntoComa 	{: 
-											nodoChtml nuevo = new nodoChtml("ELEMENTO");												
-											nuevo.add(new nodoChtml("id", new nodoChtml(id)));																																													
+											nodoChtml nuevo = new nodoChtml("ELEMENTO");
+											nuevo.add(new nodoChtml("id"));
+											nuevo.add(new nodoChtml(id));
 											RESULT=nuevo;
 											:}
 		|   grupo asignacion id:id puntoComa	{: 
 											nodoChtml nuevo = new nodoChtml("ELEMENTO");												
-											nuevo.add(new nodoChtml("id", new nodoChtml(id)));																																
+											nuevo.add(new nodoChtml("grupo"));
+											nuevo.add(new nodoChtml(id));
 											RESULT=nuevo;
 											:}
 		|   alto asignacion id:id puntoComa{: 
 										nodoChtml nuevo = new nodoChtml("ELEMENTO");												
-										nuevo.add(new nodoChtml("id", new nodoChtml(id)));																																												
+										nuevo.add( new nodoChtml("alto"));
+										nuevo.add(new nodoChtml(id));																																												
 										RESULT=nuevo;
 										:} 	
 		|   ancho asignacion id:id puntoComa{: 
 										nodoChtml nuevo = new nodoChtml("ELEMENTO");												
-										nuevo.add(new nodoChtml("id", new nodoChtml(id)));																																												
+										nuevo.add(new nodoChtml("ancho"));
+										nuevo.add(new nodoChtml(id));																																												
 										RESULT=nuevo;
 										:} 			
 		|   alineado asignacion valorAlineado:id puntoComa
 										{: 
 										nodoChtml nuevo = new nodoChtml("ELEMENTO");												
-										nuevo.add(new nodoChtml("valorAlineado", new nodoChtml(id)));																																												
+										nuevo.add(new nodoChtml("alineado"));
+										nuevo.add(new nodoChtml(id));																																												
 										RESULT=nuevo;
 										:};
 
@@ -395,20 +398,43 @@ IMAGEN::= menorQue inicioImagen  mayorQue path:ruta menorQue finImagen mayorQue{
 										RESULT=nuevo;
 										:};	
 
-ENLACE::= menorQue inicioEnlace AE:ae mayorQue cadena:cad menorQue finEnlace mayorQue{: 
-										nodoChtml nuevo = new nodoChtml("ENLACE");												
-										nuevo.add(ae);
-										//nuevo.add(new nodoChtml("cadena", new nodoChtml(cad)));																																													
-										nuevo.add(new nodoChtml(cad));										
-										RESULT=nuevo;
+
+/*------------------------------------------------INICIO ENLACE---------------------------------------------------*/
+ENLACE::= menorQue inicioEnlace AE:ae mayorQue cadena:cad menorQue finEnlace mayorQue
+										{: 	
+										ae.setValue("ENLACE");																															
+										ae.add(new nodoChtml(cad));
+										//nuevo.add(new nodoChtml("cadena", new nodoChtml(cad)));																																																							
+										RESULT=ae;
 										:}
-		| menorQue inicioEnlace  mayorQue cadena:cad menorQue finEnlace mayorQue{: 
-										nodoChtml nuevo = new nodoChtml("ENLACE");												
-										nuevo.add(new nodoChtml("cadena"));																																													
+		| menorQue inicioEnlace  mayorQue cadena:cad menorQue finEnlace mayorQue
+										{: 																																																																																																											
+										nodoChtml nuevo = new nodoChtml("ENLACE");																						
+										nuevo.add(new nodoChtml(cad));																																																							
 										RESULT=nuevo;
-										:} ;
+										:};
+AE::= AE1:r{:RESULT=r;:};
 
+AE1::= 	AE1:a ELEMENTO:r
+						{:
+						a.add(r);
+						RESULT=a;
+						:}
+		|  AE1:a RUTA:r
+						{:
+						a.add(r);			
+						RESULT=a;
+						:}
+		| ELEMENTO:r{:
+					nodoChtml nuevo = new nodoChtml("ELEMENTOS");
+					nuevo.add(r);
+					RESULT=nuevo;:}		
+		| RUTA:r{:
+				nodoChtml nuevo = new nodoChtml("ELEMENTOS");
+				nuevo.add(r);
+				RESULT=nuevo;:}; 
 
+/*------------------------------------------------FIN ENLACE--------------------------------------------------------*/
 
 BOTON::= menorQue inicioBoton ATRIBUTOS:atrib mayorQue cadena:cad menorQue finBoton mayorQue
 										{: 
@@ -423,17 +449,6 @@ BOTON::= menorQue inicioBoton ATRIBUTOS:atrib mayorQue cadena:cad menorQue finBo
 										nuevo.add(new nodoChtml("cadena", new nodoChtml(cad)));																																													
 										RESULT=nuevo;
 										:};
-
-AE::= AE1:r{:RESULT=r;:};
-AE1::= AE1:a ELEMENTO:r
-			{:
-			a.add(r);
-			RESULT=a;:}
-	|  AE1:a RUTA:r{:
-			a.add(r);			
-			RESULT=a;:}
-	| ELEMENTO:r{:RESULT=r;:}
-	| RUTA:r{:RESULT=r;:}; 
 
 
 ATRIBUTOS::=  ATRIBUTOS1:e{:
@@ -500,9 +515,11 @@ CLICK::= click asignacion metodo:met puntoComa{:
 										RESULT=nuevo;
 										:};
 
-RUTA::= ruta asignacion pathComillas:path puntoComa{:																								
-										nodoChtml nuevo = new nodoChtml(path);
-										nuevo.setTipo(path);
+RUTA::= ruta asignacion pathComillas:path puntoComa
+										{:																								
+										nodoChtml nuevo = new nodoChtml("ELEMENTO");
+										nuevo.add(new nodoChtml("RUTA"));
+										nuevo.add(new nodoChtml(path));
 										RESULT=nuevo;																																													
 										:};
 
