@@ -59,18 +59,18 @@ public class dibujador
     }
     public String dibujarArbol(nodoChtml raiz)
     {
-        String cadena = "N"+raiz.getLinea()+"[label=\""+raiz.getTipo()+"\"]; \n";
+        String cadena = "N"+raiz.hashCode()+"[label=\""+raiz.getTipo()+"\"]; \n";
         
         if(!raiz.getHijos().isEmpty())
         {
             for(int cont = 0; cont<raiz.getHijos().size();cont++)
             {
-                cadena = cadena +"N"+raiz.getHijos().get(cont).getLinea()+"[label=\""+raiz.getHijos().get(cont).getValue()+"\"]; \n";
+                cadena = cadena +"N"+raiz.getHijos().get(cont).hashCode()+"[label=\""+raiz.getHijos().get(cont).getValue()+"\"]; \n";
                 //a -> b[label="0.2",weight="0.2"];
             }
             for(int cont = 0; cont<raiz.getHijos().size();cont++)
             {
-                cadena = cadena +"N"+raiz.getLinea()+"->"  +"N"+raiz.getHijos().get(cont).getLinea()+" ; \n";
+                cadena = cadena +"N"+raiz.hashCode()+"->"  +"N"+raiz.getHijos().get(cont).hashCode()+" ; \n";
                 //a -> b[label="0.2",weight="0.2"];
             }
             
