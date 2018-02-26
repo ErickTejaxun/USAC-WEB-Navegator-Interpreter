@@ -44,7 +44,7 @@ terminal String menorQue, mayorQue, inicioChtml, finChtml, inicioEncabezado,inic
 terminal String finCjs,inicioCcss,finCcss,finEncabezado,inicioCuerpo, finCuerpo, fondo, rgb, id, inicioTitulo, finTitulo, cadena,
 inicioPanel,idCcss,grupo,alto,ancho,alineado,valorAlineado,finPanel, inicioTexto, finTexto,finImagen, inicioImagen,metodo, click, path,
 inicioBoton,finBoton, inicioEnlace, finEnlace, inicioTabla, finTabla, inicioCelda, finCelda, inicioCeldaCabecera, finCeldaCabecera,
-inicioFila, finFila, inicioCajaArea, finCajaArea;
+inicioFila, finFila, inicioCajaArea, finCajaArea, finCaja, inicioSpinner, finSpinner, inicioCaja, inicioCajaOpciones, finCajaOpciones,inicioOpcion, finOpcion, valor,salto;
 /*terminal Integer numero;
 terminal Integer decimal;
 terminal String idVariable;*/
@@ -54,7 +54,8 @@ terminal String idVariable;*/
 non terminal nodoChtml CHTML,ENCABEZADO,DEFINICIONARCHIVOS,CUERPO, ESTILOCUERPO, TITULO,  LISTAARCHIVOS, DEFCCSS, DEFCJS,DEFARCHIVO,CONTENIDOENCABEZADO,
 INICIOCHTML, FINCHTML, INICIOENCABEZADO,FINENCABEZADO,PANEL,ELEMENTO, ELEMENTOS, ELEMENTOS1,CONTENIDOCUERPO,ELEMENTOSCUERPO,ELEMENTOSCUERPO1,ATRIBUTOS,
 ATRIBUTOS1,ELEMENTOC,TEXTO,CONTENIDOCUERPO1, IMAGEN,EI,EI1,CLICK,RUTA,BOTON, ENLACE,AE,AE1,
-TABLA, LISTAFILA, FILA, LISTACELDA, CELDA, CELDAC, CONTENIDOCELDA,CADENA,TEXTOA;
+TABLA, LISTAFILA, FILA, LISTACELDA, CELDA, CELDAC, CONTENIDOCELDA,CADENA,TEXTOA,CAJATEXTO, SPINNER,CAJAOPCIONES , LISTAOPCIONES, OPCION, ELEMENTOOPCION,
+ELEMENTOSCAJA,ELEMENTOSOPCION,VALOR,ELEMENTOSCAJA1,ELEMENTOSOPCION1, SALTO;
 
 
 /*
@@ -232,13 +233,35 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							{: 
 							cuerpo.add(b);																																												
 							RESULT=cuerpo;
-							:}																																		
+							:}
+				| CONTENIDOCUERPO:cuerpo CAJATEXTO:b
+							{: 
+							cuerpo.add(b);																																												
+							RESULT=cuerpo;
+							:}
+				| CONTENIDOCUERPO:cuerpo SPINNER:b
+							{: 
+							cuerpo.add(b);																																												
+							RESULT=cuerpo;
+							:}		
+				| CONTENIDOCUERPO:cuerpo CAJAOPCIONES:b
+							{: 
+							cuerpo.add(b);																																												
+							RESULT=cuerpo;
+							:}	
+
+				| CONTENIDOCUERPO:cuerpo SALTO:b
+							{: 
+							cuerpo.add(b);																																												
+							RESULT=cuerpo;
+							:}																																																											
 				| PANEL:panel
 							{: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDO");																			
 							nuevo.add(panel);																																													
 							RESULT=nuevo;
-							:}				
+							:}
+											
 				| TEXTO:texto{: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDO");												
 							nuevo.add(texto);																																																				
@@ -265,6 +288,26 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 							RESULT=nuevo;
 							:}
 				|TEXTOA:t {: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDO");												
+							nuevo.add(t);																																																				
+							RESULT=nuevo;
+							:}
+				|CAJATEXTO:t {: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDO");												
+							nuevo.add(t);																																																				
+							RESULT=nuevo;
+							:}
+				|SPINNER:t {: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDO");												
+							nuevo.add(t);																																																				
+							RESULT=nuevo;
+							:}
+				| CAJAOPCIONES:t {: 
+							nodoChtml nuevo = new nodoChtml("CONTENIDO");												
+							nuevo.add(t);																																																				
+							RESULT=nuevo;
+							:} 
+				| SALTO:t {: 
 							nodoChtml nuevo = new nodoChtml("CONTENIDO");												
 							nuevo.add(t);																																																				
 							RESULT=nuevo;
@@ -658,3 +701,147 @@ TEXTOA::= menorQue inicioCajaArea ELEMENTOS:elementos mayorQue cadena:cad menorQ
 						nuevo.add(aux);
 						RESULT= nuevo;
 						:};
+
+
+CAJATEXTO::= menorQue inicioCaja ELEMENTOS:elementos mayorQue cadena:cad menorQue finCaja mayorQue
+						{:
+						nodoChtml nuevo = new nodoChtml("ELEMENTO");
+						nuevo.add(new nodoChtml("CADENA"));
+						nuevo.add(new nodoChtml(cad));
+						elementos.add(nuevo);
+						elementos.setValue("CAJATEXTO");
+						RESULT= elementos;
+						:}
+		| menorQue inicioCaja mayorQue cadena:cad menorQue finCaja mayorQue
+						{:
+						nodoChtml nuevo = new nodoChtml("CAJATEXTO");
+						nodoChtml aux = new nodoChtml("ELEMENTO");						
+						aux.add(new nodoChtml("CADENA"));
+						aux.add(new nodoChtml(cad));
+						nuevo.add(aux);
+						RESULT= nuevo;
+						:};		
+
+
+SPINNER::= menorQue inicioSpinner ELEMENTOS:elementos mayorQue cadena:cad menorQue finSpinner mayorQue
+						{:
+						nodoChtml nuevo = new nodoChtml("ELEMENTO");
+						nuevo.add(new nodoChtml("ENTERO"));
+						nuevo.add(new nodoChtml(cad));
+						elementos.add(nuevo);
+						elementos.setValue("SPINNER");
+						RESULT= elementos;
+						:}
+		| menorQue inicioSpinner mayorQue cadena:cad menorQue finSpinner mayorQue
+						{:
+						nodoChtml nuevo = new nodoChtml("SPINNER");
+						nodoChtml aux = new nodoChtml("ELEMENTO");						
+						aux.add(new nodoChtml("ENTERO"));
+						aux.add(new nodoChtml(cad));
+						nuevo.add(aux);
+						RESULT= nuevo;
+						:};											
+
+
+
+
+
+CAJAOPCIONES::= menorQue inicioCajaOpciones ELEMENTOSCAJA:elementos mayorQue LISTAOPCIONES:listaOpciones menorQue finCajaOpciones mayorQue
+								{:
+								elementos.setValue("CAJAOPCIONES");
+								elementos.addLista(listaOpciones);
+								RESULT = elementos;																					
+								:}
+
+				| menorQue inicioCajaOpciones mayorQue LISTAOPCIONES:listaOpciones menorQue finCajaOpciones mayorQue
+								{:
+								RESULT = listaOpciones;														
+								:};
+
+
+
+ELEMENTOSCAJA::=  ELEMENTOSCAJA1:e{:RESULT=e;:};
+
+ELEMENTOSCAJA1::= ELEMENTOSCAJA1:atributos CLICK:c{:			
+								atributos.add(c);			
+								RESULT=atributos;:}
+			| ELEMENTOSCAJA1:atributos ELEMENTO:c{:		
+								atributos.add(c);			
+								RESULT=atributos;:}
+			| CLICK:e{:
+						nodoChtml nuevo = new nodoChtml("CAJAOPCIONES");
+						nuevo.add(e);
+						RESULT=nuevo;:}			
+			| ELEMENTO:e{:
+						nodoChtml nuevo = new nodoChtml("CAJAOPCIONES");
+						nuevo.add(e);
+						RESULT=nuevo;:};
+
+
+
+LISTAOPCIONES::= LISTAOPCIONES:lista OPCION:opcion
+									{:
+									lista.add(opcion);
+									RESULT= lista;									
+									:}
+				| OPCION:opcion {:
+								nodoChtml nuevo = new nodoChtml("CAJAOPCIONES");
+								nuevo.add(opcion);
+								RESULT = nuevo;
+								:};
+
+
+
+
+
+
+
+OPCION::= menorQue inicioOpcion ELEMENTOSOPCION:elementos mayorQue cadena:cad menorQue finOpcion mayorQue
+									{:
+									nodoChtml nuevo = new nodoChtml("ELEMENTO");
+									nuevo.add(new nodoChtml("CADENA"));
+									nuevo.add(new nodoChtml(cad));
+									elementos.add(nuevo);
+									RESULT= elementos;									
+									:}				
+		|    menorQue inicioOpcion mayorQue cadena:cad menorQue finOpcion mayorQue
+									{:
+									nodoChtml nuevo = new nodoChtml("ELEMENTO");
+									nuevo.add(new nodoChtml("CADENA"));
+									nuevo.add(new nodoChtml(cad));								
+									RESULT= nuevo;																		
+									:};
+
+
+ELEMENTOSOPCION::= ELEMENTOSOPCION:atributos VALOR:c
+								{:			
+								atributos.add(c);			
+								RESULT=atributos;
+								:}
+			| ELEMENTOSOPCION:atributos ELEMENTO:c
+								{:		
+								atributos.add(c);			
+								RESULT=atributos;
+								:}
+			| VALOR:e{:
+						nodoChtml nuevo = new nodoChtml("OPCION");
+						nuevo.add(e);
+						RESULT=nuevo;:}			
+			| ELEMENTO:e{:
+						nodoChtml nuevo = new nodoChtml("OPCION");
+						nuevo.add(e);
+						RESULT=nuevo;:};
+
+VALOR::=  valor asignacion id:id puntoComa
+										{: 
+										nodoChtml nuevo = new nodoChtml("ELEMENTO");												
+										nuevo.add(new nodoChtml("VALOR"));
+										nuevo.add(new nodoChtml(id));																																												
+										RESULT=nuevo;
+										:};						
+
+
+SALTO::= menorQue salto mayorQue{:
+								nodoChtml nuevo = new nodoChtml("SALTO");
+								RESULT= nuevo;
+								:};

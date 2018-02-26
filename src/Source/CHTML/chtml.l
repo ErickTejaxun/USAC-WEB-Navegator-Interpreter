@@ -68,7 +68,7 @@ metodo = {id}"()"
 
 
 %state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS,TEXTO1,TEXTO2
-%state IMAGEN1,IMAGEN2, BOTON1, BOTON2, ENLACE1,ENLACE2,T1,T2,T3,T4,T5,T6,T7,TB,TB2,TI,TI2,TB3,TA1,TA2
+%state IMAGEN1,IMAGEN2, BOTON1, BOTON2, ENLACE1,ENLACE2,T1,T2,T3,T4,T5,T6,T7,TB,TB2,TI,TI2,TB3,TA1,TA2, CAJA1,CAJA2
 %%
 
 
@@ -405,9 +405,189 @@ metodo = {id}"()"
         Interfaz.tablaSimbolos_.add(simbolo);                                           
         return new Symbol(simbolos.finCajaArea, yychar, yyline, yytext());        
         
-    }                  
+    }    
+
+
+    "caja_texto"
+    {   
+        Interfaz.addChtml("inicioCaja",yyline,yychar,"caja_texto: Inico caja texto",yytext()); 
+        yybegin(TA1);                                       
+        return new Symbol(simbolos.inicioCaja, yychar, yyline, yytext());                
+    }   
+
+
+    "fin-caja_texto"
+    {   
+        Interfaz.addChtml("finCaja",yyline,yychar,"fin-caja_texto: Fin caja texto",yytext());                                            
+        return new Symbol(simbolos.finCaja, yychar, yyline, yytext());                
+    }    
+
+    "spinner"
+    {   
+        Interfaz.addChtml("inicioSpinner",yyline,yychar,"spinner: Inico Spinner",yytext()); 
+        yybegin(TA1);                                       
+        return new Symbol(simbolos.inicioSpinner, yychar, yyline, yytext());                
+    }   
+
+    "fin-spinner"
+    {   
+        Interfaz.addChtml("finSpinner",yyline,yychar,"fin-spinner: Fin Spinner",yytext());                                              
+        return new Symbol(simbolos.finSpinner, yychar, yyline, yytext());                
+    }          
+
+
+
+    "caja"
+    {   
+        Interfaz.addChtml("inicioCajaOpciones",yyline,yychar,"caja: Inico Caja opciones",yytext()); 
+        yybegin(ELEMENTOS);                                       
+        return new Symbol(simbolos.inicioCajaOpciones, yychar, yyline, yytext());                
+    }   
+
+    "fin-caja"
+    {   
+        Interfaz.addChtml("finCajaOpciones",yyline,yychar,"fin-caja: Fin caja Opciones",yytext());                                              
+        return new Symbol(simbolos.finCajaOpciones, yychar, yyline, yytext());                
+    }
+
+
+    "opcion"
+    {   
+        Interfaz.addChtml("inicioOpcion",yyline,yychar,"Opcion: Inico Opcion",yytext()); 
+        yybegin(CAJA1);                                       
+        return new Symbol(simbolos.inicioOpcion, yychar, yyline, yytext());                
+    }   
+
+    "fin-opcion"
+    {   
+        Interfaz.addChtml("finOpcion",yyline,yychar,"fin-opcion: Fin Opcion",yytext());                                              
+        return new Symbol(simbolos.finOpcion, yychar, yyline, yytext());                
+    }  
+
+    "salto-fin"
+    {   
+        Interfaz.addChtml("salto",yyline,yychar,"salto: salto :v",yytext());                                              
+        return new Symbol(simbolos.salto, yychar, yyline, yytext());                
+    }                          
 
                 
+}
+
+
+<CAJA1>
+{
+
+    "valor"
+    {
+        Interfaz.addChtml("valor",yyline,yychar,yytext() + "valor de opcion",yytext());                    
+        return new Symbol(simbolos.valor, yychar, yyline, yytext());
+    }
+
+    "id"
+    {
+        Interfaz.addChtml("idCcss",yyline,yychar,"id : Identificador grupo ccss",yytext());                    
+        return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
+    }
+
+    "grupo"
+    {
+        Interfaz.addChtml("grupo",yyline,yychar,"grupo : grupo ccss",yytext());                      
+        return new Symbol(simbolos.grupo, yychar, yyline, yytext());
+    } 
+
+    "alto"
+    {
+        Interfaz.addChtml("alto",yyline,yychar,"alto : Altura objeto",yytext());                    
+        return new Symbol(simbolos.alto, yychar, yyline, yytext());
+    }     
+
+
+    "ancho"
+    {
+        Interfaz.addChtml("ancho",yyline,yychar,"ancho : Anchura objeto",yytext());                    
+        return new Symbol(simbolos.ancho, yychar, yyline, yytext());
+    } 
+
+    "alineado"
+    {
+        Interfaz.addChtml("alineado",yyline,yychar,"alineado : Alineación objeto",yytext());                    
+        return new Symbol(simbolos.alineado, yychar, yyline, yytext());
+    }  
+      
+    "="
+    {        
+        Interfaz.addChtml("asignacion",yyline,yychar,"= : Asignacion",yytext());                      
+        return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
+    } 
+
+    {valorAlineado}
+    {
+        Interfaz.addChtml("valorAlineado",yyline,yychar, yytext() +" : Alineación",yytext());                    
+        return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
+    }         
+
+
+    {idComillas}
+    {        
+        Interfaz.addChtml("id",yyline,yychar,"id: Posible nombre de color.",yytext());
+        return new Symbol(simbolos.id, yychar, yyline, yytext());
+    } 
+
+
+
+    ";"
+    {        
+        Interfaz.addChtml("puntoComa",yyline,yychar,"; : Punto coma",yytext());            
+        return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
+    } 
+
+    "CLICK"
+    {        
+        Interfaz.addChtml("click",yyline,yychar,"click : evento",yytext());            
+        return new Symbol(simbolos.click, yychar, yyline, yytext());
+    }     
+
+    {metodo}
+    {        
+        Interfaz.addChtml("metodo",yyline,yychar, yytext() +" : llamada a metodo",yytext());            
+        return new Symbol(simbolos.metodo, yychar, yyline, yytext());
+    }     
+             
+                
+
+    ">"	
+    {    
+        yybegin(CAJA2);                           
+        Interfaz.addChtml("mayorQue",yyline,yychar,"> : Mayor que",yytext());                
+        return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
+    } 
+
+    {espacio}
+    {
+    }
+}
+
+
+<CAJA2>
+{
+    {espacio}
+    {cadena  = cadena + yytext();}	
+
+
+    [^]
+    {  
+        if(!yytext().equals("<"))
+        {
+            cadena  = cadena + yytext();            
+        }
+        else 
+        {
+            yybegin(YYINITIAL);
+            yypushback(1);
+            Interfaz.addChtml("cadena",yyline,yychar,"Cadena : cadena de texto",yytext()); 	                
+            return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
+        }                       
+    }     
 }
 
 <TA1>
@@ -3594,6 +3774,19 @@ metodo = {id}"()"
         return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
 
     } 
+
+
+    "CLICK"
+    {        
+        Interfaz.addChtml("click",yyline,yychar,"click : evento",yytext());            
+        return new Symbol(simbolos.click, yychar, yyline, yytext());
+    }   
+
+    {metodo}
+    {        
+        Interfaz.addChtml("metodo",yyline,yychar, yytext() +" : llamada a metodo",yytext());            
+        return new Symbol(simbolos.metodo, yychar, yyline, yytext());
+    }           
                 
 
     ">"	

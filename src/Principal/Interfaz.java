@@ -544,7 +544,7 @@ public void compilar(){
     }  
     
     
-    public void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
+    public static void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
     {                
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
