@@ -645,12 +645,16 @@ TEXTOA::= menorQue inicioCajaArea ELEMENTOS:elementos mayorQue cadena:cad menorQ
 						nodoChtml nuevo = new nodoChtml("ELEMENTO");
 						nuevo.add(new nodoChtml("CADENA"));
 						nuevo.add(new nodoChtml(cad));
-						RESULT= nuevo;
+						elementos.add(nuevo);
+						elementos.setValue("TEXTOA");
+						RESULT= elementos;
 						:}
 		| menorQue inicioCajaArea mayorQue cadena:cad menorQue finCajaArea mayorQue
 						{:
-						nodoChtml nuevo = new nodoChtml("ELEMENTO");
-						nuevo.add(new nodoChtml("CADENA"));
-						nuevo.add(new nodoChtml(cad));
+						nodoChtml nuevo = new nodoChtml("TEXTOA");
+						nodoChtml aux = new nodoChtml("ELEMENTO");						
+						aux.add(new nodoChtml("CADENA"));
+						aux.add(new nodoChtml(cad));
+						nuevo.add(aux);
 						RESULT= nuevo;
 						:};
