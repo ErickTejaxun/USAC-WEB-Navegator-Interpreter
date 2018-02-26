@@ -349,20 +349,29 @@ ELEMENTO::= idCcss asignacion id:id puntoComa 	{:
 										
 TEXTO::= menorQue inicioTexto ELEMENTOS:elementos mayorQue cadena:cad menorQue finTexto mayorQue
 										{: 	
-										elementos.setValue("TEXTO");																															
-										elementos.add(new nodoChtml(cad));	
+										elementos.setValue("TEXTO");	
+										nodoChtml nuevo = new nodoChtml("ELEMENTO");																														
+										nuevo.add(new nodoChtml("CADENA"));
+										nuevo.add(new nodoChtml(cad));
+										elementos.add(nuevo);	
 										RESULT=elementos;
 										:} 											
 		| menorQue inicioTexto  mayorQue cadena:cad menorQue finTexto mayorQue
 										{: 
-										nodoChtml nuevo = new nodoChtml("TEXTO");												
-										nuevo.add(new nodoChtml(cad));																																								;
+										nodoChtml nuevo = new nodoChtml("TEXTO");	
+										nodoChtml aux = new nodoChtml("ELEMENTO");
+										aux.add(new nodoChtml("CADENA"));
+										aux.add(new nodoChtml(cad));
+										nuevo.add(aux);										
 										RESULT=nuevo;
 										:};
 
 IMAGEN::= menorQue inicioImagen  mayorQue path:ruta menorQue finImagen mayorQue{: 
-										nodoChtml nuevo = new nodoChtml("IMAGEN");												
-										nuevo.add(new nodoChtml(ruta));																																													
+										nodoChtml nuevo = new nodoChtml("IMAGEN");
+										nodoChtml aux = new nodoChtml("ELEMENTO");												
+										aux.add(new nodoChtml("RUTA"));
+										aux.add(new nodoChtml(ruta));
+										nuevo.add(aux);																																													
 										RESULT=nuevo;
 										:} 
 		| menorQue inicioImagen mayorQue  menorQue finImagen mayorQue{: 
@@ -370,8 +379,11 @@ IMAGEN::= menorQue inicioImagen  mayorQue path:ruta menorQue finImagen mayorQue{
 										RESULT=nuevo;
 										:} 
  		| menorQue inicioImagen EI:e mayorQue path:ruta menorQue finImagen mayorQue{: 
-										e.setValue("IMAGEN");																							
-										e.add(new nodoChtml(ruta));																																													
+										e.setValue("IMAGEN");
+										nodoChtml aux = new nodoChtml("ELEMENTO");												
+										aux.add(new nodoChtml("RUTA"));
+										aux.add(new nodoChtml(ruta));
+										e.add(aux);																																																																	
 										RESULT=e;
 										:} 
 		| menorQue inicioImagen EI:e  mayorQue  menorQue finImagen mayorQue{: 
@@ -383,15 +395,21 @@ IMAGEN::= menorQue inicioImagen  mayorQue path:ruta menorQue finImagen mayorQue{
 /*------------------------------------------------INICIO ENLACE---------------------------------------------------*/
 ENLACE::= menorQue inicioEnlace AE:ae mayorQue cadena:cad menorQue finEnlace mayorQue
 										{: 	
-										ae.setValue("ENLACE");																															
-										ae.add(new nodoChtml(cad));
+										ae.setValue("ENLACE");
+										nodoChtml nuevo = new nodoChtml("ELEMENTO");																															
+										nuevo.add(new nodoChtml("CADENA"));										
+										nuevo.add(new nodoChtml(cad));
+										ae.add(nuevo);
 										//nuevo.add(new nodoChtml("cadena", new nodoChtml(cad)));																																																							
 										RESULT=ae;
 										:}
 		| menorQue inicioEnlace  mayorQue cadena:cad menorQue finEnlace mayorQue
 										{: 																																																																																																											
-										nodoChtml nuevo = new nodoChtml("ENLACE");																						
-										nuevo.add(new nodoChtml(cad));																																																							
+										nodoChtml nuevo = new nodoChtml("ENLACE");
+										nodoChtml aux = new nodoChtml("ELEMENTO");																															
+										aux.add(new nodoChtml("CADENA"));										
+										aux.add(new nodoChtml(cad));																																
+										nuevo.add(nuevo);																																																							
 										RESULT=nuevo;
 										:};
 AE::= AE1:r{:RESULT=r;:};
@@ -419,14 +437,21 @@ AE1::= 	AE1:a ELEMENTO:r
 
 BOTON::= menorQue inicioBoton ATRIBUTOS:atrib mayorQue cadena:cad menorQue finBoton mayorQue
 										{:
-										atrib.setValue("BOTON"); 																					
-										atrib.add(new nodoChtml(cad));																																													
+										atrib.setValue("BOTON"); 
+										nodoChtml nuevo = new nodoChtml("ELEMENTO");																					
+										nuevo.add(new nodoChtml("CADENA"));
+										nuevo.add(new nodoChtml(cad));
+										atrib.add(nuevo);										
 										RESULT=atrib;
 										:}
 		|menorQue inicioBoton  mayorQue cadena:cad menorQue finBoton mayorQue
 										{: 
 										nodoChtml nuevo = new nodoChtml("BOTON");												
-										nuevo.add(new nodoChtml(cad));																																													
+										nuevo.add(new nodoChtml(cad));
+										nodoChtml aux = new nodoChtml("ELEMENTO");																					
+										aux.add(new nodoChtml("CADENA"));
+										aux.add(new nodoChtml(cad));	
+										nuevo.add(aux);																																																						
 										RESULT=nuevo;
 										:};
 
@@ -501,82 +526,77 @@ RUTA::= ruta asignacion pathComillas:path puntoComa
 
 TABLA::= menorQue inicioTabla ELEMENTOS:e mayorQue LISTAFILA:contenido menorQue finTabla mayorQue
 										{:
-										nodoChtml nuevo = new nodoChtml("TABLA");												
-										nuevo.add(e);											
-										nuevo.add(contenido);									
-										RESULT=nuevo;
+										e.setValue("TABLA");											
+										e.addLista(contenido);
+										RESULT=e;
 										:}
 		| menorQue inicioTabla mayorQue LISTAFILA:contenido menorQue finTabla mayorQue
 										{:
-										nodoChtml nuevo = new nodoChtml("TABLA");												
-										nuevo.add(contenido);									
-										RESULT=nuevo;
+										contenido.setValue("TABLA");																															
+										RESULT=contenido;
 										:};
 
-LISTAFILA::= LISTAFILA:l FILA:f 										
-								{:
-								nodoChtml nuevo = new nodoChtml("LISTAFILA");												
-								nuevo.add(l);									
-								nuevo.add(f);	
-								RESULT=nuevo;
+LISTAFILA::= LISTAFILA:lista FILA:fila 										
+								{:																				
+								lista.addLista(fila);	
+								RESULT=lista;
 								:}
-			| FILA:f								
-					{:
-					nodoChtml nuevo = new nodoChtml("LISTAFILA");																									
-					nuevo.add(f);	
-					RESULT=nuevo;
-					:};
+			| FILA:f {:RESULT=f;:};
 
 FILA::=   menorQue inicioFila mayorQue LISTACELDA:celdas  menorQue finFila mayorQue									
-										{:
-										nodoChtml nuevo = new nodoChtml("FILA");												
-										nuevo.add(celdas);										
+										{:		
+										nodoChtml nuevo = new nodoChtml("FILA");
+										nuevo.add(celdas);
 										RESULT=nuevo;
 										:}	
 		| menorQue inicioFila ELEMENTOS:elementos mayorQue LISTACELDA:celdas menorQue finFila mayorQue										
 										{:
-										nodoChtml nuevo = new nodoChtml("FILA");																														
-										nuevo.add(elementos);	
-										nuevo.add(celdas);																												
-										RESULT=nuevo;
+										//nodoChtml nuevo = new nodoChtml("FILA");	
+										elementos.setValue("FILA");
+										elementos.addLista(celdas);																												
+										RESULT=elementos;
 										:};
 
 LISTACELDA::=LISTACELDA:l CELDA:c
-					{:
-					c.setTipo("Normal");
+					{:					
 					l.add(c);										
 					RESULT= l;:}		
 			| LISTACELDA:l CELDAC:c
-					{:	
-					c.setTipo("Cabecera");				
+					{:									
 					l.add(c);					
 					RESULT= l;:}			
 			| CELDA:c
-					{:
-					c.setTipo("Normal");					
-					RESULT= c;:}			
+					{:	
+					nodoChtml nuevo = new nodoChtml("FILA");
+					nuevo.add(c);									
+					RESULT= nuevo;:}			
 			| CELDAC:c
 					{:	
-					c.setTipo("Cabecera");				
-					RESULT= c;:};
+					nodoChtml nuevo = new nodoChtml("FILA");
+					nuevo.add(c);									
+					RESULT= nuevo;:};
 
 CELDA::= menorQue inicioCelda mayorQue CONTENIDOCELDA:contenido menorQue finCelda mayorQue
-										{:																																																										
+										{:																															 
+										contenido.setValue("CELDA");																												
 										RESULT=contenido;
 										:}
 		| menorQue inicioCelda ELEMENTOS:elementos mayorQue CONTENIDOCELDA:contenido  menorQue finCelda mayorQue
-										{:																															
-										elementos.add(contenido);																												
+										{:		
+										elementos.setValue("CELDA");																																																	
+										elementos.addLista(contenido);																																						
 										RESULT=elementos;
 										:};
 
 CELDAC::= menorQue inicioCeldaCabecera mayorQue CONTENIDOCELDA:contenido  menorQue finCeldaCabecera mayorQue
-										{:																																																																					
+										{:																															
+										contenido.setValue("CELDAC");																												
 										RESULT=contenido;
 										:}
 		| menorQue inicioCeldaCabecera  ELEMENTOS:elementos mayorQue CONTENIDOCELDA:contenido menorQue finCeldaCabecera mayorQue
-										{:																															
-										elementos.add(contenido);																												
+										{:		
+										elementos.setValue("CELDAC");																																																	
+										elementos.addLista(contenido);																																						
 										RESULT=elementos;
 										:};
 
@@ -591,26 +611,46 @@ CONTENIDOCELDA::= CONTENIDOCELDA:l IMAGEN:b
 				|CONTENIDOCELDA:l  BOTON:b
 								{:
 								l.add(b);						
-								RESULT= l;:}
-				| IMAGEN:c {:
-								RESULT= c;:}
-				| BOTON:c {:
-								RESULT= c;:}
-				| CADENA:cad {:
-						RESULT= cad;:};
+								RESULT= l;
+								:}
+				| IMAGEN:imagen 		
+						{:
+						nodoChtml nuevo = new nodoChtml("LISTA");
+						nuevo.add(imagen);
+						RESULT= nuevo;
+						:}
+				| BOTON:boton 
+						{:
+						nodoChtml nuevo = new nodoChtml("LISTA");
+						nuevo.add(boton);
+						RESULT= nuevo;
+						:}
+				| CADENA:cad 	
+						{:
+						nodoChtml nuevo = new nodoChtml("LISTA");						
+						nuevo.add(cad);
+						RESULT= nuevo;
+						:};
 
 
 CADENA::= cadena:cad  {:
-						nodoChtml nuevo = new nodoChtml("cad");						
+						nodoChtml nuevo = new nodoChtml("ELEMENTO");
+						nuevo.add(new nodoChtml("CADENA"));
+						nuevo.add(new nodoChtml(cad));
 						RESULT= nuevo;:};
 
 
 TEXTOA::= menorQue inicioCajaArea ELEMENTOS:elementos mayorQue cadena:cad menorQue finCajaArea mayorQue
 						{:
-						nodoChtml nuevo = new nodoChtml(cad);
-						nuevo.add(elementos);
-						RESULT= nuevo;:}
+						nodoChtml nuevo = new nodoChtml("ELEMENTO");
+						nuevo.add(new nodoChtml("CADENA"));
+						nuevo.add(new nodoChtml(cad));
+						RESULT= nuevo;
+						:}
 		| menorQue inicioCajaArea mayorQue cadena:cad menorQue finCajaArea mayorQue
 						{:
-						nodoChtml nuevo = new nodoChtml("cad");												
-						RESULT= nuevo;:};
+						nodoChtml nuevo = new nodoChtml("ELEMENTO");
+						nuevo.add(new nodoChtml("CADENA"));
+						nuevo.add(new nodoChtml(cad));
+						RESULT= nuevo;
+						:};

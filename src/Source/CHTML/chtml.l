@@ -783,7 +783,8 @@ metodo = {id}"()"
 
     ">"	
     {    
-        yybegin(T2);                           
+        yybegin(T2);  
+        cadena = "";                         
         System.out.println("Saltar a estado ENCABEZADO2");
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -1038,8 +1039,9 @@ metodo = {id}"()"
 
     ">"	
     {    
+        cadena = "";
         yybegin(T4);                           
-        System.out.println("Saltar a estado ENCABEZADO2");
+        System.out.println("Saltar a estado t4");
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
@@ -1131,6 +1133,7 @@ metodo = {id}"()"
         Interfaz.tablaSimbolos_.add(simbolo);
         yybegin(T5);   
         System.out.println("SALTAR A T5");
+        cadena = "";
         return new Symbol(simbolos.inicioCeldaCabecera, yychar, yyline, yytext());                
     }
 
@@ -1145,7 +1148,8 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
-        yybegin(T5);    
+        yybegin(T5); 
+        cadena = "";   
         System.out.println("SALTAR A T5");                                
         return new Symbol(simbolos.inicioCelda, yychar, yyline, yytext());                
     }    
@@ -1306,6 +1310,7 @@ metodo = {id}"()"
 
     ">"	
     {    
+        cadena = "";
         yybegin(T6);                           
         System.out.println("Saltar a T6");
         Interfaz.auxContador++;                                
@@ -1397,7 +1402,8 @@ metodo = {id}"()"
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);
         yybegin(T4);       
-        System.out.println("SALTAR A T4");                           
+        System.out.println("SALTAR A T4");  
+        cadena = "";                         
         return new Symbol(simbolos.finCeldaCabecera, yychar, yyline, yytext());
 
     } 
@@ -1414,7 +1420,8 @@ metodo = {id}"()"
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);    
         yybegin(T4);  
-        System.out.println("SALTAR A T4");                               
+        System.out.println("SALTAR A T4"); 
+        cadena = "";                              
         return new Symbol(simbolos.finCelda, yychar, yyline, yytext());
 
     }            
@@ -1432,7 +1439,8 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);    
-        yybegin(TI);                        
+        yybegin(TI);
+        cadena="";                        
         return new Symbol(simbolos.inicioImagen, yychar, yyline, yytext());
 
     }   
@@ -1440,6 +1448,7 @@ metodo = {id}"()"
 
     "boton"
     {
+        cadena="";
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("boton");
@@ -1541,7 +1550,8 @@ metodo = {id}"()"
 
     ">"	
     {    
-        yybegin(TB2);                           
+        yybegin(TB2);  
+        cadena = "";                         
         System.out.println("Saltar a estado ENCABEZADO2");
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -1769,7 +1779,8 @@ metodo = {id}"()"
         simbolo.setDescripcion("fin-boton: Fin boton TB3");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);            
+        Interfaz.tablaSimbolos_.add(simbolo);  
+        cadena = "";          
         return new Symbol(simbolos.finBoton, yychar, yyline, yytext());        
         
     }  
@@ -1777,6 +1788,7 @@ metodo = {id}"()"
 
     ">"	
     {    
+        cadena="";
         yybegin(T6);                           
         System.out.println("Saltar a estado ENCABEZADO2");
         Interfaz.auxContador++;                                
@@ -2017,6 +2029,7 @@ metodo = {id}"()"
 
     ">"	
     {    
+        cadena = "";
         yybegin(TI2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
         Interfaz.auxContador++;                                
@@ -2100,6 +2113,7 @@ metodo = {id}"()"
 
     "fin-imagen"
     {        
+        
         //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("fin-imagen");
@@ -2108,7 +2122,8 @@ metodo = {id}"()"
         simbolo.setDescripcion("fin-imagen: Fin imagen TI2");
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                    
+        Interfaz.tablaSimbolos_.add(simbolo);      
+        cadena = "";                              
         return new Symbol(simbolos.finImagen, yychar, yyline, yytext());        
         
     }  
@@ -2127,7 +2142,8 @@ metodo = {id}"()"
         simbolo.setIndex(Interfaz.auxContador);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);	
-        yybegin(T6);                
+        yybegin(T6); 
+        cadena = "";               
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext()); 
     }        
 

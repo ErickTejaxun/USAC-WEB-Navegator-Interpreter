@@ -101,8 +101,24 @@ public class nodoChtml
     
     public void add(nodoChtml nuevo)
     {
-        if(nuevo!=null){this.hijos.add(nuevo);}
+        if(nuevo!=null)
+        {
+            this.hijos.add(nuevo);
+        }
     }
+    
+    public void addLista(nodoChtml nuevo)
+    {
+        if(nuevo!=null)
+        {
+            for(nodoChtml aux: nuevo.getHijos())
+            {
+                this.hijos.add(aux);
+            }
+        }
+    }
+    
+
 
     
     

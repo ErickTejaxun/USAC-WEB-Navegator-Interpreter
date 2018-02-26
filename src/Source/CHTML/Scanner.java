@@ -2211,7 +2211,8 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 184: break;
           case 76: 
-            { //Generamos la entrada en la tabla de simbolos
+            { cadena="";
+        //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("boton");
         simbolo.setLinea(yyline);
@@ -2307,7 +2308,8 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setIndex(Interfaz.auxContador++);
         simbolo.setValor(yytext());                 
         Interfaz.tablaSimbolos_.add(simbolo);    
-        yybegin(TI);                        
+        yybegin(TI);
+        cadena="";                        
         return new Symbol(simbolos.inicioImagen, yychar, yyline, yytext());
             }
           case 191: break;
