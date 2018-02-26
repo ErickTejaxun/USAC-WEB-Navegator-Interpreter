@@ -541,7 +541,22 @@ public void compilar(){
         //Consola1.setText(temporal);
         System.out.println(temporal);
 
-    }    
+    }  
+    
+    
+    public void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
+    {                
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo(tipo);
+        simbolo.setLinea(linea);
+        simbolo.setColumna(columna);
+        simbolo.setDescripcion(descripcion);
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(valor);                 
+        tablaSimbolos_.add(simbolo);	            
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
