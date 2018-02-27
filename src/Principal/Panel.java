@@ -5,12 +5,46 @@
  */
 package Principal;
 
+import static Principal.Interfaz.erroresLexicos;
+import static Principal.Interfaz.erroresSemanticos;
+import static Principal.Interfaz.erroresSintacticos;
+import static Principal.Interfaz.raizChtml;
+import static Principal.Interfaz.tablaSimbolos_;
+import Source.CHTML.Scanner;
+import Source.CHTML.dibujador;
+import Source.CHTML.nodoChtml;
+import Source.CHTML.sintactico;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author erick
  */
 public class Panel extends javax.swing.JPanel {
 
+    public static  int auxContador = 0;
+    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
+    public static ArrayList<Errores> erroresSintacticos = new ArrayList();
+    public static ArrayList<Errores> erroresLexicos = new ArrayList();
+    public static ArrayList<Errores> erroresSemanticos = new ArrayList();
+    public String analisisLexico="";      
+    public String analisisLexico_="";
+    public static String resultado="";
+    public String ELexico="";
+    public String analisisSintactico="";
+    public String analisisSemantico="";   
+    public Scanner s;
+    public sintactico p;
+    public static nodoChtml raizChtml = new nodoChtml();
+    public static int contadorChtml=0;
+    public int contadorPaginas=0;
     /**
      * Creates new form Panel
      */
@@ -27,12 +61,9 @@ public class Panel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablePanel = new javax.swing.JTabbedPane();
         Panel = new javax.swing.JPanel();
         panelContenido = new javax.swing.JPanel();
         scroll = new java.awt.ScrollPane();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         panelMenu = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
         botonAtras = new javax.swing.JButton();
@@ -43,21 +74,12 @@ public class Panel extends javax.swing.JPanel {
         botonHistorial = new javax.swing.JButton();
         etiquetaNombre = new javax.swing.JLabel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setLayout(new javax.swing.OverlayLayout(this));
 
         Panel.setLayout(new java.awt.BorderLayout(10, 0));
 
         panelContenido.setBackground(new java.awt.Color(51, 204, 255));
         panelContenido.setLayout(new java.awt.BorderLayout());
-
-        jButton2.setText("jButton2");
-        scroll.add(jButton2);
-
-        jButton1.setText("jButton1");
-        scroll.add(jButton1);
-
         panelContenido.add(scroll, java.awt.BorderLayout.CENTER);
 
         Panel.add(panelContenido, java.awt.BorderLayout.CENTER);
@@ -68,8 +90,20 @@ public class Panel extends javax.swing.JPanel {
         botonAtras.setText("<-");
 
         botonAdelante.setText("->");
+        botonAdelante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAdelanteActionPerformed(evt);
+            }
+        });
 
         botonIr.setText("Ir a");
+        botonIr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonIrActionPerformed(evt);
+            }
+        });
+
+        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\prueba.html");
 
         botonOpciones.setText("Opciones");
         botonOpciones.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +138,7 @@ public class Panel extends javax.swing.JPanel {
                 .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(etiquetaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+                    .addComponent(etiquetaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
                     .addComponent(textRuta)))
         );
         MenuLayout.setVerticalGroup(
@@ -129,10 +163,22 @@ public class Panel extends javax.swing.JPanel {
 
         Panel.add(panelMenu, java.awt.BorderLayout.PAGE_START);
 
-        tablePanel.addTab("Inicio", Panel);
-
-        add(tablePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, -1, -1));
+        add(Panel);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdelanteActionPerformed
+
+    }//GEN-LAST:event_botonAdelanteActionPerformed
+
+    private void botonIrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIrActionPerformed
+        try {
+            analizar();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        generarInterfaz();
+    }//GEN-LAST:event_botonIrActionPerformed
 
     private void botonOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionesActionPerformed
         // TODO add your handling code here:
@@ -142,6 +188,419 @@ public class Panel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonHistorialActionPerformed
 
+    
+    
+public void analizar() throws IOException
+{
+        tablaSimbolos_.clear();
+        erroresLexicos.clear();
+        erroresSintacticos.clear();
+
+        if(true)
+        {
+
+            compilar();
+            if((erroresLexicos.size()!=0)||(erroresSintacticos.size()!=0)||(erroresSemanticos.size()!=0)){
+            errores_consola();
+            }
+            if((erroresLexicos.size()==0)&&(erroresSintacticos.size()==0)&&(erroresSemanticos.size()==0)){
+            //Consola1.setText("");
+            }
+            
+            dibujador aux = new dibujador();
+            aux.generarGrafica(raizChtml);
+            //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
+            //aux.imprimirtodo(raizChtml, contadorChtml);
+            //dibujarInterfaz();
+            imprimirReporteLexico();
+            imprimirResultado();
+            imprimirLexicos();
+            imprimirSintacticos();
+            imprimirSemanticos();
+        }
+    
+    
+}    
+public void compilar(){
+
+            
+        String path=this.textRuta.getText();  
+         try {
+
+             
+            s=new Scanner(new java.io.FileReader(path)); 
+              
+            p = new sintactico(s);
+            p.parse();
+            int numero= tablaSimbolos_.size();
+            System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
+            for(int n=0;n<numero;n++)
+            {
+                
+                System.out.println(tablaSimbolos_.get(n).columna + "\t"+tablaSimbolos_.get(n).linea+ "\t"+tablaSimbolos_.get(n).Valor+ "\t"+tablaSimbolos_.get(n).tipo+ "\t\t"+tablaSimbolos_.get(n).descripcion);
+            
+            }
+            System.out.println(numero);
+
+            
+//            Consola1.setText(p.textoConsola1);
+
+            
+            
+           
+            
+           
+        }
+        catch(Exception e) { System.out.println(e.getMessage());}
+    
+    
+
+}
+
+
+
+   public String dibujarInterfaz(nodoChtml raiz, int numero)
+    {
+        String retorno="";
+        if(raiz!=null)
+        {
+            System.out.println(raiz.getValue());
+            switch(raiz.getValue())
+            {
+                case "DOCUMENTO":
+                    retorno = "package Principal;\n" +
+                                    "\n" +
+                                    "import java.util.ArrayList;\n" +
+                                    "import javax.swing.JPanel;\n" +
+                                    "\n" +
+                                    "/**\n" +
+                                    " *\n" +
+                                    " * @author erick\n" +
+                                    " */\n" +
+                                    "public class Pagina"+numero+" extends JPanel\n" +
+                                    "{\n" +
+                                    "    public String path;\n" +
+                                    "    public String titulo;\n" +
+                                    "    public ArrayList<String> listaCcss = new ArrayList();\n" +
+                                    "    public ArrayList<String> listaCjs = new ArrayList();\n" +
+                            
+                                    "    \n" +
+                                    "    public Pagina"+numero+"()\n" +
+                                    "    {\n";
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        retorno = retorno + dibujarInterfaz(aux, numero);
+                    }
+
+                    retorno = retorno + "\t}\n"
+                                    + "}" ;
+                    break;
+                    
+                case "ENCABEZADO":                                
+                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    {
+                        retorno = retorno + dibujarInterfaz(raiz.getHijos().get(cont), numero);
+                    }
+                    break;
+                case "LISTAARCHIVOS":
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        String[] partes = aux.getValue().split(".cjs");                       
+                        if(partes.length>1)
+                        {
+                            aux.setValue(aux.getValue().replace("\"\"","\""));                             
+                            retorno = retorno +"\tthis.listaCcss.add(\""+aux.getValue()+"\");\n";
+                        }
+                        else
+                        {
+                            retorno = retorno+ "\tthis.listaCjs.add(\""+aux.getValue()+"\");\n";
+                        }
+                    }
+                    break;
+                case "TITULO": 
+                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    {                        
+                        
+                        retorno =   "\t this.titulo= \""+raiz.getHijos().get(cont).getValue().replace("\n", "\"\\n\" +")+"\"\n"; 
+                    }                                       
+                    break;
+            }
+        }        
+        return retorno;
+    }
+    
+    
+    
+    
+    public void imprimirReporteLexico(){
+          String directorioHtml=PathActual()+"\\Lexico.html";
+
+            if(tablaSimbolos_.isEmpty() && tablaSimbolos_.isEmpty()){
+                JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+            }else{
+                File html=new File(directorioHtml);
+                PrintWriter writer;
+
+                try {
+                    writer=new PrintWriter(html);
+                    String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                        + "<head>\n" + "<title>TABLA DE TOKENS</title>\n" + "</head>\n"
+                        + "<body>\n"
+                        + "<h1 align=\"center\">ANALISIS LEXICO </h1>\n"
+                        + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                        + "<table border=\"1\">\n"
+                        + "<tr>\n"
+                        + "<td>No.</td>\n"
+                        + "<td>Columna</td>\n"
+                        + "<td>Linea</td>\n"
+                        + "<td>Tipo</td>\n"
+                        + "<td>Valor</td>\n"
+                            + "<td>Descripcion</td>\n";
+
+                           for(int x=0;x<tablaSimbolos_.size();x++){
+                           texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).columna+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).linea+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).tipo+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).Valor+"</td>\n"
+                        + "<td>"+tablaSimbolos_.get(x).descripcion+"</td>\n";
+                           }
+
+                        texto+="</tr>\n"+                    
+                        "</table>\n"
+                        + "</body>"
+                        + "</html>";
+                    writer.print(texto);
+                    analisisLexico=texto;
+                    writer.close();
+                  //   abrirHtml(directorioHtml);
+                } catch (FileNotFoundException ex) {
+
+                }
+            } 
+    }    
+    
+    
+    public void imprimirResultado(){
+          String directorioHtml=PathActual()+"\\Resultado.html";
+
+            if(tablaSimbolos_.isEmpty() && tablaSimbolos_.isEmpty()){
+                JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+            }else{
+                File html=new File(directorioHtml);
+                PrintWriter writer;
+
+                try {
+                    writer=new PrintWriter(html);
+
+                    writer.print(Interfaz.resultado);
+                  //  resultado=Interfaz.resultado;
+                    writer.close();
+                  //   abrirHtml(directorioHtml);
+                } catch (FileNotFoundException ex) {
+
+                }
+            } 
+    }    
+    
+    public void imprimirLexicos(){
+         String directorioHtml=PathActual()+"\\Erores_lexicos.html";
+
+           if(Interfaz.erroresLexicos.isEmpty()){
+               //JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+           }else{
+               File html=new File(directorioHtml);
+               PrintWriter writer;
+
+               try {
+                   writer=new PrintWriter(html);
+                   String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                       + "<head>\n" + "<title>TABLA DE ERRORES</title>\n" + "</head>\n"
+                       + "<body>\n"
+                       + "<h1 align=\"center\">Errores Lexicos </h1>\n"
+                       + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                       + "<table border=\"1\">\n"
+                       + "<tr>\n"
+                       + "<td>No.</td>\n"
+                       + "<td>Columna</td>\n"
+                       + "<td>Linea</td>\n"
+                       + "<td>Tipo</td>\n"
+                           + "<td>Descripcion</td>\n";
+
+                          for(int x=0;x<erroresLexicos.size();x++){
+                          texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).columna+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).linea+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).tipo+"</td>\n"
+                       + "<td>"+erroresLexicos.get(x).descripcion+"</td>\n";
+                          }
+
+                       texto+="</tr>\n"+                    
+                       "</table>\n"
+                       + "</body>"
+                       + "</html>";
+                   writer.print(texto);
+                   this.ELexico=texto;
+                   writer.close();
+                 //   abrirHtml(directorioHtml);
+               } catch (FileNotFoundException ex) {
+
+               }
+           } 
+   }
+
+   public void imprimirSintacticos(){
+         String directorioHtml=PathActual()+"\\Erores_sintacticos.html";
+
+           if(Interfaz.erroresLexicos.isEmpty()){
+               //JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
+
+           }else{
+               File html=new File(directorioHtml);
+               PrintWriter writer;
+
+               try {
+                   writer=new PrintWriter(html);
+                   String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                       + "<head>\n" + "<title>TABLA DE ERRORES</title>\n" + "</head>\n"
+                       + "<body>\n"
+                       + "<h1 align=\"center\">Errores Sintacticos </h1>\n"
+                       + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                       + "<table border=\"1\">\n"
+                       + "<tr>\n"
+                       + "<td>No.</td>\n"
+                       + "<td>Columna</td>\n"
+                       + "<td>Linea</td>\n"
+                       + "<td>Tipo</td>\n"
+                           + "<td>Descripcion</td>\n";
+
+                          for(int x=0;x<erroresSintacticos.size();x++){
+                          texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).columna+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).linea+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).tipo+"</td>\n"
+                       + "<td>"+erroresSintacticos.get(x).descripcion+"</td>\n";
+                          }
+
+                       texto+="</tr>\n"+                    
+                       "</table>\n"
+                       + "</body>"
+                       + "</html>";
+                   writer.print(texto);
+                   analisisSintactico=texto;
+                   writer.close();
+                 //   abrirHtml(directorioHtml);
+               } catch (FileNotFoundException ex) {
+
+               }
+           } 
+   }
+
+   public void imprimirSemanticos(){
+         String directorioHtml=PathActual()+"\\Erores_semanticos.html";
+
+           if(Interfaz.erroresSemanticos.isEmpty()){
+              // JOptionPane.showMessageDialog(this,"No hay errores Semanticos");
+
+           }else{
+               File html=new File(directorioHtml);
+               PrintWriter writer;
+
+               try {
+                   writer=new PrintWriter(html);
+                   String texto="<html>\n <meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />"
+                       + "<head>\n" + "<title>TABLA De ERRORES</title>\n" + "</head>\n"
+                       + "<body>\n"
+                       + "<h1 align=\"center\">Errores Semanticos </h1>\n"
+                       + "<hr width=\"75%\" size=\"2\" color=\"black\"/>"
+                       + "<table border=\"1\">\n"
+                       + "<tr>\n"
+                       + "<td>No.</td>\n"
+                       + "<td>Columna</td>\n"
+                       + "<td>Linea</td>\n"
+                       + "<td>Tipo</td>\n"
+                           + "<td>Descripcion</td>\n";
+
+                          for(int x=0;x<erroresSemanticos.size();x++){
+                          texto+="</tr>\n"+ "<td>"+x+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).columna+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).linea+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).tipo+"</td>\n"
+                       + "<td>"+erroresSemanticos.get(x).descripcion+"</td>\n";
+                          }
+
+                       texto+="</tr>\n"+                    
+                       "</table>\n"
+                       + "</body>"
+                       + "</html>";
+                   writer.print(texto);
+                   analisisSemantico=texto;
+                   writer.close();
+                 //   abrirHtml(directorioHtml);
+               } catch (FileNotFoundException ex) {
+
+               }
+           } 
+   }
+
+   
+    public void generarInterfaz()
+    {
+        
+        
+        
+        
+    }
+    
+    public String PathActual(){
+        String path="";
+         File miDir = new File (".");
+         try {
+           //System.out.println (miDir.getCanonicalPath());
+           path=miDir.getCanonicalPath();
+         }
+         catch(Exception e) {
+           e.printStackTrace();
+           }
+         return path;
+    }    
+    
+    public void errores_consola(){
+        String temporal="Linea           Columna           Descripcion                TIPO";
+        for(int x=0;x<erroresLexicos.size();x++){
+        temporal+="\n"+erroresLexicos.get(x).linea+"                "+erroresLexicos.get(x).columna+"          "+erroresLexicos.get(x).getDescripcion()+"       Lexico";
+        }
+        for(int x=0;x<erroresSintacticos.size();x++){
+        temporal+="\n"+erroresSintacticos.get(x).linea+"                "+erroresSintacticos.get(x).columna+"           "+erroresSintacticos.get(x).getDescripcion()+"       Sintactico";
+        }
+        for(int x=0;x<erroresSemanticos.size();x++){
+        temporal+="\n"+erroresSemanticos.get(x).linea+"               "+erroresSemanticos.get(x).columna+"              "+erroresSemanticos.get(x).getDescripcion()+"       Semantico";
+        }
+        
+        /*Imprimimos los errores*/
+        //Consola1.setText(temporal);
+        System.out.println(temporal);
+
+    }  
+    
+    
+    public static void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
+    {                
+        Interfaz.auxContador++;                                
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo(tipo);
+        simbolo.setLinea(linea);
+        simbolo.setColumna(columna);
+        simbolo.setDescripcion(descripcion);
+        simbolo.setIndex(Interfaz.auxContador);
+        simbolo.setValor(valor);                 
+        tablaSimbolos_.add(simbolo);	            
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
@@ -152,12 +611,9 @@ public class Panel extends javax.swing.JPanel {
     private javax.swing.JButton botonIr;
     private javax.swing.JButton botonOpciones;
     private javax.swing.JLabel etiquetaNombre;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelMenu;
     private java.awt.ScrollPane scroll;
-    private javax.swing.JTabbedPane tablePanel;
     private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables
 }

@@ -3438,22 +3438,14 @@ metodo = {id}"()"
 
 <TITULO2>
 {
-    {espacio}
-    {cadena  = cadena + yytext();}	
-
-
-    [^]
+    [^"*/"]
     {  
         if(!yytext().equals("<"))
         {
             cadena  = cadena + yytext();
-            //System.out.println(cadena);
         }
         else 
-        {
-
-            //cadena = cadena + yytext();
-            
+        {           
             yybegin(ENCABEZADO2);
             Interfaz.auxContador++;                                
             //Generamos la entrada en la tabla de simbolos.
@@ -3467,11 +3459,8 @@ metodo = {id}"()"
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
-
         }                       
     } 
-
-
 }
 
 <TITULO3>

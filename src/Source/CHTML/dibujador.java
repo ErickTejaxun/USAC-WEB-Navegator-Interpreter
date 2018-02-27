@@ -6,6 +6,7 @@
 package Source.CHTML;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -94,5 +95,106 @@ public class dibujador
            e.printStackTrace();
            }
          return path;
-    }     
+    }  
+    
+    
+    
+    
+    
+    
+    public String dibujarInterfaz(nodoChtml raiz, int numero)
+    {
+        String retorno="";
+        if(raiz!=null)
+        {
+            System.out.println(raiz.getValue());
+            switch(raiz.getValue())
+            {
+                case "DOCUMENTO":
+                    retorno = "package Principal;\n" +
+                                    "\n" +
+                                    "import java.util.ArrayList;\n" +
+                                    "import javax.swing.JPanel;\n" +
+                                    "\n" +
+                                    "/**\n" +
+                                    " *\n" +
+                                    " * @author erick\n" +
+                                    " */\n" +
+                                    "public class Pagina"+numero+" extends JPanel\n" +
+                                    "{\n" +
+                                    "    public String path;\n" +
+                                    "    public String titulo;\n" +
+                                    "    public ArrayList<String> listaCcss = new ArrayList();\n" +
+                                    "    public ArrayList<String> listaCjs = new ArrayList();\n" +
+                            
+                                    "    \n" +
+                                    "    public Pagina"+numero+"()\n" +
+                                    "    {\n";
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        retorno = retorno + dibujarInterfaz(aux, numero);
+                    }
+
+                    retorno = retorno + "\t}\n"
+                                    + "}" ;
+                    break;
+                    
+                case "ENCABEZADO":                                
+                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    {
+                        retorno = retorno + dibujarInterfaz(raiz.getHijos().get(cont), numero);
+                    }
+                    break;
+                case "LISTAARCHIVOS":
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        String[] partes = aux.getValue().split(".cjs");                       
+                        if(partes.length>1)
+                        {
+                            aux.setValue(aux.getValue().replace("\"\"","\""));                             
+                            retorno = retorno +"\tthis.listaCcss.add(\""+aux.getValue()+"\");\n";
+                        }
+                        else
+                        {
+                            retorno = retorno+ "\tthis.listaCjs.add(\""+aux.getValue()+"\");\n";
+                        }
+                    }
+                    break;
+                case "TITULO": 
+                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    {                        
+                        
+                        retorno =   "\t this.titulo= \""+raiz.getHijos().get(cont).getValue().replace("\n", "\"\\n\" +")+"\"\n"; 
+                    }                                       
+                    break;
+            }
+        }        
+        return retorno;
+    }
+    
+    public void imprimirtodo(nodoChtml raiz, int numero) throws FileNotFoundException
+    {        
+        String direccionEntrada = PathActual()+"\\clase.java";
+        
+        String cadena = dibujarInterfaz(raiz, numero);
+                       
+        cadena = cadena.replace("\"\"","\"");
+        cadena = cadena.replace("\\","\\\\");
+        /*---------------------------------------------------------------------------------*/
+        try (  PrintWriter writer = new PrintWriter(direccionEntrada)) {
+            writer.print(cadena);            
+        } 
+        /*---------------------------------------------------------------------------------*/        
+    }
+    
+    public String todo(nodoChtml raiz)
+    {
+        String cadena = "";
+        cadena = cadena + raiz.getValue()+ "\n";
+        for(nodoChtml aux: raiz.getHijos())
+        {
+            cadena = cadena + todo(aux);
+        }
+        return cadena;
+    }
 }

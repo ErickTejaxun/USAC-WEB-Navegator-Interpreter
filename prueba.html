@@ -18,7 +18,7 @@ aa
 
     < ccss ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.ccss" ; > < fin-ccss >
     < titulo > Página de prueba 3, Usac 2018 asdfasfasfda
-    < fin-titulo> 
+    XD< fin-titulo> 
 
 
 < fin-encabezado >
@@ -26,12 +26,109 @@ aa
 
 
     <cuerpo fondo = "#7as8as";>     
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Ir a inicio<fin-enlace>    
+
+
+        < texto  id = "texto1"; grupo="titulo"; alto="13"; alineado="centrado";> 
+            Mecanica cuantica 3
+        <fin-texto>
+
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; alineado="centrado"; >Ir a inicio<fin-enlace>  
+
+        <TEXTO id = "texto2"; grupo="titulos1"; alto="13"; alineado="derecha"; > Entrada: Esta es
+        una etiqueta
+        que permite
+        saltos
+        <FIN-TEXTO>
+
+        <imagen id="imagen1"; grupo="imagenes"; alto="10"; ancho="100"; alineado="izquierda";click="saludar()"; ruta = "C:\Users\imageng.jpg" ;>   <fin-imagen>
+        <imagen >                     C:\Users\imageng.jpg
+        <fin-imagen>   
+
+        <boton id="boton1";> boton 1 <fin-boton>
+        <boton id="boton1"; grupo="boton-texto1"; click="guardar()";> boton 1<fin-boton>                   
+        <boton  grupo="boton-texto1"; id="boton1"; click="guardar()";> boton 2<fin-boton>           
+        <boton  click="guardar()"; grupo="boton-texto1"; id="boton1"; > boton 3<fin-boton>
+
+
+
+        <TABLA>
+                <FIL_T>
+                    <CB>Nombre<FIN-CB>
+                    <CB>Apellido<FIN-CB>
+                    <CB>Edad<FIN-CB>
+                <FIN-FIL_T>
+                <FIL_T>
+                    <CT>Mack<FIN-CT>
+                    <CT>Hill<FIN-CT>
+                    <CT>15<FIN-CT>
+                <FIN-FIL_T>
+                <FIL_T>
+                    <CT>Stark<FIN-CT>
+                    <CT>Iron<FIN-CT>
+                    <CT>50<FIN-CT>
+                <FIN-FIL_T>
+        <FIN-TABLA>
+
+
+        <tabla id="tabla1"; grupo="tabla-detalle";> 
+
+                <fil_t>
+                    < cb id="cb1"; grupo="cabecera-detalle"; > No. < fin-cb >
+                    < ct id="ct1"; grupo="celda-detalle"; > Caracteristicas < fin-ct >
+                    < ct id="ct1"; grupo="celda-detalle"; > 
+                        <imagen click="saludar()"; ruta = "C:\Users\imageng.jpg" ;>
+                            C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.jpg
+                        <fin-imagen>                                    
+                        ¿Guardar de todos modos?         
+                        <boton id="boton1"; grupo="boton-texto1"; click="guardar()";> 
+                            boton cerote
+                        <fin-boton>  
+        
+                        <imagen click="saludar()"; ruta = "C:\Users\imageng.jpg" ;>
+                            C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.jpg
+                        <fin-imagen>
+                        <imagen click="saludar()"; ruta = "C:\Users\imageng.jpg" ;>
+                            C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.jpg
+                        <fin-imagen>                                    
+                    <fin-ct>              
+                <fin-fil_t>                    
+            <fin-tabla>            
+
+
+            <spinner>100<fin-spinner>
+            <spinner id="edad"; grupo="eleccion1"; alineado="derecha"; alto="11";>100<fin-spinner>                
+
+            <texto_a id="caja1"; grupo="areas"; alineado="centrado";>Hola perros<fin-texto_a>
+
+            <caja_texto id="caja1"; grupo="areas"; alineado="centrado";>Hola perros<fin-caja_texto>
+            <caja_texto >Hola perros<fin-caja_texto>             
+
+
+
+            <CAJA click="metodo()";grupo="select-mode1"; id="caja1"; >
+                <opcion valor="1"; id="opcion1"; grupo="grupo2"; >Uno<fin-opcion>
+                <opcion valor="2";>Dos<fin-opcion>
+                <opcion valor="3";>Tres<fin-opcion>                    
+                <opcion valor="4";>Cuatro<fin-opcion>
+            <FIN-CAJA>
+
+                    <SALTO-FIN>
+            <CAJA>
+                <OPCION valor="1";>Uno<FIN-OPCION>
+                <OPCION valor="2";>Dos<FIN-OPCION>
+            <FIN-CAJA>
+            <SALTO-FIN>
+            <CAJA_TEXTO> Contenido en la caja de texto <FIN-CAJA_TEXTO>    
+                
+        
             <PANEL>
-                    <TEXTO> Esta es una etiqueta<FIN-TEXTO>
-                    <CAJA_TEXTO> Contenido en la caja de texto <FIN-CAJA_TEXTO>
-                    <PANEL>
-                    <FIN-PANEL>
-                   <FIN-PANEL>   
+                <TEXTO> Esta es una etiqueta<FIN-TEXTO>
+                <CAJA_TEXTO> Contenido en la caja de texto <FIN-CAJA_TEXTO>
+                <PANEL>
+                        <caja_texto id="caja1"; grupo="areas"; alineado="centrado";>Hola perros<fin-caja_texto>
+                <FIN-PANEL>
+            <FIN-PANEL>                
 
 
     <fin-cuerpo>

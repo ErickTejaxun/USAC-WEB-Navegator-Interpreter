@@ -9,6 +9,7 @@ import Source.CHTML.Scanner;
 import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
+import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +19,12 @@ import java.util.ArrayList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.OverlayLayout;
 
 /**
  *
@@ -41,11 +47,21 @@ public class Interfaz extends javax.swing.JFrame {
     public sintactico p;
     public static nodoChtml raizChtml = new nodoChtml();
     public static int contadorChtml=0;
+    public int contadorPaginas=0;
+    public static Panel nuevo;
+    JTabbedPane contenedor = new JTabbedPane();
+    JTabbedPane tabbedPane = new JTabbedPane();    
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
         initComponents();
+        
+        contenedor.add("Inicio",null);        
+        Panel nuevo =new Panel();
+        JButton boton = new JButton("+");
+        contenedor.setTabComponentAt(contenedor.getTabCount()-1, boton);
+        this.add(contenedor);            
     }
 
     /**
@@ -57,20 +73,6 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablePanel = new javax.swing.JTabbedPane();
-        Panel = new javax.swing.JPanel();
-        panelContenido = new javax.swing.JPanel();
-        scroll = new java.awt.ScrollPane();
-        panelMenu = new javax.swing.JPanel();
-        Menu = new javax.swing.JPanel();
-        botonAtras = new javax.swing.JButton();
-        botonAdelante = new javax.swing.JButton();
-        botonIr = new javax.swing.JButton();
-        textRuta = new javax.swing.JTextField();
-        botonOpciones = new javax.swing.JButton();
-        botonHistorial = new javax.swing.JButton();
-        etiquetaNombre = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1, 53));
         setSize(new java.awt.Dimension(1, 0));
@@ -81,116 +83,12 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
-        tablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        Panel.setLayout(new java.awt.BorderLayout(10, 0));
-
-        panelContenido.setBackground(new java.awt.Color(51, 204, 255));
-        panelContenido.setLayout(new java.awt.BorderLayout());
-        panelContenido.add(scroll, java.awt.BorderLayout.CENTER);
-
-        Panel.add(panelContenido, java.awt.BorderLayout.CENTER);
-
-        panelMenu.setBackground(new java.awt.Color(0, 255, 102));
-        panelMenu.setLayout(new java.awt.BorderLayout());
-
-        botonAtras.setText("<-");
-
-        botonAdelante.setText("->");
-
-        botonIr.setText("Ir a");
-        botonIr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonIrActionPerformed(evt);
-            }
-        });
-
-        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\prueba.html");
-
-        botonOpciones.setText("Opciones");
-        botonOpciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonOpcionesActionPerformed(evt);
-            }
-        });
-
-        botonHistorial.setText("Historial");
-        botonHistorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonHistorialActionPerformed(evt);
-            }
-        });
-
-        etiquetaNombre.setText("Inicio");
-
-        javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
-        Menu.setLayout(MenuLayout);
-        MenuLayout.setHorizontalGroup(
-            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botonOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(etiquetaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
-                    .addComponent(textRuta)))
-        );
-        MenuLayout.setVerticalGroup(
-            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
-                .addComponent(etiquetaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botonAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(botonAtras, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        panelMenu.add(Menu, java.awt.BorderLayout.CENTER);
-
-        Panel.add(panelMenu, java.awt.BorderLayout.PAGE_START);
-
-        tablePanel.addTab("Inicio", Panel);
-
-        getContentPane().add(tablePanel);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonHistorialActionPerformed
-
-    private void botonOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonOpcionesActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
        
     }//GEN-LAST:event_formKeyPressed
-
-    private void botonIrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIrActionPerformed
-        try {
-            analizar();
-        } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_botonIrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +123,12 @@ public class Interfaz extends javax.swing.JFrame {
                 new Interfaz().setVisible(true);
             }
         });
+        
+        
+
+        
+        
+
     }
     
 public void analizar() throws IOException
@@ -246,7 +150,9 @@ public void analizar() throws IOException
             
             dibujador aux = new dibujador();
             aux.generarGrafica(raizChtml);
-            
+            //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
+            //aux.imprimirtodo(raizChtml, contadorChtml);
+            //dibujarInterfaz();
             imprimirReporteLexico();
             imprimirResultado();
             imprimirLexicos();
@@ -259,7 +165,11 @@ public void analizar() throws IOException
 public void compilar(){
 
             
-        String path=this.textRuta.getText();        
+        String path= "";
+        //int actual = contenedor.getSelectedIndex();
+        
+        
+        
          try {
 
              
@@ -291,6 +201,78 @@ public void compilar(){
     
 
 }
+
+
+
+   public String dibujarInterfaz(nodoChtml raiz, int numero)
+    {
+        String retorno="";
+        if(raiz!=null)
+        {
+            System.out.println(raiz.getValue());
+            switch(raiz.getValue())
+            {
+                case "DOCUMENTO":
+                    retorno = "package Principal;\n" +
+                                    "\n" +
+                                    "import java.util.ArrayList;\n" +
+                                    "import javax.swing.JPanel;\n" +
+                                    "\n" +
+                                    "/**\n" +
+                                    " *\n" +
+                                    " * @author erick\n" +
+                                    " */\n" +
+                                    "public class Pagina"+numero+" extends JPanel\n" +
+                                    "{\n" +
+                                    "    public String path;\n" +
+                                    "    public String titulo;\n" +
+                                    "    public ArrayList<String> listaCcss = new ArrayList();\n" +
+                                    "    public ArrayList<String> listaCjs = new ArrayList();\n" +
+                            
+                                    "    \n" +
+                                    "    public Pagina"+numero+"()\n" +
+                                    "    {\n";
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        retorno = retorno + dibujarInterfaz(aux, numero);
+                    }
+
+                    retorno = retorno + "\t}\n"
+                                    + "}" ;
+                    break;
+                    
+                case "ENCABEZADO":                                
+                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    {
+                        retorno = retorno + dibujarInterfaz(raiz.getHijos().get(cont), numero);
+                    }
+                    break;
+                case "LISTAARCHIVOS":
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        String[] partes = aux.getValue().split(".cjs");                       
+                        if(partes.length>1)
+                        {
+                            aux.setValue(aux.getValue().replace("\"\"","\""));                             
+                            retorno = retorno +"\tthis.listaCcss.add(\""+aux.getValue()+"\");\n";
+                        }
+                        else
+                        {
+                            retorno = retorno+ "\tthis.listaCjs.add(\""+aux.getValue()+"\");\n";
+                        }
+                    }
+                    break;
+                case "TITULO": 
+                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    {                        
+                        
+                        retorno =   "\t this.titulo= \""+raiz.getHijos().get(cont).getValue().replace("\n", "\"\\n\" +")+"\"\n"; 
+                    }                                       
+                    break;
+            }
+        }        
+        return retorno;
+    }
     
     
     
@@ -510,7 +492,13 @@ public void compilar(){
    }
 
    
-    
+    public void generarInterfaz()
+    {
+        
+        
+        
+        
+    }
     
     public String PathActual(){
         String path="";
@@ -560,18 +548,5 @@ public void compilar(){
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Menu;
-    private javax.swing.JPanel Panel;
-    private javax.swing.JButton botonAdelante;
-    private javax.swing.JButton botonAtras;
-    private javax.swing.JButton botonHistorial;
-    private javax.swing.JButton botonIr;
-    private javax.swing.JButton botonOpciones;
-    private javax.swing.JLabel etiquetaNombre;
-    private javax.swing.JPanel panelContenido;
-    private javax.swing.JPanel panelMenu;
-    private java.awt.ScrollPane scroll;
-    private javax.swing.JTabbedPane tablePanel;
-    private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables
 }
