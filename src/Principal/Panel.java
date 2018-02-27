@@ -5,11 +5,7 @@
  */
 package Principal;
 
-import static Principal.Interfaz.erroresLexicos;
-import static Principal.Interfaz.erroresSemanticos;
-import static Principal.Interfaz.erroresSintacticos;
-import static Principal.Interfaz.raizChtml;
-import static Principal.Interfaz.tablaSimbolos_;
+
 import Source.CHTML.Scanner;
 import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
@@ -208,10 +204,11 @@ public void analizar() throws IOException
             }
             
             dibujador aux = new dibujador();
+            raizChtml = Interfaz.raizChtml;
             aux.generarGrafica(raizChtml);
             //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
             //aux.imprimirtodo(raizChtml, contadorChtml);
-            //dibujarInterfaz();
+            dibujarInterfaz(raizChtml);
             imprimirReporteLexico();
             imprimirResultado();
             imprimirLexicos();
@@ -223,15 +220,14 @@ public void analizar() throws IOException
 }    
 public void compilar(){
 
-            
-        String path=this.textRuta.getText();  
-         try {
-
-             
+        
+        String path=textRuta.getText();  
+         try {            
             s=new Scanner(new java.io.FileReader(path)); 
               
             p = new sintactico(s);
             p.parse();
+            tablaSimbolos_ = Interfaz.tablaSimbolos_;
             int numero= tablaSimbolos_.size();
             System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
             for(int n=0;n<numero;n++)
@@ -259,7 +255,7 @@ public void compilar(){
 
 
 
-   public String dibujarInterfaz(nodoChtml raiz, int numero)
+   public void dibujarInterfaz(nodoChtml raiz)
     {
         String retorno="";
         if(raiz!=null)
@@ -268,38 +264,16 @@ public void compilar(){
             switch(raiz.getValue())
             {
                 case "DOCUMENTO":
-                    retorno = "package Principal;\n" +
-                                    "\n" +
-                                    "import java.util.ArrayList;\n" +
-                                    "import javax.swing.JPanel;\n" +
-                                    "\n" +
-                                    "/**\n" +
-                                    " *\n" +
-                                    " * @author erick\n" +
-                                    " */\n" +
-                                    "public class Pagina"+numero+" extends JPanel\n" +
-                                    "{\n" +
-                                    "    public String path;\n" +
-                                    "    public String titulo;\n" +
-                                    "    public ArrayList<String> listaCcss = new ArrayList();\n" +
-                                    "    public ArrayList<String> listaCjs = new ArrayList();\n" +
-                            
-                                    "    \n" +
-                                    "    public Pagina"+numero+"()\n" +
-                                    "    {\n";
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        retorno = retorno + dibujarInterfaz(aux, numero);
+                        dibujarInterfaz(aux);
                     }
-
-                    retorno = retorno + "\t}\n"
-                                    + "}" ;
                     break;
                     
                 case "ENCABEZADO":                                
-                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
+                    for(nodoChtml aux: raiz.getHijos())
                     {
-                        retorno = retorno + dibujarInterfaz(raiz.getHijos().get(cont), numero);
+                        dibujarInterfaz(aux);
                     }
                     break;
                 case "LISTAARCHIVOS":
@@ -310,6 +284,7 @@ public void compilar(){
                         {
                             aux.setValue(aux.getValue().replace("\"\"","\""));                             
                             retorno = retorno +"\tthis.listaCcss.add(\""+aux.getValue()+"\");\n";
+                            /*Primero analizamoes estos textos*/
                         }
                         else
                         {
@@ -318,15 +293,16 @@ public void compilar(){
                     }
                     break;
                 case "TITULO": 
-                    for(int cont = 0; cont<raiz.getHijos().size();cont++)
-                    {                        
-                        
-                        retorno =   "\t this.titulo= \""+raiz.getHijos().get(cont).getValue().replace("\n", "\"\\n\" +")+"\"\n"; 
-                    }                                       
+                    String titulo = "";
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        titulo = titulo + aux.getValue();
+                    }                                    
+                    etiquetaNombre.setText(titulo);
                     break;
             }
         }        
-        return retorno;
+    
     }
     
     

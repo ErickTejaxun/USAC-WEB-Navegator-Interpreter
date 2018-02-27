@@ -31,8 +31,10 @@ public class Pagina {
         parent.setVisible(true);
         
         
-        botonPlus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        botonPlus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt) 
+            {
                 botonPlusActionPerformed(evt);
             }
         });
