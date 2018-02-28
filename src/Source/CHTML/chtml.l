@@ -578,15 +578,20 @@ metodo = {id}"()"
 
 <CAJA2>
 {
-    {espacio}
-    {cadena  = cadena + yytext();}	
-
 
     [^]
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();            
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
         else 
         {
@@ -789,8 +794,15 @@ metodo = {id}"()"
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
-            //System.out.println(cadena);
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
         else 
         {
@@ -1555,13 +1567,19 @@ metodo = {id}"()"
     {espacio}
     {cadena  = cadena + yytext();}	
 
-
     [^]
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
-            //System.out.println(cadena);
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
         else 
         {
@@ -1952,10 +1970,17 @@ metodo = {id}"()"
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
-            //System.out.println(cadena);
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
-        else 
+        else  
         {
 
             //cadena = cadena + yytext();
@@ -2636,8 +2661,15 @@ metodo = {id}"()"
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
-            //System.out.println(cadena);
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
         else 
         {
@@ -2925,13 +2957,19 @@ metodo = {id}"()"
     {espacio}
     {cadena  = cadena + yytext();}	
 
-
     [^]
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
-            //System.out.println(cadena);
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
         else 
         {
@@ -3485,10 +3523,17 @@ metodo = {id}"()"
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
-            //System.out.println(cadena);
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
-        else 
+        else  
         {
 
             //cadena = cadena + yytext();
@@ -3551,13 +3596,21 @@ metodo = {id}"()"
 
 <TITULO2>
 {
-    [^"*/"]
+    [^"*/"]    
     {  
         if(!yytext().equals("<"))
         {
-            cadena  = cadena + yytext();
+            if(yytext().equals("\n"))
+            {
+                cadena  = cadena + "\\n";
+            }
+            else
+            {
+                cadena  = cadena + yytext();            
+            }
+            
         }
-        else 
+        else  
         {           
             yybegin(ENCABEZADO2);
             Interfaz.auxContador++;                                

@@ -27,7 +27,7 @@ public class Pagina {
         addButtonToTab(tabEntity);
 
         parent.add(tabEntity);
-        parent.setSize(new Dimension(400, 200));
+        parent.setSize(new Dimension(600, 600));
         parent.setVisible(true);
         
         

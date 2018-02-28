@@ -11,6 +11,8 @@ import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.Color;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,6 +55,7 @@ public class Panel extends javax.swing.JPanel {
     int posX = 0;
     int posY = 0;
     Color colorFondo = Color.WHITE ;
+    ArrayList<Elemento> elementos = new ArrayList();
     
     //JScrollPane scroll = new JScrollPane();
     
@@ -80,8 +83,8 @@ public class Panel extends javax.swing.JPanel {
         tablaSalida.setModel(filasSalidas);
         //this.panelContenido.add(scroll);
         
-        
-        
+        this.areaOpciones.hide();
+                
     }
 
     /**
@@ -125,6 +128,11 @@ public class Panel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaErrores = new javax.swing.JTable();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
         setLayout(new javax.swing.OverlayLayout(this));
 
         Panel.setLayout(new java.awt.BorderLayout(10, 0));
@@ -133,6 +141,11 @@ public class Panel extends javax.swing.JPanel {
         panelContenido.setLayout(new javax.swing.OverlayLayout(panelContenido));
 
         scroll.setBackground(new java.awt.Color(153, 255, 255));
+        scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                scrollComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout scrollLayout = new javax.swing.GroupLayout(scroll);
         scroll.setLayout(scrollLayout);
@@ -340,6 +353,16 @@ public class Panel extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_botonOpcionesActionPerformed
 
+    private void scrollComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_scrollComponentResized
+        
+    }//GEN-LAST:event_scrollComponentResized
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        generarInterfaz();        // TODO add your handling code here:
+        posX = posY = 0;
+        System.out.println(scroll.getHeight() + "\t" + scroll.getWidth());
+    }//GEN-LAST:event_formComponentResized
+
     
     
 public void analizar() throws IOException
@@ -347,8 +370,10 @@ public void analizar() throws IOException
         this.scroll.removeAll();
         tablaSimbolos_.clear();
         erroresLexicos.clear();
+        elementos.clear();
         erroresSintacticos.clear();
-
+        Interfaz.raizChtml = new nodoChtml();
+        this.elementos = new ArrayList();
         if(true)
         {
 
@@ -363,12 +388,16 @@ public void analizar() throws IOException
             dibujador aux = new dibujador();
             raizChtml = Interfaz.raizChtml;
             aux.generarGrafica(raizChtml); // Dibujamos el arbol
+            generarObjetos(raizChtml);            
+            generarInterfaz(); // Generamos la interfaz 
+            
+            
+            
             //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
             //aux.imprimirtodo(raizChtml, contadorChtml);
 
             
             limpiarSalidas();
-            dibujarInterfaz(raizChtml);
             imprimirReporteLexico();
             imprimirResultado();
             imprimirLexicos();
@@ -435,7 +464,7 @@ public void compilar(){
 
 
 
-   public void dibujarInterfaz(nodoChtml raiz)
+   public void generarObjetos(nodoChtml raiz)
     {
         
         String retorno="";
@@ -447,14 +476,14 @@ public void compilar(){
                 case "DOCUMENTO":
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        dibujarInterfaz(aux);
+                        generarObjetos(aux);
                     }
                     break;
                     
                 case "ENCABEZADO":                                
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        dibujarInterfaz(aux);
+                        generarObjetos(aux);
                     }
                     break;
                 case "LISTAARCHIVOS":
@@ -476,7 +505,7 @@ public void compilar(){
                     nodoChtml auxiliar = raiz.getHijos().get(0);
                     if(auxiliar.getValue().equals("CONTENIDO"))
                     {
-                        dibujarInterfaz(raiz.getHijos().get(0));
+                        generarObjetos(raiz.getHijos().get(0));
                         
                     }
                     else
@@ -518,7 +547,7 @@ public void compilar(){
                             this.scroll.setBackground(buscarColor(raiz.getHijos().get(0)));
                             colorFondo = buscarColor(raiz.getHijos().get(0));
                         }
-                        dibujarInterfaz(raiz.getHijos().get(1));
+                        generarObjetos(raiz.getHijos().get(1));
                     }
                     break;
                     
@@ -526,7 +555,7 @@ public void compilar(){
                 case "CONTENIDO"   :
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        dibujarInterfaz(aux);
+                        generarObjetos(aux);
                     }
                     break;
                     
@@ -594,10 +623,9 @@ public void compilar(){
                     /*
                     
                     */                    
+                    Elemento elemento = new Elemento(enlace.getId(),"enlace",enlace);
+                    elementos.add(elemento);                 
                     
-                    enlace.setBounds(posX, posY, enlace.getAncho(), enlace.getAlto());  
-                    comprobarPosiciones(enlace.getAncho(), enlace.getAlto());
-                    this.scroll.add(enlace);
                     break;
                     
                     
@@ -662,10 +690,8 @@ public void compilar(){
                             }
                         }
                     }                    
-                                        
-                    texto.setBounds(posX, posY, texto.getAlto(),texto.getAncho());   
-                    comprobarPosiciones(texto.getAncho(), texto.getAlto());
-                    this.scroll.add(texto);
+                    elemento = new Elemento(texto.getId(),"texto",texto);    
+                    elementos.add(elemento);
                     break;                    
                     
                     
@@ -673,6 +699,54 @@ public void compilar(){
         }        
     
     }
+   
+public void generarInterfaz()
+{
+    scroll.removeAll();
+    System.out.println("--------Numero de elementos : "+elementos.size());
+    posX =0 ;
+    posY= 0;
+    for(Elemento aux: elementos)
+    {
+        switch(aux.getTipo())
+        {
+            case "boton":
+                Boton boton =(Boton)aux.getValor();
+                boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());  
+                scroll.add(boton);
+                comprobarPosiciones(boton.ancho, boton.alto);                
+                break;
+            case "enlace":
+                boton =(Boton)aux.getValor();
+                boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());
+                scroll.add(boton);
+                comprobarPosiciones(boton.ancho, boton.alto);                
+                break;   
+            case "texto":
+                Texto texto =(Texto)aux.getValor();
+                String[] auxiliar = texto.getCadena().split("\r");
+                int alto= auxiliar.length;
+                int ancho = 0;
+                for(String cad : auxiliar)
+                {
+                    if(cad.length()>ancho){ancho=cad.length();}
+                }
+                texto.setText(texto.getText());   
+                texto.setAlto(alto*20);
+                texto.setAncho(ancho*5);
+                //texto.enable(false);
+                //System.out.println("------------Altura: "+ alto);
+                //System.out.println("------------Anchura: "+ ancho);
+                texto.setBounds(posX, posY, texto.getAncho(),texto.getAlto());
+                scroll.add(texto);
+                comprobarPosiciones(texto.ancho, texto.alto);                
+                break;                 
+        }
+    }
+    this.repaint();
+    
+}   
+   
    
 public void comprobarPosiciones(int ancho, int alto)
 {
@@ -986,13 +1060,7 @@ private static boolean esNumero(String cadena){
    }
 
    
-    public void generarInterfaz()
-    {
-        
-        
-        
-        
-    }
+
     
     public String PathActual(){
         String path="";

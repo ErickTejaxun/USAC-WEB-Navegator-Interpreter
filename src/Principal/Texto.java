@@ -6,7 +6,7 @@
 package Principal;
 
 import javax.accessibility.AccessibleContext;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 
@@ -14,7 +14,7 @@ import javax.swing.plaf.ComponentUI;
  *
  * @author erick
  */
-public class Texto extends JTextArea
+public class Texto extends JTextPane 
 {
     String ruta;
     String grupo;
@@ -100,13 +100,6 @@ public class Texto extends JTextArea
         return ancho;
     }
 
-    public static String getFOCUS_ACCELERATOR_KEY() {
-        return FOCUS_ACCELERATOR_KEY;
-    }
-
-    public static String getDEFAULT_KEYMAP() {
-        return DEFAULT_KEYMAP;
-    }
 
     public ComponentUI getUi() {
         return ui;
