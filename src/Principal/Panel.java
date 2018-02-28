@@ -10,6 +10,7 @@ import Source.CHTML.Scanner;
 import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,11 +44,42 @@ public class Panel extends javax.swing.JPanel {
     public static nodoChtml raizChtml = new nodoChtml();
     public static int contadorChtml=0;
     public int contadorPaginas=0;
+    public String consolaSalida = "";
+    
+    DefaultTableModel filasErrores = new DefaultTableModel(); 
+    DefaultTableModel filasSalidas = new DefaultTableModel();
+    int flagOpciones = 0;
+    int posX = 0;
+    int posY = 0;
+    
+    //JScrollPane scroll = new JScrollPane();
+    
+    
+    
+    public ArrayList<String> archivos = new ArrayList();
     /**
      * Creates new form Panel
      */
     public Panel() {
         initComponents();
+        filasErrores = new DefaultTableModel(); 
+        filasSalidas = new DefaultTableModel();
+        filasErrores.addColumn("Archivo");
+        filasErrores.addColumn("Línea");
+        filasErrores.addColumn("Columna");
+        filasErrores.addColumn("Tipo");
+        filasErrores.addColumn("Descripción");
+        tablaErrores.setModel(filasErrores);
+        
+        filasSalidas.addColumn("Archivo");
+        filasSalidas.addColumn("Línea");
+        filasSalidas.addColumn("Columna");
+        filasSalidas.addColumn("SalidaX"); 
+        tablaSalida.setModel(filasSalidas);
+        //this.panelContenido.add(scroll);
+        
+        
+        
     }
 
     /**
@@ -59,7 +93,8 @@ public class Panel extends javax.swing.JPanel {
 
         Panel = new javax.swing.JPanel();
         panelContenido = new javax.swing.JPanel();
-        scroll = new java.awt.ScrollPane();
+        scrollPanel = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
         botonAtras = new javax.swing.JButton();
@@ -69,14 +104,48 @@ public class Panel extends javax.swing.JPanel {
         botonOpciones = new javax.swing.JButton();
         botonHistorial = new javax.swing.JButton();
         etiquetaNombre = new javax.swing.JLabel();
+        areaOpciones = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        archivoCHTML = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        ccss1 = new javax.swing.JTabbedPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ccssArea1 = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        cjs1 = new javax.swing.JTabbedPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        cjsArea1 = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaSalida = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaErrores = new javax.swing.JTable();
 
         setLayout(new javax.swing.OverlayLayout(this));
 
         Panel.setLayout(new java.awt.BorderLayout(10, 0));
 
         panelContenido.setBackground(new java.awt.Color(51, 204, 255));
-        panelContenido.setLayout(new java.awt.BorderLayout());
-        panelContenido.add(scroll, java.awt.BorderLayout.CENTER);
+        panelContenido.setLayout(new javax.swing.OverlayLayout(panelContenido));
+
+        scroll.setBackground(new java.awt.Color(153, 255, 255));
+
+        javax.swing.GroupLayout scrollLayout = new javax.swing.GroupLayout(scroll);
+        scroll.setLayout(scrollLayout);
+        scrollLayout.setHorizontalGroup(
+            scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1028, Short.MAX_VALUE)
+        );
+        scrollLayout.setVerticalGroup(
+            scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 211, Short.MAX_VALUE)
+        );
+
+        scrollPanel.setViewportView(scroll);
+
+        panelContenido.add(scrollPanel);
 
         Panel.add(panelContenido, java.awt.BorderLayout.CENTER);
 
@@ -159,6 +228,80 @@ public class Panel extends javax.swing.JPanel {
 
         Panel.add(panelMenu, java.awt.BorderLayout.PAGE_START);
 
+        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
+
+        archivoCHTML.setColumns(20);
+        archivoCHTML.setRows(5);
+        jScrollPane3.setViewportView(archivoCHTML);
+
+        jPanel1.add(jScrollPane3);
+
+        areaOpciones.addTab("CHTML", jPanel1);
+
+        jPanel2.setLayout(new javax.swing.OverlayLayout(jPanel2));
+
+        ccssArea1.setColumns(20);
+        ccssArea1.setRows(5);
+        jScrollPane4.setViewportView(ccssArea1);
+
+        ccss1.addTab("tab1", jScrollPane4);
+
+        jPanel2.add(ccss1);
+
+        areaOpciones.addTab("CCSS", jPanel2);
+
+        jPanel3.setLayout(new javax.swing.OverlayLayout(jPanel3));
+
+        cjsArea1.setColumns(20);
+        cjsArea1.setRows(5);
+        jScrollPane5.setViewportView(cjsArea1);
+
+        cjs1.addTab("tab1", jScrollPane5);
+
+        jPanel3.add(cjs1);
+
+        areaOpciones.addTab("CJS", jPanel3);
+
+        jPanel4.setLayout(new javax.swing.OverlayLayout(jPanel4));
+
+        tablaSalida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Archivo", "Línea", "Columna", "Salida"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaSalida);
+        if (tablaSalida.getColumnModel().getColumnCount() > 0) {
+            tablaSalida.getColumnModel().getColumn(0).setHeaderValue("Archivo");
+            tablaSalida.getColumnModel().getColumn(1).setHeaderValue("Línea");
+            tablaSalida.getColumnModel().getColumn(2).setHeaderValue("Columna");
+            tablaSalida.getColumnModel().getColumn(3).setHeaderValue("Salida");
+        }
+
+        jPanel4.add(jScrollPane1);
+
+        areaOpciones.addTab("Consolo Salida", jPanel4);
+
+        jPanel5.setLayout(new javax.swing.OverlayLayout(jPanel5));
+
+        tablaErrores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Archivo", "Línea", "Columna", "Tipo", "Descripción"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaErrores);
+
+        jPanel5.add(jScrollPane2);
+
+        areaOpciones.addTab("Consola Errores", jPanel5);
+
+        Panel.add(areaOpciones, java.awt.BorderLayout.PAGE_END);
+
         add(Panel);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,13 +319,24 @@ public class Panel extends javax.swing.JPanel {
         generarInterfaz();
     }//GEN-LAST:event_botonIrActionPerformed
 
-    private void botonOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonOpcionesActionPerformed
-
     private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonHistorialActionPerformed
+
+    private void botonOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionesActionPerformed
+        if(flagOpciones==0)
+        {
+            this.areaOpciones.hide();
+            flagOpciones = 1;
+            //this.repaint();
+        }
+        if(flagOpciones==1)
+        {
+            this.areaOpciones.show(true);
+            flagOpciones = 0;
+            //this.repaint();
+        }        
+    }//GEN-LAST:event_botonOpcionesActionPerformed
 
     
     
@@ -205,9 +359,12 @@ public void analizar() throws IOException
             
             dibujador aux = new dibujador();
             raizChtml = Interfaz.raizChtml;
-            aux.generarGrafica(raizChtml);
+            aux.generarGrafica(raizChtml); // Dibujamos el arbol
             //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
             //aux.imprimirtodo(raizChtml, contadorChtml);
+
+            
+            limpiarSalidas();
             dibujarInterfaz(raizChtml);
             imprimirReporteLexico();
             imprimirResultado();
@@ -217,13 +374,33 @@ public void analizar() throws IOException
         }
     
     
-}    
+} 
+
+public void limpiarSalidas()
+{
+        filasErrores = new DefaultTableModel(); 
+        filasSalidas = new DefaultTableModel();
+        filasErrores.addColumn("Archivo");
+        filasErrores.addColumn("Línea");
+        filasErrores.addColumn("Columna");
+        filasErrores.addColumn("Tipo");
+        filasErrores.addColumn("Descripción");
+        tablaErrores.setModel(filasErrores);
+        
+        filasSalidas.addColumn("Archivo");
+        filasSalidas.addColumn("Línea");
+        filasSalidas.addColumn("Columna");
+        filasSalidas.addColumn("SalidaX"); 
+        tablaSalida.setModel(filasSalidas);
+}
+
 public void compilar(){
 
         
         String path=textRuta.getText();  
          try {            
             s=new Scanner(new java.io.FileReader(path)); 
+            
               
             p = new sintactico(s);
             p.parse();
@@ -257,6 +434,7 @@ public void compilar(){
 
    public void dibujarInterfaz(nodoChtml raiz)
     {
+        
         String retorno="";
         if(raiz!=null)
         {
@@ -279,17 +457,7 @@ public void compilar(){
                 case "LISTAARCHIVOS":
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        String[] partes = aux.getValue().split(".cjs");                       
-                        if(partes.length>1)
-                        {
-                            aux.setValue(aux.getValue().replace("\"\"","\""));                             
-                            retorno = retorno +"\tthis.listaCcss.add(\""+aux.getValue()+"\");\n";
-                            /*Primero analizamoes estos textos*/
-                        }
-                        else
-                        {
-                            retorno = retorno+ "\tthis.listaCjs.add(\""+aux.getValue()+"\");\n";
-                        }
+                        archivos.add(aux.getValue()); // Agregamos los archivos a analizar.
                     }
                     break;
                 case "TITULO": 
@@ -300,10 +468,214 @@ public void compilar(){
                     }                                    
                     etiquetaNombre.setText(titulo);
                     break;
+                    
+                case  "CUERPO":
+                    nodoChtml auxiliar = raiz.getHijos().get(0);
+                    if(auxiliar.getValue().equals("CONTENIDO"))
+                    {
+                        dibujarInterfaz(raiz.getHijos().get(0));
+                    }
+                    else
+                    {
+                        if(auxiliar.getValue().substring(1,2).equals("#"))
+                        {
+                            if(auxiliar.getValue().length()==9)
+                            {
+                                //Color colorFodo = new Color(int r, int g, int b, int a);
+                                //this.scroll.setBackground(colorFondo);
+                                int r,g,b,a;
+                                String hr,hg,hb,ha;
+                                String entrada= auxiliar.getValue();
+                                hr = entrada.substring(2,4);
+                                hg = entrada.substring(4,6);
+                                hb = entrada.substring(6,8);
+
+                                r = hexToDec(hr);
+                                g = hexToDec(hg);
+                                b = hexToDec(hb);
+                                a=0;
+                                if(r==300 || g ==300 || b==300)
+                                {
+                                    filasErrores.addRow(new String[]{"CHTML",String.valueOf(auxiliar.getLinea()),String.valueOf(auxiliar.getColumna()),"Semantico", auxiliar.getValue() + " Valor rgb no valido."});
+                                    break;
+                                }
+
+                                this.scroll.setBackground(new Color(r,g,b));
+                            }
+                            else
+                            {
+                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(auxiliar.getLinea()),String.valueOf(auxiliar.getColumna()),"Semantico","Valor rgb no valido."});
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            this.scroll.setBackground(buscarColor(raiz.getHijos().get(0)));
+                        }
+                        dibujarInterfaz(raiz.getHijos().get(1));
+                    }
+                    break;
+                    
+                    
+                case "CONTENIDO"   :
+                    for(nodoChtml aux: raiz.getHijos())
+                    {
+                        dibujarInterfaz(aux);
+                    }
+                    break;
+                    
+                case "ENLACE":
+                    System.out.println("---------------------------ENLACE---------------------");
+                    //Vemos todos los elementos :v
+                    Boton enlace = new Boton();
+                    for(nodoChtml aux: raiz.getHijos())
+                    {                        
+                        if(aux.getValue().equals("ELEMENTO"))
+                        {
+                            switch(aux.getHijos().get(0).getValue().toLowerCase())
+                            {
+                                case "ruta":
+                                    enlace.setRuta(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "id":
+                                    enlace.setId(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "grupo":
+                                    enlace.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "cadena":
+                                    enlace.setCadena(aux.getHijos().get(1).getValue());                                    
+                                    enlace.setText(enlace.getCadena());
+                                    break; 
+                                case "ancho":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        enlace.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                       
+                                    break;
+                                case "alto":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        enlace.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                                                                                                                   
+                                    break; 
+                                case "alineado":                                                                        
+                                    switch(aux.getHijos().get(1).getValue())
+                                    {
+                                        case "\"izquierda\"":
+                                            enlace.setAlineado("izquierda");
+                                            enlace.setAlignmentX(LEFT_ALIGNMENT);
+                                            break;
+                                        case "\"derecha\"":
+                                            enlace.setAlineado("derecha");
+                                            enlace.setAlignmentX(RIGHT_ALIGNMENT);
+                                            break;  
+                                        case "\"centrado\"":
+                                            enlace.setAlineado("centrado");
+                                            enlace.setAlignmentX(CENTER_ALIGNMENT);
+                                            break;   
+                                        default :
+                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                "Sintactico","Valor de alineacion incorrecto"});
+                                            break;                                          
+                                    }
+                                    System.out.println("------------ALINEACION: \t"+enlace.getAlineado());
+                                    break;                                     
+                            }
+                        }
+                    }
+                    enlace.setBounds(posX, posY, 100,100);                    
+                    this.scroll.add(enlace);
+                    break;
             }
         }        
     
     }
+   
+public void comprobarPosiciones()
+{
+    double porcentajeX = scrollPanel.getHeight()/posX;
+
+}   
+   
+   
+private static boolean esNumero(String cadena){
+	try {
+		Integer.parseInt(cadena);
+		return true;
+	} catch (NumberFormatException nfe){
+		return false;
+	}
+}   
+   
+   
+   public Color buscarColor(nodoChtml raiz)
+   {
+       Color retorno = Color.white ;
+       System.out.println("Buscando color: \t "+raiz.getValue());
+        switch(raiz.getValue())
+        {
+            case "\"blue\"":
+                retorno = Color.blue;
+                break;
+            case "\"black\"":
+                retorno = Color.BLACK;
+                break;
+            case "\"gray\"":
+                retorno = Color.GRAY;
+                break;
+            case "\"cyan\"":
+                retorno = Color.CYAN;
+                break;
+            case "\"dark_gray\"":
+                retorno = Color.DARK_GRAY;
+                break;   
+            case "\"green\"":
+                retorno = Color.GREEN;
+                break;
+            case "\"light_gray\"":
+                retorno = Color.LIGHT_GRAY;
+                break;
+            case "\"magenta\"":
+                retorno = Color.MAGENTA;
+                break;
+            case "\"orange\"":
+                retorno = Color.ORANGE;
+                break;
+            case "\"pink\"":
+                retorno = Color.PINK;
+                break;
+            case "\"red\"":
+                retorno = Color.RED;
+                break;
+            case "\"white\"":
+                retorno = Color.WHITE;
+                break;
+            case "\"yellow\"":
+                retorno = Color.YELLOW;
+                break;  
+            default:
+                filasErrores.addRow(new String[]{"CHTML",String.valueOf(raiz.getLinea()),String.valueOf(raiz.getColumna()),"Semantico","Nombre de color no válido."});
+                break;
+        }   
+        return retorno;
+   }
+   
+   
+   private static int hexToDec(String hex) {  
+       Integer outputDecimal = 0;
+        try
+        { 
+            outputDecimal = Integer.parseInt(hex, 16);
+            System.out.print(outputDecimal+"\t D:\t" + hex);
+            return outputDecimal;
+        }
+
+        catch(NumberFormatException ne)
+        {
+            return 300;
+        }            
+}
     
     
     
@@ -581,15 +953,34 @@ public void compilar(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel Panel;
+    private javax.swing.JTextArea archivoCHTML;
+    private javax.swing.JTabbedPane areaOpciones;
     private javax.swing.JButton botonAdelante;
     private javax.swing.JButton botonAtras;
     private javax.swing.JButton botonHistorial;
     private javax.swing.JButton botonIr;
     private javax.swing.JButton botonOpciones;
+    private javax.swing.JTabbedPane ccss1;
+    private javax.swing.JTextArea ccssArea1;
+    private javax.swing.JTabbedPane cjs1;
+    private javax.swing.JTextArea cjsArea1;
     private javax.swing.JLabel etiquetaNombre;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelMenu;
-    private java.awt.ScrollPane scroll;
+    private javax.swing.JPanel scroll;
+    private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JTable tablaErrores;
+    private javax.swing.JTable tablaSalida;
     private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables
 }

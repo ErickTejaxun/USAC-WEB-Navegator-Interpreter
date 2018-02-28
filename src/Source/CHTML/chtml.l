@@ -30,6 +30,7 @@ eofval: especifica un valor de retorno al final del archivo
 
     public static int flagInicio = 0;
     public String cadena = "";
+    public String estado="";
 %}
 
 %class Scanner /*Nombre de la clase a generar.%cupsym simbolos*/
@@ -53,7 +54,7 @@ simbolos2= "("|")"|"*"|"-"|"+"|"."|"!"
 letra = ([a-zA-Z]|"ñ"|"á"|"é"|"í"|"ó"|"ú")
 linea = ([^\r\n\"\\])
 id = ({letra}({letra}|{digito}|"_"|"-")*)
-rgb  = ("#"{id}| "#"{digito}{id})
+rgb  = ("#"{id}| "#"{digito} | "#"{digito}{id})
 direccionWindows= ("\"" ({letra}":"("\\"({id})+)+"."{id}) "\"")
 direccionLinux=(("/"{linea}+))+
 
@@ -89,6 +90,7 @@ metodo = {id}"()"
     /*----------  < ----------------*/
     "<//-"	
     {   
+        estado="YYINITIAL";
         yybegin(COMENTARIO);
     }
 
@@ -477,6 +479,12 @@ metodo = {id}"()"
 <CAJA1>
 {
 
+    "<//-"	
+    {   
+        estado="CAJA1";
+        yybegin(COMENTARIO);
+    }
+
     "valor"
     {
         Interfaz.addChtml("valor",yyline,yychar,yytext() + "valor de opcion",yytext());                    
@@ -593,7 +601,11 @@ metodo = {id}"()"
 <TA1>
 {
 
-
+    "<//-"	
+    {   
+        estado="TA1";
+        yybegin(COMENTARIO);
+    }
     "id"
     {
         //Generamos la entrada en la tabla de simbolos
@@ -811,6 +823,11 @@ metodo = {id}"()"
 <T1>
 {
 
+    "<//-"	
+    {   
+        estado="T1";
+        yybegin(COMENTARIO);
+    }
 
     "id"
     {
@@ -988,6 +1005,11 @@ metodo = {id}"()"
 
 <T2>
 {
+    "<//-"	
+    {   
+        estado="T2";
+        yybegin(COMENTARIO);
+    }
 
     {espacio}
     {
@@ -1066,6 +1088,11 @@ metodo = {id}"()"
 
 <T3>
 {
+    "<//-"	
+    {   
+        estado="T3";
+        yybegin(COMENTARIO);
+    }
 
 
     "id"
@@ -1245,6 +1272,13 @@ metodo = {id}"()"
 
 <T4>
 {
+
+
+    "<//-"	
+    {   
+        estado="T4";
+        yybegin(COMENTARIO);
+    }    
     {espacio}
     {
 
@@ -1338,7 +1372,11 @@ metodo = {id}"()"
 
 <T5>
 {
-
+    "<//-"	
+    {   
+        estado="T5";
+        yybegin(COMENTARIO);
+    }  
 
     "id"
     {
@@ -1551,7 +1589,11 @@ metodo = {id}"()"
 
 <T7>
 {
-
+    "<//-"	
+    {   
+        estado="T7";
+        yybegin(COMENTARIO);
+    }  
 
     "<"	
     {    
@@ -1649,6 +1691,13 @@ metodo = {id}"()"
 /*ffffffffffffffffffffffffffffffffffffffff*/
 <TB>
 {
+
+
+    "<//-"	
+    {   
+        estado="TB";
+        yybegin(COMENTARIO);
+    }      
     "click"
     {
         //Generamos la entrada en la tabla de simbolos
@@ -1933,6 +1982,14 @@ metodo = {id}"()"
 
 <TB3>
 {
+
+
+    "<//-"	
+    {   
+        estado="TB3";
+        yybegin(COMENTARIO);
+    }
+
     "<"	
     {    
          
@@ -1994,7 +2051,11 @@ metodo = {id}"()"
 <TI>
 {
 
-
+    "<//-"	
+    {   
+        estado="TI";
+        yybegin(COMENTARIO);
+    }
 
     "id"
     {
@@ -2253,6 +2314,13 @@ metodo = {id}"()"
 
 <TI2>
 {
+
+    "<//-"	
+    {   
+        estado="TI2";
+        yybegin(COMENTARIO);
+    }
+
     {espacio}
     {
 
@@ -2332,6 +2400,15 @@ metodo = {id}"()"
 
 <ENLACE1>
 {
+
+
+    "<//-"	
+    {   
+        estado="ENLACE1";
+        yybegin(COMENTARIO);
+    }    
+
+
     {espacio}
     {
 
@@ -2548,6 +2625,9 @@ metodo = {id}"()"
 
 <ENLACE2>
 {
+
+
+
     {espacio}
     {cadena  = cadena + yytext();}	
 
@@ -2589,6 +2669,14 @@ metodo = {id}"()"
 
 <BOTON1>
 {
+
+    "<//-"	
+    {   
+        estado="BOTON1";
+        yybegin(COMENTARIO);
+    
+    }
+
     "click"
     {
         //Generamos la entrada en la tabla de simbolos
@@ -2875,7 +2963,12 @@ metodo = {id}"()"
 <IMAGEN1>
 {
 
-
+    "<//-"	
+    {   
+        estado="IMAGEN1";
+        yybegin(COMENTARIO);
+    
+    }
 
     "id"
     {
@@ -3133,6 +3226,14 @@ metodo = {id}"()"
 
 <IMAGEN2>
 {
+
+
+    "<//-"	
+    {   
+        estado="IMAGEN2";
+        yybegin(COMENTARIO);    
+    }   
+
     {espacio}
     {
 
@@ -3192,6 +3293,14 @@ metodo = {id}"()"
 
 <TEXTO1>
 {
+
+
+    "<//-"	
+    {   
+        estado="TEXTO1";
+        yybegin(COMENTARIO);    
+    }   
+
     "id"
     {
         //Generamos la entrada en la tabla de simbolos
@@ -3408,7 +3517,11 @@ metodo = {id}"()"
 
 <TITULO1>
 {
-
+    "<//-"	
+    {   
+        estado="TITULO1";
+        yybegin(COMENTARIO);    
+    }   
     {espacio}
     {}
 
@@ -3466,6 +3579,12 @@ metodo = {id}"()"
 <TITULO3>
 {
 
+    "<//-"	
+    {   
+        estado="TITULO3";
+        yybegin(COMENTARIO);    
+    }     
+
     {espacio}
     {}
 
@@ -3493,6 +3612,14 @@ metodo = {id}"()"
 
 <CUERPO>
 {
+
+    "<//-"	
+    {   
+        estado="CUERPO";
+        yybegin(COMENTARIO);    
+    }   
+
+
     {espacio}
     {}	
 
@@ -3614,6 +3741,12 @@ metodo = {id}"()"
 
 <ELEMENTOS>
 {
+
+    "<//-"	
+    {   
+        estado="ELEMENTOS";
+        yybegin(COMENTARIO);    
+    }   
 
 
     "id"
@@ -3806,7 +3939,11 @@ metodo = {id}"()"
 <ENCABEZADO1>
 {
 
-
+    "<//-"	
+    {   
+        estado="ENCABEZADO1";
+        yybegin(COMENTARIO);    
+    }   
 
     /*----------  > ----------------*/
     ">"	
@@ -3834,6 +3971,13 @@ metodo = {id}"()"
 
 <ENCABEZADO2>
 {
+
+    "<//-"	
+    {   
+        estado="ENCABEZADO2";
+        yybegin(COMENTARIO);    
+    }   
+
     {espacio}
     { cadena = "";}
 
@@ -4091,7 +4235,109 @@ metodo = {id}"()"
 <COMENTARIO>[^"*/"] {System.out.print(yytext());}
 <COMENTARIO> "-//>"	 
             {
-						yybegin(YYINITIAL);	
+                switch(estado)
+                {
+                    case "COMENTARIO":
+                        yybegin(COMENTARIO);	
+                        break;
+                    case "ENCABEZADO1":
+                        yybegin(ENCABEZADO1);	
+                        break;                    
+                    case "ENCABEZADO2":
+                        yybegin(ENCABEZADO2);	
+                        break;                    
+                    case "CUERPO":
+                        yybegin(CUERPO);	
+                        break;                    
+                    case "TITULO1":
+                        yybegin(TITULO1);	
+                        break;                    
+                    case "TITULO2":
+                        yybegin(TITULO2);	
+                        break;                    
+                    case "TITULO3":
+                        yybegin(TITULO3);	
+                        break;                    
+                    case "ELEMENTOS":
+                        yybegin(ELEMENTOS);	
+                        break;
+                    case "TEXTO1":
+                        yybegin(TEXTO1);	
+                        break;
+                    case "TEXTO2":
+                        yybegin(TEXTO2);	
+                        break;
+                    case "IMAGEN1":
+                        yybegin(IMAGEN1);	
+                        break;
+                    case "IMAGEN2":
+                        yybegin(IMAGEN2);	
+                        break;
+                    case "BOTON1":
+                        yybegin(BOTON1);	
+                        break;
+                    case "BOTON2":
+                        yybegin(BOTON2);	
+                        break;
+                    case "ENLACE1":
+                        yybegin(ENLACE1);	
+                        break;
+                    case "ENLACE2":
+                        yybegin(ENLACE2);	
+                        break;
+                    case "T1":
+                        yybegin(T1);	
+                        break;
+                    case  "T2":
+                        yybegin(T2);	
+                        break;
+                    case "T3":
+                        yybegin(T3);	
+                        break;
+                    case "T4":
+                        yybegin(T4);	
+                        break;
+                    case "T5":
+                        yybegin(T5);	
+                        break;
+                    case "T6":
+                        yybegin(T6);	
+                        break;
+                    case "T7":
+                        yybegin(T7);	
+                        break;
+                    case "TB":
+                        yybegin(TB);	
+                        break;
+                    case "TB2":
+                        yybegin(TB2);	
+                        break;
+                    case "TI":
+                        yybegin(TI);	
+                        break;
+                        
+                    case "TI2":
+                        yybegin(TI2);	
+                        break;
+                    case "TB3":
+                        yybegin(TB3);	
+                        break;
+                    case "TA1":
+                        yybegin(TA1);	
+                        break;
+                    case "TA2":
+                        yybegin(TA2);	
+                        break;
+                    case "CAJA1":
+                        yybegin(CAJA1);	
+                        break;
+                    case "CAJA2":
+                        yybegin(CAJA2);	
+                        break;
+                    case "YYINITIAL":
+                        yybegin(YYINITIAL);	
+                        break;                        
+                }						
             }
 .			{
 			System.out.println("Caracter ilegal: " + yytext()+" Linea : "+yyline +" Columna: "+yychar); 
