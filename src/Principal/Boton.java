@@ -23,13 +23,13 @@ import javax.swing.plaf.ComponentUI;
  */
 public class Boton extends JButton
 {
-    String ruta;
-    String grupo;
-    String id;
-    String cadena;
-    String alineado;
-    int alto;
-    int ancho;
+    private String ruta;
+    private String grupo;
+    private String id;
+    private String cadena;
+    private String alineado;
+    private int alto;
+    private int ancho;
     
     public Boton()
     {

@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -692,7 +693,82 @@ public void compilar(){
                     }                    
                     elemento = new Elemento(texto.getId(),"texto",texto);    
                     elementos.add(elemento);
-                    break;                    
+                    break;  
+                    
+                case "IMAGEN":
+                    System.out.println("---------------------------TEXTO---------------------");
+                    //Vemos todos los elementos :v
+                    Imagen imagen = new Imagen();
+                    imagen.setBackground(colorFondo);
+                    for(nodoChtml aux: raiz.getHijos())
+                    {                        
+                        if(aux.getValue().equals("ELEMENTO"))
+                        {
+                            switch(aux.getHijos().get(0).getValue().toLowerCase())
+                            {                                                                 
+                                case "id":
+                                    imagen.setName(aux.getHijos().get(1).getValue());
+                                    break;
+                                case "grupo":
+                                    imagen.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "cadena":
+                                    imagen.setCadena(aux.getHijos().get(1).getValue());                                    
+                                    imagen.setText(imagen.getCadena());
+                                    //texto.setAlto(texto.cadena.length());
+                                    break; 
+                                case "ancho":                                                                        
+                                    String numero = aux.getHijos().get(1).getValue();
+                                    numero = numero.substring(1,numero.length()-1);
+                                    if (esNumero(numero))
+                                    {
+                                        imagen.setAncho(Integer.valueOf(numero)*2);
+                                    } 
+                                    System.out.println("--Ancho imagen:\t"+imagen.getAncho() +"\t"+numero);
+                                    break;
+                                case "alto":            
+                                    numero = aux.getHijos().get(1).getValue();
+                                    numero = numero.substring(1,numero.length()-1);
+                                    if (esNumero(numero))
+                                    {
+                                        imagen.setAlto(Integer.valueOf(numero)*2);
+                                    }     
+                                    System.out.println("--Ancho alto:\t"+imagen.getAlto() +"\t"+numero);
+                                    break; 
+                                case "alineado":                                                                        
+                                    switch(aux.getHijos().get(1).getValue())
+                                    {
+                                        case "\"izquierda\"":
+                                            imagen.setAlineado("izquierda");
+                                            imagen.setAlignmentX(LEFT_ALIGNMENT);
+                                            break;
+                                        case "\"derecha\"":
+                                            imagen.setAlineado("derecha");
+                                            imagen.setAlignmentX(RIGHT_ALIGNMENT);
+                                            break;  
+                                        case "\"centrado\"":
+                                            imagen.setAlineado("centrado");
+                                            imagen.setAlignmentX(CENTER_ALIGNMENT);
+                                            break;   
+                                        default :
+                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                "Sintactico","Valor de alineacion incorrecto"});
+                                            break;                                          
+                                    }
+                                    System.out.println("------------ALINEACION: \t"+imagen.getAlineado());
+                                    break;  
+                                case "click":                                                                       
+                                    imagen.setMetodo(aux.getHijos().get(1).getValue());
+                                    break; 
+                                case "ruta":                                                                       
+                                    imagen.setRuta(aux.getHijos().get(1).getValue());
+                                    break;                                    
+                            }
+                        }
+                    }                    
+                    elemento = new Elemento(imagen.getId(),"imagen",imagen);    
+                    elementos.add(elemento);
+                    break;                     
                     
                     
             }
@@ -714,14 +790,28 @@ public void generarInterfaz()
                 Boton boton =(Boton)aux.getValor();
                 boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());  
                 scroll.add(boton);
-                comprobarPosiciones(boton.ancho, boton.alto);                
+                comprobarPosiciones(boton.getAncho(), boton.getAlto());                
                 break;
             case "enlace":
                 boton =(Boton)aux.getValor();
                 boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());
                 scroll.add(boton);
-                comprobarPosiciones(boton.ancho, boton.alto);                
-                break;   
+                comprobarPosiciones(boton.getAncho(), boton.getAlto());                
+                break;  
+            case "imagen":
+                Imagen imagen =(Imagen)aux.getValor();
+                imagen.setBounds(posX, posY, imagen.getAncho(),imagen.getAlto());
+                ImageIcon icono = new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1)); 
+                
+                if(!imagen.getRuta().substring(0,1).equals("\""))
+                {
+                    icono = new ImageIcon(imagen.getRuta());
+                }  
+                ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
+                imagen.setIcon(iconoEscala);               
+                scroll.add(imagen);                
+                comprobarPosiciones(imagen.getAncho(), imagen.getAlto());                
+                break;                  
             case "texto":
                 Texto texto =(Texto)aux.getValor();
                 String[] auxiliar = texto.getCadena().split("\r");
@@ -733,7 +823,7 @@ public void generarInterfaz()
                 }
                 texto.setText(texto.getText());   
                 texto.setAlto(alto*20);
-                texto.setAncho(ancho*5);
+                texto.setAncho(ancho*6);
                 //texto.enable(false);
                 //System.out.println("------------Altura: "+ alto);
                 //System.out.println("------------Anchura: "+ ancho);
