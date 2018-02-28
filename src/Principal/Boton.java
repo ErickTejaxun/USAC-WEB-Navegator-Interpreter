@@ -33,7 +33,7 @@ public class Boton extends JButton
     
     public Boton()
     {
-        this.alto=100;
+        this.alto=30;
         this.ancho=100;
         this.addActionListener(new java.awt.event.ActionListener()
         {

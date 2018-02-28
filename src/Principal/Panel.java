@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,6 +52,7 @@ public class Panel extends javax.swing.JPanel {
     int flagOpciones = 0;
     int posX = 0;
     int posY = 0;
+    Color colorFondo = Color.WHITE ;
     
     //JScrollPane scroll = new JScrollPane();
     
@@ -342,6 +344,7 @@ public class Panel extends javax.swing.JPanel {
     
 public void analizar() throws IOException
 {
+        this.scroll.removeAll();
         tablaSimbolos_.clear();
         erroresLexicos.clear();
         erroresSintacticos.clear();
@@ -474,6 +477,7 @@ public void compilar(){
                     if(auxiliar.getValue().equals("CONTENIDO"))
                     {
                         dibujarInterfaz(raiz.getHijos().get(0));
+                        
                     }
                     else
                     {
@@ -501,6 +505,7 @@ public void compilar(){
                                 }
 
                                 this.scroll.setBackground(new Color(r,g,b));
+                                colorFondo = new Color(r,g,b);
                             }
                             else
                             {
@@ -511,6 +516,7 @@ public void compilar(){
                         else
                         {
                             this.scroll.setBackground(buscarColor(raiz.getHijos().get(0)));
+                            colorFondo = buscarColor(raiz.getHijos().get(0));
                         }
                         dibujarInterfaz(raiz.getHijos().get(1));
                     }
@@ -528,6 +534,7 @@ public void compilar(){
                     System.out.println("---------------------------ENLACE---------------------");
                     //Vemos todos los elementos :v
                     Boton enlace = new Boton();
+                    enlace.setBackground(colorFondo);
                     for(nodoChtml aux: raiz.getHijos())
                     {                        
                         if(aux.getValue().equals("ELEMENTO"))
@@ -584,17 +591,101 @@ public void compilar(){
                             }
                         }
                     }
-                    enlace.setBounds(posX, posY, 100,100);                    
+                    /*
+                    
+                    */                    
+                    
+                    enlace.setBounds(posX, posY, enlace.getAncho(), enlace.getAlto());  
+                    comprobarPosiciones(enlace.getAncho(), enlace.getAlto());
                     this.scroll.add(enlace);
                     break;
+                    
+                    
+                    
+                    
+                case "TEXTO":
+                    System.out.println("---------------------------TEXTO---------------------");
+                    //Vemos todos los elementos :v
+                    Texto texto = new Texto();
+                    texto.setBackground(colorFondo);
+                    for(nodoChtml aux: raiz.getHijos())
+                    {                        
+                        if(aux.getValue().equals("ELEMENTO"))
+                        {
+                            switch(aux.getHijos().get(0).getValue().toLowerCase())
+                            {                                                                 
+                                case "id":
+                                    texto.setName(aux.getHijos().get(1).getValue());
+                                    break;
+                                case "grupo":
+                                    texto.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "cadena":
+                                    texto.setCadena(aux.getHijos().get(1).getValue());                                    
+                                    texto.setText(texto.getCadena());
+                                    //texto.setAlto(texto.cadena.length());
+                                    break; 
+                                case "ancho":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        texto.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                       
+                                    break;
+                                case "alto":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        texto.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                                                                                                                   
+                                    break; 
+                                case "alineado":                                                                        
+                                    switch(aux.getHijos().get(1).getValue())
+                                    {
+                                        case "\"izquierda\"":
+                                            texto.setAlineado("izquierda");
+                                            texto.setAlignmentX(LEFT_ALIGNMENT);
+                                            break;
+                                        case "\"derecha\"":
+                                            texto.setAlineado("derecha");
+                                            texto.setAlignmentX(RIGHT_ALIGNMENT);
+                                            break;  
+                                        case "\"centrado\"":
+                                            texto.setAlineado("centrado");
+                                            texto.setAlignmentX(CENTER_ALIGNMENT);
+                                            break;   
+                                        default :
+                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                "Sintactico","Valor de alineacion incorrecto"});
+                                            break;                                          
+                                    }
+                                    System.out.println("------------ALINEACION: \t"+texto.getAlineado());
+                                    break;                                     
+                            }
+                        }
+                    }                    
+                                        
+                    texto.setBounds(posX, posY, texto.getAlto(),texto.getAncho());   
+                    comprobarPosiciones(texto.getAncho(), texto.getAlto());
+                    this.scroll.add(texto);
+                    break;                    
+                    
+                    
             }
         }        
     
     }
    
-public void comprobarPosiciones()
+public void comprobarPosiciones(int ancho, int alto)
 {
-    double porcentajeX = scrollPanel.getHeight()/posX;
+    int limite = this.scroll.getWidth();
+    if((posX + ancho)>= limite)        
+    {
+        posX = 0;
+        posY = posY + alto;
+    }
+    else
+    {
+        posX = posX + ancho;
+    }
 
 }   
    
