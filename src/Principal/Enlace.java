@@ -21,7 +21,7 @@ import javax.swing.plaf.ComponentUI;
  *
  * @author erick
  */
-public class Boton extends JButton
+public class Enlace extends JButton
 {
     private String ruta;
     private String grupo;
@@ -30,9 +30,8 @@ public class Boton extends JButton
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo;
     
-    public Boton()
+    public Enlace()
     {
         this.alto=30;
         this.ancho=100;
@@ -44,16 +43,6 @@ public class Boton extends JButton
             }
         });
     }
-
-    public void setMetodo(String metodo) {
-        this.metodo = metodo;
-    }
-
-    public String getMetodo() {
-        return metodo;
-    }
-    
-    
     
     public void actionPerformed(java.awt.event.ActionEvent evt) 
     {

@@ -563,7 +563,7 @@ public void compilar(){
                 case "ENLACE":
                     System.out.println("---------------------------ENLACE---------------------");
                     //Vemos todos los elementos :v
-                    Boton enlace = new Boton();
+                    Enlace enlace = new Enlace();
                     enlace.setBackground(colorFondo);
                     for(nodoChtml aux: raiz.getHijos())
                     {                        
@@ -625,12 +625,144 @@ public void compilar(){
                     
                     */                    
                     Elemento elemento = new Elemento(enlace.getId(),"enlace",enlace);
-                    elementos.add(elemento);                 
-                    
+                    elementos.add(elemento);                                     
                     break;
                     
+                case "BOTON":
+                    System.out.println("---------------------------ENLACE---------------------");
+                    //Vemos todos los elementos :v
+                    Boton boton = new Boton();
+                    //boton.setBackground(colorFondo);
+                    for(nodoChtml aux: raiz.getHijos())
+                    {                        
+                        if(aux.getValue().equals("ELEMENTO"))
+                        {
+                            switch(aux.getHijos().get(0).getValue().toLowerCase())
+                            {
+                                case "ruta":
+                                    boton.setRuta(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "click":                                                                       
+                                    boton.setMetodo(aux.getHijos().get(1).getValue());
+                                    break;                                     
+                                case "id":
+                                    boton.setId(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "grupo":
+                                    boton.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "cadena":
+                                    boton.setCadena(aux.getHijos().get(1).getValue());                                    
+                                    boton.setText(boton.getCadena());
+                                    break; 
+                                case "ancho":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        boton.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                       
+                                    break;
+                                case "alto":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        boton.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                                                                                                                   
+                                    break; 
+                                case "alineado":                                                                        
+                                    switch(aux.getHijos().get(1).getValue())
+                                    {
+                                        case "\"izquierda\"":
+                                            boton.setAlineado("izquierda");
+                                            boton.setAlignmentX(LEFT_ALIGNMENT);
+                                            break;
+                                        case "\"derecha\"":
+                                            boton.setAlineado("derecha");
+                                            boton.setAlignmentX(RIGHT_ALIGNMENT);
+                                            break;  
+                                        case "\"centrado\"":
+                                            boton.setAlineado("centrado");
+                                            boton.setAlignmentX(CENTER_ALIGNMENT);
+                                            break;   
+                                        default :
+                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                "Sintactico","Valor de alineacion incorrecto"});
+                                            break;                                          
+                                    }
+                                    System.out.println("------------ALINEACION: \t"+boton.getAlineado());
+                                    break;                                     
+                            }
+                        }
+                    }                   
+                    elemento = new Elemento(boton.getId(),"boton",boton);
+                    elementos.add(elemento);                                     
+                    break;                    
                     
                     
+                case "SPINNER":
+                    System.out.println("---------------------------ENLACE---------------------");
+                    //Vemos todos los elementos :v
+                    Spinner spinner = new Spinner();
+                    //boton.setBackground(colorFondo);
+                    for(nodoChtml aux: raiz.getHijos())
+                    {                        
+                        if(aux.getValue().equals("ELEMENTO"))
+                        {
+                            switch(aux.getHijos().get(0).getValue().toLowerCase())
+                            {
+                                case "ruta":
+                                    spinner.setRuta(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "click":                                                                       
+                                    spinner.setMetodo(aux.getHijos().get(1).getValue());
+                                    break;                                     
+                                case "id":
+                                    spinner.setId(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "grupo":
+                                    spinner.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    break;
+                                case "entero":
+                                    spinner.setCadena(aux.getHijos().get(1).getValue());                                                                        
+                                    break; 
+                                case "ancho":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        spinner.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                       
+                                    break;
+                                case "alto":                                                                        
+                                    if (esNumero(aux.getHijos().get(1).getValue()))
+                                    {
+                                        spinner.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                    }                                                                                                                                   
+                                    break; 
+                                case "alineado":                                                                        
+                                    switch(aux.getHijos().get(1).getValue())
+                                    {
+                                        case "\"izquierda\"":
+                                            spinner.setAlineado("izquierda");
+                                            spinner.setAlignmentX(LEFT_ALIGNMENT);
+                                            break;
+                                        case "\"derecha\"":
+                                            spinner.setAlineado("derecha");
+                                            spinner.setAlignmentX(RIGHT_ALIGNMENT);
+                                            break;  
+                                        case "\"centrado\"":
+                                            spinner.setAlineado("centrado");
+                                            spinner.setAlignmentX(CENTER_ALIGNMENT);
+                                            break;   
+                                        default :
+                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                "Sintactico","Valor de alineacion incorrecto"});
+                                            break;                                          
+                                    }
+                                    System.out.println("------------ALINEACION: \t"+spinner.getAlineado());
+                                    break;                                     
+                            }
+                        }
+                    }                   
+                    elemento = new Elemento(spinner.getId(),"spinner",spinner);
+                    elementos.add(elemento);                                     
+                    break;                    
                     
                 case "TEXTO":
                     System.out.println("---------------------------TEXTO---------------------");
@@ -768,7 +900,15 @@ public void compilar(){
                     }                    
                     elemento = new Elemento(imagen.getId(),"imagen",imagen);    
                     elementos.add(elemento);
-                    break;                     
+                    break;    
+                    
+                case "TABLA":
+                    System.out.println("---------------------------ENLACE---------------------");
+                    //Vemos todos los elementos :v
+                    Tabla tabla = new Tabla();                                                                                                                                            
+                    elemento = new Elemento(tabla.getId(),"tabla",tabla);
+                    elementos.add(elemento);                                     
+                    break;                    
                     
                     
             }
@@ -793,11 +933,24 @@ public void generarInterfaz()
                 comprobarPosiciones(boton.getAncho(), boton.getAlto());                
                 break;
             case "enlace":
-                boton =(Boton)aux.getValor();
-                boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());
-                scroll.add(boton);
-                comprobarPosiciones(boton.getAncho(), boton.getAlto());                
-                break;  
+                Enlace enlace =(Enlace)aux.getValor();
+                enlace.setBounds(posX, posY, enlace.getAncho(),enlace.getAlto());
+                scroll.add(enlace);
+                comprobarPosiciones(enlace.getAncho(), enlace.getAlto());                
+                break; 
+            case "spinner":
+                Spinner spinner =(Spinner)aux.getValor();
+                spinner.setBounds(posX, posY, spinner.getAncho(),spinner.getAlto());
+                System.out.println("---------VAlor spinner " +spinner.getCadena());
+                //spinner.setCadena(spinner.getCadena().substring(0,spinner.getCadena().length()-1));
+                System.out.println("---------VAlor spinner " +spinner.getCadena());
+                if(esNumero(spinner.getCadena()))
+                {
+                    spinner.setValue(Integer.valueOf(spinner.getCadena()));
+                }
+                scroll.add(spinner);
+                comprobarPosiciones(spinner.getAncho(), spinner.getAlto());                
+                break;                
             case "imagen":
                 Imagen imagen =(Imagen)aux.getValor();
                 imagen.setBounds(posX, posY, imagen.getAncho(),imagen.getAlto());
@@ -829,8 +982,15 @@ public void generarInterfaz()
                 //System.out.println("------------Anchura: "+ ancho);
                 texto.setBounds(posX, posY, texto.getAncho(),texto.getAlto());
                 scroll.add(texto);
-                comprobarPosiciones(texto.ancho, texto.alto);                
-                break;                 
+                comprobarPosiciones(texto.getAncho(), texto.getAlto());                
+                break;   
+                
+            case "tabla":
+                Tabla tabla =(Tabla)aux.getValor();
+                tabla.setBounds(posX, posY, tabla.getAncho(),tabla.getAlto());
+                scroll.add(tabla);
+                comprobarPosiciones(tabla.getAncho(), tabla.getAlto());                
+                break;                
         }
     }
     this.repaint();
