@@ -11,8 +11,6 @@ import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.Color;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,8 +22,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -156,6 +152,7 @@ public class Panel extends javax.swing.JPanel {
         scroll.setBackground(new java.awt.Color(153, 255, 255));
         scroll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         scroll.setMinimumSize(new java.awt.Dimension(0, 15767));
+        scroll.setPreferredSize(new java.awt.Dimension(600, 600));
         scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 scrollComponentResized(evt);
@@ -166,7 +163,7 @@ public class Panel extends javax.swing.JPanel {
         scroll.setLayout(scrollLayout);
         scrollLayout.setHorizontalGroup(
             scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1028, Short.MAX_VALUE)
+            .addGap(0, 1011, Short.MAX_VALUE)
         );
         scrollLayout.setVerticalGroup(
             scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +374,7 @@ public class Panel extends javax.swing.JPanel {
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         generarInterfaz();        // TODO add your handling code here:
-        posX = posY = 0;
+        posX = posY = xMax = yMax=  0;
         System.out.println(scroll.getHeight() + "\t" + scroll.getWidth());
     }//GEN-LAST:event_formComponentResized
 
@@ -408,7 +405,8 @@ public void analizar() throws IOException
             dibujador aux = new dibujador();
             raizChtml = Interfaz.raizChtml;
             aux.generarGrafica(raizChtml); // Dibujamos el arbol
-            generarObjetos(raizChtml);            
+            generarObjetos(raizChtml);  
+            posX = posY = xMax = yMax=  0;
             generarInterfaz(); // Generamos la interfaz 
             
             
@@ -1001,10 +999,9 @@ public void compilar(){
                     elementos.add(elemento);
                     break;  
 
-/*----------------------------IMAGEN*/                    
+/*----------------------------IMAGEN--------------------------------------*/                    
                 case "IMAGEN":
                     System.out.println("---------------------------IMAGEN---------------------");
-                    //Vemos todos los elementos :v
                     Imagen imagen = new Imagen();
                     imagen.setBackground(colorFondo);
                     for(nodoChtml aux: raiz.getHijos())
@@ -1014,33 +1011,30 @@ public void compilar(){
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {                                                                 
                                 case "id":
-                                    imagen.setName(aux.getHijos().get(1).getValue());
+                                    imagen.setName(quitarComillas(aux.getHijos().get(1).getValue()));
                                     break;
                                 case "grupo":
-                                    imagen.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    imagen.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "cadena":
-                                    imagen.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    imagen.setText(imagen.getCadena());
-                                    //texto.setAlto(texto.cadena.length());
+                                    imagen.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                    imagen.setText(imagen.getCadena());                                    
                                     break; 
                                 case "ancho":                                                                        
                                     String numero = aux.getHijos().get(1).getValue();
                                     numero = numero.substring(1,numero.length()-1);
                                     if (esNumero(numero))
                                     {
-                                        imagen.setAncho(Integer.valueOf(numero)*2);
+                                        imagen.setAncho(Integer.valueOf(numero));
                                     } 
-                                    System.out.println("--Ancho imagen:\t"+imagen.getAncho() +"\t"+numero);
                                     break;
                                 case "alto":            
                                     numero = aux.getHijos().get(1).getValue();
                                     numero = numero.substring(1,numero.length()-1);
                                     if (esNumero(numero))
                                     {
-                                        imagen.setAlto(Integer.valueOf(numero)*2);
+                                        imagen.setAlto(Integer.valueOf(numero));
                                     }     
-                                    System.out.println("--Ancho alto:\t"+imagen.getAlto() +"\t"+numero);
                                     break; 
                                 case "alineado":                                                                        
                                     switch(aux.getHijos().get(1).getValue())
@@ -1062,7 +1056,6 @@ public void compilar(){
                                                 "Sintactico","Valor de alineacion incorrecto"});
                                             break;                                          
                                     }
-                                    System.out.println("------------ALINEACION: \t"+imagen.getAlineado());
                                     break;  
                                 case "click":                                                                       
                                     imagen.setMetodo(aux.getHijos().get(1).getValue());
@@ -1075,17 +1068,13 @@ public void compilar(){
                     }                    
                     elemento = new Elemento(imagen.getId(),"imagen",imagen);    
                     elementos.add(elemento);
-                    break;    
-                    
+                    break;                        
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
-                    //Vemos todos los elementos :v
                     Tabla tabla = generarTabla(raiz);
                     elemento = new Elemento(tabla.getId(),"tabla",tabla);
                     elementos.add(elemento);                                     
-                    break;                    
-                    
-                    
+                    break;                         
             }
         }        
     
@@ -1094,9 +1083,6 @@ public void compilar(){
   public Tabla generarTabla(nodoChtml raiz)
   {
       Tabla tabla = new Tabla();
-      
-      
-      
       return tabla;
   }   
    
@@ -1111,8 +1097,8 @@ public void generarInterfaz()
         switch(aux.getTipo())
         {
             case "boton":
-                Boton boton =(Boton)aux.getValor();
-                boton.setBounds( posX, posY, boton.getAncho(),boton.getAlto());                  
+                Boton boton =(Boton)aux.getValor();                
+                boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());                  
                 comprobarPosiciones(boton.getAncho(), boton.getAlto());         
                 scroll.add(boton);
                 break;
@@ -1123,16 +1109,13 @@ public void generarInterfaz()
                 scroll.add(enlace);
                 break; 
             case "salto":
-                posY +=  yMax;
-                xMax = yMax = 0;
-                posX=0;
+                posX = 0;
+                posY = posY + yMax;
+                yMax= xMax =0;  
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();
                 spinner.setBounds(posX, posY, spinner.getAncho(),spinner.getAlto());
-                System.out.println("---------VAlor spinner " +spinner.getCadena());
-                //spinner.setCadena(spinner.getCadena().substring(0,spinner.getCadena().length()-1));
-                System.out.println("---------VAlor spinner " +spinner.getCadena());
                 if(esNumero(spinner.getCadena()))
                 {
                     spinner.setValue(Integer.valueOf(spinner.getCadena()));
@@ -1157,9 +1140,7 @@ public void generarInterfaz()
                     ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
                     imagen.setIcon(iconoEscala);                     
                     
-                }
-                
-                                       
+                }                                                       
                 comprobarPosiciones(imagen.getAncho(), imagen.getAlto());                
                 scroll.add(imagen);       
                 break;                  
@@ -1230,22 +1211,21 @@ public void yMax(int y)
 {
     if(y>yMax)
     {
-        yMax = y;
+        yMax = y;       
     }
-    System.out.println("YMAX-----------------"+yMax);
+
 }
    
 public void comprobarPosiciones(int ancho, int alto)
-{
-    yMax(alto);
-    
-    int limite = this.scroll.getWidth();
-    
-    if((posX + ancho)>= limite-50)        
+{   
+    int limite = scroll.getWidth(); 
+    if(alto>yMax){yMax = alto;}    
+    if((posX + ancho)>= limite-ancho)        
     {
         posX = 0;
         posY = posY + yMax;
-        yMax= yMax =0;        
+        System.out.println("Salto de linea de :"+yMax);        
+        yMax= 0;              
     }
     else
     {
@@ -1256,7 +1236,7 @@ public void comprobarPosiciones(int ancho, int alto)
 
 public String quitarComillas(String cadena)
 {
-    if(cadena.substring(1).equals("\""))
+    if(cadena.substring(0).equals("\""))
     {
         return cadena.substring(1, cadena.length()-1);
     }
