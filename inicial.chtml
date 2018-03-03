@@ -24,7 +24,7 @@ aa
 
 
 
-    <cuerpo fondo = "white";>  
+    <cuerpo fondo = "pink";>  
         
     <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>
     <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "160"; >Tabla Estudiante<FIN-BOTON>
@@ -32,7 +32,8 @@ aa
     <salto-fin>
     <TEXTO alto= "50"; ancho ="210"; id="titulo_doc"; grupo="titulo";>Calificación Compiladores 2 
     Proyecto 2 <FIN-TEXTO>
-    <salto-fin>    
+    <salto-fin>
+    <TEXTO alto= "30"; ancho ="210"; id="titulo_fomulario"; grupo="formulario_1";>Formulario de Notas:<FIN-TEXTO>
     <TEXTO alto= "30"; ancho ="210"; id="titulo_fomulario"; grupo="formulario_1";>Formulario de Notas:<FIN-TEXTO>
     <SALTO-FIN>
     <SALTO-FIN>
@@ -46,11 +47,11 @@ aa
     <//- se agregó dos salto de linea entre elementos -//>
     <SALTO-FIN>
     <SALTO-FIN>
-    <TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
+    <TEXTO alto= "16"; ancho ="105"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
     <CAJA_TEXTO alto= "20"; ancho ="200"; id="nombre"; grupo="formulario_2";>Nombre<FIN-CAJA_TEXTO>
     <SALTO-FIN>
-    <TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
-    <TEXTO_A alto="95"; ancho="200"; id="comentario"; grupo="formulario_2";><FIN-TEXTO_A>
+    <TEXTO alto= "16"; ancho ="65"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
+    <TEXTO_A alto="95"; ancho="200" id="comentario"; grupo="formulario_2";><FIN-TEXTO_A>
     <SALTO-FIN>
     <CAJA id="caja_1"; grupo="formulario_2";>
     <OPCION valor= "promedio"; >Promedio<FIN-OPCION>

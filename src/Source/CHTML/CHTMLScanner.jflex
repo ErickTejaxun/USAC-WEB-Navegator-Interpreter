@@ -1,4 +1,6 @@
 package Analizadores.CHTML;
+
+import Principal.Errores;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 /*
@@ -18,6 +20,9 @@ eofval: especifica un valor de retorno al final del archivo
 	public static String txt_temporal="";
 	public static int linea=0;
 	public static int columna=0;
+
+    public static ArrayList<Errores> erroresLexicos = new ArrayList();    
+
 %}
 %cupsym simbolos
 %class Scanner /*Nombre de la clase a generar.*/

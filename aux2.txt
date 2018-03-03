@@ -1,0 +1,105 @@
+< chtml >
+
+<//- 
+Comentario multinlinea
+
+aa
+-//>
+
+
+< encabezado >
+
+
+
+
+    < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+    < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+    < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+
+    < ccss ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.ccss" ; > < fin-ccss >
+    < titulo > Maxwell (microarquitectura) < fin-titulo> 
+
+
+< fin-encabezado >
+
+
+
+    <cuerpo fondo = "pink";>     
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Ir a inicio<fin-enlace> 
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Erick<fin-enlace>            
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Inicio<fin-enlace>            
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Amigos<fin-enlace>            
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Mensajes<fin-enlace>            
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; >Configuracion<fin-enlace>            
+        <SALTO-FIN>
+                <//- Hola perros -//>
+        < texto  id = "texto1"; grupo="titulo"; alto="13"; alineado="derecha"; ancho="100"; <//- Hola perros -//>> 
+        Pascal is the codename for a GPU microarchitecture developed by Nvidia, as the successor to the Maxwell 
+        architecture. The architecture was first introduced in April 2016 with the release of the Tesla P100 (GP100) 
+        on April 5, 2016, and is primarily used in the GeForce 10 series, starting with the GeForce GTX 1080 and GTX .   
+        <fin-texto>
+        <SALTO-FIN>
+        <enlace ruta="C:\index.chtml" ; grupo="link-1"; id="enlace1"; alineado="izquierda"; >Descrpicion<fin-enlace>  
+
+        <TEXTO id = "texto2"; grupo="titulos1"; alto="13"; alineado="derecha"; > Entrada: Esta es
+        una etiqueta
+        que permite
+        saltos
+        <FIN-TEXTO>
+        <SALTO-FIN>
+        <imagen id="imagen1"; grupo="imagenes"; alto="100"; ancho="100"; alineado="izquierda";click="saludar()"; ruta = "C:\Users\erick\Desktop\pro.jpg" ;>   <fin-imagen>
+        <imagen >                     C:\Users\erick\Desktop\poe.jpg
+        <fin-imagen>   
+        <SALTO-FIN> 
+        <boton id="boton1";> Guradar <fin-boton>
+        <boton id="boton1"; grupo="boton-texto1"; click="guardar()";> boton 1<fin-boton>   <//- Hola perros -//>                 
+        <boton  grupo="boton-texto1"; id="boton1"; click="guardar()";> boton 2<fin-boton>           <//- Hola perros -//>
+        <boton  click="guardar()"; grupo="boton-texto1"; id="boton1"; > boton 3<fin-boton><//- Hola perros -//>
+
+
+         
+
+        <SALTO-FIN>
+        <texto>Edad         <fin-texto><spinner>1000<fin-spinner>
+        <SALTO-FIN>
+        <texto>No. Articulos<fin-texto><spinner id="edad"; grupo="eleccion1"; alineado="derecha"; alto="101";>100<fin-spinner>                
+        <SALTO-FIN>
+        <texto>Código <fin-texto>
+        <texto_a id="caja1"; grupo="areas"; alineado="centrado"; alto="100"; ancho = "100";>Ingrese codigo<fin-texto_a>
+
+        <caja_texto id="caja1"; grupo="areas"; alineado="centrado";>Hola perros<fin-caja_texto>
+        <caja_texto > Erick 
+        Roberto 
+        Tejaxun<fin-caja_texto>             
+
+
+
+        <CAJA click="metodo()";grupo="select-mode1"; id="caja1"; >
+            <opcion valor="1"; id="opcion1"; grupo="grupo2"; >Uno<fin-opcion>
+            <opcion valor="2";>Dos<fin-opcion>
+            <opcion valor="3";>Tres<fin-opcion>                    
+            <opcion valor="4";>Cuatro<fin-opcion>
+        <FIN-CAJA>
+
+                
+        <CAJA>
+            <OPCION valor="1";>Uno<FIN-OPCION>
+            <OPCION valor="2";>Dos<FIN-OPCION>
+        <FIN-CAJA>
+        <SALTO-FIN>
+        <CAJA_TEXTO> Contenido en la caja de texto <FIN-CAJA_TEXTO>    
+            
+    
+        <PANEL>
+            <TEXTO> Esta es una etiqueta<FIN-TEXTO>
+            <CAJA_TEXTO> Contenido en la caja de texto <FIN-CAJA_TEXTO>
+            <PANEL>
+                    <caja_texto id="caja1"; grupo="areas"; alineado="centrado";>Hola perros<fin-caja_texto>
+            <FIN-PANEL>
+        <FIN-PANEL>                                     
+    <fin-cuerpo>
+
+
+
+
+< fin-chtml >

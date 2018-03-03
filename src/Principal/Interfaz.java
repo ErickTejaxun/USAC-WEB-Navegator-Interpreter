@@ -9,22 +9,17 @@ import Source.CHTML.Scanner;
 import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
-import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
+
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.OverlayLayout;
 
 /**
  *

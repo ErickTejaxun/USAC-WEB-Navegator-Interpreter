@@ -3515,12 +3515,14 @@ metodo = {id}"()"
 
 <TEXTO2>
 {
-    {espacio}
-    {cadena  = cadena + yytext();}	
-
+    "<\\-"
+    {
+        yybegin(COMENTARIO);
+    }
 
     [^]
     {  
+        System.out.print(yytext());
         if(!yytext().equals("<"))
         {
             if(yytext().equals("\n"))

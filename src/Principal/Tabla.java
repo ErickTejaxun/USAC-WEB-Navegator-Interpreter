@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumnModel;
@@ -33,6 +34,7 @@ public class Tabla extends JTable
     private int alto;
     private int ancho;
     private String metodo; 
+    DefaultTableModel filasErrores = new DefaultTableModel(); 
 
     public Tabla() 
     {

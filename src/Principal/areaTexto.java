@@ -14,7 +14,7 @@ import javax.swing.plaf.ComponentUI;
  *
  * @author erick
  */
-public class Texto extends JTextPane 
+public class areaTexto extends JTextPane 
 {
     String ruta;
     String grupo;
@@ -24,10 +24,10 @@ public class Texto extends JTextPane
     int alto;
     int ancho;    
 
-    public Texto() 
+    public areaTexto() 
     {
-        this.alto= 0;
-        this.ancho= 0;
+        this.alto= 400;
+        this.ancho= 400;
     }
 
     public void setRuta(String ruta) {

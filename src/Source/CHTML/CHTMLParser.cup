@@ -10,7 +10,9 @@ import Source.CHTML.nodoChtml;
 //import static olc1_proyecto1.Menu.path;
 parser code
 {:
-	
+	public String cadena="";
+    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();	
+
 	public static String ConvertirObjectToString(Object Obj)
 	 {
 		String Str="";
@@ -32,8 +34,7 @@ parser code
 		errores_sintacticos.setColumna(s.left);
 		errores_sintacticos.setDescripcion(ConvertirObjectToString(s.value));
 		//sintactico.listaSintactico.add(errores_sintacticos);
-		Interfaz.erroresSintacticos.add(errores_sintacticos);
-
+		erroresSintacticos.add(errores_sintacticos);
 	}
 
 :}

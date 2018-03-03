@@ -6,7 +6,7 @@
 package Principal;
 
 import javax.accessibility.AccessibleContext;
-import javax.swing.JTextPane;
+import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 
@@ -14,7 +14,7 @@ import javax.swing.plaf.ComponentUI;
  *
  * @author erick
  */
-public class Texto extends JTextPane 
+public class Caja extends JTextField 
 {
     String ruta;
     String grupo;
@@ -24,7 +24,7 @@ public class Texto extends JTextPane
     int alto;
     int ancho;    
 
-    public Texto() 
+    public Caja() 
     {
         this.alto= 0;
         this.ancho= 0;
