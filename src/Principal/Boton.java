@@ -5,7 +5,6 @@
  */
 package Principal;
 
-import static Principal.Pagina.botonPlus;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import javax.accessibility.AccessibleContext;
@@ -16,6 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
+import static Principal.Pagina.botonAgregar;
 
 /**
  *

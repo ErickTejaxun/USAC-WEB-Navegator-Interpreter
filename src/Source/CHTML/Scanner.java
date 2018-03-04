@@ -2150,7 +2150,7 @@ public class Scanner implements java_cup.runtime.Scanner {
         {
             yybegin(YYINITIAL);
             yypushback(1);
-            Interfaz.addChtml("cadena",yyline,yychar,"Cadena : cadena de texto",yytext()); 	                
+            Interfaz.addChtml("cadena",yyline,yychar,"Cadena : cadena de texto",cadena); 	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
         }
             }

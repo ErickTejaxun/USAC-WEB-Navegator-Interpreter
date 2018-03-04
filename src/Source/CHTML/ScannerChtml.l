@@ -19,7 +19,9 @@ eofval: especifica un valor de retorno al final del archivo
 
 
 %%
-%{	public static ArrayList<Errores> listaLexico=new ArrayList();	
+%{
+    public static ArrayList<Errores> listaErrores=new ArrayList();	
+    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
 	public static String urlAuxliar="";
 	public static Boolean fin=false;
 	public static String txt_temporal="";
@@ -31,7 +33,7 @@ eofval: especifica un valor de retorno al final del archivo
     public static int flagInicio = 0;
     public String cadena = "";
     public String estado="";
-
+    public boolean flagCadena = false;
 
     public void addError(int linea, int columna, String valor)
     {
@@ -93,8 +95,7 @@ valorAlineado = ("\"izquierda\""|"\"derecha\""|"\"centrado\"")
 metodo = {id}"()"
 
 
-%state COMENTARIO, ENCABEZADO1, ENCABEZADO2, CUERPO, TITULO1, TITULO2, TITULO3, ELEMENTOS,TEXTO1,TEXTO2
-%state IMAGEN1,IMAGEN2, BOTON1, BOTON2, ENLACE1,ENLACE2,T1,T2,T3,T4,T5,T6,T7,TB,TB2,TI,TI2,TB3,TA1,TA2, CAJA1,CAJA2
+%state COMENTARIO, CADENA
 %%
 
 
@@ -336,6 +337,12 @@ metodo = {id}"()"
         return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
     } 
 
+    {direccionWindows}
+    {        
+        addChtml("path",yyline,yychar,"path : direccion archivo",yytext()); 
+        return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
+    }    
+
     {valorAlineado}
     {
         addChtml("valorAlineado",yyline,yychar,"valorAlineado : Alineación",yytext());                     
@@ -343,11 +350,14 @@ metodo = {id}"()"
     }         
 
 
+
     {idComillas}
     {        
         addChtml("id",yyline,yychar,"id: Posible nombre de color.",yytext()); 
         return new Symbol(simbolos.id, yychar, yyline, yytext());
     } 
+
+
 
     ";"
     {        
@@ -414,7 +424,7 @@ metodo = {id}"()"
         else 
         {
             yybegin(YYINITIAL);
-            flagCadena=true;            
+            //flagCadena=true;            
             yypushback(1);
             addChtml("cadena",yyline,yychar,"Cadena : cadena de texto",yytext()); 	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -424,22 +434,12 @@ metodo = {id}"()"
 
 <COMENTARIO>
 {
-    {espacio} 
-    {   }
-
     [^"*/"]
     {}
     
     "-//>"
     {
-        if(flagCadena)
-        {
-            yybegin(CADENA);
-        }
-        else
-        {
-            yybegin(YYINITIAL);
-        }
+        yybegin(YYINITIAL);        
     }
  
 }

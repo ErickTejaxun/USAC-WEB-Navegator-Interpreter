@@ -9,25 +9,23 @@ import javax.swing.WindowConstants;
 
 public class Pagina {
 
-    public static JButton botonPlus = new JButton("+");
-    final static JTabbedPane tabEntity = new JTabbedPane();
+    public static JButton botonAgregar = new JButton("+");
+    final static JTabbedPane contenedorPaginas = new JTabbedPane();
     public static void main(String[] args) 
     {
-        JFrame parent = new JFrame();
-        parent.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JFrame ventana = new JFrame();
+        ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        //tabEntity.addTab("Details", null, new JScrollPane());
-        //tabEntity.addTab("Context", null, new JScrollPane());
-        tabEntity.addTab("", null, new JScrollPane());
+        contenedorPaginas.addTab("", null, new JScrollPane());
 
-        addButtonToTab(tabEntity);
+        addButtonToTab(contenedorPaginas);
 
-        parent.add(tabEntity);
-        parent.setSize(new Dimension(600, 600));
-        parent.setVisible(true);
+        ventana.add(contenedorPaginas);
+        ventana.setSize(new Dimension(600, 600));
+        ventana.setVisible(true);
         
         
-        botonPlus.addActionListener(new java.awt.event.ActionListener()
+        botonAgregar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt) 
             {
@@ -41,7 +39,7 @@ public class Pagina {
 
     public static void addButtonToTab(final JTabbedPane tabEntity) 
     {
-        tabEntity.setTabComponentAt(tabEntity.getTabCount() - 1, botonPlus);
+        tabEntity.setTabComponentAt(tabEntity.getTabCount() - 1, botonAgregar);
     }
     
     private static void botonPlusActionPerformed(java.awt.event.ActionEvent evt)
@@ -49,7 +47,7 @@ public class Pagina {
         JScrollPane scroll = new JScrollPane();
         Panel pagina = new Panel();
         scroll.add(pagina);
-        tabEntity.addTab("Nuevo", null, pagina);
+        contenedorPaginas.addTab("Nuevo", null, pagina);
     }     
     
 }

@@ -12,6 +12,7 @@ parser code
 {:
 	public String cadena="";
     public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();	
+	public static ArrayList<Errores> erroresSintacticos = new ArrayList();
 
 	public static String ConvertirObjectToString(Object Obj)
 	 {
@@ -811,8 +812,10 @@ OPCION::= menorQue inicioOpcion ELEMENTOSOPCION:elementos mayorQue cadena:cad me
 		|    menorQue inicioOpcion mayorQue cadena:cad menorQue finOpcion mayorQue
 									{:
 									nodoChtml nuevo = new nodoChtml("OPCION");
-									nuevo.add(new nodoChtml("CADENA"));
-									nuevo.add(new nodoChtml(cad));								
+									nodoChtml aux = new nodoChtml("ELEMENTO");									
+									aux.add(new nodoChtml("CADENA"));
+									aux.add(new nodoChtml(cad));
+									nuevo.add(aux);
 									RESULT= nuevo;																		
 									:};
 
@@ -842,7 +845,14 @@ VALOR::=  valor asignacion id:id puntoComa
 										nuevo.add(new nodoChtml("VALOR"));
 										nuevo.add(new nodoChtml(id));																																												
 										RESULT=nuevo;
-										:};						
+										:}		
+		|  valor asignacion cadena:id puntoComa
+										{: 
+										nodoChtml nuevo = new nodoChtml("ELEMENTO");												
+										nuevo.add(new nodoChtml("VALOR"));
+										nuevo.add(new nodoChtml(id));																																												
+										RESULT=nuevo;
+										:};															
 
 
 SALTO::= menorQue salto mayorQue{:

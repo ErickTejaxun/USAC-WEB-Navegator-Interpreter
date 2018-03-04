@@ -60,6 +60,11 @@ public class Panel extends javax.swing.JPanel {
     int yMax=0;
     int flagTabla = 0; // 0 Significa Que no pertence a tabla, 1. que sí.
     
+    Tabla tablaActual;
+    Panel panelActual = null;
+    
+    
+    
     //JScrollPane scroll = new JScrollPane();
     
     
@@ -86,6 +91,7 @@ public class Panel extends javax.swing.JPanel {
         tablaSalida.setModel(filasSalidas);
         //this.panelContenido.add(scroll);
         
+        //
         this.areaOpciones.hide();
                 
     }
@@ -716,9 +722,7 @@ public void compilar(){
                     }      
                     if(flagTabla==1)
                     {
-                        Elemento tablaAuxiliar =  elementos.get(elementos.size());
-                        
-                        
+                        Elemento tablaAuxiliar =  elementos.get(elementos.size());                                                
                     }
                     elemento = new Elemento(boton.getId(),"boton",boton);
                     elementos.add(elemento);                                     
@@ -1086,7 +1090,7 @@ public void compilar(){
                             /*------------OPCIONES----------*/                                        
                             case "opcion":
                                 
-                                String valor = String.valueOf(contadorOpciones);                                
+                                String valor = "";                                
                                 for(nodoChtml opcion: aux.getHijos())
                                 {     
                                     if(opcion.getValue().equals("ELEMENTO"))
@@ -1100,7 +1104,7 @@ public void compilar(){
                                                 valor = quitarComillas(derecha.getValue());
                                                 break; 
                                             case "cadena":                                                                       
-                                                if(valor.equals(String.valueOf(contadorOpciones)))
+                                                if(valor.equals(""))
                                                 {
                                                     valor = quitarComillas(derecha.getValue());
                                                 }
@@ -1118,6 +1122,11 @@ public void compilar(){
                     elementos.add(elemento);
                     break;                        
                   
+                    
+                case "PANEL":
+                    System.out.println("---------------------------PANEL---------------------");
+                    panelActual = new Panel();                    
+                    break;                    
                     
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
@@ -1313,7 +1322,8 @@ public String quitarComillas(String cadena)
    
    
 private static boolean esNumero(String cadena){
-	try {
+	try 
+        {
 		Integer.parseInt(cadena);
 		return true;
 	} catch (NumberFormatException nfe){
