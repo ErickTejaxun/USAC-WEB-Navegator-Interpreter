@@ -756,6 +756,8 @@ CAJAOPCIONES::= menorQue inicioCajaOpciones ELEMENTOSCAJA:elementos mayorQue LIS
 
 				| menorQue inicioCajaOpciones mayorQue LISTAOPCIONES:listaOpciones menorQue finCajaOpciones mayorQue
 								{:
+								nodoChtml nuevo = new nodoChtml("LISTAOPCIONES");
+								listaOpciones.setValue("");
 								RESULT = listaOpciones;														
 								:};
 
@@ -782,11 +784,12 @@ ELEMENTOSCAJA1::= ELEMENTOSCAJA1:atributos CLICK:c{:
 
 LISTAOPCIONES::= LISTAOPCIONES:lista OPCION:opcion
 									{:
+									lista.setValue("OPCION");
 									lista.add(opcion);
 									RESULT= lista;									
 									:}
 				| OPCION:opcion {:
-								nodoChtml nuevo = new nodoChtml("CAJAOPCIONES");
+								nodoChtml nuevo = new nodoChtml("OPCION");
 								nuevo.add(opcion);
 								RESULT = nuevo;
 								:};
@@ -807,7 +810,7 @@ OPCION::= menorQue inicioOpcion ELEMENTOSOPCION:elementos mayorQue cadena:cad me
 									:}				
 		|    menorQue inicioOpcion mayorQue cadena:cad menorQue finOpcion mayorQue
 									{:
-									nodoChtml nuevo = new nodoChtml("ELEMENTO");
+									nodoChtml nuevo = new nodoChtml("OPCION");
 									nuevo.add(new nodoChtml("CADENA"));
 									nuevo.add(new nodoChtml(cad));								
 									RESULT= nuevo;																		

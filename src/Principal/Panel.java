@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -195,7 +196,7 @@ public class Panel extends javax.swing.JPanel {
             }
         });
 
-        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\ejemplo.chtml");
+        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\prueba.html");
 
         botonOpciones.setText("Opciones");
         botonOpciones.addActionListener(new java.awt.event.ActionListener() {
@@ -1069,12 +1070,64 @@ public void compilar(){
                     elemento = new Elemento(imagen.getId(),"imagen",imagen);    
                     elementos.add(elemento);
                     break;                        
+                    
+                  
+/*------------------------CAJA DE OPCIONES-----------------------*/                    
+                case "CAJAOPCIONES":
+                    System.out.println("---------------------------IMAGEN---------------------");
+                    JComboBox cajaOpciones = new JComboBox();
+                    cajaOpciones.setBounds(posX, posY, 100, 20);
+                    int contadorOpciones = 0;
+                    for(nodoChtml aux: raiz.getHijos())
+                    {       
+                        System.out.println(aux.getValue());
+                        switch(aux.getValue().toLowerCase())
+                        {                                      
+                            /*------------OPCIONES----------*/                                        
+                            case "opcion":
+                                
+                                String valor = String.valueOf(contadorOpciones);                                
+                                for(nodoChtml opcion: aux.getHijos())
+                                {     
+                                    if(opcion.getValue().equals("ELEMENTO"))
+                                    {
+                                        nodoChtml izquierda = opcion.getHijos().get(0);
+                                        nodoChtml derecha = opcion.getHijos().get(1);
+                                        System.out.println(izquierda.getValue().toLowerCase()+"***********************************************"+derecha.getValue());
+                                        switch(izquierda.getValue().toLowerCase())
+                                        {
+                                            case "valor":                                                                                                                           
+                                                valor = quitarComillas(derecha.getValue());
+                                                break; 
+                                            case "cadena":                                                                       
+                                                if(valor.equals(String.valueOf(contadorOpciones)))
+                                                {
+                                                    valor = quitarComillas(derecha.getValue());
+                                                }
+                                                break;                                                
+                                        }                                                        
+                                    }
+                                }
+                                cajaOpciones.addItem(valor);
+                                break;                                                                                                    
+                        }
+                        contadorOpciones++;
+                    }                    
+                    //elemento = new Elemento(cajaOpciones.getId(),"cajaOpciones",cajaOpciones);    
+                    elemento = new Elemento("cajaOpciones","cajaOpciones",cajaOpciones);    
+                    elementos.add(elemento);
+                    break;                        
+                  
+                    
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
                     Tabla tabla = generarTabla(raiz);
                     elemento = new Elemento(tabla.getId(),"tabla",tabla);
                     elementos.add(elemento);                                     
-                    break;                         
+                    break;
+                    
+                    
+                    
             }
         }        
     
@@ -1090,8 +1143,7 @@ public void generarInterfaz()
 {
     scroll.removeAll();
     System.out.println("--------Numero de elementos : "+elementos.size());
-    posX =0 ;
-    posY= 0;
+    posX = posY = xMax = yMax = 0;
     for(Elemento aux: elementos)
     {
         switch(aux.getTipo())
@@ -1109,9 +1161,13 @@ public void generarInterfaz()
                 scroll.add(enlace);
                 break; 
             case "salto":
+                if(yMax == 0)
+                {
+                    yMax = 10;
+                }
                 posX = 0;
                 posY = posY + yMax;
-                yMax= xMax =0;  
+                yMax= xMax =0;                
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();
@@ -1122,6 +1178,12 @@ public void generarInterfaz()
                 }                
                 comprobarPosiciones(spinner.getAncho(), spinner.getAlto());                
                 scroll.add(spinner);
+                break;                
+            case "cajaOpciones":
+                JComboBox opciones =(JComboBox)aux.getValor();
+                opciones.setBounds(posX, posY, opciones.getWidth(), opciones.getHeight());                
+                comprobarPosiciones(opciones.getWidth(), opciones.getHeight());                
+                scroll.add(opciones);
                 break;                
             case "imagen":
                 Imagen imagen =(Imagen)aux.getValor();
@@ -1148,16 +1210,21 @@ public void generarInterfaz()
                 Texto texto =(Texto)aux.getValor();
                 if(texto.getAlto()==0 && texto.getAncho()==0)
                 {
+                    
                     String[] auxiliar = texto.getCadena().split("\r");
-                    int alto= auxiliar.length;
+                    int alto= auxiliar.length*20;
+                    System.out.println("El texto no tiene dimensiones definidas");
+                    System.out.println("\t"+texto.getCadena());
+                    System.out.println("\tNo. líneas \t"+alto);
                     int ancho = 0;
                     for(String cad : auxiliar)
                     {
                         if(cad.length()>ancho){ancho=cad.length();}
+                        System.out.println("\tNo. caracteres \t"+ancho);
                     }
                     texto.setText(texto.getText());   
-                    texto.setAlto(alto*25);
-                    texto.setAncho(ancho*5);                    
+                    texto.setAlto(alto);
+                    texto.setAncho(ancho*7);                    
                 }
                 texto.setBounds(posX, posY, texto.getAncho(),texto.getAlto());
                 comprobarPosiciones(texto.getAncho(), texto.getAlto());                
@@ -1188,7 +1255,7 @@ public void generarInterfaz()
                 
             case "area":
                 areaTexto area =(areaTexto)aux.getValor();
-               // area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
+                //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
                 JScrollPane nuevo = new JScrollPane(area);
                 nuevo.setBounds(posX, posY, area.getAncho(),area.getAlto());
                 comprobarPosiciones(area.getAncho(), area.getAlto()); 
@@ -1236,11 +1303,12 @@ public void comprobarPosiciones(int ancho, int alto)
 
 public String quitarComillas(String cadena)
 {
-    if(cadena.substring(0).equals("\""))
+    String inicio = cadena.substring(0, 1);
+    if(inicio.equals("\""))
     {
         return cadena.substring(1, cadena.length()-1);
     }
-    return cadena;
+    return cadena.trim();
 }
    
    

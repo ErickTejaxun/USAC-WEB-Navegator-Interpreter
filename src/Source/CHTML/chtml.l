@@ -818,7 +818,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -1595,7 +1595,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -1994,7 +1994,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -2685,7 +2685,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -2985,7 +2985,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -3515,10 +3515,6 @@ metodo = {id}"()"
 
 <TEXTO2>
 {
-    "<\\-"
-    {
-        yybegin(COMENTARIO);
-    }
 
     [^]
     {  
@@ -3549,7 +3545,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
@@ -3623,7 +3619,7 @@ metodo = {id}"()"
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
             simbolo.setIndex(Interfaz.auxContador);
-            simbolo.setValor(cadena);                 
+            if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
             Interfaz.tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 

@@ -1,70 +1,73 @@
-<//- Inicio CHTML -//>
-<CHTML>
- <//- Contenido encabezado -//>
- <ENCABEZADO>
- <//- Estilo de la intefaz grafica de la página web -//>
- <CCSS ruta="C:\proyecto1\archivo_entrada_estilo.ccss";><FIN-CCSS>
- <CJS ruta="C:\proyecto1\archivo_entrada_estilo.cjs";><FIN-CJS>
+< chtml >
 
- <TITULO>PAGINA 1<FIN-TITULO>
- <FIN-ENCABEZADO>
+<//- 
+Comentario multinlinea
 
-<CUERPO fondo = "white";>        
+aa
+-//>
 
 
-        <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>
-        <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "160"; >Tabla Estudiante<FIN-BOTON>
-        <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "100"; > Principal <FIN-BOTON>   
-        <salto-fin>
-        <SPINNER ancho = "50"; alto ="25"; id="nota_1"; id="nota_1"; grupo="formulario_2";> <FIN-SPINNER>
-        <//- ingreso de espacios en blanco para las separaciones entre etiquetas -//>
-        <TEXTO> <FIN-TEXTO>
-        <TEXTO alto= "16"; ancho ="90"; grupo="formulario_1";>Nota Proyecto 2: <FIN-TEXTO>
-        <SPINNER ancho = "50"; alto ="25"; id="nota_2"; id="nota_2"; grupo="formulario_2";> <FIN-SPINNER>
-        <//- se agregó dos salto de linea entre elementos -//>
-        <SALTO-FIN>
-        <SALTO-FIN>
-        <TEXTO alto= "16"; ancho ="105"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
-        <CAJA_TEXTO alto= "20"; ancho ="200"; id="nombre"; grupo="formulario_2";>Nombre<FIN-CAJA_TEXTO>
-        <SALTO-FIN>
-        <TEXTO alto= "16"; ancho ="65"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
-        <TEXTO_A alto="95"; ancho="200"; id="comentario"; grupo="formulario_2";><FIN-TEXTO_A>
-        <SALTO-FIN>
-        <CAJA id="caja_1"; grupo="formulario_2";>
-        <OPCION valor= "promedio"; >Promedio<FIN-OPCION>
-        <OPCION valor= "suma"; >Suma<FIN-OPCION>
-        <OPCION valor= "resta"; >Resta<FIN-OPCION>
-        <OPCION valor= "multiplicar"; >Multiplicacion<FIN-OPCION>
-        <OPCION valor= "7"; >Modulo P1 % 7<FIN-OPCION>
-        <OPCION valor= "11"; >Modulo P2 % 11<FIN-OPCION>
-        <FIN-CAJA>
-        <BOTON click="operacion_datos();" alto= "30"; ancho ="210"; id="boto_cal"; grupo="formulario_2";> Calcular <FIN-BOTON> 
+< encabezado >
 
 
-                                    
-        <TEXTO alto= "30"; ancho ="210"; id="titulo_fomulario"; grupo="formulario_1";>Formulario de Notas:<FIN-TEXTO>   
-        <TEXTO alto= "16"; ancho ="90"; grupo="formulario_1";>Nota Proyecto 1: <FIN-TEXTO>                         
-        <TEXTO grupo = "salida_texto_1";>Opcion Seleccionada:<FIN-TEXTO>
-        <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_opcion";>--------<FIN-TEXTO>
-        <SALTO-FIN>
-        <TEXTO grupo = "salida_texto_1";>Nombre del Estudiante<FIN-TEXTO>
-        <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nombre"; >--------<FIN-TEXTO>
-        <SALTO-FIN>
-        <TEXTO grupo = "salida_texto_1";>Resultado: <FIN-TEXTO>
-        <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_resultado"; >--------<FIN-TEXTO>
-        <SALTO-FIN>
-        <TEXTO grupo = "salida_texto_1";>Comentario Realizado<FIN-TEXTO>
-        <TEXTO alto = "120"; ancho="200"; grupo = "salida_texto_2"; id= "r_comentario"; >--------<FIN-TEXTO>
-        <SALTO-FIN>
-        <TEXTO grupo = "salida_texto_1";>Nota P1:<FIN-TEXTO>
-        <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nota_1"; >--------<FIN-TEXTO>
-        <SALTO-FIN>
-        <TEXTO grupo = "salida_texto_1";>Nota P2:<FIN-TEXTO>
-        <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nota_2"; >--------<FIN-TEXTO>
-        <SALTO-FIN>
-        <IMAGEN alto = "300"; ancho = "200"; id="imagen_1";>C:\Users\erick\Desktop\pro.jpg<FIN-IMAGEN>            
-                                                                 
 
- 
- <FIN-CUERPO>
-<FIN-CHTML>    
+
+    < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+    < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+    < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+
+    < ccss ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.ccss" ; > < fin-ccss >
+    < titulo > Maxwell (microarquitectura) < fin-titulo> 
+
+
+< fin-encabezado >
+
+
+
+    <cuerpo fondo = "white";>  
+        
+    <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>
+    <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "160"; >Tabla Estudiante<FIN-BOTON>
+    <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "100"; > Principal <FIN-BOTON>       
+    <salto-fin>
+    <TEXTO alto= "50"; ancho ="210"; id="titulo_doc"; grupo="titulo";>Calificación Compiladores 2 
+    Proyecto 1 <FIN-TEXTO>
+    <salto-fin>    
+    <TEXTO alto= "30"; ancho ="210"; id="titulo_fomulario"; grupo="formulario_1";>Formulario de Notas:<FIN-TEXTO>
+    <SALTO-FIN>
+    <SALTO-FIN>
+    <SALTO-FIN>
+    <TEXTO alto= "25"; ancho ="100"; grupo="formulario_1";>Nota Proyecto 1: <FIN-TEXTO>
+    <SPINNER ancho = "50"; alto ="25"; id="nota_1"; id="nota_1"; grupo="formulario_2";> <FIN-SPINNER>
+    <//- ingreso de espacios en blanco para las separaciones entre etiquetas -//>
+    <TEXTO> <FIN-TEXTO>
+    <TEXTO alto= "16"; ancho ="100"; grupo="formulario_1";>Nota Proyecto 2: <FIN-TEXTO>
+    <SPINNER ancho = "50"; alto ="25"; id="nota_2"; id="nota_2"; grupo="formulario_2";> <FIN-SPINNER>
+    <//- se agregó dos salto de linea entre elementos -//>
+    <SALTO-FIN>
+    <SALTO-FIN>
+    <TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
+    <CAJA_TEXTO alto= "20"; ancho ="200"; id="nombre"; grupo="formulario_2";>Nombre<FIN-CAJA_TEXTO>
+    <SALTO-FIN>
+    <TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
+    <TEXTO_A alto="95"; ancho="200"; id="comentario"; grupo="formulario_2";><FIN-TEXTO_A>
+    <SALTO-FIN>
+    <CAJA id="caja_1"; grupo="formulario_2";>
+    <OPCION valor= "promedio"; >Promedio<FIN-OPCION>
+    <OPCION valor= "suma"; >Suma<FIN-OPCION>
+    <OPCION valor= "resta"; >Resta<FIN-OPCION>
+    <OPCION valor= "multiplicar"; >Multiplicacion<FIN-OPCION>
+    <OPCION valor= "7"; >Modulo P1 % 7<FIN-OPCION>
+    <OPCION valor= "11"; >Modulo P2 % 11<FIN-OPCION>
+    <FIN-CAJA>
+    <BOTON click="operacion_datos()"; alto= "30"; ancho ="210"; id="boto_cal"; grupo="formulario_2";> Calcular <FIN-BOTON>
+    <salto-fin>
+
+
+
+    <fin-cuerpo>
+
+
+
+
+< fin-chtml >

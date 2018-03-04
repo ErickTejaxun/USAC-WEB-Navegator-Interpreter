@@ -194,7 +194,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="textRuta">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="C:\u005cUsers\u005cerick\u005cDocuments\u005cNetBeansProjects\u005cUSAC-WEB\u005cejemplo.chtml" containsInvalidXMLChars="true"/>
+                    <Property name="text" type="java.lang.String" value="C:\u005cUsers\u005cerick\u005cDocuments\u005cNetBeansProjects\u005cUSAC-WEB\u005cprueba.html" containsInvalidXMLChars="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="botonOpciones">
