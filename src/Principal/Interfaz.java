@@ -43,7 +43,7 @@ public class Interfaz extends javax.swing.JFrame {
     public static nodoChtml raizChtml = new nodoChtml();
     public static int contadorChtml=0;
     public int contadorPaginas=0;
-    public static Panel nuevo;
+    public static Pagina nuevo;
     JTabbedPane contenedor = new JTabbedPane();
     JTabbedPane tabbedPane = new JTabbedPane();    
     /**
@@ -53,7 +53,7 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         
         contenedor.add("Inicio",null);        
-        Panel nuevo =new Panel();
+        Pagina nuevo =new Pagina();
         JButton boton = new JButton("+");
         contenedor.setTabComponentAt(contenedor.getTabCount()-1, boton);
         this.add(contenedor);            

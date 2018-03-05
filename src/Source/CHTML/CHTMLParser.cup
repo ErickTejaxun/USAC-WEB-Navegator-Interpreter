@@ -149,7 +149,6 @@ DEFCJS::= menorQue inicioCjs ruta asignacion pathComillas:path puntoComa mayorQu
 												nuevo.setTipo("path");
 												RESULT=nuevo;
 												:};
-
 DEFCCSS::= menorQue inicioCcss ruta asignacion pathComillas:path puntoComa mayorQue menorQue finCcss mayorQue
 												{: 
 												nodoChtml nuevo = new nodoChtml(path);																																		
@@ -320,16 +319,15 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 
 PANEL::= menorQue inicioPanel  ELEMENTOS:elementos mayorQue CONTENIDOCUERPO:contenido menorQue finPanel mayorQue
 												{: 
-												nodoChtml nuevo = new nodoChtml("PANEL");												
-												nuevo.add(elementos);																								
-												nuevo.add(contenido);																																														
-												RESULT=nuevo;
+												elementos.setValue("PANEL");																								
+												elementos.add(contenido);																																														
+												RESULT=elementos;
 												:}
 		|menorQue inicioPanel  ELEMENTOS:elementos mayorQue  menorQue finPanel mayorQue
 												{: 
-												nodoChtml nuevo = new nodoChtml("PANEL");												
-												nuevo.add(elementos);																																													
-												RESULT=nuevo;
+												elementos.setValue("PANEL");																								
+												//elementos.add(contenido);																																														
+												RESULT=elementos;
 												:}
  		| menorQue inicioPanel  mayorQue CONTENIDOCUERPO:contenido menorQue finPanel mayorQue
 												{: 
