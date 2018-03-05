@@ -1126,15 +1126,7 @@ public void compilar(){
                     
                 case "PANEL":
                     System.out.println("---------------------------PANEL---------------------");
-                    Panel panelNuevo = new Panel();
-                    panelNuevo.setAncho(scroll.getWidth());
-                    panelNuevo.setAlto(100);
-                    panelNuevo.setSize(scroll.getWidth(), 100);                    
-                    ArrayList<Elemento> elementosPanel = new ArrayList();                     
-                    for(nodoChtml hijo: raiz.getHijos())
-                    {
-                        generarPanel(hijo, elementosPanel, panelNuevo);
-                    }
+                    Panel panelNuevo = generarPanel(raiz);
                     elemento = new Elemento("panel","panel",panelNuevo); 
                     elementos.add(elemento);
                     break;                    
@@ -1154,636 +1146,633 @@ public void compilar(){
    
    
    /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-   public Panel generarPanel(nodoChtml raiz, ArrayList<Elemento> elementosPanel, Panel panelNuevo)
-   {                   
+   public Panel generarPanel(nodoChtml raiz)
+   {             
+       ArrayList<Elemento> elementosPanel = new ArrayList();
+       Panel panelNuevo = new Panel();
         if(raiz!=null)
         {
-            
-            switch(raiz.getValue())
+          for(nodoChtml hijo : raiz.getHijos())
+          {                                      
+            switch(hijo.getValue())
             {               
                 case "CONTENIDO":
-                    for(nodoChtml aux: raiz.getHijos())
+                    for(nodoChtml nieto: hijo.getHijos())
                     {
-                        generarPanel(aux, elementosPanel, panelNuevo);
-                    }
-                    break;
-                case "SALTO":                                   
-                    Elemento salto = new Elemento();
-                    salto.setNombre("salto");
-                    salto.setTipo("salto");
-                    elementosPanel.add(salto);
-                    break;                                                                                    
-                case "ELEMENTO":
-                        System.out.println("---------------ELEMENTOS DE OBJETO DE PANEL----------------------");
-                        nodoChtml hijoI = raiz.getHijos().get(0);
-                        nodoChtml hijoD = raiz.getHijos().get(1);
-                        switch(hijoI.getValue().toLowerCase())
-                        {                                                                 
-                            case "id":
-                                panelNuevo.setName(hijoD.getValue());
-                                break;
-                            case "grupo":
-                                panelNuevo.setGrupo(hijoD.getValue());                                    
-                                break;
-                            case "cadena":
-                                panelNuevo.setCadena(hijoD.getValue());                                                                    
-                                //texto.setAlto(texto.cadena.length());
-                                break; 
-                            case "ancho":     
-                                String ancho = hijoD.getValue().substring(1,hijoD.getValue().length()-1);                                
-                                if (esNumero(ancho))
-                                {
-                                    panelNuevo.setAncho(Integer.valueOf(ancho));     
-                                    panelNuevo.setSize(panelNuevo.getWidth(), panelNuevo.getHeight());
-                                }                                       
-                                break;
-                            case "alto": 
-                                String alto =  hijoD.getValue().substring(1,hijoD.getValue().length()-1);                                
-                                if (esNumero(alto))
-                                {
-                                    panelNuevo.setAlto(Integer.valueOf(alto));
-                                    panelNuevo.setAlto(panelNuevo.getAlto());
-                                    panelNuevo.setSize(panelNuevo.getWidth(), panelNuevo.getHeight());
-                                }                                                                                                                                   
-                                break; 
-                            case "alineado":                                                                        
-                                switch(hijoD.getValue())
-                                {
-                                    case "\"izquierda\"":
-                                        panelNuevo.setAlineado("izquierda");
-                                        panelNuevo.setAlignmentX(LEFT_ALIGNMENT);
-                                        break;
-                                    case "\"derecha\"":
-                                        panelNuevo.setAlineado("derecha");
-                                        panelNuevo.setAlignmentX(RIGHT_ALIGNMENT);
-                                        break;  
-                                    case "\"centrado\"":
-                                        panelNuevo.setAlineado("centrado");
-                                        panelNuevo.setAlignmentX(CENTER_ALIGNMENT);
-                                        break;   
-                                    default :
-                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(hijoD.getLinea()),String.valueOf(hijoD.getColumna()),
-                                            "Sintactico","Valor de alineacion incorrecto"});
-                                        break;                                          
-                                }                                
-                                break;                                     
-                        }                    
-                break;  
-                case "ENLACE":
-                    System.out.println("---------------------------ENLACE---------------------");                    
-                    Enlace enlace = new Enlace();
-                    enlace.setBackground(colorFondo);
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {
-                                case "ruta":
-                                    enlace.setRuta(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "id":
-                                    enlace.setId(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "grupo":
-                                    enlace.setGrupo(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "cadena":
-                                    enlace.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    enlace.setText(enlace.getCadena());
-                                    break; 
-                                case "ancho":                                                                        
-                                    if (esNumero(aux.getHijos().get(1).getValue()))
-                                    {
-                                        enlace.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
-                                    }                                       
-                                    break;
-                                case "alto":                                                                        
-                                    if (esNumero(aux.getHijos().get(1).getValue()))
-                                    {
-                                        enlace.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
-                                    }                                                                                                                                   
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            enlace.setAlineado("izquierda");
-                                            enlace.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            enlace.setAlineado("derecha");
-                                            enlace.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            enlace.setAlineado("centrado");
-                                            enlace.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    System.out.println("------------ALINEACION: \t"+enlace.getAlineado());
-                                    break;                                     
-                            }
-                        }
-                    }
-                    /*
-                    
-                    */                    
-                    Elemento elemento = new Elemento(enlace.getId(),"enlace",enlace);
-                    elementosPanel.add(elemento);                                     
-                    break;
-                    
-                case "BOTON":
-                    System.out.println("---------------------------BOTON---------------------");                    
-                    Boton boton = new Boton();                    
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {
-                                case "ruta":
-                                    boton.setRuta(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "click":                                                                       
-                                    boton.setMetodo(aux.getHijos().get(1).getValue());
-                                    break;                                     
-                                case "id":
-                                    boton.setId(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "grupo":
-                                    boton.setGrupo(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "cadena":
-                                    boton.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    boton.setText(boton.getCadena());
-                                    break; 
-                                case "ancho":          
-                                    String numero = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    if (esNumero(numero))
-                                    {
-                                        boton.setAncho(Integer.valueOf(numero));
-                                    }                                       
-                                    break;
-                                case "alto":  
-                                    numero = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);                                    
-                                    if (esNumero(numero))
-                                    {
-                                        boton.setAlto(Integer.valueOf(numero));
-                                    }                                                                                                                                   
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            boton.setAlineado("izquierda");
-                                            boton.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            boton.setAlineado("derecha");
-                                            boton.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            boton.setAlineado("centrado");
-                                            boton.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    break;                                     
-                            }
-                        }
-                    }      
-                    elemento = new Elemento(boton.getId(),"boton",boton);
-                    elementosPanel.add(elemento);                                     
-                    break;                    
-                    
-                    
-                case "SPINNER":
-                    System.out.println("---------------------------SPINNER---------------------");                    
-                    Spinner spinner = new Spinner();
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {
-                                case "ruta":
-                                    spinner.setRuta(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "click":                                                                       
-                                    spinner.setMetodo(aux.getHijos().get(1).getValue());
-                                    break;                                     
-                                case "id":
-                                    spinner.setId(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "grupo":
-                                    spinner.setGrupo(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "entero":
-                                    spinner.setCadena(aux.getHijos().get(1).getValue());                                                                        
-                                    break; 
-                                case "ancho":                                                                        
-                                    if (esNumero(aux.getHijos().get(1).getValue()))
-                                    {
-                                        spinner.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
-                                    }                                       
-                                    break;
-                                case "alto":                                                                        
-                                    if (esNumero(aux.getHijos().get(1).getValue()))
-                                    {
-                                        spinner.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
-                                    }                                                                                                                                   
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            spinner.setAlineado("izquierda");
-                                            spinner.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            spinner.setAlineado("derecha");
-                                            spinner.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            spinner.setAlineado("centrado");
-                                            spinner.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    System.out.println("------------ALINEACION: \t"+spinner.getAlineado());
-                                    break;                                     
-                            }
-                        }
-                    }                   
-                    elemento = new Elemento(spinner.getId(),"spinner",spinner);
-                    elementosPanel.add(elemento);                                     
-                    break;                    
-                    
-                case "TEXTO":
-                    System.out.println("---------------------------TEXTO---------------------");
-                    //Vemos todos los elementosPanel :v
-                    Texto texto = new Texto();
-                    //texto.setBackground(colorFondo);
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {                                                                 
-                                case "id":
-                                    texto.setName(aux.getHijos().get(1).getValue());
-                                    break;
-                                case "grupo":
-                                    texto.setGrupo(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "cadena":
-                                    texto.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    texto.setText(texto.getCadena());
-                                    //texto.setAlto(texto.cadena.length());
-                                    break; 
-                                case "ancho":                                                                        
-                                    String ancho = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    System.out.println(aux.getHijos().get(1).getValue()+"  ANCHO ---- "+ancho);
-                                    if (esNumero(ancho))
-                                    {
-                                        System.out.println("--Valor válido--");
-                                        texto.setAncho(Integer.valueOf(ancho));
-                                    }                                       
-                                    break;
-                                case "alto":                                                                        
-                                    String alto = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    System.out.println(aux.getHijos().get(1).getValue()+"  ALTO ---- "+alto);
-                                    if (esNumero(alto))
-                                    {
-                                        System.out.println("--Valor válido--");
-                                        texto.setAlto(Integer.valueOf(alto));
-                                    }                                                                                                                                   
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            texto.setAlineado("izquierda");
-                                            texto.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            texto.setAlineado("derecha");
-                                            texto.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            texto.setAlineado("centrado");
-                                            texto.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    System.out.println("------------ALINEACION: \t"+texto.getAlineado());
-                                    break;                                     
-                            }
-                        }
-                    }                    
-                    elemento = new Elemento(texto.getId(),"texto",texto);    
-                    elementosPanel.add(elemento);
-                    break;  
-/*Caja area de texto*/                   
-                case "TEXTOA":
-                    System.out.println("---------------------------TEXTOA---------------------");
-                    //Vemos todos los elementosPanel :v
-                    areaTexto area = new areaTexto();
-                    area.setBackground(Color.white);
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {                                                                 
-                                case "id":
-                                    area.setName(aux.getHijos().get(1).getValue());
-                                    break;
-                                case "grupo":
-                                    area.setGrupo(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "cadena":
-                                    area.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    area.setText(area.getCadena());
-                                    //texto.setAlto(texto.cadena.length());
-                                    break; 
-                                case "ancho":     
-                                    String ancho = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    System.out.println("ANCHO ---- "+ancho);
-                                    if (esNumero(ancho))
-                                    {
-                                        area.setAncho(Integer.valueOf(ancho));
-                                        area.setAncho(area.getAncho());
-                                    }                                       
-                                    break;
-                                case "alto": 
-                                    String alto = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    System.out.println("ALTO ---- "+alto);
-                                    if (esNumero(alto))
-                                    {
-                                        area.setAlto(Integer.valueOf(alto));
-                                        area.setAlto(area.getAlto());
-                                    }                                                                                                                                   
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            area.setAlineado("izquierda");
-                                            area.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            area.setAlineado("derecha");
-                                            area.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            area.setAlineado("centrado");
-                                            area.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    System.out.println("------------ALINEACION: \t"+area.getAlineado());
-                                    break;                                     
-                            }
-                        }
-                    }   
-                    area.setBorder(BorderFactory.createLineBorder(Color.black));
-                    elemento = new Elemento(area.getId(),"area",area);    
-                    elementosPanel.add(elemento);
-                    break;      
-                    
-/*CAJA DE TEXTO SIN LINEAS*/  
-                    
-                case "CAJATEXTO":
-                    System.out.println("---------------------------CAJATEXTO---------------------");
-                    //Vemos todos los elementosPanel :v
-                    Caja caja = new Caja();                    
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {                                                                 
-                                case "id":
-                                    caja.setName(aux.getHijos().get(1).getValue());
-                                    break;
-                                case "grupo":
-                                    caja.setGrupo(aux.getHijos().get(1).getValue());                                    
-                                    break;
-                                case "cadena":
-                                    caja.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    caja.setText(caja.getCadena());
-                                    //texto.setAlto(texto.cadena.length());
-                                    break; 
-                                case "ancho":     
-                                    String ancho = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    System.out.println("ANCHO ---- "+ancho);
-                                    if (esNumero(ancho))
-                                    {
-                                        caja.setAncho(Integer.valueOf(ancho));
-                                        caja.setAncho(caja.getAncho());
-                                    }                                       
-                                    break;
-                                case "alto": 
-                                    String alto = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
-                                    System.out.println("ALTO ---- "+alto);
-                                    if (esNumero(alto))
-                                    {
-                                        caja.setAlto(Integer.valueOf(alto));
-                                        caja.setAlto(caja.getAlto());
-                                    }                                                                                                                                   
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            caja.setAlineado("izquierda");
-                                            caja.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            caja.setAlineado("derecha");
-                                            caja.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            caja.setAlineado("centrado");
-                                            caja.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    System.out.println("------------ALINEACION: \t"+caja.getAlineado());
-                                    break;                                     
-                            }
-                        }
-                    }   
-                    caja.setBorder(BorderFactory.createLineBorder(Color.black));
-                    elemento = new Elemento(caja.getId(),"caja",caja);    
-                    elementosPanel.add(elemento);
-                    break;  
-
-/*----------------------------IMAGEN--------------------------------------*/                    
-                case "IMAGEN":
-                    System.out.println("---------------------------IMAGEN---------------------");
-                    Imagen imagen = new Imagen();
-                    imagen.setBackground(colorFondo);
-                    for(nodoChtml aux: raiz.getHijos())
-                    {                        
-                        if(aux.getValue().equals("ELEMENTO"))
-                        {
-                            switch(aux.getHijos().get(0).getValue().toLowerCase())
-                            {                                                                 
-                                case "id":
-                                    imagen.setName(quitarComillas(aux.getHijos().get(1).getValue()));
-                                    break;
-                                case "grupo":
-                                    imagen.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
-                                    break;
-                                case "cadena":
-                                    imagen.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                    
-                                    imagen.setText(imagen.getCadena());                                    
-                                    break; 
-                                case "ancho":                                                                        
-                                    String numero = aux.getHijos().get(1).getValue();
-                                    numero = numero.substring(1,numero.length()-1);
-                                    if (esNumero(numero))
-                                    {
-                                        imagen.setAncho(Integer.valueOf(numero));
-                                    } 
-                                    break;
-                                case "alto":            
-                                    numero = aux.getHijos().get(1).getValue();
-                                    numero = numero.substring(1,numero.length()-1);
-                                    if (esNumero(numero))
-                                    {
-                                        imagen.setAlto(Integer.valueOf(numero));
-                                    }     
-                                    break; 
-                                case "alineado":                                                                        
-                                    switch(aux.getHijos().get(1).getValue())
-                                    {
-                                        case "\"izquierda\"":
-                                            imagen.setAlineado("izquierda");
-                                            imagen.setAlignmentX(LEFT_ALIGNMENT);
-                                            break;
-                                        case "\"derecha\"":
-                                            imagen.setAlineado("derecha");
-                                            imagen.setAlignmentX(RIGHT_ALIGNMENT);
-                                            break;  
-                                        case "\"centrado\"":
-                                            imagen.setAlineado("centrado");
-                                            imagen.setAlignmentX(CENTER_ALIGNMENT);
-                                            break;   
-                                        default :
-                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
-                                                "Sintactico","Valor de alineacion incorrecto"});
-                                            break;                                          
-                                    }
-                                    break;  
-                                case "click":                                                                       
-                                    imagen.setMetodo(aux.getHijos().get(1).getValue());
-                                    break; 
-                                case "ruta":                                                                       
-                                    imagen.setRuta(aux.getHijos().get(1).getValue());
-                                    break;                                    
-                            }
-                        }
-                    }                    
-                    elemento = new Elemento(imagen.getId(),"imagen",imagen);    
-                    elementosPanel.add(elemento);
-                    break;                        
-                    
-                  
-/*------------------------CAJA DE OPCIONES-----------------------*/                    
-                case "CAJAOPCIONES":
-                    System.out.println("---------------------------IMAGEN---------------------");
-                    JComboBox cajaOpciones = new JComboBox();
-                    cajaOpciones.setBounds(posX, posY, 100, 20);
-                    int contadorOpciones = 0;
-                    for(nodoChtml aux: raiz.getHijos())
-                    {       
-                        System.out.println(aux.getValue());
-                        switch(aux.getValue().toLowerCase())
-                        {                                      
-                            /*------------OPCIONES----------*/                                        
-                            case "opcion":
-                                
-                                String valor = "";                                
-                                for(nodoChtml opcion: aux.getHijos())
-                                {     
-                                    if(opcion.getValue().equals("ELEMENTO"))
-                                    {
-                                        nodoChtml izquierda = opcion.getHijos().get(0);
-                                        nodoChtml derecha = opcion.getHijos().get(1);
-                                        System.out.println(izquierda.getValue().toLowerCase()+"***********************************************"+derecha.getValue());
-                                        switch(izquierda.getValue().toLowerCase())
-                                        {
-                                            case "valor":                                                                                                                           
-                                                valor = quitarComillas(derecha.getValue());
-                                                break; 
-                                            case "cadena":                                                                       
-                                                if(valor.equals(""))
+                       switch(nieto.getValue())
+                       {
+                                    case "SALTO":                                   
+                                    Elemento salto = new Elemento();
+                                    salto.setNombre("salto");
+                                    salto.setTipo("salto");
+                                    elementosPanel.add(salto);
+                                    break;                                                                                    
+                                    case "ENLACE":
+                                        System.out.println("---------------------------ENLACE---------------------");                    
+                                        Enlace enlace = new Enlace();
+                                        enlace.setBackground(colorFondo);
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
                                                 {
-                                                    valor = quitarComillas(derecha.getValue());
+                                                    case "ruta":
+                                                        enlace.setRuta(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "id":
+                                                        enlace.setId(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "grupo":
+                                                        enlace.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "cadena":
+                                                        enlace.setCadena(aux.getHijos().get(1).getValue());                                    
+                                                        enlace.setText(enlace.getCadena());
+                                                        break; 
+                                                    case "ancho":                                                                        
+                                                        if (esNumero(aux.getHijos().get(1).getValue()))
+                                                        {
+                                                            enlace.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                                        }                                       
+                                                        break;
+                                                    case "alto":                                                                        
+                                                        if (esNumero(aux.getHijos().get(1).getValue()))
+                                                        {
+                                                            enlace.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                                        }                                                                                                                                   
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                enlace.setAlineado("izquierda");
+                                                                enlace.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                enlace.setAlineado("derecha");
+                                                                enlace.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                enlace.setAlineado("centrado");
+                                                                enlace.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        System.out.println("------------ALINEACION: \t"+enlace.getAlineado());
+                                                        break;                                     
                                                 }
-                                                break;                                                
-                                        }                                                        
+                                            }
+                                        }
+                                        /*
+
+                                        */                    
+                                        Elemento elemento = new Elemento(enlace.getId(),"enlace",enlace);
+                                        elementosPanel.add(elemento);                                     
+                                        break;
+
+                                    case "BOTON":
+                                        System.out.println("---------------------------BOTON---------------------");                    
+                                        Boton boton = new Boton();                    
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                                {
+                                                    case "ruta":
+                                                        boton.setRuta(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "click":                                                                       
+                                                        boton.setMetodo(aux.getHijos().get(1).getValue());
+                                                        break;                                     
+                                                    case "id":
+                                                        boton.setId(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "grupo":
+                                                        boton.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "cadena":
+                                                        boton.setCadena(aux.getHijos().get(1).getValue());                                    
+                                                        boton.setText(boton.getCadena());
+                                                        break; 
+                                                    case "ancho":          
+                                                        String numero = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        if (esNumero(numero))
+                                                        {
+                                                            boton.setAncho(Integer.valueOf(numero));
+                                                        }                                       
+                                                        break;
+                                                    case "alto":  
+                                                        numero = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);                                    
+                                                        if (esNumero(numero))
+                                                        {
+                                                            boton.setAlto(Integer.valueOf(numero));
+                                                        }                                                                                                                                   
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                boton.setAlineado("izquierda");
+                                                                boton.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                boton.setAlineado("derecha");
+                                                                boton.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                boton.setAlineado("centrado");
+                                                                boton.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        break;                                     
+                                                }
+                                            }
+                                        }      
+                                        elemento = new Elemento(boton.getId(),"boton",boton);
+                                        elementosPanel.add(elemento);                                     
+                                        break;                    
+
+
+                                    case "SPINNER":
+                                        System.out.println("---------------------------SPINNER---------------------");                    
+                                        Spinner spinner = new Spinner();
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                                {
+                                                    case "ruta":
+                                                        spinner.setRuta(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "click":                                                                       
+                                                        spinner.setMetodo(aux.getHijos().get(1).getValue());
+                                                        break;                                     
+                                                    case "id":
+                                                        spinner.setId(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "grupo":
+                                                        spinner.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "entero":
+                                                        spinner.setCadena(aux.getHijos().get(1).getValue());                                                                        
+                                                        break; 
+                                                    case "ancho":                                                                        
+                                                        if (esNumero(aux.getHijos().get(1).getValue()))
+                                                        {
+                                                            spinner.setAncho(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                                        }                                       
+                                                        break;
+                                                    case "alto":                                                                        
+                                                        if (esNumero(aux.getHijos().get(1).getValue()))
+                                                        {
+                                                            spinner.setAlto(Integer.valueOf(aux.getHijos().get(1).getValue()));
+                                                        }                                                                                                                                   
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                spinner.setAlineado("izquierda");
+                                                                spinner.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                spinner.setAlineado("derecha");
+                                                                spinner.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                spinner.setAlineado("centrado");
+                                                                spinner.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        System.out.println("------------ALINEACION: \t"+spinner.getAlineado());
+                                                        break;                                     
+                                                }
+                                            }
+                                        }                   
+                                        elemento = new Elemento(spinner.getId(),"spinner",spinner);
+                                        elementosPanel.add(elemento);                                     
+                                        break;                    
+
+                                    case "TEXTO":
+                                        System.out.println("---------------------------TEXTO---------------------");
+                                        //Vemos todos los elementosPanel :v
+                                        Texto texto = new Texto();
+                                        //texto.setBackground(colorFondo);
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                                {                                                                 
+                                                    case "id":
+                                                        texto.setName(aux.getHijos().get(1).getValue());
+                                                        break;
+                                                    case "grupo":
+                                                        texto.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "cadena":
+                                                        texto.setCadena(aux.getHijos().get(1).getValue());                                    
+                                                        texto.setText(texto.getCadena());
+                                                        //texto.setAlto(texto.cadena.length());
+                                                        break; 
+                                                    case "ancho":                                                                        
+                                                        String ancho = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        System.out.println(aux.getHijos().get(1).getValue()+"  ANCHO ---- "+ancho);
+                                                        if (esNumero(ancho))
+                                                        {
+                                                            System.out.println("--Valor válido--");
+                                                            texto.setAncho(Integer.valueOf(ancho));
+                                                        }                                       
+                                                        break;
+                                                    case "alto":                                                                        
+                                                        String alto = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        System.out.println(aux.getHijos().get(1).getValue()+"  ALTO ---- "+alto);
+                                                        if (esNumero(alto))
+                                                        {
+                                                            System.out.println("--Valor válido--");
+                                                            texto.setAlto(Integer.valueOf(alto));
+                                                        }                                                                                                                                   
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                texto.setAlineado("izquierda");
+                                                                texto.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                texto.setAlineado("derecha");
+                                                                texto.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                texto.setAlineado("centrado");
+                                                                texto.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        System.out.println("------------ALINEACION: \t"+texto.getAlineado());
+                                                        break;                                     
+                                                }
+                                            }
+                                        }                    
+                                        elemento = new Elemento(texto.getId(),"texto",texto);    
+                                        elementosPanel.add(elemento);
+                                        break;  
+                    /*Caja area de texto*/                   
+                                    case "TEXTOA":
+                                        System.out.println("---------------------------TEXTOA---------------------");
+                                        //Vemos todos los elementosPanel :v
+                                        areaTexto area = new areaTexto();
+                                        area.setBackground(Color.white);
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                                {                                                                 
+                                                    case "id":
+                                                        area.setName(aux.getHijos().get(1).getValue());
+                                                        break;
+                                                    case "grupo":
+                                                        area.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "cadena":
+                                                        area.setCadena(aux.getHijos().get(1).getValue());                                    
+                                                        area.setText(area.getCadena());
+                                                        //texto.setAlto(texto.cadena.length());
+                                                        break; 
+                                                    case "ancho":     
+                                                        String ancho = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        System.out.println("ANCHO ---- "+ancho);
+                                                        if (esNumero(ancho))
+                                                        {
+                                                            area.setAncho(Integer.valueOf(ancho));
+                                                            area.setAncho(area.getAncho());
+                                                        }                                       
+                                                        break;
+                                                    case "alto": 
+                                                        String alto = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        System.out.println("ALTO ---- "+alto);
+                                                        if (esNumero(alto))
+                                                        {
+                                                            area.setAlto(Integer.valueOf(alto));
+                                                            area.setAlto(area.getAlto());
+                                                        }                                                                                                                                   
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                area.setAlineado("izquierda");
+                                                                area.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                area.setAlineado("derecha");
+                                                                area.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                area.setAlineado("centrado");
+                                                                area.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        System.out.println("------------ALINEACION: \t"+area.getAlineado());
+                                                        break;                                     
+                                                }
+                                            }
+                                        }   
+                                        area.setBorder(BorderFactory.createLineBorder(Color.black));
+                                        elemento = new Elemento(area.getId(),"area",area);    
+                                        elementosPanel.add(elemento);
+                                        break;      
+
+                    /*CAJA DE TEXTO SIN LINEAS*/  
+
+                                    case "CAJATEXTO":
+                                        System.out.println("---------------------------CAJATEXTO---------------------");
+                                        //Vemos todos los elementosPanel :v
+                                        Caja caja = new Caja();                    
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                                {                                                                 
+                                                    case "id":
+                                                        caja.setName(aux.getHijos().get(1).getValue());
+                                                        break;
+                                                    case "grupo":
+                                                        caja.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                                        break;
+                                                    case "cadena":
+                                                        caja.setCadena(aux.getHijos().get(1).getValue());                                    
+                                                        caja.setText(caja.getCadena());
+                                                        //texto.setAlto(texto.cadena.length());
+                                                        break; 
+                                                    case "ancho":     
+                                                        String ancho = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        System.out.println("ANCHO ---- "+ancho);
+                                                        if (esNumero(ancho))
+                                                        {
+                                                            caja.setAncho(Integer.valueOf(ancho));
+                                                            caja.setAncho(caja.getAncho());
+                                                        }                                       
+                                                        break;
+                                                    case "alto": 
+                                                        String alto = aux.getHijos().get(1).getValue().substring(1,aux.getHijos().get(1).getValue().length()-1);
+                                                        System.out.println("ALTO ---- "+alto);
+                                                        if (esNumero(alto))
+                                                        {
+                                                            caja.setAlto(Integer.valueOf(alto));
+                                                            caja.setAlto(caja.getAlto());
+                                                        }                                                                                                                                   
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                caja.setAlineado("izquierda");
+                                                                caja.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                caja.setAlineado("derecha");
+                                                                caja.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                caja.setAlineado("centrado");
+                                                                caja.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        System.out.println("------------ALINEACION: \t"+caja.getAlineado());
+                                                        break;                                     
+                                                }
+                                            }
+                                        }   
+                                        caja.setBorder(BorderFactory.createLineBorder(Color.black));
+                                        elemento = new Elemento(caja.getId(),"caja",caja);    
+                                        elementosPanel.add(elemento);
+                                        break;  
+
+                    /*----------------------------IMAGEN--------------------------------------*/                    
+                                    case "IMAGEN":
+                                        System.out.println("---------------------------IMAGEN---------------------");
+                                        Imagen imagen = new Imagen();
+                                        imagen.setBackground(colorFondo);
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {                        
+                                            if(aux.getValue().equals("ELEMENTO"))
+                                            {
+                                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                                {                                                                 
+                                                    case "id":
+                                                        imagen.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                                        break;
+                                                    case "grupo":
+                                                        imagen.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                                        break;
+                                                    case "cadena":
+                                                        imagen.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                                        imagen.setText(imagen.getCadena());                                    
+                                                        break; 
+                                                    case "ancho":                                                                        
+                                                        String numero = aux.getHijos().get(1).getValue();
+                                                        numero = numero.substring(1,numero.length()-1);
+                                                        if (esNumero(numero))
+                                                        {
+                                                            imagen.setAncho(Integer.valueOf(numero));
+                                                        } 
+                                                        break;
+                                                    case "alto":            
+                                                        numero = aux.getHijos().get(1).getValue();
+                                                        numero = numero.substring(1,numero.length()-1);
+                                                        if (esNumero(numero))
+                                                        {
+                                                            imagen.setAlto(Integer.valueOf(numero));
+                                                        }     
+                                                        break; 
+                                                    case "alineado":                                                                        
+                                                        switch(aux.getHijos().get(1).getValue())
+                                                        {
+                                                            case "\"izquierda\"":
+                                                                imagen.setAlineado("izquierda");
+                                                                imagen.setAlignmentX(LEFT_ALIGNMENT);
+                                                                break;
+                                                            case "\"derecha\"":
+                                                                imagen.setAlineado("derecha");
+                                                                imagen.setAlignmentX(RIGHT_ALIGNMENT);
+                                                                break;  
+                                                            case "\"centrado\"":
+                                                                imagen.setAlineado("centrado");
+                                                                imagen.setAlignmentX(CENTER_ALIGNMENT);
+                                                                break;   
+                                                            default :
+                                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                                break;                                          
+                                                        }
+                                                        break;  
+                                                    case "click":                                                                       
+                                                        imagen.setMetodo(aux.getHijos().get(1).getValue());
+                                                        break; 
+                                                    case "ruta":                                                                       
+                                                        imagen.setRuta(aux.getHijos().get(1).getValue());
+                                                        break;                                    
+                                                }
+                                            }
+                                        }                    
+                                        elemento = new Elemento(imagen.getId(),"imagen",imagen);    
+                                        elementosPanel.add(elemento);
+                                        break;                        
+
+
+                    /*------------------------CAJA DE OPCIONES-----------------------*/                    
+                                    case "CAJAOPCIONES":
+                                        System.out.println("---------------------------IMAGEN---------------------");
+                                        JComboBox cajaOpciones = new JComboBox();
+                                        cajaOpciones.setBounds(posX, posY, 100, 20);
+                                        int contadorOpciones = 0;
+                                        for(nodoChtml aux: nieto.getHijos())
+                                        {       
+                                            System.out.println(aux.getValue());
+                                            switch(aux.getValue().toLowerCase())
+                                            {                                      
+                                                /*------------OPCIONES----------*/                                        
+                                                case "opcion":
+
+                                                    String valor = "";                                
+                                                    for(nodoChtml opcion: aux.getHijos())
+                                                    {     
+                                                        if(opcion.getValue().equals("ELEMENTO"))
+                                                        {
+                                                            nodoChtml izquierda = opcion.getHijos().get(0);
+                                                            nodoChtml derecha = opcion.getHijos().get(1);
+                                                            System.out.println(izquierda.getValue().toLowerCase()+"***********************************************"+derecha.getValue());
+                                                            switch(izquierda.getValue().toLowerCase())
+                                                            {
+                                                                case "valor":                                                                                                                           
+                                                                    valor = quitarComillas(derecha.getValue());
+                                                                    break; 
+                                                                case "cadena":                                                                       
+                                                                    if(valor.equals(""))
+                                                                    {
+                                                                        valor = quitarComillas(derecha.getValue());
+                                                                    }
+                                                                    break;                                                
+                                                            }                                                        
+                                                        }
+                                                    }
+                                                    cajaOpciones.addItem(valor);
+                                                    break;                                                                                                    
+                                            }
+                                            contadorOpciones++;
+                                        }                    
+                                        //elemento = new Elemento(cajaOpciones.getId(),"cajaOpciones",cajaOpciones);    
+                                        elemento = new Elemento("cajaOpciones","cajaOpciones",cajaOpciones);    
+                                        elementosPanel.add(elemento);
+                                        break;                        
+
+
+                                    case "PANEL":
+                                        System.out.println("---------------------------PANEL---------------------");
+                                        Panel panelNuevo_ = generarPanel(nieto);
+                                        elemento = new Elemento("panel","panel",panelNuevo_); 
+                                        elementosPanel.add(elemento);
+                                        break;                                    
+                                    case "TABLA":
+                                        System.out.println("---------------------------TABLA---------------------");
+                                        Tabla tabla = generarTabla(nieto);
+                                        elemento = new Elemento(tabla.getId(),"tabla",tabla);
+                                        elementosPanel.add(elemento);                                     
+                                        break;                            
+
+                                           }
                                     }
-                                }
-                                cajaOpciones.addItem(valor);
-                                break;                                                                                                    
-                        }
-                        contadorOpciones++;
-                    }                    
-                    //elemento = new Elemento(cajaOpciones.getId(),"cajaOpciones",cajaOpciones);    
-                    elemento = new Elemento("cajaOpciones","cajaOpciones",cajaOpciones);    
-                    elementosPanel.add(elemento);
-                    break;                        
-                  
-                    
-                case "PANEL":
-                    System.out.println("---------------------------PANEL---------------------");
-                    Panel panel = new Panel();
-                    panel.setAncho(scroll.getWidth());
-                    panel.setAlto(100);
-                    panel.setSize(scroll.getWidth(), 100);                    
-                    ArrayList<Elemento> elementos = new ArrayList();                     
-                    for(nodoChtml hijo: raiz.getHijos())
-                    {
-                        generarPanel(hijo, elementos, panel);
-                    }
-                    elemento = new Elemento("panel","panel",panel);    
-                    elementosPanel.add(elemento);
-                    break;                  
-                    
-                case "TABLA":
-                    System.out.println("---------------------------TABLA---------------------");
-                    Tabla tabla = generarTabla(raiz);
-                    elemento = new Elemento(tabla.getId(),"tabla",tabla);
-                    elementosPanel.add(elemento);                                     
-                    break;
-                    
-                    
-                    
+                                break;
+                                
+                            case "ELEMENTO":
+                                    System.out.println("---------------ELEMENTOS DE OBJETO DE PANEL----------------------");
+                                    nodoChtml hijoI = hijo.getHijos().get(0);
+                                    nodoChtml hijoD = hijo.getHijos().get(1);
+                                    System.out.println(hijoI.getValue() +"--->" + hijoD.getValue());
+                                    switch(hijoI.getValue().toLowerCase())
+                                    {                                                                 
+                                        case "id":
+                                            panelNuevo.setName(hijoD.getValue());
+                                            break;
+                                        case "grupo":
+                                            panelNuevo.setGrupo(hijoD.getValue());                                    
+                                            break;
+                                        case "cadena":
+                                            panelNuevo.setCadena(hijoD.getValue());                                                                    
+                                            //texto.setAlto(texto.cadena.length());
+                                            break; 
+                                        case "ancho":     
+                                            String ancho = hijoD.getValue().substring(1,hijoD.getValue().length()-1);                                
+                                            if (esNumero(ancho))
+                                            {
+                                                panelNuevo.setAncho(Integer.valueOf(ancho));     
+                                                panelNuevo.setSize(panelNuevo.getAncho(), panelNuevo.getHeight());
+                                            }                                       
+                                            break;
+                                        case "alto": 
+                                            String alto =  hijoD.getValue().substring(1,hijoD.getValue().length()-1);                                
+                                            if (esNumero(alto))
+                                            {
+                                                panelNuevo.setAlto(Integer.valueOf(alto));
+                                                panelNuevo.setSize(panelNuevo.getWidth(), panelNuevo.getAlto());
+                                            }                                                                                                                                   
+                                            break; 
+                                        case "alineado":                                                                        
+                                            switch(hijoD.getValue())
+                                            {
+                                                case "\"izquierda\"":
+                                                    panelNuevo.setAlineado("izquierda");
+                                                    panelNuevo.setAlignmentX(LEFT_ALIGNMENT);
+                                                    break;
+                                                case "\"derecha\"":
+                                                    panelNuevo.setAlineado("derecha");
+                                                    panelNuevo.setAlignmentX(RIGHT_ALIGNMENT);
+                                                    break;  
+                                                case "\"centrado\"":
+                                                    panelNuevo.setAlineado("centrado");
+                                                    panelNuevo.setAlignmentX(CENTER_ALIGNMENT);
+                                                    break;   
+                                                default :
+                                                    filasErrores.addRow(new String[]{"CHTML",String.valueOf(hijoD.getLinea()),String.valueOf(hijoD.getColumna()),
+                                                        "Sintactico","Valor de alineacion incorrecto"});
+                                                    break;                                          
+                                            }                                
+                                            break;                                     
+                        }                    
+                break;                      
+                }                         
             }
-        }                                  
+        }
+        dibujarPanel(panelNuevo, elementosPanel);
         return panelNuevo;
    }
    
@@ -1819,7 +1808,7 @@ public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
                 }
                 posX = 0;
                 posY = posY + yMax;
-                yMax= xMax =0;                
+                yMax= xMax =0;                    
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();

@@ -23,6 +23,11 @@ public class Panel extends JPanel
     private int alto;
     private int ancho;
     private String metodo;
+    
+    public Panel()
+    {       
+        this.setSize(100,300);
+    }
 
     public String getRuta() {
         return ruta;
