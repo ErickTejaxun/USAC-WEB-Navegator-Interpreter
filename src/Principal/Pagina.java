@@ -162,7 +162,6 @@ public class Pagina extends javax.swing.JPanel {
         scroll.setBackground(new java.awt.Color(153, 255, 255));
         scroll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         scroll.setMinimumSize(new java.awt.Dimension(0, 15767));
-        scroll.setPreferredSize(new java.awt.Dimension(600, 600));
         scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 scrollComponentResized(evt);
@@ -397,7 +396,7 @@ public void prepararPanel(Panel nuevo)
     //nuevo.setBackground(new java.awt.Color(153, 255, 255));
     nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     nuevo.setMinimumSize(new java.awt.Dimension(0, 15767));
-    nuevo.setPreferredSize(new java.awt.Dimension(500, 200));
+    nuevo.setPreferredSize(new java.awt.Dimension(nuevo.getAncho(),nuevo.getAlto()));
     /*nuevo.addComponentListener(new java.awt.event.ComponentAdapter() {
     public void componentResized(java.awt.event.ComponentEvent evt) {
         scrollComponentResized(evt);
@@ -437,6 +436,8 @@ public void analizar() throws IOException
         posX = posY = xMax = yMax=  0;
         Panel nuevo = new Panel();        
         nuevo.setBounds(0, 0, scroll.getWidth(), scroll.getHeight());
+        nuevo.setAncho(scroll.getWidth());
+        nuevo.setAlto(scroll.getHeight());
         prepararPanel(nuevo);
         generarObjetos(raizChtml,nuevo);  
 
@@ -558,44 +559,102 @@ public void compilar(){
                     }
                     break;
                 case "ELEMENTO":
-                        nodoChtml auxiliar = raiz.getHijos().get(1);
-                        if(auxiliar.getValue().substring(1,2).equals("#"))
-                        {
-                            if(auxiliar.getValue().length()==9)
-                            {
-                                //Color colorFodo = new Color(int r, int g, int b, int a);
-                                //this.scroll.setBackground(colorFondo);
-                                int r,g,b,a;
-                                String hr,hg,hb,ha;
-                                String entrada= auxiliar.getValue();
-                                hr = entrada.substring(2,4);
-                                hg = entrada.substring(4,6);
-                                hb = entrada.substring(6,8);
-
-                                r = hexToDec(hr);
-                                g = hexToDec(hg);
-                                b = hexToDec(hb);
-                                a=0;
-                                if(r==300 || g ==300 || b==300)
-                                {
-                                    filasErrores.addRow(new String[]{"CHTML",String.valueOf(auxiliar.getLinea()),String.valueOf(auxiliar.getColumna()),"Semantico", auxiliar.getValue() + " Valor rgb no valido."});
-                                    break;
-                                }
-
-                                panel.setBackground(new Color(r,g,b));
-                                colorFondo = new Color(r,g,b);
-                            }
-                            else
-                            {
-                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(auxiliar.getLinea()),String.valueOf(auxiliar.getColumna()),"Semantico","Valor rgb no valido."});
+                        nodoChtml hijoI = raiz.getHijos().get(0);
+                        nodoChtml hijoD = raiz.getHijos().get(1);
+                        switch(hijoI.getValue().toLowerCase())
+                        {                                                                 
+                            case "id":
+                                panel.setName(quitarComillas(hijoD.getValue()));
                                 break;
-                            }
-                        }
-                        else
-                        {
-                            panel.setBackground(buscarColor(auxiliar));
-                            colorFondo = buscarColor(raiz.getHijos().get(0));
-                        }                                                                   
+                            case "grupo":
+                                panel.setGrupo(quitarComillas(hijoD.getValue()));                                    
+                                break;
+                            case "cadena":
+                                panel.setCadena(quitarComillas(hijoD.getValue()));                                                                                           
+                                break; 
+                            case "ancho":                                                                        
+                                String numero = hijoD.getValue();
+                                numero = numero.substring(1,numero.length()-1);
+                                if (esNumero(numero))
+                                {
+                                    panel.setAncho(Integer.valueOf(numero));
+                                } 
+                                break;
+                            case "alto":            
+                                numero = hijoD.getValue();
+                                numero = numero.substring(1,numero.length()-1);
+                                if (esNumero(numero))
+                                {
+                                    panel.setAlto(Integer.valueOf(numero));
+                                }     
+                                break; 
+                            case "alineado":                                                                        
+                                switch(hijoD.getValue())
+                                {
+                                    case "\"izquierda\"":
+                                        panel.setAlineado("izquierda");
+                                        panel.setAlignmentX(LEFT_ALIGNMENT);
+                                        break;
+                                    case "\"derecha\"":
+                                        panel.setAlineado("derecha");
+                                        panel.setAlignmentX(RIGHT_ALIGNMENT);
+                                        break;  
+                                    case "\"centrado\"":
+                                        panel.setAlineado("centrado");
+                                        panel.setAlignmentX(CENTER_ALIGNMENT);
+                                        break;   
+                                    default :
+                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(hijoD.getLinea()),String.valueOf(hijoD.getColumna()),
+                                            "Sintactico","Valor de alineacion incorrecto"});
+                                        break;                                          
+                                }
+                                break;  
+                            case "click":                                                                       
+                                panel.setMetodo(hijoD.getValue());
+                                break; 
+                            case "ruta":                                                                       
+                                panel.setRuta(hijoD.getValue());
+                                break;   
+                            case "color":
+                                if(hijoD.getValue().substring(1,2).equals("#"))
+                                {
+                                    if(hijoD.getValue().length()==9)
+                                    {
+                                        //Color colorFodo = new Color(int r, int g, int b, int a);
+                                        //this.scroll.setBackground(colorFondo);
+                                        int r,g,b,a;
+                                        String hr,hg,hb,ha;
+                                        String entrada= hijoD.getValue();
+                                        hr = entrada.substring(2,4);
+                                        hg = entrada.substring(4,6);
+                                        hb = entrada.substring(6,8);
+
+                                        r = hexToDec(hr);
+                                        g = hexToDec(hg);
+                                        b = hexToDec(hb);
+                                        a=0;
+                                        if(r==300 || g ==300 || b==300)
+                                        {
+                                            filasErrores.addRow(new String[]{"CHTML",String.valueOf(hijoD.getLinea()),String.valueOf(hijoD.getColumna()),"Semantico", hijoD.getValue() + " Valor rgb no valido."});
+                                            break;
+                                        }
+
+                                        panel.setBackground(new Color(r,g,b));
+                                        colorFondo = new Color(r,g,b);
+                                    }
+                                    else
+                                    {
+                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(hijoD.getLinea()),String.valueOf(hijoD.getColumna()),"Semantico","Valor rgb no valido."});
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    panel.setBackground(buscarColor(hijoD));
+                                    colorFondo = buscarColor(raiz.getHijos().get(0));
+                                }  
+                                break;
+                        }                                                                                                                 
                     break;
                     
                     
