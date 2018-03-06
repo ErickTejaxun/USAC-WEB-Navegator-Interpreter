@@ -13,15 +13,39 @@
 
 
 
-    <cuerpo fondo = "black";>                      
- 
-            <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>                             
+    <cuerpo fondo = "#fff00";>                      
+        <panel > 
+            <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>                         
             <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "160"; >Tabla Estudiante<FIN-BOTON>            
             <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "100"; > Principal <FIN-BOTON>       
-  
+        <fin-panel> 
+        <salto-fin> 
+        <panel alto="400"; ancho="500";>
+        <TEXTO alto= "50"; ancho ="210"; id="titulo_doc"; grupo="titulo";>Calificación Compiladores 2 Proyecto 2 <FIN-TEXTO>
+        <fin-panel>
+
+        <salto-fin>
+        <panel alto="400"; ancho="500"; >
+            <TEXTO alto= "30"; ancho ="210"; id="titulo_fomulario"; grupo="formulario_1";>Formulario de Notas:<FIN-TEXTO>
+            <TEXTO alto= "16"; ancho ="90"; grupo="formulario_1";>Nota Proyecto 1: <FIN-TEXTO>            
+            <SPINNER ancho = "50"; alto ="25"; id="nota_1"; id="nota_1"; grupo="formulario_2";> <FIN-SPINNER>
+            <//- ingreso de espacios en blanco para las separaciones entre etiquetas -//>
+            <TEXTO>                 <FIN-TEXTO>
+            <TEXTO alto= "16"; ancho ="90"; grupo="formulario_1";>Nota Proyecto 2: <FIN-TEXTO>
+            <SPINNER ancho = "50"; alto ="25"; id="nota_2"; id="nota_2"; grupo="formulario_2";> <FIN-SPINNER>
+            <TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
+            <CAJA_TEXTO alto= "20"; ancho ="200"; id="nombre"; grupo="formulario_2"; >Nombre<FIN-CAJA_TEXTO>
+            <TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
+            <TEXTO_A alto="95"; ancho="200"; id="comentario"; grupo="formulario_2";>   <FIN-TEXTO_A>
+            <CAJA id="caja_1"; grupo="formulario_2"; click="calcular()";>
+                <OPCION valor= "promedio";>Promedio<FIN-OPCION>
+                <OPCION valor= "suma";>Suma<FIN-OPCION>
+                <OPCION valor= "resta";>Resta<FIN-OPCION>
+                <OPCION valor= "multiplicar";>Multiplicacion<FIN-OPCION>
+                <OPCION valor= "7"; >Modulo P1 % 7<FIN-OPCION>
+                <OPCION valor= "11"; >Modulo P2 % 11<FIN-OPCION>
+            <FIN-CAJA>
+            <BOTON click="operacion_datos()"; alto= "30"; ancho ="210"; id="boto_cal"; grupo="formulario_2";> Calcular <FIN-BOTON>                                  
+        <fin-panel>          
     <fin-cuerpo>
-
-
-
-
 < fin-chtml >

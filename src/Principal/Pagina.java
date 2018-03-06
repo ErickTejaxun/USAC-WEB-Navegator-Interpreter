@@ -447,8 +447,7 @@ public void limpiarSalidas()
         filasErrores.addColumn("Columna");
         filasErrores.addColumn("Tipo");
         filasErrores.addColumn("Descripción");
-        tablaErrores.setModel(filasErrores);
-        
+        tablaErrores.setModel(filasErrores);        
         filasSalidas.addColumn("Archivo");
         filasSalidas.addColumn("Línea");
         filasSalidas.addColumn("Columna");
@@ -529,14 +528,13 @@ public void compilar(){
                     panel.getElementos().add(salto);
                     break;                    
                 case  "CUERPO":
-                    nodoChtml auxiliar = raiz.getHijos().get(0);
-                    if(!auxiliar.getValue().equals("ELEMENTO"))
+                    for(nodoChtml aux: raiz.getHijos())
                     {
-                        generarObjetos(raiz.getHijos().get(0),panel);
-                        
+                        generarObjetos(aux,panel);
                     }
-                    else
-                    {
+                    break;
+                case "ELEMENTO":
+                        nodoChtml auxiliar = raiz.getHijos().get(1);
                         if(auxiliar.getValue().substring(1,2).equals("#"))
                         {
                             if(auxiliar.getValue().length()==9)
@@ -560,7 +558,7 @@ public void compilar(){
                                     break;
                                 }
 
-                                this.scroll.setBackground(new Color(r,g,b));
+                                panel.setBackground(new Color(r,g,b));
                                 colorFondo = new Color(r,g,b);
                             }
                             else
@@ -571,11 +569,9 @@ public void compilar(){
                         }
                         else
                         {
-                            panel.setBackground(buscarColor(raiz.getHijos().get(0)));
+                            panel.setBackground(buscarColor(auxiliar));
                             colorFondo = buscarColor(raiz.getHijos().get(0));
-                        }
-                        generarObjetos(raiz.getHijos().get(1),panel);
-                    }
+                        }                                                                   
                     break;
                     
                     
@@ -2128,6 +2124,7 @@ public void Interfaz(Panel contenedor)
                 contenedor.add(panel);
                 break;                  
         }
+        this.repaint();
     }
     
     
