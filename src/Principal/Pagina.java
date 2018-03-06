@@ -350,13 +350,14 @@ public class Pagina extends javax.swing.JPanel {
     }//GEN-LAST:event_botonAdelanteActionPerformed
 
     private void botonIrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIrActionPerformed
-        try {
+        try 
+        {
             analizar();
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex)
+        {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        generarInterfaz();
+        }       
     }//GEN-LAST:event_botonIrActionPerformed
 
     private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
@@ -393,48 +394,46 @@ public class Pagina extends javax.swing.JPanel {
     
 public void analizar() throws IOException
 {
-        this.scroll.removeAll();
+        scroll.removeAll();
         tablaSimbolos_.clear();
         erroresLexicos.clear();
         elementos.clear();
         erroresSintacticos.clear();
-        Interfaz.raizChtml = new nodoChtml();
-        erroresLexicos = Interfaz.erroresLexicos;
-        Interfaz.erroresLexicos.clear();
-        this.elementos = new ArrayList();
-        if(true)
+        elementos = new ArrayList();
+
+
+        compilar();
+        
+        if((erroresLexicos.size()!=0)||(erroresSintacticos.size()!=0)||(erroresSemanticos.size()!=0))
         {
-
-            compilar();
-            if((erroresLexicos.size()!=0)||(erroresSintacticos.size()!=0)||(erroresSemanticos.size()!=0)){
             errores_consola();
-            }
-            if((erroresLexicos.size()==0)&&(erroresSintacticos.size()==0)&&(erroresSemanticos.size()==0)){
-            //Consola1.setText("");
-            }
-            
-            dibujador aux = new dibujador();
-            raizChtml = Interfaz.raizChtml;
-            aux.generarGrafica(raizChtml); // Dibujamos el arbol
-            generarObjetos(raizChtml);  
-            posX = posY = xMax = yMax=  0;
-            Panel nuevo = new Panel();
-            scroll.add(nuevo);
-            Interfaz( nuevo , elementos); // Generamos la interfaz 
-            
-            
-            
-            //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
-            //aux.imprimirtodo(raizChtml, contadorChtml);
-
-            
-            limpiarSalidas();
-            imprimirReporteLexico();
-            imprimirResultado();
-            imprimirLexicos();
-            imprimirSintacticos();
-            imprimirSemanticos();
         }
+        dibujador aux = new dibujador();           
+        aux.generarGrafica(raizChtml); // Dibujamos el arbol
+
+        posX = posY = xMax = yMax=  0;
+        Panel nuevo = new Panel();
+        nuevo.setBounds(0, 0, scroll.getWidth(), scroll.getHeight());
+        generarObjetos(raizChtml,nuevo);  
+
+        Elemento elemento = new Elemento("panel", "panel", nuevo);
+        elementos.add(elemento);
+        Interfaz(nuevo); // Generamos la interfaz             
+        scroll.add(nuevo);
+
+
+
+        //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
+        //aux.imprimirtodo(raizChtml, contadorChtml);
+
+
+        limpiarSalidas();
+        imprimirReporteLexico();
+        imprimirResultado();
+        imprimirLexicos();
+        imprimirSintacticos();
+        imprimirSemanticos();
+        
     
     
 } 
@@ -461,13 +460,13 @@ public void compilar(){
 
         
         String path=textRuta.getText();  
-         try {            
-            s=new Scanner(new java.io.FileReader(path)); 
-            
-              
+         try 
+         {            
+            s=new Scanner(new java.io.FileReader(path));                          
             p = new sintactico(s);
             p.parse();
-            tablaSimbolos_ = Interfaz.tablaSimbolos_;
+            tablaSimbolos_ = Scanner.tablaSimbolos_;
+            raizChtml = sintactico.raizChtml;
             int numero= tablaSimbolos_.size();
             System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
             for(int n=0;n<numero;n++)
@@ -477,15 +476,7 @@ public void compilar(){
             
             }
             System.out.println(numero);
-
-            
-//            Consola1.setText(p.textoConsola1);
-
-            
-            
-           
-            
-           
+ 
         }
         catch(Exception e) { System.out.println(e.getMessage());}
     
@@ -495,7 +486,7 @@ public void compilar(){
 
 
 
-   public void generarObjetos(nodoChtml raiz)
+   public void generarObjetos(nodoChtml raiz, Panel panel)
     {
         
         String retorno="";
@@ -507,14 +498,14 @@ public void compilar(){
                 case "DOCUMENTO":
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        generarObjetos(aux);
+                        generarObjetos(aux, panel);
                     }
                     break;
                     
                 case "ENCABEZADO":                                
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        generarObjetos(aux);
+                        generarObjetos(aux, panel);
                     }
                     break;
                 case "LISTAARCHIVOS":
@@ -535,13 +526,13 @@ public void compilar(){
                     Elemento salto = new Elemento();
                     salto.setNombre("salto");
                     salto.setTipo("salto");
-                    elementos.add(salto);
+                    panel.getElementos().add(salto);
                     break;                    
                 case  "CUERPO":
                     nodoChtml auxiliar = raiz.getHijos().get(0);
-                    if(auxiliar.getValue().equals("CONTENIDO"))
+                    if(!auxiliar.getValue().equals("ELEMENTO"))
                     {
-                        generarObjetos(raiz.getHijos().get(0));
+                        generarObjetos(raiz.getHijos().get(0),panel);
                         
                     }
                     else
@@ -580,10 +571,10 @@ public void compilar(){
                         }
                         else
                         {
-                            this.scroll.setBackground(buscarColor(raiz.getHijos().get(0)));
+                            panel.setBackground(buscarColor(raiz.getHijos().get(0)));
                             colorFondo = buscarColor(raiz.getHijos().get(0));
                         }
-                        generarObjetos(raiz.getHijos().get(1));
+                        generarObjetos(raiz.getHijos().get(1),panel);
                     }
                     break;
                     
@@ -591,7 +582,7 @@ public void compilar(){
                 case "CONTENIDO"   :
                     for(nodoChtml aux: raiz.getHijos())
                     {
-                        generarObjetos(aux);
+                        generarObjetos(aux,panel);
                     }
                     break;
                     
@@ -660,7 +651,7 @@ public void compilar(){
                     
                     */                    
                     Elemento elemento = new Elemento(enlace.getId(),"enlace",enlace);
-                    elementos.add(elemento);                                     
+                   panel.getElementos().add(elemento);                                     
                     break;
                     
                 case "BOTON":
@@ -731,7 +722,7 @@ public void compilar(){
                         Elemento tablaAuxiliar =  elementos.get(elementos.size());                                                
                     }
                     elemento = new Elemento(boton.getId(),"boton",boton);
-                    elementos.add(elemento);                                     
+                    panel.getElementos().add(elemento);                                     
                     break;                    
                     
                     
@@ -797,7 +788,7 @@ public void compilar(){
                         }
                     }                   
                     elemento = new Elemento(spinner.getId(),"spinner",spinner);
-                    elementos.add(elemento);                                     
+                    panel.getElementos().add(elemento);                                     
                     break;                    
                     
                 case "TEXTO":
@@ -866,7 +857,7 @@ public void compilar(){
                         }
                     }                    
                     elemento = new Elemento(texto.getId(),"texto",texto);    
-                    elementos.add(elemento);
+                    panel.getElementos().add(elemento);
                     break;  
 /*Caja area de texto*/                   
                 case "TEXTOA":
@@ -936,7 +927,7 @@ public void compilar(){
                     }   
                     area.setBorder(BorderFactory.createLineBorder(Color.black));
                     elemento = new Elemento(area.getId(),"area",area);    
-                    elementos.add(elemento);
+                    panel.getElementos().add(elemento);
                     break;      
                     
 /*CAJA DE TEXTO SIN LINEAS*/  
@@ -1007,7 +998,7 @@ public void compilar(){
                     }   
                     caja.setBorder(BorderFactory.createLineBorder(Color.black));
                     elemento = new Elemento(caja.getId(),"caja",caja);    
-                    elementos.add(elemento);
+                    panel.getElementos().add(elemento);
                     break;  
 
 /*----------------------------IMAGEN--------------------------------------*/                    
@@ -1078,7 +1069,7 @@ public void compilar(){
                         }
                     }                    
                     elemento = new Elemento(imagen.getId(),"imagen",imagen);    
-                    elementos.add(elemento);
+                    panel.getElementos().add(elemento);
                     break;                        
                     
                   
@@ -1125,23 +1116,27 @@ public void compilar(){
                     }                    
                     //elemento = new Elemento(cajaOpciones.getId(),"cajaOpciones",cajaOpciones);    
                     elemento = new Elemento("cajaOpciones","cajaOpciones",cajaOpciones);    
-                    elementos.add(elemento);
+                    panel.getElementos().add(elemento);
                     break;                        
                   
                     
                 case "PANEL":
                     System.out.println("---------------------------PANEL---------------------");
-                    Panel panelNuevo = generarPanel(raiz);                    
+                    Panel panelNuevo = new Panel();
+                    for(nodoChtml hijoAuxiliar: raiz.getHijos())
+                    {
+                        generarObjetos(hijoAuxiliar, panelNuevo);                                  
+                    }                              
                     anchoActual = scroll.getWidth();
                     elemento = new Elemento("panel","panel",panelNuevo); 
-                    elementos.add(elemento);
+                    panel.getElementos().add(elemento);
                     break;                    
                     
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
                     Tabla tabla = generarTabla(raiz);
                     elemento = new Elemento(tabla.getId(),"tabla",tabla);
-                    elementos.add(elemento);                                     
+                    panel.getElementos().add(elemento);                                     
                     break;                                                            
             }
         }        
@@ -1980,12 +1975,14 @@ public void posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, in
 
 }
    
-public void Interfaz(Panel contenedor, ArrayList<Elemento> elementos)
+public void Interfaz(Panel contenedor)
 {
     int x = 0;
     int y = 0;
     int saltoY = 0;
     int saltoX = 0;
+    ArrayList<Elemento> elementos = contenedor.getElementos();
+    
     for(Elemento aux: elementos)
     {
         switch(aux.getTipo())
@@ -2126,7 +2123,7 @@ public void Interfaz(Panel contenedor, ArrayList<Elemento> elementos)
                 if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(scroll.getWidth(),100);}
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
-                Interfaz(panel, panel.getElementos());
+                Interfaz(panel);
                 posicionPanel( panel.getWidth(),panel.getHeight(),contenedor, saltoY, x, y); 
                 contenedor.add(panel);
                 break;                  
@@ -2406,9 +2403,8 @@ private static boolean esNumero(String cadena){
     public void imprimirReporteLexico(){
           String directorioHtml=PathActual()+"\\Lexico.html";
 
-            if(tablaSimbolos_.isEmpty() && tablaSimbolos_.isEmpty()){
-                JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
-
+            if(tablaSimbolos_.isEmpty()){
+                //JOptionPane.showMessageDialog(this,"No se ha hecho ningun analisis :v");
             }else{
                 File html=new File(directorioHtml);
                 PrintWriter writer;

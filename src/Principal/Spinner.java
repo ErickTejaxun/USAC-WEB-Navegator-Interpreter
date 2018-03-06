@@ -16,7 +16,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
-import static Principal.Navegador.botonAgregar;
+import static Principal.Nav.botonAgregar;
 
 /**
  *

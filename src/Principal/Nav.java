@@ -7,11 +7,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
-public class Navegador {
+public class Nav {
 
     public static JButton botonAgregar = new JButton("+");
     final static JTabbedPane contenedorPaginas = new JTabbedPane();
-    public static void main(String[] args) 
+    public static void main() 
     {
         JFrame ventana = new JFrame();
         ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

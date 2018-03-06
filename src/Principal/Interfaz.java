@@ -50,13 +50,19 @@ public class Interfaz extends javax.swing.JFrame {
      * Creates new form Interfaz
      */
     public Interfaz() {
-        initComponents();
+        //initComponents();
         
         contenedor.add("Inicio",null);        
         Pagina nuevo =new Pagina();
         JButton boton = new JButton("+");
         contenedor.setTabComponentAt(contenedor.getTabCount()-1, boton);
-        this.add(contenedor);            
+        //this.add(contenedor); 
+        this.hide();
+
+       
+        //Nav navegador = new Nav();
+        Nav.main();
+        
     }
 
     /**

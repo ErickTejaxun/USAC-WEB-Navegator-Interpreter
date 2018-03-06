@@ -7,12 +7,14 @@ import Principal.Errores;
 import Principal.Interfaz;
 import Principal.tablaSimbolos;
 import Source.CHTML.nodoChtml;
+
 //import static olc1_proyecto1.Menu.path;
 parser code
 {:
 	public String cadena="";
     public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();	
 	public static ArrayList<Errores> erroresSintacticos = new ArrayList();
+	public static nodoChtml raizChtml ;
 
 	public static String ConvertirObjectToString(Object Obj)
 	 {
@@ -24,7 +26,14 @@ parser code
 		return Str;
 	}
 
-
+	public static void agregarRaiz(nodoChtml encabezado, nodoChtml cuerpo)
+	{
+		raizChtml = new nodoChtml("DOCUMENTO");
+		raizChtml.setValue("DOCUMENTO");
+		raizChtml.setTipo("DOCUMENTO");				
+		raizChtml.add(encabezado);
+		raizChtml.add(cuerpo);
+	}
 	public static void erroresSintacticos(Symbol s)
 	{
 		System.out.println("Error de sintaxis. Linea: " + (s.right + 1) +
@@ -72,12 +81,7 @@ start with CHTML;
 
 /*1. Documento completo-----------ENCABEZADO CUERPO ---------------------------------------------------------------------------------------------------------------------*/
 CHTML::= INICIOCHTML:iz  ENCABEZADO:encabezado CUERPO:cuerpo FINCHTML:der {:
-										Interfaz.raizChtml.setValue("DOCUMENTO");
-										Interfaz.raizChtml.setTipo("DOCUMENTO");
-										Interfaz.raizChtml.setLinea(Interfaz.contadorChtml++);
-										//if(iz!=null){Interfaz.raizChtml.add(iz);}
-										Interfaz.raizChtml.add(encabezado);
-										Interfaz.raizChtml.add(cuerpo);
+										agregarRaiz(encabezado, cuerpo);
 										:};
 										//if(der!=null){Interfaz.raizChtml.add(der);}:};
 
@@ -169,19 +173,23 @@ CUERPO ::= menorQue inicioCuerpo  ESTILOCUERPO:estilo mayorQue CONTENIDOCUERPO:c
 												nodoChtml nuevo = new nodoChtml("CUERPO");												
 												nuevo.add(estilo);
 												nuevo.add(contenido);
-												RESULT=nuevo;
+												estilo.setValue("CUERPO");
+												estilo.addLista(contenido);
+												RESULT=estilo;
 												:}
 		|menorQue inicioCuerpo  ESTILOCUERPO:estilo mayorQue  menorQue finCuerpo mayorQue
 												{: 
 												nodoChtml nuevo = new nodoChtml("CUERPO");
 												nuevo.add(estilo);	
-												RESULT=nuevo;											
+												estilo.setValue("CUERPO");
+												RESULT=estilo;											
 												:}
 		|	menorQue inicioCuerpo mayorQue CONTENIDOCUERPO:contenido  menorQue finCuerpo mayorQue
 												{: 
 												nodoChtml nuevo = new nodoChtml("CUERPO");
 												nuevo.add(contenido);
-												RESULT=nuevo;
+												contenido.setValue("CUERPO");
+												RESULT=contenido;
 												:}															
 		|	menorQue inicioCuerpo mayorQue  menorQue finCuerpo mayorQue
 												{: 
@@ -190,12 +198,20 @@ CUERPO ::= menorQue inicioCuerpo  ESTILOCUERPO:estilo mayorQue CONTENIDOCUERPO:c
 												:};
 
 ESTILOCUERPO::=  fondo asignacion rgb:color puntoComa{: 
-												nodoChtml nuevo = new nodoChtml(color);																																		
-												RESULT=nuevo;
+												nodoChtml nodo = new nodoChtml("CUERPO");												
+												nodoChtml nuevo = new nodoChtml("ELEMENTO");
+												nuevo.add(new nodoChtml("color"));
+												nuevo.add(new nodoChtml(color));
+												nodo.add(nuevo);
+												RESULT=nodo;
 												:}
 				| fondo asignacion id:color puntoComa {: 
-												nodoChtml nuevo = new nodoChtml(color);																																		
-												RESULT=nuevo;
+												nodoChtml nodo = new nodoChtml("CUERPO");
+												nodoChtml nuevo = new nodoChtml("ELEMENTO");
+												nuevo.add(new nodoChtml("color"));
+												nuevo.add(new nodoChtml(color));
+												nodo.add(nuevo);
+												RESULT=nodo;
 												:}; 
 
 /*TODOS LOS ELEMENTOS QUE PUEDEN VENIR DENTRO DEL CUERPO O DENTRO DE UN PANEL :V :V Y MÁS :V*/
@@ -320,7 +336,7 @@ CONTENIDOCUERPO::= CONTENIDOCUERPO:cuerpo PANEL:panel
 PANEL::= menorQue inicioPanel  ELEMENTOS:elementos mayorQue CONTENIDOCUERPO:contenido menorQue finPanel mayorQue
 												{: 
 												elementos.setValue("PANEL");																								
-												elementos.add(contenido);																																														
+												elementos.addLista(contenido);																																														
 												RESULT=elementos;
 												:}
 		|menorQue inicioPanel  ELEMENTOS:elementos mayorQue  menorQue finPanel mayorQue
@@ -332,7 +348,7 @@ PANEL::= menorQue inicioPanel  ELEMENTOS:elementos mayorQue CONTENIDOCUERPO:cont
  		| menorQue inicioPanel  mayorQue CONTENIDOCUERPO:contenido menorQue finPanel mayorQue
 												{: 
 												nodoChtml nuevo = new nodoChtml("PANEL");																							
-												nuevo.add(contenido);																																													
+												nuevo.addLista(contenido);																																													
 												RESULT=nuevo;
 												:}
 		|menorQue inicioPanel mayorQue  menorQue finPanel mayorQue

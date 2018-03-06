@@ -991,6 +991,8 @@ public class Scanner implements java_cup.runtime.Scanner {
   private int zzFinalHighSurrogate = 0;
 
   /* user code: */
+    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
+    public static ArrayList<Errores> listaErrores = new ArrayList();
 	public static String urlAuxliar="";
 	public static Boolean fin=false;
 	public static String txt_temporal="";
@@ -1002,6 +1004,31 @@ public class Scanner implements java_cup.runtime.Scanner {
     public static int flagInicio = 0;
     public String cadena = "";
     public String estado="";
+
+
+    public void addError(int linea, int columna, String valor)
+    {
+        Errores errorLexico=new Errores("Lexico",linea, columna, valor);
+        listaErrores.add(errorLexico);
+    }
+
+    public static void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
+    {                
+        tipo = tipo.toLowerCase();
+        valor = valor.toLowerCase();
+                                        
+        //Generamos la entrada en la tabla de simbolos.
+        tablaSimbolos simbolo=new tablaSimbolos();
+        simbolo.setTipo(tipo);
+        simbolo.setLinea(linea);
+        simbolo.setColumna(columna);
+        simbolo.setDescripcion(descripcion);
+        
+        simbolo.setValor(valor);                 
+        tablaSimbolos_.add(simbolo);	            
+    }     
+ 
+
 
 
   /**
@@ -1376,7 +1403,7 @@ public class Scanner implements java_cup.runtime.Scanner {
 			errorLexico.setLinea(yyline);
 			errorLexico.setColumna(yychar);
 			errorLexico.setDescripcion("Caracter Ilegal: "+yytext());
-			Interfaz.erroresLexicos.add(errorLexico);
+			listaErrores.add(errorLexico);
 			//Proyecto1_Compiladores.listaLexico.add(errorLexico);
 			//Menu.listaLexico=Proyecto1_Compiladores.listaLexico;
             }
@@ -1391,32 +1418,32 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 159: break;
           case 4: 
             { cadena = "";
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : Menor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         System.out.println("*****************************************************************");
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 160: break;
           case 5: 
             { cadena = "";
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	        
+        tablaSimbolos_.add(simbolo);	        
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 161: break;
@@ -1431,16 +1458,16 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 8: 
             { yybegin(ENCABEZADO2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
@@ -1451,31 +1478,29 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 165: break;
           case 10: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : Menor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
        
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 166: break;
           case 11: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
 
 
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -1483,16 +1508,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 167: break;
           case 12: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("asignacion");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
              
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -1500,16 +1524,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 168: break;
           case 13: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("puntoComa");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
             
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -1519,16 +1542,16 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 14: 
             { yybegin(YYINITIAL);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
@@ -1537,16 +1560,16 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 15: 
             { yybegin(TITULO2);                           
         System.out.println("Saltar a estado TITULO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         
         
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
@@ -1568,16 +1591,16 @@ public class Scanner implements java_cup.runtime.Scanner {
         else  
         {           
             yybegin(ENCABEZADO2);
-            Interfaz.auxContador++;                                
+                                            
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
             simbolo.setTipo("cadena");
             simbolo.setLinea(yyline);
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
-            simbolo.setIndex(Interfaz.auxContador);
+            
             if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
-            Interfaz.tablaSimbolos_.add(simbolo);
+            tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
         }
@@ -1587,32 +1610,32 @@ public class Scanner implements java_cup.runtime.Scanner {
             { yybegin(ENCABEZADO2);  
         System.out.println("----------------------------------------------Saliendo de titulo3");                         
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : Menor que titulo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 173: break;
           case 18: 
             { yybegin(YYINITIAL);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 174: break;
@@ -1623,9 +1646,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                              
         return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
             }
@@ -1637,9 +1660,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                     
         return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
             }
@@ -1647,16 +1670,16 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 21: 
             { yybegin(TEXTO2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 177: break;
@@ -1680,16 +1703,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             //cadena = cadena + yytext();
             
             yybegin(YYINITIAL);
-            Interfaz.auxContador++;                                
+                                            
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
             simbolo.setTipo("cadena");
             simbolo.setLinea(yyline);
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
-            simbolo.setIndex(Interfaz.auxContador);
+            
             if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
-            Interfaz.tablaSimbolos_.add(simbolo);
+            tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
 
@@ -1699,46 +1722,45 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 23: 
             { yybegin(IMAGEN2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 179: break;
           case 24: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : MenorQue fin Imagen");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 180: break;
           case 25: 
             { yybegin(BOTON2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 181: break;
@@ -1765,16 +1787,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             //cadena = cadena + yytext();
             
             yybegin(YYINITIAL);
-            Interfaz.auxContador++;                                
+                                            
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
             simbolo.setTipo("cadena");
             simbolo.setLinea(yyline);
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
-            simbolo.setIndex(Interfaz.auxContador);
+            
             if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
-            Interfaz.tablaSimbolos_.add(simbolo);
+            tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
 
@@ -1784,16 +1806,16 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 28: 
             { yybegin(ENLACE2);                           
         System.out.println("Saltar a estado ENLACE2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 184: break;
@@ -1801,46 +1823,46 @@ public class Scanner implements java_cup.runtime.Scanner {
             { yybegin(T2);  
         cadena = "";                         
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 185: break;
           case 30: 
             { cadena = "";
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : Menor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 186: break;
           case 31: 
             { cadena = "";
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         System.out.println("*****************************************************************");
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
@@ -1849,31 +1871,31 @@ public class Scanner implements java_cup.runtime.Scanner {
             { cadena = "";
         yybegin(T4);                           
         System.out.println("Saltar a estado t4");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 188: break;
           case 33: 
             { cadena = "";
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que T4");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	        
+        tablaSimbolos_.add(simbolo);	        
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 189: break;
@@ -1881,16 +1903,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             { cadena = "";
         yybegin(T6);                           
         System.out.println("Saltar a T6");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que T5");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 190: break;
@@ -1901,9 +1923,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                              
         return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
             }
@@ -1915,9 +1937,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                     
         return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
             }
@@ -1941,16 +1963,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             //cadena = cadena + yytext();
             
             yybegin(T7);
-            Interfaz.auxContador++;                                
+                                            
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
             simbolo.setTipo("cadena");
             simbolo.setLinea(yyline);
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
-            simbolo.setIndex(Interfaz.auxContador);
+            
             if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
-            Interfaz.tablaSimbolos_.add(simbolo);
+            tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
 
@@ -1958,16 +1980,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 193: break;
           case 38: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : MenorQue T7");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 194: break;
@@ -1975,16 +1996,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             { yybegin(TB2);  
         cadena = "";                         
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 195: break;
@@ -2007,16 +2028,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             //cadena = cadena + yytext();
             
             yybegin(TB3);
-            Interfaz.auxContador++;                                
+                                            
             //Generamos la entrada en la tabla de simbolos.
             tablaSimbolos simbolo=new tablaSimbolos();
             simbolo.setTipo("cadena");
             simbolo.setLinea(yyline);
             simbolo.setColumna(yychar);
             simbolo.setDescripcion("Cadena : cadena de texto");
-            simbolo.setIndex(Interfaz.auxContador);
+            
             if(cadena.equals("")){cadena=" ";} simbolo.setValor(cadena);                 
-            Interfaz.tablaSimbolos_.add(simbolo);
+            tablaSimbolos_.add(simbolo);
             yypushback(1);	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
 
@@ -2027,60 +2048,57 @@ public class Scanner implements java_cup.runtime.Scanner {
             { cadena = "";
         yybegin(TI2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 197: break;
           case 42: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : MenorQue inicio TI2");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 198: break;
           case 43: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : mayorQue fin Imagen TI2");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         yybegin(T6); 
         cadena = "";               
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 199: break;
           case 44: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("menorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("< : MenorQue inicio TB3");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.menorQue, yychar, yyline, yytext());
             }
           case 200: break;
@@ -2088,48 +2106,48 @@ public class Scanner implements java_cup.runtime.Scanner {
             { cadena="";
         yybegin(T6);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que TB3");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 201: break;
           case 46: 
             { yybegin(TA2);                           
         System.out.println("Saltar a estado ENCABEZADO2");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("mayorQue");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("> : Mayor que");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	                
+        tablaSimbolos_.add(simbolo);	                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 202: break;
           case 47: 
             { yybegin(CAJA2);                           
-        Interfaz.addChtml("mayorQue",yyline,yychar,"> : Mayor que",yytext());                
+        addChtml("mayorQue",yyline,yychar,"> : Mayor que",yytext());                
         return new Symbol(simbolos.mayorQue, yychar, yyline, yytext());
             }
           case 203: break;
           case 48: 
-            { Interfaz.addChtml("asignacion",yyline,yychar,"= : Asignacion",yytext());                      
+            { addChtml("asignacion",yyline,yychar,"= : Asignacion",yytext());                      
         return new Symbol(simbolos.asignacion, yychar, yyline, yytext());
             }
           case 204: break;
           case 49: 
-            { Interfaz.addChtml("puntoComa",yyline,yychar,"; : Punto coma",yytext());            
+            { addChtml("puntoComa",yyline,yychar,"; : Punto coma",yytext());            
         return new Symbol(simbolos.puntoComa, yychar, yyline, yytext());
             }
           case 205: break;
@@ -2150,7 +2168,7 @@ public class Scanner implements java_cup.runtime.Scanner {
         {
             yybegin(YYINITIAL);
             yypushback(1);
-            Interfaz.addChtml("cadena",yyline,yychar,"Cadena : cadena de texto",cadena); 	                
+            addChtml("cadena",yyline,yychar,"Cadena : cadena de texto",cadena); 	                
             return new Symbol(simbolos.cadena, yychar, yyline, cadena); 
         }
             }
@@ -2162,9 +2180,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
             }
@@ -2176,9 +2194,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                            
+        tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
             }
           case 208: break;
@@ -2189,9 +2207,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ct: Inicio Celda");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(T5); 
         cadena = "";   
         System.out.println("SALTAR A T5");                                
@@ -2205,9 +2223,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("cb: Inicio Celda cabecera");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(T5);   
         System.out.println("SALTAR A T5");
         cadena = "";
@@ -2221,28 +2239,27 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                            
+        tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
             }
           case 211: break;
           case 56: 
-            { Interfaz.addChtml("idCcss",yyline,yychar,"id : Identificador grupo ccss",yytext());                    
+            { addChtml("idCcss",yyline,yychar,"id : Identificador grupo ccss",yytext());                    
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
             }
           case 212: break;
           case 57: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("inicioCjs");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("CJS : Inicio etiqueta CJS");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
               
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -2250,16 +2267,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 213: break;
           case 58: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("id");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -2273,15 +2289,15 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
 
         return new Symbol(simbolos.id, yychar, yyline, yytext());
             }
           case 215: break;
           case 60: 
-            { Interfaz.addChtml("metodo",yyline,yychar, yytext() +" : llamada a metodo",yytext());            
+            { addChtml("metodo",yyline,yychar, yytext() +" : llamada a metodo",yytext());            
         return new Symbol(simbolos.metodo, yychar, yyline, yytext());
             }
           case 216: break;
@@ -2292,9 +2308,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("metodo : Llamada a metodo");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.metodo, yychar, yyline, yytext());
             }
@@ -2306,20 +2322,20 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color. T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
 
         return new Symbol(simbolos.id, yychar, yyline, yytext());
             }
           case 218: break;
           case 63: 
-            { Interfaz.addChtml("id",yyline,yychar,"id: Posible nombre de color.",yytext());
+            { addChtml("id",yyline,yychar,"id: Posible nombre de color.",yytext());
         return new Symbol(simbolos.id, yychar, yyline, yytext());
             }
           case 219: break;
           case 64: 
-            { Interfaz.addChtml("inicioCajaOpciones",yyline,yychar,"caja: Inico Caja opciones",yytext()); 
+            { addChtml("inicioCajaOpciones",yyline,yychar,"caja: Inico Caja opciones",yytext()); 
         yybegin(ELEMENTOS);                                       
         return new Symbol(simbolos.inicioCajaOpciones, yychar, yyline, yytext());
             }
@@ -2441,16 +2457,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 223: break;
           case 68: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("ruta");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ruta : Declaración ruta archivo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -2458,16 +2473,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 224: break;
           case 69: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("inicioCcss");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("CCSS : Inicio etiqueta CCSS");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
               
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -2480,16 +2494,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 226: break;
           case 71: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("rgb");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("rgb: Posible nombre de color.");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -2518,9 +2531,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.alto, yychar, yyline, yytext());
             }
@@ -2536,16 +2549,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 233: break;
           case 78: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("ruta");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ruta : Declaración ruta archivo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                
         return new Symbol(simbolos.ruta, yychar, yyline, yytext());
             }
@@ -2597,9 +2609,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.alto, yychar, yyline, yytext());
             }
@@ -2640,7 +2652,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 250: break;
           case 95: 
-            { Interfaz.addChtml("alto",yyline,yychar,"alto : Altura objeto",yytext());                    
+            { addChtml("alto",yyline,yychar,"alto : Altura objeto",yytext());                    
         return new Symbol(simbolos.alto, yychar, yyline, yytext());
             }
           case 251: break;
@@ -2650,16 +2662,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 252: break;
           case 97: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("inicioChtml");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("CHTML : Inicio Documento");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         
         return new Symbol(simbolos.inicioChtml, yychar, yyline, yytext());
             }
@@ -2671,9 +2682,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("texto: Inicio texto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(TEXTO1);                            
         return new Symbol(simbolos.inicioTexto, yychar, yyline, yytext());
             }
@@ -2685,9 +2696,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("tabla: Inicio tabla");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(T1);                                    
         return new Symbol(simbolos.inicioTabla, yychar, yyline, yytext());
             }
@@ -2699,9 +2710,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("boton: Inicio boton");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(BOTON1);                                    
         return new Symbol(simbolos.inicioBoton, yychar, yyline, yytext());
             }
@@ -2713,25 +2724,24 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("panel: Declaracion panel");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                
         yybegin(ELEMENTOS);        
         return new Symbol(simbolos.inicioPanel, yychar, yyline, yytext());
             }
           case 257: break;
           case 102: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("fondo");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fondo : declaracion fondo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
        
         return new Symbol(simbolos.fondo, yychar, yyline, yytext());
             }
@@ -2743,15 +2753,15 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.ancho, yychar, yyline, yytext());
             }
           case 259: break;
           case 104: 
-            { Interfaz.addChtml("click",yyline,yychar,"click : evento",yytext());            
+            { addChtml("click",yyline,yychar,"click : evento",yytext());            
         return new Symbol(simbolos.click, yychar, yyline, yytext());
             }
           case 260: break;
@@ -2762,9 +2772,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.grupo, yychar, yyline, yytext());
             }
@@ -2776,9 +2786,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("click : Evento Click");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                            
+        tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.click, yychar, yyline, yytext());
             }
           case 262: break;
@@ -2789,9 +2799,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fil_t: Inicio fila");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo); 
+        tablaSimbolos_.add(simbolo); 
         yybegin(T3);                                
         return new Symbol(simbolos.inicioFila, yychar, yyline, yytext());
             }
@@ -2803,9 +2813,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.ancho, yychar, yyline, yytext());
             }
@@ -2817,9 +2827,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.grupo, yychar, yyline, yytext());
             }
@@ -2832,25 +2842,25 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("boton : Inicio boton");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);    
+        tablaSimbolos_.add(simbolo);    
         yybegin(TB);                        
         return new Symbol(simbolos.inicioBoton, yychar, yyline, yytext());
             }
           case 266: break;
           case 111: 
-            { Interfaz.addChtml("ancho",yyline,yychar,"ancho : Anchura objeto",yytext());                    
+            { addChtml("ancho",yyline,yychar,"ancho : Anchura objeto",yytext());                    
         return new Symbol(simbolos.ancho, yychar, yyline, yytext());
             }
           case 267: break;
           case 112: 
-            { Interfaz.addChtml("grupo",yyline,yychar,"grupo : grupo ccss",yytext());                      
+            { addChtml("grupo",yyline,yychar,"grupo : grupo ccss",yytext());                      
         return new Symbol(simbolos.grupo, yychar, yyline, yytext());
             }
           case 268: break;
           case 113: 
-            { Interfaz.addChtml("valor",yyline,yychar,yytext() + "valor de opcion",yytext());                    
+            { addChtml("valor",yyline,yychar,yytext() + "valor de opcion",yytext());                    
         return new Symbol(simbolos.valor, yychar, yyline, yytext());
             }
           case 269: break;
@@ -2861,9 +2871,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("imagen: Inicio imagen");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(IMAGEN1);                                    
         return new Symbol(simbolos.inicioImagen, yychar, yyline, yytext());
             }
@@ -2875,9 +2885,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("enlace: Inicio enlace");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(ENLACE1);                                    
         return new Symbol(simbolos.inicioEnlace, yychar, yyline, yytext());
             }
@@ -2885,21 +2895,21 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 116: 
             { yybegin(CUERPO);
         System.out.println("Saltar a estado CUERPO");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("cuerpo");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("cuerpo : Inicio cuerpo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioCuerpo, yychar, yyline, yytext());
             }
           case 272: break;
           case 117: 
-            { Interfaz.addChtml("inicioOpcion",yyline,yychar,"Opcion: Inico Opcion",yytext()); 
+            { addChtml("inicioOpcion",yyline,yychar,"Opcion: Inico Opcion",yytext()); 
         yybegin(CAJA1);                                       
         return new Symbol(simbolos.inicioOpcion, yychar, yyline, yytext());
             }
@@ -2907,16 +2917,16 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 118: 
             { yybegin(TITULO1);
         System.out.println("Saltar a estado CUERPO");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("titulo");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("titulo : Inicio titulo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioTitulo, yychar, yyline, yytext());
             }
           case 274: break;
@@ -2927,9 +2937,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                          
+        tablaSimbolos_.add(simbolo);                          
         return new Symbol(simbolos.path, yychar, yyline, yytext());
             }
           case 275: break;
@@ -2940,9 +2950,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("imagen : Inicio imagen");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);    
+        tablaSimbolos_.add(simbolo);    
         yybegin(TI);
         cadena="";                        
         return new Symbol(simbolos.inicioImagen, yychar, yyline, yytext());
@@ -2955,9 +2965,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("finCeldaCabecera : Fin cabecera");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);    
+        tablaSimbolos_.add(simbolo);    
         yybegin(T4);  
         System.out.println("SALTAR A T4"); 
         cadena = "";                              
@@ -2971,9 +2981,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("finCelda : Fin Celda");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(T4);       
         System.out.println("SALTAR A T4");  
         cadena = "";                         
@@ -2987,9 +2997,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen TI2");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                          
+        tablaSimbolos_.add(simbolo);                          
         return new Symbol(simbolos.path, yychar, yyline, yytext());
             }
           case 279: break;
@@ -3000,30 +3010,29 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("inicioCajaArea: Inicio caja area de texto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
         yybegin(TA1);                                    
         return new Symbol(simbolos.inicioCajaArea, yychar, yyline, yytext());
             }
           case 280: break;
           case 125: 
-            { Interfaz.addChtml("inicioSpinner",yyline,yychar,"spinner: Inico Spinner",yytext()); 
+            { addChtml("inicioSpinner",yyline,yychar,"spinner: Inico Spinner",yytext()); 
         yybegin(TA1);                                       
         return new Symbol(simbolos.inicioSpinner, yychar, yyline, yytext());
             }
           case 281: break;
           case 126: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("finCjs");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-cjs : finCJs");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
              
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -3031,21 +3040,20 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 282: break;
           case 127: 
-            { Interfaz.addChtml("finCajaOpciones",yyline,yychar,"fin-caja: Fin caja Opciones",yytext());                                              
+            { addChtml("finCajaOpciones",yyline,yychar,"fin-caja: Fin caja Opciones",yytext());                                              
         return new Symbol(simbolos.finCajaOpciones, yychar, yyline, yytext());
             }
           case 283: break;
           case 128: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("pathComillas");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("Path: Ruta a archivo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -3053,16 +3061,15 @@ public class Scanner implements java_cup.runtime.Scanner {
             }
           case 284: break;
           case 129: 
-            { Interfaz.auxContador++;
-        //Generamos la entrada en la tabla de simbolos
+            { //Generamos la entrada en la tabla de simbolos
         tablaSimbolos simbolo = new tablaSimbolos();
         simbolo.setTipo("finCcss");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-CCSS : fin etiqueta CCSS");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
              
         
         //Nos movemos al estado auxiliar para declaracion cjs
@@ -3076,9 +3083,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.alineado, yychar, yyline, yytext());
             }
@@ -3090,9 +3097,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.pathComillas, yychar, yyline, yytext());
             }
@@ -3104,29 +3111,28 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.alineado, yychar, yyline, yytext());
             }
           case 288: break;
           case 133: 
-            { Interfaz.addChtml("alineado",yyline,yychar,"alineado : Alineación objeto",yytext());                    
+            { addChtml("alineado",yyline,yychar,"alineado : Alineación objeto",yytext());                    
         return new Symbol(simbolos.alineado, yychar, yyline, yytext());
             }
           case 289: break;
           case 134: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("finChtml");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("FIN-CHTML : Fin Documento");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         
         return new Symbol(simbolos.finChtml, yychar, yyline, yytext());
             }
@@ -3138,9 +3144,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-texto: Fin texto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                    
+        tablaSimbolos_.add(simbolo);                                    
         return new Symbol(simbolos.finTexto, yychar, yyline, yytext());
             }
           case 291: break;
@@ -3151,9 +3157,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-boton: Fin boton");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                 
+        tablaSimbolos_.add(simbolo);                                 
         return new Symbol(simbolos.finBoton, yychar, yyline, yytext());
             }
           case 292: break;
@@ -3164,15 +3170,15 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-panel: Cierre panel");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                           
         return new Symbol(simbolos.finPanel, yychar, yyline, yytext());
             }
           case 293: break;
           case 138: 
-            { Interfaz.addChtml("salto",yyline,yychar,"salto: salto :v",yytext());                                              
+            { addChtml("salto",yyline,yychar,"salto: salto :v",yytext());                                              
         return new Symbol(simbolos.salto, yychar, yyline, yytext());
             }
           case 294: break;
@@ -3183,9 +3189,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
             }
@@ -3197,24 +3203,23 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-tabla: Fin tabla");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);  
+        tablaSimbolos_.add(simbolo);  
         yybegin(YYINITIAL);
         return new Symbol(simbolos.finTabla, yychar, yyline, yytext());
             }
           case 296: break;
           case 141: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("fin-fil_t");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-fil_t : Fin Fila");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);   
+        tablaSimbolos_.add(simbolo);   
         yybegin(T2);     	        
         return new Symbol(simbolos.finFila, yychar, yyline, yytext());
             }
@@ -3226,9 +3231,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación T5");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);
+        tablaSimbolos_.add(simbolo);
                             
         return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
             }
@@ -3240,36 +3245,36 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-boton: Fin boton TB3");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);  
+        tablaSimbolos_.add(simbolo);  
         cadena = "";          
         return new Symbol(simbolos.finBoton, yychar, yyline, yytext());
             }
           case 299: break;
           case 144: 
-            { Interfaz.addChtml("valorAlineado",yyline,yychar, yytext() +" : Alineación",yytext());                    
+            { addChtml("valorAlineado",yyline,yychar, yytext() +" : Alineación",yytext());                    
         return new Symbol(simbolos.valorAlineado, yychar, yyline, yytext());
             }
           case 300: break;
           case 145: 
             { yybegin(ENCABEZADO1);
         System.out.println("Saltar a estado ENCABEZADO1");
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("inicioEncabezado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("encabezado : Inicio encabezado");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.inicioEncabezado, yychar, yyline, yytext());
             }
           case 301: break;
           case 146: 
-            { Interfaz.addChtml("inicioCaja",yyline,yychar,"caja_texto: Inico caja texto",yytext()); 
+            { addChtml("inicioCaja",yyline,yychar,"caja_texto: Inico caja texto",yytext()); 
         yybegin(TA1);                                       
         return new Symbol(simbolos.inicioCaja, yychar, yyline, yytext());
             }
@@ -3281,42 +3286,40 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-enlace: Fin enlace");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                 
+        tablaSimbolos_.add(simbolo);                                 
         return new Symbol(simbolos.finEnlace, yychar, yyline, yytext());
             }
           case 303: break;
           case 148: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("fin-cuerpo");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-cuerpo : Fin cuerpo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.finCuerpo, yychar, yyline, yytext());
             }
           case 304: break;
           case 149: 
-            { Interfaz.addChtml("finOpcion",yyline,yychar,"fin-opcion: Fin Opcion",yytext());                                              
+            { addChtml("finOpcion",yyline,yychar,"fin-opcion: Fin Opcion",yytext());                                              
         return new Symbol(simbolos.finOpcion, yychar, yyline, yytext());
             }
           case 305: break;
           case 150: 
-            { Interfaz.auxContador++;                                
-        //Generamos la entrada en la tabla de simbolos.
+            { //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("fin-titulo");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-titulo : Fin titulo");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);        	        
+        tablaSimbolos_.add(simbolo);        	        
         return new Symbol(simbolos.finTitulo, yychar, yyline, yytext());
             }
           case 306: break;
@@ -3328,9 +3331,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-imagen: Fin imagen");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                    
+        tablaSimbolos_.add(simbolo);                                    
         return new Symbol(simbolos.finImagen, yychar, yyline, yytext());
             }
           case 307: break;
@@ -3341,9 +3344,9 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-imagen: Fin imagen TI2");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);      
+        tablaSimbolos_.add(simbolo);      
         cadena = "";                              
         return new Symbol(simbolos.finImagen, yychar, yyline, yytext());
             }
@@ -3355,34 +3358,34 @@ public class Scanner implements java_cup.runtime.Scanner {
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("finCajaArea: Fin caja area de texto");
-        simbolo.setIndex(Interfaz.auxContador++);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);                                           
+        tablaSimbolos_.add(simbolo);                                           
         return new Symbol(simbolos.finCajaArea, yychar, yyline, yytext());
             }
           case 309: break;
           case 154: 
-            { Interfaz.addChtml("finSpinner",yyline,yychar,"fin-spinner: Fin Spinner",yytext());                                              
+            { addChtml("finSpinner",yyline,yychar,"fin-spinner: Fin Spinner",yytext());                                              
         return new Symbol(simbolos.finSpinner, yychar, yyline, yytext());
             }
           case 310: break;
           case 155: 
-            { Interfaz.addChtml("finCaja",yyline,yychar,"fin-caja_texto: Fin caja texto",yytext());                                            
+            { addChtml("finCaja",yyline,yychar,"fin-caja_texto: Fin caja texto",yytext());                                            
         return new Symbol(simbolos.finCaja, yychar, yyline, yytext());
             }
           case 311: break;
           case 156: 
             { yybegin(YYINITIAL);
-        Interfaz.auxContador++;                                
+                                        
         //Generamos la entrada en la tabla de simbolos.
         tablaSimbolos simbolo=new tablaSimbolos();
         simbolo.setTipo("finEncabezado");
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("FIN-ENCABEZADO : Fin Encabezado");
-        simbolo.setIndex(Interfaz.auxContador);
+        
         simbolo.setValor(yytext());                 
-        Interfaz.tablaSimbolos_.add(simbolo);	
+        tablaSimbolos_.add(simbolo);	
         
         return new Symbol(simbolos.finEncabezado, yychar, yyline, yytext());
             }
