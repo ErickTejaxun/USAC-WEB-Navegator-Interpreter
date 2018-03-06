@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Principal;
+import java.util.ArrayList;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
@@ -23,14 +24,26 @@ public class Panel extends JPanel
     private int alto;
     private int ancho;
     private String metodo;
+    private ArrayList<Elemento> elementos = new ArrayList();
     
     public Panel()
     {       
-        this.setSize(100,300);
+        this.setSize(0,0);
+        this.setBounds(0, 0, 0, 0);
+        
+        //this.setLayout(new java.awt.CardLayout());        
     }
 
     public String getRuta() {
         return ruta;
+    }
+
+    public ArrayList<Elemento> getElementos() {
+        return elementos;
+    }
+
+    public void setElementos(ArrayList<Elemento> elementos) {
+        this.elementos = elementos;
     }
 
     public String getGrupo() {

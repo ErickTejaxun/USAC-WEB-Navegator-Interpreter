@@ -21,7 +21,9 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -53,17 +55,17 @@ public class Pagina extends javax.swing.JPanel {
     DefaultTableModel filasErrores = new DefaultTableModel(); 
     DefaultTableModel filasSalidas = new DefaultTableModel();
     int flagOpciones = 0;
-    int posX = 0;
-    int posY = 0;
+    int posX, posXAux = 0;
+    int posY, posYAux = 0;
     Color colorFondo = Color.WHITE ;
     ArrayList<Elemento> elementos = new ArrayList();
-    int xMax=0;
-    int yMax=0;
+    int xMax,  xMaxAux=0;
+    int yMax, yMaxAux=0;
     int flagTabla = 0; // 0 Significa Que no pertence a tabla, 1. que sí.
     
     Tabla tablaActual;
     Pagina panelActual = null;
-    
+    public int anchoActual=0;
     
     
     //JScrollPane scroll = new JScrollPane();
@@ -376,15 +378,16 @@ public class Pagina extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_botonOpcionesActionPerformed
 
-    private void scrollComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_scrollComponentResized
-        
-    }//GEN-LAST:event_scrollComponentResized
-
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         generarInterfaz();        // TODO add your handling code here:
         posX = posY = xMax = yMax=  0;
+        posXAux = posYAux = xMaxAux = yMaxAux=  0;
         System.out.println(scroll.getHeight() + "\t" + scroll.getWidth());
     }//GEN-LAST:event_formComponentResized
+
+    private void scrollComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_scrollComponentResized
+
+    }//GEN-LAST:event_scrollComponentResized
 
     
     
@@ -415,7 +418,9 @@ public void analizar() throws IOException
             aux.generarGrafica(raizChtml); // Dibujamos el arbol
             generarObjetos(raizChtml);  
             posX = posY = xMax = yMax=  0;
-            generarInterfaz(); // Generamos la interfaz 
+            Panel nuevo = new Panel();
+            scroll.add(nuevo);
+            Interfaz( nuevo , elementos); // Generamos la interfaz 
             
             
             
@@ -1098,7 +1103,7 @@ public void compilar(){
                                     {
                                         nodoChtml izquierda = opcion.getHijos().get(0);
                                         nodoChtml derecha = opcion.getHijos().get(1);
-                                        System.out.println(izquierda.getValue().toLowerCase()+"***********************************************"+derecha.getValue());
+                                        //System.out.println(izquierda.getValue().toLowerCase()+"***********************************************"+derecha.getValue());
                                         switch(izquierda.getValue().toLowerCase())
                                         {
                                             case "valor":                                                                                                                           
@@ -1126,7 +1131,8 @@ public void compilar(){
                     
                 case "PANEL":
                     System.out.println("---------------------------PANEL---------------------");
-                    Panel panelNuevo = generarPanel(raiz);
+                    Panel panelNuevo = generarPanel(raiz);                    
+                    anchoActual = scroll.getWidth();
                     elemento = new Elemento("panel","panel",panelNuevo); 
                     elementos.add(elemento);
                     break;                    
@@ -1465,6 +1471,7 @@ public void compilar(){
                                                         {
                                                             area.setAncho(Integer.valueOf(ancho));
                                                             area.setAncho(area.getAncho());
+                                                            area.setSize(Integer.valueOf(ancho),area.getHeight());
                                                         }                                       
                                                         break;
                                                     case "alto": 
@@ -1474,6 +1481,7 @@ public void compilar(){
                                                         {
                                                             area.setAlto(Integer.valueOf(alto));
                                                             area.setAlto(area.getAlto());
+                                                            area.setSize(area.getWidth(), Integer.valueOf(alto));
                                                         }                                                                                                                                   
                                                         break; 
                                                     case "alineado":                                                                        
@@ -1772,7 +1780,8 @@ public void compilar(){
                 }                         
             }
         }
-        dibujarPanel(panelNuevo, elementosPanel);
+        panelNuevo.setElementos(elementosPanel);
+        //dibujarPanel(panelNuevo);
         return panelNuevo;
    }
    
@@ -1782,37 +1791,44 @@ public void compilar(){
         return tabla;
     }
     
-public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
+public void dibujarPanel(Panel contenedor)
 {    
-    posX = posY = xMax = yMax = 0;
+    posXAux = posYAux = xMaxAux = yMaxAux = 0;
+    ArrayList<Elemento> lista = contenedor.getElementos();
     for(Elemento aux: lista)
     {
         switch(aux.getTipo())
         {
             case "boton":
                 Boton boton =(Boton)aux.getValor();                
-                boton.setBounds(posX, posY, boton.getAncho(),boton.getAlto());                  
+                boton.setBounds(posXAux, posYAux, boton.getAncho(),boton.getAlto());                  
                 posicionesPanel(boton.getAncho(), boton.getAlto(), contenedor);         
                 contenedor.add(boton);
                 break;
             case "enlace":
                 Enlace enlace =(Enlace)aux.getValor();                
-                enlace.setBounds(posX, posY, enlace.getAncho(),enlace.getAlto());                
+                enlace.setBounds(posXAux, posYAux, enlace.getAncho(),enlace.getAlto());                
                 posicionesPanel(enlace.getAncho(), enlace.getAlto(), contenedor);        
                 contenedor.add(enlace);
                 break; 
             case "salto":
-                if(yMax == 0)
+                System.out.println("Salto de línea dentro del panel");
+                if(yMaxAux == 0)
                 {
-                    yMax = 20;
+                    yMaxAux = 15;
                 }
-                posX = 0;
-                posY = posY + yMax;
-                yMax= xMax =0;                    
+                JLabel label = new JLabel();
+                label.setBackground(contenedor.getBackground());
+                label.setSize(yMaxAux, contenedor.getWidth()-xMaxAux-50);
+                for(int contador = 0 ; contador<contenedor.getWidth()-xMaxAux-50;contador++){label.setText(label.getText() + " ");}
+                //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                posicionesPanel(label.getWidth(), label.getHeight(), contenedor);  
+                
+                contenedor.add(label);                
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();
-                spinner.setBounds(posX, posY, spinner.getAncho(),spinner.getAlto());
+                spinner.setBounds(posXAux, posYAux, spinner.getAncho(),spinner.getAlto());
                 if(esNumero(spinner.getCadena()))
                 {
                     spinner.setValue(Integer.valueOf(spinner.getCadena()));
@@ -1822,13 +1838,13 @@ public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
                 break;                
             case "cajaOpciones":
                 JComboBox opciones =(JComboBox)aux.getValor();
-                opciones.setBounds(posX, posY, opciones.getWidth(), opciones.getHeight());                
+                opciones.setBounds(posXAux, posYAux, opciones.getWidth(), opciones.getHeight());                
                 posicionesPanel(opciones.getWidth(), opciones.getHeight(), contenedor);                
                 contenedor.add(opciones);
                 break;                
             case "imagen":
                 Imagen imagen =(Imagen)aux.getValor();
-                imagen.setBounds(posX, posY, imagen.getAncho(),imagen.getAlto());
+                imagen.setBounds(posXAux, posYAux, imagen.getAncho(),imagen.getAlto());
                 ImageIcon icono = new ImageIcon(); 
                 if(imagen.getRuta()!=null )
                 {
@@ -1867,7 +1883,7 @@ public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
                     texto.setAlto(alto);
                     texto.setAncho(ancho*7);                    
                 }
-                texto.setBounds(posX, posY, texto.getAncho(),texto.getAlto());
+                texto.setBounds(posXAux, posYAux, texto.getAncho(),texto.getAlto());
                 posicionesPanel(texto.getAncho(), texto.getAlto(), contenedor);                
                 contenedor.add(texto);                
                 break;  
@@ -1889,7 +1905,7 @@ public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
                     caja.setAlto(20);
                     caja.setAncho(ancho*7);
                 }
-                caja.setBounds(posX, posY, caja.getAncho(),caja.getAlto());
+                caja.setBounds(posXAux, posYAux, caja.getAncho(),caja.getAlto());
                 posicionesPanel(caja.getAncho(), caja.getAlto(), contenedor);                
                 contenedor.add(caja);                
                 break;                  
@@ -1898,23 +1914,28 @@ public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
                 areaTexto area =(areaTexto)aux.getValor();
                 //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
                 JScrollPane nuevo = new JScrollPane(area);
-                nuevo.setBounds(posX, posY, area.getAncho(),area.getAlto());
-                posicionesPanel(area.getAncho(), area.getAlto(),contenedor); 
-                scroll.add(nuevo);                
+                nuevo.setBounds(posXAux, posYAux, area.getWidth(),area.getHeight());
+                posicionesPanel(area.getWidth(), area.getHeight(),contenedor); 
+                contenedor.add(nuevo);                
                 break;                 
                 
             case "tabla":
                 Tabla tabla =(Tabla)aux.getValor();
-                tabla.setBounds(posX, posY, tabla.getAncho(),tabla.getAlto());                
+                tabla.setBounds(posXAux, posYAux, tabla.getAncho(),tabla.getAlto());                
                 posicionesPanel(tabla.getAncho(), tabla.getAlto(), contenedor);       
                 contenedor.add(tabla);
                 break;     
                 
             case "panel":
                 Panel panel =(Panel)aux.getValor();
+                //panel.setBackground(Color.black);
+                if(panel.getWidth()==0){ panel.setSize(contenedor.getWidth(), panel.getHeight());}
+                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
+                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(contenedor.getWidth(),100);}                
+                panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setSize(panel.getAncho(), panel.getAlto());
-                panel.setBounds(posX, posY, panel.getWidth(),panel.getHeight());                
-                posicionesPanel( panel.getWidth(),panel.getHeight(), contenedor);       
+                panel.setBounds(posXAux, posYAux, panel.getAncho(),panel.getAlto());                
+                posicionesPanel( panel.getAncho(),panel.getAlto(), contenedor);       
                 contenedor.add(panel);
                 break;                  
         }
@@ -1926,21 +1947,196 @@ public void dibujarPanel(Panel contenedor, ArrayList<Elemento> lista)
 
 public void posicionesPanel(int ancho, int alto, Panel contenedor)
 {   
-    int limite = contenedor.getWidth(); 
-    if(alto>yMax){yMax = alto;}    
-    if((posX + ancho)>= limite-ancho)        
+    int limite = contenedor.getAncho(); 
+    if(alto>yMaxAux){yMaxAux = alto;}    
+    if((posXAux + ancho)>= limite-ancho)        
     {
-        posX = 0;
-        posY = posY + yMax;            
-        yMax= 0;              
+        posXAux = 0;
+        posYAux = posYAux + yMaxAux;            
+        yMaxAux= 0;              
     }
     else
     {
-        posX = posX + ancho;
+        posXAux = posXAux + ancho;
+    }
+
+}
+
+
+public void posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, int x, int y)
+{   
+    int limite = contenedor.getAncho(); 
+    if(alto>saltoY){saltoY = alto;}    
+    if((x + ancho)>= limite-ancho)        
+    {
+        x = 0;
+        y = y + saltoY;            
+        saltoY= 0;              
+    }
+    else
+    {
+        x = x + ancho;
     }
 
 }
    
+public void Interfaz(Panel contenedor, ArrayList<Elemento> elementos)
+{
+    int x = 0;
+    int y = 0;
+    int saltoY = 0;
+    int saltoX = 0;
+    for(Elemento aux: elementos)
+    {
+        switch(aux.getTipo())
+        {
+            case "boton":
+                Boton boton =(Boton)aux.getValor();                
+                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());                  
+                posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y);         
+                contenedor.add(boton);
+                break;
+            case "enlace":
+                Enlace enlace =(Enlace)aux.getValor();                
+                enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
+                posicionPanel(enlace.getAncho(), enlace.getAlto(),contenedor, saltoY, x, y);        
+                contenedor.add(enlace);
+                break; 
+            case "salto":
+                if(saltoY == 0)
+                {
+                    saltoY = 20;
+                }                
+                x = 0;
+                y = y + saltoY;            
+                y= 0;  
+                
+                JLabel label = new JLabel();
+                label.setBackground(contenedor.getBackground());
+                label.setSize(saltoY, contenedor.getWidth()-x-50);
+                for(int contador = 0 ; contador<contenedor.getWidth()-x-50;contador++){label.setText(label.getText() + " ");}
+                //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                posicionPanel(label.getWidth(), label.getHeight(), contenedor, saltoY, x, y);                  
+                contenedor.add(label);                 
+                break;                 
+            case "spinner":
+                Spinner spinner =(Spinner)aux.getValor();
+                spinner.setBounds(x, y, spinner.getAncho(),spinner.getAlto());
+                if(esNumero(spinner.getCadena()))
+                {
+                    spinner.setValue(Integer.valueOf(spinner.getCadena()));
+                }                
+                posicionPanel(spinner.getAncho(), spinner.getAlto(), contenedor, saltoY, x, y);                
+                contenedor.add(spinner);
+                break;                
+            case "cajaOpciones":
+                JComboBox opciones =(JComboBox)aux.getValor();
+                opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());                
+                posicionPanel(opciones.getWidth(), opciones.getHeight(),contenedor, saltoY, x, y);                
+                contenedor.add(opciones);
+                break;                
+            case "imagen":
+                Imagen imagen =(Imagen)aux.getValor();
+                imagen.setBounds(x, y, imagen.getAncho(),imagen.getAlto());
+                ImageIcon icono = new ImageIcon(); 
+                if(imagen.getRuta()!=null )
+                {
+                    if(!imagen.getRuta().equals(""))
+                    {
+                        icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
+                    }   
+                    if(!imagen.getRuta().substring(0,1).equals("\""))
+                    {
+                        icono = new ImageIcon(imagen.getRuta());
+                    }  
+                    ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
+                    imagen.setIcon(iconoEscala);                     
+                    
+                }                                                       
+                posicionPanel(imagen.getAncho(), imagen.getAlto(), contenedor, saltoY, x, y);                
+                contenedor.add(imagen);       
+                break;                  
+            case "texto":
+                Texto texto =(Texto)aux.getValor();
+                if(texto.getAlto()==0 && texto.getAncho()==0)
+                {
+                    
+                    String[] auxiliar = texto.getCadena().split("\r");
+                    int alto= auxiliar.length*20;
+                    System.out.println("El texto no tiene dimensiones definidas");
+                    System.out.println("\t"+texto.getCadena());
+                    System.out.println("\tNo. líneas \t"+alto);
+                    int ancho = 0;
+                    for(String cad : auxiliar)
+                    {
+                        if(cad.length()>ancho){ancho=cad.length();}
+                        System.out.println("\tNo. caracteres \t"+ancho);
+                    }
+                    texto.setText(texto.getText());   
+                    texto.setAlto(alto);
+                    texto.setAncho(ancho*7);                    
+                }
+                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());
+                posicionPanel(texto.getAncho(), texto.getAlto(), contenedor, saltoY, x, y);                
+                contenedor.add(texto);                
+                break;  
+                
+            case "caja":
+                Caja caja =(Caja)aux.getValor();
+                if(caja.getAlto()==0 && caja.getAncho()==0)
+                {
+                    String[] auxiliar = caja.getCadena().split("\r");
+                    int alto = auxiliar.length;
+                    int ancho = 0;
+                    String valorCaja= "";
+                    for(String cad : auxiliar)
+                    {
+                        valorCaja = valorCaja + cad;                        
+                        ancho = ancho + cad.length();
+                    }                    
+                    caja.setText(valorCaja);   
+                    caja.setAlto(20);
+                    caja.setAncho(ancho*7);
+                }
+                caja.setBounds(x, y, caja.getAncho(),caja.getAlto());
+                posicionPanel(caja.getAncho(), caja.getAlto(), contenedor, saltoY, x, y);                
+                contenedor.add(caja);                
+                break;                  
+                
+            case "area":
+                areaTexto area =(areaTexto)aux.getValor();
+                //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
+                JScrollPane nuevo = new JScrollPane(area);
+                nuevo.setBounds(x, y, area.getAncho(),area.getAlto());
+                posicionPanel(area.getAncho(), area.getAlto(), contenedor, saltoY, x, y); 
+                contenedor.add(nuevo);                
+                break;                 
+                
+            case "tabla":
+                Tabla tabla =(Tabla)aux.getValor();
+                tabla.setBounds(x, y, tabla.getAncho(),tabla.getAlto());                
+                posicionPanel(tabla.getAncho(), tabla.getAlto(), contenedor, saltoY, x, y);       
+                contenedor.add(tabla);
+                break;     
+                
+            case "panel":
+                Panel panel =(Panel)aux.getValor();
+                if(panel.getWidth()==0){ panel.setSize(scroll.getWidth(), panel.getHeight());}
+                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
+                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(scroll.getWidth(),100);}
+                panel.setBorder(BorderFactory.createLineBorder(Color.black));
+                panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
+                Interfaz(panel, panel.getElementos());
+                posicionPanel( panel.getWidth(),panel.getHeight(),contenedor, saltoY, x, y); 
+                contenedor.add(panel);
+                break;                  
+        }
+    }
+    
+    
+}
+
+
 public void generarInterfaz()
 {
     scroll.removeAll();
@@ -1965,11 +2161,11 @@ public void generarInterfaz()
             case "salto":
                 if(yMax == 0)
                 {
-                    yMax = 10;
-                }
+                    yMax = 20;
+                }                
                 posX = 0;
-                posY = posY + yMax;
-                yMax= xMax =0;                
+                posY = posY + yMax;            
+                yMax= 0;                   
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();
@@ -2073,9 +2269,12 @@ public void generarInterfaz()
                 
             case "panel":
                 Panel panel =(Panel)aux.getValor();
+                if(panel.getWidth()==0){ panel.setSize(scroll.getWidth(), panel.getHeight());}
+                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
+                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(scroll.getWidth(),100);}
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setBounds(posX, posY, panel.getWidth(),panel.getHeight());                
-                comprobarPosiciones( panel.getWidth(),panel.getHeight());       
+                comprobarPosiciones( panel.getWidth(),panel.getHeight()); 
                 scroll.add(panel);
                 break;                  
         }

@@ -1,0 +1,46 @@
+< chtml >
+
+
+
+
+    < encabezado >
+        < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+        < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+        < cjs ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.cjs" ; > < fin-cjs >
+        < ccss ruta = "C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\archivo.ccss" ; > < fin-ccss >
+        < titulo > Maxwell (microarquitectura) < fin-titulo> 
+    < fin-encabezado >
+
+
+
+    <cuerpo fondo = "xx";>                      
+        <panel alto="35"; ancho="1000";> 
+            <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>            
+            <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "160"; >Tabla Estudiante<FIN-BOTON>
+            <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "100"; > Principal <FIN-BOTON>       
+        <fin-panel>
+        <salto-fin>
+        <panel alto="50"; ancho="1000";>
+            <TEXTO alto= "50"; ancho ="210"; id="titulo_doc"; grupo="titulo";>Calificación Compiladores 2 Proyecto 2 
+            Que pumas<FIN-TEXTO>
+        <fin-panel>
+        <salto-fin>  
+        <salto-fin>  
+        <salto-fin>                    
+
+
+        
+        <panel alto="300"; ancho="500"; >
+            <SALTO-FIN>
+            <BOTON click="operacion_datos()"; alto= "30"; ancho ="210"; id="boto_cal"; grupo="formulario_2";> Calcular <FIN-BOTON>                                  
+        <fin-panel>
+
+
+      
+        
+    <fin-cuerpo>
+
+
+
+
+< fin-chtml >
