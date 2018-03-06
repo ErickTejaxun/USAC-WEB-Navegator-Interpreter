@@ -391,6 +391,29 @@ public class Pagina extends javax.swing.JPanel {
     }//GEN-LAST:event_scrollComponentResized
 
     
+
+public void prepararPanel(Panel nuevo)
+{
+    //nuevo.setBackground(new java.awt.Color(153, 255, 255));
+    nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    nuevo.setMinimumSize(new java.awt.Dimension(0, 15767));
+    nuevo.setPreferredSize(new java.awt.Dimension(500, 200));
+    /*nuevo.addComponentListener(new java.awt.event.ComponentAdapter() {
+    public void componentResized(java.awt.event.ComponentEvent evt) {
+        scrollComponentResized(evt);
+    }
+    });
+    javax.swing.GroupLayout scrollLayout = new javax.swing.GroupLayout(nuevo);
+    nuevo.setLayout(scrollLayout);
+    scrollLayout.setHorizontalGroup(
+    scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    .addGap(0, 1011, Short.MAX_VALUE)
+    );
+    scrollLayout.setVerticalGroup(
+    scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    .addGap(0, 15767, Short.MAX_VALUE)
+    );    */
+}
     
 public void analizar() throws IOException
 {
@@ -412,8 +435,9 @@ public void analizar() throws IOException
         aux.generarGrafica(raizChtml); // Dibujamos el arbol
 
         posX = posY = xMax = yMax=  0;
-        Panel nuevo = new Panel();
+        Panel nuevo = new Panel();        
         nuevo.setBounds(0, 0, scroll.getWidth(), scroll.getHeight());
+        prepararPanel(nuevo);
         generarObjetos(raizChtml,nuevo);  
 
         Elemento elemento = new Elemento("panel", "panel", nuevo);
@@ -1119,6 +1143,7 @@ public void compilar(){
                 case "PANEL":
                     System.out.println("---------------------------PANEL---------------------");
                     Panel panelNuevo = new Panel();
+                    prepararPanel(panelNuevo);
                     for(nodoChtml hijoAuxiliar: raiz.getHijos())
                     {
                         generarObjetos(hijoAuxiliar, panelNuevo);                                  
@@ -1977,9 +2002,8 @@ public void Interfaz(Panel contenedor)
     int y = 0;
     int saltoY = 0;
     int saltoX = 0;
-    ArrayList<Elemento> elementos = contenedor.getElementos();
-    
-    for(Elemento aux: elementos)
+    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
+    for(Elemento aux: elementosContenedor)
     {
         switch(aux.getTipo())
         {
@@ -2002,8 +2026,7 @@ public void Interfaz(Panel contenedor)
                 }                
                 x = 0;
                 y = y + saltoY;            
-                y= 0;  
-                
+                y= 0;                 
                 JLabel label = new JLabel();
                 label.setBackground(contenedor.getBackground());
                 label.setSize(saltoY, contenedor.getWidth()-x-50);
@@ -2113,10 +2136,11 @@ public void Interfaz(Panel contenedor)
                 break;     
                 
             case "panel":
-                Panel panel =(Panel)aux.getValor();
+                Panel panel =(Panel)aux.getValor();                                
                 if(panel.getWidth()==0){ panel.setSize(scroll.getWidth(), panel.getHeight());}
                 if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
                 if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(scroll.getWidth(),100);}
+                prepararPanel(panel);
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
                 Interfaz(panel);
