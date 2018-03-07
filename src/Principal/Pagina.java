@@ -1223,7 +1223,324 @@ public void compilar(){
     
     }
    
-   
+   public Tabla generarTabla(nodoChtml raiz)
+   {
+       Tabla tabla = new Tabla();
+       DefaultTableModel dataTablaFila = new DefaultTableModel();
+       ArrayList<Elemento> listaCeldas = new ArrayList();
+       for(nodoChtml aux: raiz.getHijos())
+       {
+           listaCeldas.clear();
+           switch(aux.getValue())
+           {
+                case "ELEMENTO":                    
+                    switch(aux.getHijos().get(0).getValue().toLowerCase())
+                    {                                                                 
+                        case "id":
+                            tabla.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                            break;
+                        case "grupo":
+                            tabla.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                            break;
+                        case "cadena":
+                            tabla.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                                                                               
+                            break; 
+                        case "ancho":                                                                        
+                            String numero = aux.getHijos().get(1).getValue();
+                            numero = numero.substring(1,numero.length()-1);
+                            if (esNumero(numero))
+                            {
+                                tabla.setAncho(Integer.valueOf(numero));
+                            } 
+                            break;
+                        case "alto":            
+                            numero = aux.getHijos().get(1).getValue();
+                            numero = numero.substring(1,numero.length()-1);
+                            if (esNumero(numero))
+                            {
+                                tabla.setAlto(Integer.valueOf(numero));
+                            }     
+                            break; 
+                        case "alineado":                                                                        
+                            switch(aux.getHijos().get(1).getValue())
+                            {
+                                case "\"izquierda\"":
+                                    tabla.setAlineado("izquierda");
+                                    tabla.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "\"derecha\"":
+                                    tabla.setAlineado("derecha");
+                                    tabla.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;  
+                                case "\"centrado\"":
+                                    tabla.setAlineado("centrado");
+                                    tabla.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;   
+                                default :
+                                    filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                        "Sintactico","Valor de alineacion incorrecto"});
+                                    break;                                          
+                            }
+                            break;  
+                        case "click":                                                                       
+                            tabla.setMetodo(aux.getHijos().get(1).getValue());
+                            break; 
+                        case "ruta":                                                                       
+                            tabla.setRuta(aux.getHijos().get(1).getValue());
+                            break;                                    
+                    }
+                break;
+                case "FILA":                    
+                    for(nodoChtml fila: aux.getHijos())
+                    {                                                
+                        for(nodoChtml elemento :  fila.getHijos())
+                        {
+                            switch(elemento.getValue())
+                            {
+                                case "ELEMENTO":
+                                        nodoChtml valorI = elemento.getHijos().get(0);
+                                        nodoChtml valorD = elemento.getHijos().get(1);
+                                        switch(valorI.getValue().toLowerCase())
+                                        {
+                                            case "id":
+                                                tabla.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                                break;
+                                            case "grupo":
+                                                tabla.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                                break;
+                                            case "cadena":
+                                                Texto nuevoTexto = new Texto();
+                                                nuevoTexto.setText(quitarComillas(aux.getHijos().get(1).getValue()));
+                                                nuevoTexto.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));
+                                                Elemento nuevoElemento = new Elemento();
+                                                nuevoElemento.setTipo("texto");
+                                                nuevoElemento.setValor(nuevoTexto);                                                        
+                                                listaCeldas.add(nuevoElemento);
+                                                break; 
+                                            case "ancho":                                                                        
+                                                String numero = aux.getHijos().get(1).getValue();
+                                                numero = numero.substring(1,numero.length()-1);
+                                                if (esNumero(numero))
+                                                {
+                                                    tabla.setAncho(Integer.valueOf(numero));
+                                                } 
+                                                break;
+                                            case "alto":            
+                                                numero = aux.getHijos().get(1).getValue();
+                                                numero = numero.substring(1,numero.length()-1);
+                                                if (esNumero(numero))
+                                                {
+                                                    tabla.setAlto(Integer.valueOf(numero));
+                                                }     
+                                                break; 
+                                            case "alineado":                                                                        
+                                                switch(aux.getHijos().get(1).getValue())
+                                                {
+                                                    case "\"izquierda\"":
+                                                        tabla.setAlineado("izquierda");
+                                                        tabla.setAlignmentX(LEFT_ALIGNMENT);
+                                                        break;
+                                                    case "\"derecha\"":
+                                                        tabla.setAlineado("derecha");
+                                                        tabla.setAlignmentX(RIGHT_ALIGNMENT);
+                                                        break;  
+                                                    case "\"centrado\"":
+                                                        tabla.setAlineado("centrado");
+                                                        tabla.setAlignmentX(CENTER_ALIGNMENT);
+                                                        break;   
+                                                    default :
+                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                            "Sintactico","Valor de alineacion incorrecto"});
+                                                        break;                                          
+                                                }
+                                                break;  
+                                            case "click":                                                                       
+                                                tabla.setMetodo(aux.getHijos().get(1).getValue());
+                                                break; 
+                                            case "ruta":                                                                       
+                                                tabla.setRuta(aux.getHijos().get(1).getValue());
+                                                break;                                                                                                 
+                                        }
+                                        break;
+                            /*-----------------------------------------/ELEMENTOS------------------------------------------*/                                                
+                            /*-----------------------------------------BOTON------------------------------------------*/
+                            case "BOTON":
+                                System.out.println("---------------------------BOTON---------------------");                    
+                                Boton boton = new Boton();                    
+                                for(nodoChtml nodoBoton: elemento.getHijos())
+                                {                        
+                                    if(nodoBoton.getValue().equals("ELEMENTO"))
+                                    {
+                                        switch(nodoBoton.getHijos().get(0).getValue().toLowerCase())
+                                        {
+                                            case "ruta":
+                                                boton.setRuta(nodoBoton.getHijos().get(1).getValue());                                    
+                                                break;
+                                            case "click":                                                                       
+                                                boton.setMetodo(nodoBoton.getHijos().get(1).getValue());
+                                                break;                                     
+                                            case "id":
+                                                boton.setId(nodoBoton.getHijos().get(1).getValue());                                    
+                                                break;
+                                            case "grupo":
+                                                boton.setGrupo(nodoBoton.getHijos().get(1).getValue());                                    
+                                                break;
+                                            case "cadena":
+                                                boton.setCadena(nodoBoton.getHijos().get(1).getValue());                                    
+                                                boton.setText(boton.getCadena());
+                                                break; 
+                                            case "ancho":          
+                                                String numero = nodoBoton.getHijos().get(1).getValue().substring(1,nodoBoton.getHijos().get(1).getValue().length()-1);
+                                                if (esNumero(numero))
+                                                {
+                                                    boton.setAncho(Integer.valueOf(numero));
+                                                }                                       
+                                                break;
+                                            case "alto":  
+                                                numero = nodoBoton.getHijos().get(1).getValue().substring(1,nodoBoton.getHijos().get(1).getValue().length()-1);                                    
+                                                if (esNumero(numero))
+                                                {
+                                                    boton.setAlto(Integer.valueOf(numero));
+                                                }                                                                                                                                   
+                                                break; 
+                                            case "alineado":                                                                        
+                                                switch(nodoBoton.getHijos().get(1).getValue())
+                                                {
+                                                    case "\"izquierda\"":
+                                                        boton.setAlineado("izquierda");
+                                                        boton.setAlignmentX(LEFT_ALIGNMENT);
+                                                        break;
+                                                    case "\"derecha\"":
+                                                        boton.setAlineado("derecha");
+                                                        boton.setAlignmentX(RIGHT_ALIGNMENT);
+                                                        break;  
+                                                    case "\"centrado\"":
+                                                        boton.setAlineado("centrado");
+                                                        boton.setAlignmentX(CENTER_ALIGNMENT);
+                                                        break;   
+                                                    default :
+                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(nodoBoton.getHijos().get(1).getLinea()),String.valueOf(nodoBoton.getHijos().get(1).getColumna()),
+                                                            "Sintactico","Valor de alineacion incorrecto"});
+                                                        break;                                          
+                                                }
+                                                break;                                     
+                                        }
+                                    }
+                                } 
+                                Elemento nuevoElemento = new Elemento();
+                                nuevoElemento.setTipo("boton");
+                                nuevoElemento.setValor(boton);
+                                listaCeldas.add(nuevoElemento);
+                                break;
+                            /*-----------------------------------------/BOTON------------------------------------------*/
+                            /*-----------------------------------------IMAGEN------------------------------------------*/                                        
+                            case "IMAGEN":
+                                System.out.println("---------------------------IMAGEN---------------------");
+                                Imagen imagen = new Imagen();
+                                imagen.setBackground(colorFondo);
+                                for(nodoChtml nodoImagen: elemento.getHijos())
+                                {                        
+                                    if(aux.getValue().equals("ELEMENTO"))
+                                    {
+                                        switch(nodoImagen.getHijos().get(0).getValue().toLowerCase())
+                                        {                                                                 
+                                            case "id":
+                                                imagen.setName(quitarComillas(nodoImagen.getHijos().get(1).getValue()));
+                                                break;
+                                            case "grupo":
+                                                imagen.setGrupo(quitarComillas(nodoImagen.getHijos().get(1).getValue()));                                    
+                                                break;
+                                            case "cadena":
+                                                imagen.setCadena(quitarComillas(nodoImagen.getHijos().get(1).getValue()));                                    
+                                                imagen.setText(imagen.getCadena());                                    
+                                                break; 
+                                            case "ancho":                                                                        
+                                                String numero = nodoImagen.getHijos().get(1).getValue();
+                                                numero = numero.substring(1,numero.length()-1);
+                                                if (esNumero(numero))
+                                                {
+                                                    imagen.setAncho(Integer.valueOf(numero));
+                                                } 
+                                                break;
+                                            case "alto":            
+                                                numero = nodoImagen.getHijos().get(1).getValue();
+                                                numero = numero.substring(1,numero.length()-1);
+                                                if (esNumero(numero))
+                                                {
+                                                    imagen.setAlto(Integer.valueOf(numero));
+                                                }     
+                                                break; 
+                                            case "alineado":                                                                        
+                                                switch(nodoImagen.getHijos().get(1).getValue())
+                                                {
+                                                    case "\"izquierda\"":
+                                                        imagen.setAlineado("izquierda");
+                                                        imagen.setAlignmentX(LEFT_ALIGNMENT);
+                                                        break;
+                                                    case "\"derecha\"":
+                                                        imagen.setAlineado("derecha");
+                                                        imagen.setAlignmentX(RIGHT_ALIGNMENT);
+                                                        break;  
+                                                    case "\"centrado\"":
+                                                        imagen.setAlineado("centrado");
+                                                        imagen.setAlignmentX(CENTER_ALIGNMENT);
+                                                        break;   
+                                                    default :
+                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(nodoImagen.getHijos().get(1).getLinea()),String.valueOf(nodoImagen.getHijos().get(1).getColumna()),
+                                                            "Sintactico","Valor de alineacion incorrecto"});
+                                                        break;                                          
+                                                }
+                                                break;  
+                                            case "click":                                                                       
+                                                imagen.setMetodo(nodoImagen.getHijos().get(1).getValue());
+                                                break; 
+                                            case "ruta":                                                                       
+                                                imagen.setRuta(nodoImagen.getHijos().get(1).getValue());
+                                                break;                                    
+                                        }
+                                    }
+                                }                    
+                                nuevoElemento = new Elemento(imagen.getId(),"imagen",imagen);    
+                                listaCeldas.add(nuevoElemento);    
+                                break;
+                            /*-----------------------------------------/IMAGEN------------------------------------------*/                                         
+                            }
+                        }                                                                                                              
+                        /*Aquí agregamos la fila*/
+                        Object[] arrayFila = new Object[listaCeldas.size()];
+                        dataTablaFila.setColumnCount(3);
+                        int contador= 0;
+                        for(Elemento auxElemento: listaCeldas)
+                        {
+                            switch(auxElemento.getTipo())
+                            {
+                                case "texto":
+                                    Texto nuevoTexto = (Texto)auxElemento.getValor();
+                                    nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getAncho(),nuevoTexto.getAlto()));
+                                    arrayFila[contador] = nuevoTexto;
+                                    break;
+                                case "boton":
+                                    Boton nuevoBoton = (Boton)auxElemento.getValor();
+                                    nuevoBoton.setPreferredSize(new java.awt.Dimension(nuevoBoton.getAncho(),nuevoBoton.getAlto()));
+                                    arrayFila[contador] = nuevoBoton;
+                                    break;  
+                                case "imagen":
+                                    Imagen nuevoImagen = (Imagen)auxElemento.getValor();
+                                    nuevoImagen.setPreferredSize(new java.awt.Dimension(nuevoImagen.getAncho(),nuevoImagen.getAlto()));
+                                    arrayFila[contador] = nuevoImagen;
+                                    break;                                                                           
+                            }
+                        }
+                        dataTablaFila.addRow(arrayFila);                        
+                        //dataTablaFila.addRow(new Object[] {"Nombre", "Apellido"});                        
+                    }                    
+                    break;                           
+           }
+       }              
+       tabla.setModel(dataTablaFila);
+       tabla.setBorder(BorderFactory.createLineBorder(Color.red));
+       return tabla;       
+   }
    
    
    /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1860,11 +2177,7 @@ public void compilar(){
         return panelNuevo;
    }
    
-    public Tabla generarTabla(nodoChtml raiz)
-    {
-        Tabla tabla = new Tabla();
-        return tabla;
-    }
+
     
 public void dibujarPanel(Panel contenedor)
 {    
@@ -2038,19 +2351,26 @@ public void posicionesPanel(int ancho, int alto, Panel contenedor)
 }
 
 
-public void posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, int x, int y)
+public void posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, int x, int y, int xMax, int yMax)
 {   
     int limite = contenedor.getAncho(); 
     if(alto>saltoY){saltoY = alto;}    
-    if((x + ancho)>= limite-ancho)        
+    if(limite>0)
     {
-        x = 0;
-        y = y + saltoY;            
-        saltoY= 0;              
+        if((x + ancho)>= limite-ancho)        
+        {
+            x = 0;
+            y = y + saltoY;            
+            saltoY= 0;              
+        }
+        else
+        {
+            x = x + ancho;
+        }        
     }
     else
     {
-        x = x + ancho;
+        x = x + ancho;            
     }
 
 }
@@ -2061,6 +2381,8 @@ public void Interfaz(Panel contenedor)
     int y = 0;
     int saltoY = 0;
     int saltoX = 0;
+    int anchoMaximo = 0;
+    int altoMaximo = 0;
     ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
     for(Elemento aux: elementosContenedor)
     {
@@ -2068,20 +2390,22 @@ public void Interfaz(Panel contenedor)
         {
             case "boton":
                 Boton boton =(Boton)aux.getValor();                
-                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());                  
-                posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y);         
+                boton.setPreferredSize(new java.awt.Dimension(boton.getAncho(),boton.getAlto()));
+                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());                                  
+                posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y,anchoMaximo,altoMaximo);         
                 contenedor.add(boton);
                 break;
             case "enlace":
-                Enlace enlace =(Enlace)aux.getValor();                
+                Enlace enlace =(Enlace)aux.getValor();   
+                enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
                 enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
-                posicionPanel(enlace.getAncho(), enlace.getAlto(),contenedor, saltoY, x, y);        
+                posicionPanel(enlace.getAncho(), enlace.getAlto(),contenedor, saltoY, x, y,anchoMaximo,altoMaximo);        
                 contenedor.add(enlace);
                 break; 
             case "salto":
                 if(saltoY == 0)
                 {
-                    saltoY = 20;
+                    saltoY = 10;
                 }                
                 x = 0;
                 y = y + saltoY;            
@@ -2090,8 +2414,8 @@ public void Interfaz(Panel contenedor)
                 label.setBackground(contenedor.getBackground());
                 label.setSize(saltoY, contenedor.getWidth()-x-50);
                 for(int contador = 0 ; contador<contenedor.getWidth()-x-50;contador++){label.setText(label.getText() + " ");}
-                //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-                posicionPanel(label.getWidth(), label.getHeight(), contenedor, saltoY, x, y);                  
+                //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));                
+                posicionPanel(label.getWidth(), label.getHeight(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                  
                 contenedor.add(label);                 
                 break;                 
             case "spinner":
@@ -2100,14 +2424,16 @@ public void Interfaz(Panel contenedor)
                 if(esNumero(spinner.getCadena()))
                 {
                     spinner.setValue(Integer.valueOf(spinner.getCadena()));
-                }                
-                posicionPanel(spinner.getAncho(), spinner.getAlto(), contenedor, saltoY, x, y);                
+                }    
+                spinner.setPreferredSize(new java.awt.Dimension(spinner.getAncho(),spinner.getAlto()));
+                posicionPanel(spinner.getAncho(), spinner.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                
                 contenedor.add(spinner);
                 break;                
             case "cajaOpciones":
                 JComboBox opciones =(JComboBox)aux.getValor();
-                opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());                
-                posicionPanel(opciones.getWidth(), opciones.getHeight(),contenedor, saltoY, x, y);                
+                opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());    
+                opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));
+                posicionPanel(opciones.getWidth(), opciones.getHeight(),contenedor, saltoY, x, y, anchoMaximo,altoMaximo);                
                 contenedor.add(opciones);
                 break;                
             case "imagen":
@@ -2127,8 +2453,9 @@ public void Interfaz(Panel contenedor)
                     ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
                     imagen.setIcon(iconoEscala);                     
                     
-                }                                                       
-                posicionPanel(imagen.getAncho(), imagen.getAlto(), contenedor, saltoY, x, y);                
+                }                    
+                imagen.setPreferredSize(new java.awt.Dimension(imagen.getAncho(),imagen.getAlto()));
+                posicionPanel(imagen.getAncho(), imagen.getAlto(), contenedor, saltoY, x, y ,anchoMaximo,altoMaximo);                
                 contenedor.add(imagen);       
                 break;                  
             case "texto":
@@ -2151,8 +2478,9 @@ public void Interfaz(Panel contenedor)
                     texto.setAlto(alto);
                     texto.setAncho(ancho*7);                    
                 }
-                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());
-                posicionPanel(texto.getAncho(), texto.getAlto(), contenedor, saltoY, x, y);                
+                texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
+                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
+                posicionPanel(texto.getAncho(), texto.getAlto(), contenedor, saltoY, x, y ,anchoMaximo,altoMaximo);                
                 contenedor.add(texto);                
                 break;  
                 
@@ -2173,8 +2501,9 @@ public void Interfaz(Panel contenedor)
                     caja.setAlto(20);
                     caja.setAncho(ancho*7);
                 }
+                caja.setPreferredSize(new java.awt.Dimension(caja.getAncho(),caja.getAlto()));
                 caja.setBounds(x, y, caja.getAncho(),caja.getAlto());
-                posicionPanel(caja.getAncho(), caja.getAlto(), contenedor, saltoY, x, y);                
+                posicionPanel(caja.getAncho(), caja.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                
                 contenedor.add(caja);                
                 break;                  
                 
@@ -2183,32 +2512,35 @@ public void Interfaz(Panel contenedor)
                 //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
                 JScrollPane nuevo = new JScrollPane(area);
                 nuevo.setBounds(x, y, area.getAncho(),area.getAlto());
-                posicionPanel(area.getAncho(), area.getAlto(), contenedor, saltoY, x, y); 
+                area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto()));
+                posicionPanel(area.getAncho(), area.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo); 
                 contenedor.add(nuevo);                
                 break;                 
                 
             case "tabla":
                 Tabla tabla =(Tabla)aux.getValor();
-                tabla.setBounds(x, y, tabla.getAncho(),tabla.getAlto());                
-                posicionPanel(tabla.getAncho(), tabla.getAlto(), contenedor, saltoY, x, y);       
+                tabla.setBounds(x, y, tabla.getAncho(),tabla.getAlto());  
+                tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
+                posicionPanel(tabla.getAncho(), tabla.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);       
                 contenedor.add(tabla);
                 break;     
                 
             case "panel":
                 Panel panel =(Panel)aux.getValor();                                
-                if(panel.getWidth()==0){ panel.setSize(scroll.getWidth(), panel.getHeight());}
-                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
-                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(scroll.getWidth(),100);}
                 prepararPanel(panel);
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
-                Interfaz(panel);
-                posicionPanel( panel.getWidth(),panel.getHeight(),contenedor, saltoY, x, y); 
+                Interfaz(panel);               
+                if(panel.getWidth()==0){ panel.setSize(contenedor.getWidth(), panel.getHeight());}
+                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
+                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(contenedor.getWidth(),100);}              
+                posicionPanel( panel.getWidth(),panel.getHeight(),contenedor, saltoY, x, y,anchoMaximo,altoMaximo); 
                 contenedor.add(panel);
                 break;                  
         }
         this.repaint();
     }
+
     
     
 }
