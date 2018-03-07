@@ -388,7 +388,7 @@ public class Pagina extends javax.swing.JPanel {
         posX = posY = xMax = yMax=  0;
         //panelPrincipal = new Panel();        
         panelPrincipal = new Panel();
-        panelPrincipal.setBounds(0, 0, Panel.getWidth(), Panel.getHeight());
+        panelPrincipal.setBounds(0, 0, scroll.getWidth(), Panel.getHeight());
         panelPrincipal.setAncho(Panel.getWidth());
         panelPrincipal.setAlto(scroll.getHeight());
         prepararPanel(panelPrincipal);
@@ -416,45 +416,33 @@ public void analizar() throws IOException
         erroresSintacticos.clear();
         elementos.clear();
         compilar();        
-        if((!erroresLexicos.isEmpty())
+        if(
+                (!erroresLexicos.isEmpty())
                 ||(erroresSintacticos.size()!=0)
                 ||(erroresSemanticos.size()!=0))
         {
             errores_consola();
-        }
-        
+        }  
         
         dibujador aux = new dibujador();           
-        aux.generarGrafica(raizChtml); // Dibujamos el arbol
-
+        aux.generarGrafica(raizChtml);
         posX = posY = xMax = yMax=  0;
         panelPrincipal = new Panel();        
-        panelPrincipal.setBounds(0, 0, Panel.getWidth(), scroll.getHeight());
+        panelPrincipal.setBounds(0, 0, scroll.getWidth(), scroll.getHeight());
         panelPrincipal.setAncho(scroll.getWidth());
         panelPrincipal.setAlto(scroll.getHeight());
         prepararPanel(panelPrincipal);
         generarObjetos(raizChtml,panelPrincipal);  
-
         Elemento elemento = new Elemento("panel", "panel", panelPrincipal);
         elementos.add(elemento);
         Interfaz(panelPrincipal); // Generamos la interfaz             
         scroll.add(panelPrincipal);
-
-
-
-        //System.out.println(aux.dibujarInterfaz(raizChtml,contadorPaginas)); // Generamos interfaz :v
-        //aux.imprimirtodo(raizChtml, contadorChtml);
-
-
         limpiarSalidas();
         imprimirReporteLexico();
         imprimirResultado();
         imprimirLexicos();
         imprimirSintacticos();
-        imprimirSemanticos();
-        
-    
-    
+        imprimirSemanticos();                
 } 
 
 public void limpiarSalidas()
@@ -490,7 +478,12 @@ public void compilar(){
             for(int n=0;n<numero;n++)
             {
                 
-                System.out.println(tablaSimbolos_.get(n).columna + "\t"+tablaSimbolos_.get(n).linea+ "\t"+tablaSimbolos_.get(n).Valor+ "\t"+tablaSimbolos_.get(n).tipo+ "\t\t"+tablaSimbolos_.get(n).descripcion);
+                System.out.println(
+                        tablaSimbolos_.get(n).columna +
+                        "\t"+tablaSimbolos_.get(n).linea+
+                        "\t"+tablaSimbolos_.get(n).Valor+ 
+                        "\t"+tablaSimbolos_.get(n).tipo+ 
+                        "\t\t"+tablaSimbolos_.get(n).descripcion);
             
             }
             System.out.println(numero);
@@ -932,7 +925,7 @@ public void compilar(){
                     elemento = new Elemento(texto.getId(),"texto",texto);    
                     panel.getElementos().add(elemento);
                     break;  
-/*Caja area de texto*/                   
+/*--------------------------------------------------Caja area de texto--------------------------------------------------*/                   
                 case "TEXTOA":
                     System.out.println("---------------------------TEXTOA---------------------");
                     //Vemos todos los elementos :v
@@ -1003,7 +996,7 @@ public void compilar(){
                     panel.getElementos().add(elemento);
                     break;      
                     
-/*CAJA DE TEXTO SIN LINEAS*/  
+/*CAJA DE TEXTO SIN LINEAS-----------------------------------------------*/  
                     
                 case "CAJATEXTO":
                     System.out.println("---------------------------CAJATEXTO---------------------");
@@ -1208,9 +1201,9 @@ public void compilar(){
                     
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
-                    /* Tabla tabla = generarTabla(raiz);
+                    Tabla tabla = generarTabla(raiz);
                     elemento = new Elemento(tabla.getId(),"tabla",tabla);
-                    panel.getElementos().add(elemento); */
+                    panel.getElementos().add(elemento);
                     break;                                                            
             }
         }        
@@ -1223,8 +1216,7 @@ public void compilar(){
        DefaultTableModel dataTablaFila = new DefaultTableModel();
        ArrayList<Elemento> listaCeldas = new ArrayList();
        for(nodoChtml aux: raiz.getHijos())
-       {
-           listaCeldas.clear();
+       {           
            switch(aux.getValue())
            {
                 case "ELEMENTO":                    
@@ -1504,9 +1496,11 @@ public void compilar(){
                             /*-----------------------------------------/IMAGEN------------------------------------------*/                                         
                             }
                         }                                                                                                                                    
-                    }                    
+                    }
+                    Elemento nuevoElemento = new Elemento ("nuevaLinea","nuevaLinea", new String(""));
+                    listaCeldas.add(nuevoElemento);
                         /*Aquí agregamos la fila*/
-                        Object[] arrayFila = new Object[listaCeldas.size()];
+                    /*    Object[] arrayFila = new Object[listaCeldas.size()];
                         dataTablaFila.setColumnCount(listaCeldas.size());
                         int contador= 0;
                         for(Elemento auxElemento: listaCeldas)
@@ -1557,12 +1551,13 @@ public void compilar(){
                             }
                         }
                         dataTablaFila.addRow(arrayFila);                        
-                        //dataTablaFila.addRow(new Object[] {"Nombre", "Apellido"});                      
+                        //dataTablaFila.addRow(new Object[] {"Nombre", "Apellido"});       
+                    */
                     break;                           
            }
        }              
-       //tabla.setModel(dataTablaFila);
-       tabla.setBorder(BorderFactory.createLineBorder(Color.red));
+              
+       tabla.setElementos(listaCeldas);
        return tabla;       
    }
    
@@ -2543,7 +2538,61 @@ public void Interfaz(Panel contenedor)
                 
             case "tabla":
                 Tabla tabla =(Tabla)aux.getValor();
-                tabla.setBounds(x, y, tabla.getAncho(),tabla.getAlto());  
+                Tab  tablaPanel = new Tab();
+                tablaPanel.setBounds(x, y, tabla.getAncho(),tabla.getAlto());  
+                DefaultTableModel dataTablaFila = new DefaultTableModel();                
+                Object[] arrayFila = new Object[15];
+                int contador = 0;
+                for(Elemento auxElemento: tabla.getElementos())
+                {                    
+                    //elementos.add(auxElemento);
+                    switch(auxElemento.getTipo())
+                    {
+
+                        case "texto":
+                            Texto nuevoTexto = (Texto)auxElemento.getValor();
+                            nuevoTexto.setText(nuevoTexto.getCadena());
+                            nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getText().length()*4,20));
+                            if(nuevoTexto.getAncho()!=0 && nuevoTexto.getAlto()!=0)
+                            {
+                                nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getAncho(),nuevoTexto.getAlto()));
+                            }                                    
+                            arrayFila[contador] = nuevoTexto;                                    
+                            //tabla.add(nuevoTexto);
+                            break;
+                        case "boton":
+                            Boton nuevoBoton = (Boton)auxElemento.getValor();
+                            nuevoBoton.setPreferredSize(new java.awt.Dimension(nuevoBoton.getAncho(),nuevoBoton.getAlto()));
+                            arrayFila[contador] = nuevoBoton;
+                            //tabla.add(nuevoBoton);
+                            break;  
+                        case "imagen":                                  
+                            Imagen imagenTabla =(Imagen)auxElemento.getValor();
+                            imagenTabla.setBounds(posXAux, posYAux, imagenTabla.getAncho(),imagenTabla.getAlto());
+                            ImageIcon iconoTabla = new ImageIcon(); 
+                            if(imagenTabla.getRuta()!=null )
+                            {
+                                if(!imagenTabla.getRuta().equals(""))
+                                {
+                                    iconoTabla =   new ImageIcon(imagenTabla.getRuta().substring(1,imagenTabla.getRuta().length()-1));
+                                }   
+                                if(!imagenTabla.getRuta().substring(0,1).equals("\""))
+                                {
+                                    iconoTabla = new ImageIcon(imagenTabla.getRuta());
+                                }  
+                                ImageIcon iconoEscalaTabla = new ImageIcon(iconoTabla.getImage().getScaledInstance(imagenTabla.getAncho(), imagenTabla.getAlto(), java.awt.Image.SCALE_DEFAULT));                
+                                imagenTabla.setIcon(iconoEscalaTabla);                     
+                            }                                                       
+                            imagenTabla.setPreferredSize(new java.awt.Dimension(imagenTabla.getAncho(),imagenTabla.getAlto()));
+                            arrayFila[contador] = imagenTabla;                            
+                            break;
+                        case "nuevaLinea":
+                            //dataTablaFila.addRow(arrayFila);
+                            break;
+                    }                   
+                    contador++;
+                }                
+                tabla.setModel(dataTablaFila);
                 tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
                 posicionPanel(tabla.getAncho(), tabla.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);       
                 contenedor.add(tabla);

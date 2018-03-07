@@ -8,6 +8,7 @@ package Principal;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JTable;
@@ -34,12 +35,29 @@ public class Tabla extends JTable
     private int alto;
     private int ancho;
     private String metodo; 
+    private ArrayList<Elemento> elementos  = new ArrayList();
     DefaultTableModel filasErrores = new DefaultTableModel(); 
 
     public Tabla() 
     {
         alto=200;
         ancho=200;
+    }
+
+    public ArrayList<Elemento> getElementos() {
+        return elementos;
+    }
+
+    public DefaultTableModel getFilasErrores() {
+        return filasErrores;
+    }
+
+    public void setElementos(ArrayList<Elemento> elementos) {
+        this.elementos = elementos;
+    }
+
+    public void setFilasErrores(DefaultTableModel filasErrores) {
+        this.filasErrores = filasErrores;
     }
 
     public void setRuta(String ruta) {
