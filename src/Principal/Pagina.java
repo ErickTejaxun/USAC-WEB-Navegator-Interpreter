@@ -66,6 +66,7 @@ public class Pagina extends javax.swing.JPanel {
     Tabla tablaActual;
     Pagina panelActual = null;
     public int anchoActual=0;
+    public Panel panelPrincipal = new Panel();
     
     
     //JScrollPane scroll = new JScrollPane();
@@ -379,13 +380,21 @@ public class Pagina extends javax.swing.JPanel {
     }//GEN-LAST:event_botonOpcionesActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        generarInterfaz();        // TODO add your handling code here:
-        posX = posY = xMax = yMax=  0;
-        posXAux = posYAux = xMaxAux = yMaxAux=  0;
-        System.out.println(scroll.getHeight() + "\t" + scroll.getWidth());
+
+
     }//GEN-LAST:event_formComponentResized
 
     private void scrollComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_scrollComponentResized
+        posX = posY = xMax = yMax=  0;
+        //panelPrincipal = new Panel();        
+        panelPrincipal = new Panel();
+        panelPrincipal.setBounds(0, 0, Panel.getWidth(), Panel.getHeight());
+        panelPrincipal.setAncho(Panel.getWidth());
+        panelPrincipal.setAlto(scroll.getHeight());
+        prepararPanel(panelPrincipal);
+        generarObjetos(raizChtml,panelPrincipal); 
+        Interfaz(panelPrincipal); // Generamos la interfaz         
+        scroll.add(panelPrincipal); 
 
     }//GEN-LAST:event_scrollComponentResized
 
@@ -393,25 +402,9 @@ public class Pagina extends javax.swing.JPanel {
 
 public void prepararPanel(Panel nuevo)
 {
-    //nuevo.setBackground(new java.awt.Color(153, 255, 255));
     nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     nuevo.setMinimumSize(new java.awt.Dimension(0, 15767));
     nuevo.setPreferredSize(new java.awt.Dimension(nuevo.getAncho(),nuevo.getAlto()));
-    /*nuevo.addComponentListener(new java.awt.event.ComponentAdapter() {
-    public void componentResized(java.awt.event.ComponentEvent evt) {
-        scrollComponentResized(evt);
-    }
-    });
-    javax.swing.GroupLayout scrollLayout = new javax.swing.GroupLayout(nuevo);
-    nuevo.setLayout(scrollLayout);
-    scrollLayout.setHorizontalGroup(
-    scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    .addGap(0, 1011, Short.MAX_VALUE)
-    );
-    scrollLayout.setVerticalGroup(
-    scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    .addGap(0, 15767, Short.MAX_VALUE)
-    );    */
 }
     
 public void analizar() throws IOException
@@ -421,30 +414,31 @@ public void analizar() throws IOException
         erroresLexicos.clear();
         elementos.clear();
         erroresSintacticos.clear();
-        elementos = new ArrayList();
-
-
-        compilar();
-        
-        if((erroresLexicos.size()!=0)||(erroresSintacticos.size()!=0)||(erroresSemanticos.size()!=0))
+        elementos.clear();
+        compilar();        
+        if((!erroresLexicos.isEmpty())
+                ||(erroresSintacticos.size()!=0)
+                ||(erroresSemanticos.size()!=0))
         {
             errores_consola();
         }
+        
+        
         dibujador aux = new dibujador();           
         aux.generarGrafica(raizChtml); // Dibujamos el arbol
 
         posX = posY = xMax = yMax=  0;
-        Panel nuevo = new Panel();        
-        nuevo.setBounds(0, 0, scroll.getWidth(), scroll.getHeight());
-        nuevo.setAncho(scroll.getWidth());
-        nuevo.setAlto(scroll.getHeight());
-        prepararPanel(nuevo);
-        generarObjetos(raizChtml,nuevo);  
+        panelPrincipal = new Panel();        
+        panelPrincipal.setBounds(0, 0, Panel.getWidth(), scroll.getHeight());
+        panelPrincipal.setAncho(scroll.getWidth());
+        panelPrincipal.setAlto(scroll.getHeight());
+        prepararPanel(panelPrincipal);
+        generarObjetos(raizChtml,panelPrincipal);  
 
-        Elemento elemento = new Elemento("panel", "panel", nuevo);
+        Elemento elemento = new Elemento("panel", "panel", panelPrincipal);
         elementos.add(elemento);
-        Interfaz(nuevo); // Generamos la interfaz             
-        scroll.add(nuevo);
+        Interfaz(panelPrincipal); // Generamos la interfaz             
+        scroll.add(panelPrincipal);
 
 
 
@@ -1214,9 +1208,9 @@ public void compilar(){
                     
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
-                    Tabla tabla = generarTabla(raiz);
+                    /* Tabla tabla = generarTabla(raiz);
                     elemento = new Elemento(tabla.getId(),"tabla",tabla);
-                    panel.getElementos().add(elemento);                                     
+                    panel.getElementos().add(elemento); */
                     break;                                                            
             }
         }        
@@ -1303,22 +1297,22 @@ public void compilar(){
                                         switch(valorI.getValue().toLowerCase())
                                         {
                                             case "id":
-                                                tabla.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                                tabla.setName(quitarComillas(valorD.getValue()));
                                                 break;
                                             case "grupo":
-                                                tabla.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                                tabla.setGrupo(quitarComillas(valorD.getValue()));                                    
                                                 break;
                                             case "cadena":
                                                 Texto nuevoTexto = new Texto();
-                                                nuevoTexto.setText(quitarComillas(aux.getHijos().get(1).getValue()));
-                                                nuevoTexto.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));
+                                                nuevoTexto.setText(quitarComillas(valorD.getValue()));
+                                                nuevoTexto.setCadena(quitarComillas(valorD.getValue()));
                                                 Elemento nuevoElemento = new Elemento();
                                                 nuevoElemento.setTipo("texto");
                                                 nuevoElemento.setValor(nuevoTexto);                                                        
                                                 listaCeldas.add(nuevoElemento);
                                                 break; 
                                             case "ancho":                                                                        
-                                                String numero = aux.getHijos().get(1).getValue();
+                                                String numero = valorD.getValue();
                                                 numero = numero.substring(1,numero.length()-1);
                                                 if (esNumero(numero))
                                                 {
@@ -1326,7 +1320,7 @@ public void compilar(){
                                                 } 
                                                 break;
                                             case "alto":            
-                                                numero = aux.getHijos().get(1).getValue();
+                                                numero = valorD.getValue();
                                                 numero = numero.substring(1,numero.length()-1);
                                                 if (esNumero(numero))
                                                 {
@@ -1334,7 +1328,7 @@ public void compilar(){
                                                 }     
                                                 break; 
                                             case "alineado":                                                                        
-                                                switch(aux.getHijos().get(1).getValue())
+                                                switch(valorD.getValue())
                                                 {
                                                     case "\"izquierda\"":
                                                         tabla.setAlineado("izquierda");
@@ -1349,16 +1343,16 @@ public void compilar(){
                                                         tabla.setAlignmentX(CENTER_ALIGNMENT);
                                                         break;   
                                                     default :
-                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(valorD.getLinea()),String.valueOf(valorD.getColumna()),
                                                             "Sintactico","Valor de alineacion incorrecto"});
                                                         break;                                          
                                                 }
                                                 break;  
                                             case "click":                                                                       
-                                                tabla.setMetodo(aux.getHijos().get(1).getValue());
+                                                tabla.setMetodo(valorD.getValue());
                                                 break; 
                                             case "ruta":                                                                       
-                                                tabla.setRuta(aux.getHijos().get(1).getValue());
+                                                tabla.setRuta(valorD.getValue());
                                                 break;                                                                                                 
                                         }
                                         break;
@@ -1371,40 +1365,42 @@ public void compilar(){
                                 {                        
                                     if(nodoBoton.getValue().equals("ELEMENTO"))
                                     {
-                                        switch(nodoBoton.getHijos().get(0).getValue().toLowerCase())
+                                        valorI = nodoBoton.getHijos().get(0);
+                                        valorD = nodoBoton.getHijos().get(1);
+                                        switch(valorI.getValue().toLowerCase())
                                         {
                                             case "ruta":
-                                                boton.setRuta(nodoBoton.getHijos().get(1).getValue());                                    
+                                                boton.setRuta(valorD.getValue());                                    
                                                 break;
                                             case "click":                                                                       
-                                                boton.setMetodo(nodoBoton.getHijos().get(1).getValue());
+                                                boton.setMetodo(valorD.getValue());
                                                 break;                                     
                                             case "id":
-                                                boton.setId(nodoBoton.getHijos().get(1).getValue());                                    
+                                                boton.setId(valorD.getValue());                                    
                                                 break;
                                             case "grupo":
-                                                boton.setGrupo(nodoBoton.getHijos().get(1).getValue());                                    
+                                                boton.setGrupo(valorD.getValue());                                    
                                                 break;
                                             case "cadena":
-                                                boton.setCadena(nodoBoton.getHijos().get(1).getValue());                                    
+                                                boton.setCadena(valorD.getValue());                                    
                                                 boton.setText(boton.getCadena());
                                                 break; 
                                             case "ancho":          
-                                                String numero = nodoBoton.getHijos().get(1).getValue().substring(1,nodoBoton.getHijos().get(1).getValue().length()-1);
+                                                String numero = valorD.getValue().substring(1,valorD.getValue().length()-1);
                                                 if (esNumero(numero))
                                                 {
                                                     boton.setAncho(Integer.valueOf(numero));
                                                 }                                       
                                                 break;
                                             case "alto":  
-                                                numero = nodoBoton.getHijos().get(1).getValue().substring(1,nodoBoton.getHijos().get(1).getValue().length()-1);                                    
+                                                numero = valorD.getValue().substring(1,valorD.getValue().length()-1);                                    
                                                 if (esNumero(numero))
                                                 {
                                                     boton.setAlto(Integer.valueOf(numero));
                                                 }                                                                                                                                   
                                                 break; 
                                             case "alineado":                                                                        
-                                                switch(nodoBoton.getHijos().get(1).getValue())
+                                                switch(valorD.getValue())
                                                 {
                                                     case "\"izquierda\"":
                                                         boton.setAlineado("izquierda");
@@ -1419,7 +1415,7 @@ public void compilar(){
                                                         boton.setAlignmentX(CENTER_ALIGNMENT);
                                                         break;   
                                                     default :
-                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(nodoBoton.getHijos().get(1).getLinea()),String.valueOf(nodoBoton.getHijos().get(1).getColumna()),
+                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(valorD.getLinea()),String.valueOf(valorD.getColumna()),
                                                             "Sintactico","Valor de alineacion incorrecto"});
                                                         break;                                          
                                                 }
@@ -1440,22 +1436,24 @@ public void compilar(){
                                 imagen.setBackground(colorFondo);
                                 for(nodoChtml nodoImagen: elemento.getHijos())
                                 {                        
-                                    if(aux.getValue().equals("ELEMENTO"))
+                                    if(nodoImagen.getValue().equals("ELEMENTO"))
                                     {
-                                        switch(nodoImagen.getHijos().get(0).getValue().toLowerCase())
+                                        valorI = nodoImagen.getHijos().get(0);
+                                        valorD = nodoImagen.getHijos().get(1);                                        
+                                        switch(valorI.getValue().toLowerCase())
                                         {                                                                 
                                             case "id":
-                                                imagen.setName(quitarComillas(nodoImagen.getHijos().get(1).getValue()));
+                                                imagen.setName(quitarComillas(valorD.getValue()));
                                                 break;
                                             case "grupo":
-                                                imagen.setGrupo(quitarComillas(nodoImagen.getHijos().get(1).getValue()));                                    
+                                                imagen.setGrupo(quitarComillas(valorD.getValue()));                                    
                                                 break;
                                             case "cadena":
-                                                imagen.setCadena(quitarComillas(nodoImagen.getHijos().get(1).getValue()));                                    
+                                                imagen.setCadena(quitarComillas(valorD.getValue()));                                    
                                                 imagen.setText(imagen.getCadena());                                    
                                                 break; 
                                             case "ancho":                                                                        
-                                                String numero = nodoImagen.getHijos().get(1).getValue();
+                                                String numero = valorD.getValue();
                                                 numero = numero.substring(1,numero.length()-1);
                                                 if (esNumero(numero))
                                                 {
@@ -1463,7 +1461,7 @@ public void compilar(){
                                                 } 
                                                 break;
                                             case "alto":            
-                                                numero = nodoImagen.getHijos().get(1).getValue();
+                                                numero = valorD.getValue();
                                                 numero = numero.substring(1,numero.length()-1);
                                                 if (esNumero(numero))
                                                 {
@@ -1471,7 +1469,7 @@ public void compilar(){
                                                 }     
                                                 break; 
                                             case "alineado":                                                                        
-                                                switch(nodoImagen.getHijos().get(1).getValue())
+                                                switch(valorD.getValue())
                                                 {
                                                     case "\"izquierda\"":
                                                         imagen.setAlineado("izquierda");
@@ -1486,16 +1484,16 @@ public void compilar(){
                                                         imagen.setAlignmentX(CENTER_ALIGNMENT);
                                                         break;   
                                                     default :
-                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(nodoImagen.getHijos().get(1).getLinea()),String.valueOf(nodoImagen.getHijos().get(1).getColumna()),
+                                                        filasErrores.addRow(new String[]{"CHTML",String.valueOf(valorD.getLinea()),String.valueOf(valorD.getColumna()),
                                                             "Sintactico","Valor de alineacion incorrecto"});
                                                         break;                                          
                                                 }
                                                 break;  
                                             case "click":                                                                       
-                                                imagen.setMetodo(nodoImagen.getHijos().get(1).getValue());
+                                                imagen.setMetodo(valorD.getValue());
                                                 break; 
                                             case "ruta":                                                                       
-                                                imagen.setRuta(nodoImagen.getHijos().get(1).getValue());
+                                                imagen.setRuta(valorD.getValue());
                                                 break;                                    
                                         }
                                     }
@@ -1505,39 +1503,65 @@ public void compilar(){
                                 break;
                             /*-----------------------------------------/IMAGEN------------------------------------------*/                                         
                             }
-                        }                                                                                                              
+                        }                                                                                                                                    
+                    }                    
                         /*Aquí agregamos la fila*/
                         Object[] arrayFila = new Object[listaCeldas.size()];
-                        dataTablaFila.setColumnCount(3);
+                        dataTablaFila.setColumnCount(listaCeldas.size());
                         int contador= 0;
                         for(Elemento auxElemento: listaCeldas)
                         {
+                            //elementos.add(auxElemento);
                             switch(auxElemento.getTipo())
                             {
+                                
                                 case "texto":
                                     Texto nuevoTexto = (Texto)auxElemento.getValor();
-                                    nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getAncho(),nuevoTexto.getAlto()));
-                                    arrayFila[contador] = nuevoTexto;
+                                    nuevoTexto.setText(nuevoTexto.getCadena());
+                                    nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getText().length()*4,20));
+                                    if(nuevoTexto.getAncho()!=0 && nuevoTexto.getAlto()!=0)
+                                    {
+                                        nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getAncho(),nuevoTexto.getAlto()));
+                                    }                                    
+                                    arrayFila[contador] = nuevoTexto;                                    
+                                    //tabla.add(nuevoTexto);
                                     break;
                                 case "boton":
                                     Boton nuevoBoton = (Boton)auxElemento.getValor();
                                     nuevoBoton.setPreferredSize(new java.awt.Dimension(nuevoBoton.getAncho(),nuevoBoton.getAlto()));
                                     arrayFila[contador] = nuevoBoton;
+                                    //tabla.add(nuevoBoton);
                                     break;  
-                                case "imagen":
-                                    Imagen nuevoImagen = (Imagen)auxElemento.getValor();
-                                    nuevoImagen.setPreferredSize(new java.awt.Dimension(nuevoImagen.getAncho(),nuevoImagen.getAlto()));
-                                    arrayFila[contador] = nuevoImagen;
+                                case "imagen":                                  
+                                    Imagen imagen =(Imagen)auxElemento.getValor();
+                                    imagen.setBounds(posXAux, posYAux, imagen.getAncho(),imagen.getAlto());
+                                    ImageIcon icono = new ImageIcon(); 
+                                    if(imagen.getRuta()!=null )
+                                    {
+                                        if(!imagen.getRuta().equals(""))
+                                        {
+                                            icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
+                                        }   
+                                        if(!imagen.getRuta().substring(0,1).equals("\""))
+                                        {
+                                            icono = new ImageIcon(imagen.getRuta());
+                                        }  
+                                        ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
+                                        imagen.setIcon(iconoEscala);                     
+
+                                    }                                                       
+                                    imagen.setPreferredSize(new java.awt.Dimension(imagen.getAncho(),imagen.getAlto()));
+                                    arrayFila[contador] = imagen;
+                                    //tabla.add(imagen);
                                     break;                                                                           
                             }
                         }
                         dataTablaFila.addRow(arrayFila);                        
-                        //dataTablaFila.addRow(new Object[] {"Nombre", "Apellido"});                        
-                    }                    
+                        //dataTablaFila.addRow(new Object[] {"Nombre", "Apellido"});                      
                     break;                           
            }
        }              
-       tabla.setModel(dataTablaFila);
+       //tabla.setModel(dataTablaFila);
        tabla.setBorder(BorderFactory.createLineBorder(Color.red));
        return tabla;       
    }
@@ -2245,8 +2269,7 @@ public void dibujarPanel(Panel contenedor)
                         icono = new ImageIcon(imagen.getRuta());
                     }  
                     ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
-                    imagen.setIcon(iconoEscala);                     
-                    
+                    imagen.setIcon(iconoEscala);                                         
                 }                                                       
                 posicionesPanel(imagen.getAncho(), imagen.getAlto(), contenedor);                
                 contenedor.add(imagen);       
@@ -2384,6 +2407,7 @@ public void Interfaz(Panel contenedor)
     int anchoMaximo = 0;
     int altoMaximo = 0;
     ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
+    scroll.removeAll();
     for(Elemento aux: elementosContenedor)
     {
         switch(aux.getTipo())
@@ -2538,11 +2562,11 @@ public void Interfaz(Panel contenedor)
                 contenedor.add(panel);
                 break;                  
         }
-        this.repaint();
+        contenedor.repaint();
     }
 
     
-    
+    this.repaint();
 }
 
 

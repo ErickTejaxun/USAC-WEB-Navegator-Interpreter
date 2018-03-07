@@ -85,7 +85,7 @@
             <fin-panel>         
             <salto-fin>
 
-
+            <imagen alto="40"; ancho ="300";>C:\Users\erick\Desktop\Poe.jpg<fin-imagen>
         <fin-panel>
                 
     <fin-cuerpo>

@@ -58,7 +58,7 @@ public class Interfaz extends javax.swing.JFrame {
         contenedor.setTabComponentAt(contenedor.getTabCount()-1, boton);
         //this.add(contenedor); 
         this.hide();
-
+        setVisible(false);
        
         //Nav navegador = new Nav();
         Nav.main();
