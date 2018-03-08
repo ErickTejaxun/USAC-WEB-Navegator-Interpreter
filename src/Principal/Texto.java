@@ -26,8 +26,8 @@ public class Texto extends JTextPane
 
     public Texto() 
     {
-        this.alto= 0;
-        this.ancho= 0;
+        this.alto= 30;
+        this.ancho= 200;
     }
 
     public void setRuta(String ruta) {

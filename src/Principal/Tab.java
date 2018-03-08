@@ -27,13 +27,9 @@ public class Tab extends JPanel
     private ArrayList<Elemento> elementos = new ArrayList();
     
     public Tab()
-    {       
-        
-        this.setSize(0,0);
-        this.setBounds(0, 0, 500,100);
-        this.setAlto(50);
-        this.setAncho(300);
-        
+    {              
+        this.setAlto(200);
+        this.setAncho(200);        
         //this.setLayout(new java.awt.CardLayout());        
     }
 

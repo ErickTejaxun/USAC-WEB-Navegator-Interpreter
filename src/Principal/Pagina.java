@@ -11,6 +11,7 @@ import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -474,6 +476,8 @@ public void compilar(){
             tablaSimbolos_ = Scanner.tablaSimbolos_;
             raizChtml = sintactico.raizChtml;
             int numero= tablaSimbolos_.size();
+            
+            
             System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
             for(int n=0;n<numero;n++)
             {
@@ -1201,7 +1205,7 @@ public void compilar(){
                     
                 case "TABLA":
                     System.out.println("---------------------------TABLA---------------------");
-                    Tabla tabla = generarTabla(raiz);
+                    Tab tabla = generarTabla(raiz);
                     elemento = new Elemento(tabla.getId(),"tabla",tabla);
                     panel.getElementos().add(elemento);
                     break;                                                            
@@ -1210,9 +1214,9 @@ public void compilar(){
     
     }
    
-   public Tabla generarTabla(nodoChtml raiz)
+   public Tab generarTabla(nodoChtml raiz)
    {
-       Tabla tabla = new Tabla();
+       Tab tabla = new Tab();
        DefaultTableModel dataTablaFila = new DefaultTableModel();
        ArrayList<Elemento> listaCeldas = new ArrayList();
        for(nodoChtml aux: raiz.getHijos())
@@ -1301,7 +1305,7 @@ public void compilar(){
                                                 Elemento nuevoElemento = new Elemento();
                                                 nuevoElemento.setTipo("texto");
                                                 nuevoElemento.setValor(nuevoTexto);                                                        
-                                                listaCeldas.add(nuevoElemento);
+                                                if(nuevoTexto.getText().length()!=0){listaCeldas.add(nuevoElemento);}                                                
                                                 break; 
                                             case "ancho":                                                                        
                                                 String numero = valorD.getValue();
@@ -2123,7 +2127,7 @@ public void compilar(){
                                         break;                                    
                                     case "TABLA":
                                         System.out.println("---------------------------TABLA---------------------");
-                                        Tabla tabla = generarTabla(nieto);
+                                        Tab tabla = generarTabla(nieto);
                                         elemento = new Elemento(tabla.getId(),"tabla",tabla);
                                         elementosPanel.add(elemento);                                     
                                         break;                            
@@ -2392,6 +2396,31 @@ public void posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, in
     }
 
 }
+
+
+public void posicionTabla(int ancho, int alto, Tab contenedor , int saltoY, int x, int y, int xMax, int yMax)
+{   
+    int limite = contenedor.getAncho(); 
+    if(alto>saltoY){saltoY = alto;}    
+    if(limite>0)
+    {
+        if((x + ancho)>= limite-ancho)        
+        {
+            x = 0;
+            y = y + saltoY;            
+            saltoY= 0;              
+        }
+        else
+        {
+            x = x + ancho;
+        }        
+    }
+    else
+    {
+        x = x + ancho;            
+    }
+
+}
    
 public void Interfaz(Panel contenedor)
 {
@@ -2537,65 +2566,302 @@ public void Interfaz(Panel contenedor)
                 break;                 
                 
             case "tabla":
-                Tabla tabla =(Tabla)aux.getValor();
-                Tab  tablaPanel = new Tab();
-                tablaPanel.setBounds(x, y, tabla.getAncho(),tabla.getAlto());  
-                DefaultTableModel dataTablaFila = new DefaultTableModel();                
-                Object[] arrayFila = new Object[15];
-                int contador = 0;
-                for(Elemento auxElemento: tabla.getElementos())
-                {                    
-                    //elementos.add(auxElemento);
-                    switch(auxElemento.getTipo())
-                    {
-
-                        case "texto":
-                            Texto nuevoTexto = (Texto)auxElemento.getValor();
-                            nuevoTexto.setText(nuevoTexto.getCadena());
-                            nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getText().length()*4,20));
-                            if(nuevoTexto.getAncho()!=0 && nuevoTexto.getAlto()!=0)
-                            {
-                                nuevoTexto.setPreferredSize(new java.awt.Dimension(nuevoTexto.getAncho(),nuevoTexto.getAlto()));
-                            }                                    
-                            arrayFila[contador] = nuevoTexto;                                    
-                            //tabla.add(nuevoTexto);
-                            break;
-                        case "boton":
-                            Boton nuevoBoton = (Boton)auxElemento.getValor();
-                            nuevoBoton.setPreferredSize(new java.awt.Dimension(nuevoBoton.getAncho(),nuevoBoton.getAlto()));
-                            arrayFila[contador] = nuevoBoton;
-                            //tabla.add(nuevoBoton);
-                            break;  
-                        case "imagen":                                  
-                            Imagen imagenTabla =(Imagen)auxElemento.getValor();
-                            imagenTabla.setBounds(posXAux, posYAux, imagenTabla.getAncho(),imagenTabla.getAlto());
-                            ImageIcon iconoTabla = new ImageIcon(); 
-                            if(imagenTabla.getRuta()!=null )
-                            {
-                                if(!imagenTabla.getRuta().equals(""))
-                                {
-                                    iconoTabla =   new ImageIcon(imagenTabla.getRuta().substring(1,imagenTabla.getRuta().length()-1));
-                                }   
-                                if(!imagenTabla.getRuta().substring(0,1).equals("\""))
-                                {
-                                    iconoTabla = new ImageIcon(imagenTabla.getRuta());
-                                }  
-                                ImageIcon iconoEscalaTabla = new ImageIcon(iconoTabla.getImage().getScaledInstance(imagenTabla.getAncho(), imagenTabla.getAlto(), java.awt.Image.SCALE_DEFAULT));                
-                                imagenTabla.setIcon(iconoEscalaTabla);                     
-                            }                                                       
-                            imagenTabla.setPreferredSize(new java.awt.Dimension(imagenTabla.getAncho(),imagenTabla.getAlto()));
-                            arrayFila[contador] = imagenTabla;                            
-                            break;
-                        case "nuevaLinea":
-                            //dataTablaFila.addRow(arrayFila);
-                            break;
-                    }                   
-                    contador++;
-                }                
-                tabla.setModel(dataTablaFila);
+                Tab tabla =(Tab)aux.getValor();               
+                tabla.setSize(tabla.getAncho(), tabla.getAncho());
+                tabla.setBackground(Color.white);
+                //tabla.setBorder(BorderFactory.createLineBorder(Color.black));
                 tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
-                posicionPanel(tabla.getAncho(), tabla.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);       
+                InterfazTabla(tabla);
+                posicionPanel( tabla.getAncho(),tabla.getAlto(),contenedor, saltoY, x, y,anchoMaximo,altoMaximo); 
                 contenedor.add(tabla);
+                break;     
+                
+            case "panel":
+                Panel panel =(Panel)aux.getValor();                                
+                prepararPanel(panel);
+                panel.setBorder(BorderFactory.createLineBorder(Color.black));
+                panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
+                Interfaz(panel);               
+                if(panel.getWidth()==0){ panel.setSize(contenedor.getWidth(), panel.getHeight());}
+                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
+                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(contenedor.getWidth(),100);}              
+                posicionPanel( panel.getWidth(),panel.getHeight(),contenedor, saltoY, x, y,anchoMaximo,altoMaximo); 
+                contenedor.add(panel);
+                break;                  
+        }
+        contenedor.repaint();
+    }   
+    this.repaint();
+}
+
+public void InterfazTabla(Tab contenedor)
+{
+    int x = 0;
+    int y = 0;
+    int saltoY = 0;
+    int saltoX = 0;
+    int anchoMaximo = 0;
+    int altoMaximo = 0;
+    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();   
+    
+    int anchoContenedor = contenedor.getAncho();
+    int altoContenedor = contenedor.getAlto();
+    ArrayList<Integer> listaNumeroCeldas = new ArrayList();
+    int celdas = 0;
+    for(Elemento aux: contenedor.getElementos())
+    {
+        if(aux.getTipo().equals("nuevaLinea"))
+        {
+            listaNumeroCeldas.add(celdas);
+            celdas = 0;
+            
+        }
+        else
+        {
+            celdas++;
+        }
+    }
+    
+    int numeroCeldas = 0;
+    int numeroFilas = listaNumeroCeldas.size();
+    int cursor = 0;
+    int index=0;
+    for(Elemento aux: elementosContenedor)
+    {
+        numeroCeldas = listaNumeroCeldas.get(index);
+        if(cursor==numeroCeldas)
+        {
+            if(index<numeroFilas-1)
+            {
+                index++;
+                numeroCeldas = listaNumeroCeldas.get(index);
+                cursor=0;                
+            }
+        }       
+        int altoCelda = (altoContenedor-50)/numeroFilas;
+        int anchoCelda = (anchoContenedor-50)/numeroCeldas;
+        switch(aux.getTipo())
+        {
+            case "boton":
+                Boton boton =(Boton)aux.getValor();                
+                boton.setPreferredSize(new java.awt.Dimension(anchoCelda,altoCelda));
+                boton.setBounds(x, y,anchoCelda, altoCelda);                                  
+                posicionTabla(anchoCelda, altoCelda,  contenedor, saltoY, x, y,anchoMaximo,altoMaximo);         
+                contenedor.add(boton);
+                break;                                           
+            case "imagen":
+                Imagen imagen =(Imagen)aux.getValor();
+                imagen.setBounds(x, y, anchoCelda,altoCelda);
+                ImageIcon icono = new ImageIcon(); 
+                if(imagen.getRuta()!=null )
+                {
+                    if(!imagen.getRuta().equals(""))
+                    {
+                        icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
+                    }   
+                    if(!imagen.getRuta().substring(0,1).equals("\""))
+                    {
+                        icono = new ImageIcon(imagen.getRuta());
+                    }  
+                    ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(anchoCelda, altoCelda, java.awt.Image.SCALE_DEFAULT));                
+                    imagen.setIcon(iconoEscala);                     
+                    
+                }                    
+                imagen.setPreferredSize(new java.awt.Dimension(anchoCelda,altoCelda));
+                posicionTabla(anchoCelda, altoCelda, contenedor, saltoY, x, y ,anchoMaximo,altoMaximo);                
+                contenedor.add(imagen);       
+                break;                  
+            case "texto":
+                Texto texto =(Texto)aux.getValor();
+                if(texto.getAlto()==0 && texto.getAncho()==0)
+                {
+                    
+                    String[] auxiliar = texto.getCadena().split("\r");
+                    int alto= auxiliar.length*20;
+                    System.out.println("El texto no tiene dimensiones definidas");
+                    System.out.println("\t"+texto.getCadena());
+                    System.out.println("\tNo. líneas \t"+alto);
+                    int ancho = 0;
+                    for(String cad : auxiliar)
+                    {
+                        if(cad.length()>ancho){ancho=cad.length();}
+                        System.out.println("\tNo. caracteres \t"+ancho);
+                    }
+                    texto.setText(texto.getText());   
+                    texto.setAlto(alto);
+                    texto.setAncho(ancho*7);                    
+                }
+                texto.setPreferredSize(new java.awt.Dimension(anchoCelda,altoCelda));
+                texto.setBounds(x, y, anchoCelda,altoCelda);                
+                posicionTabla(anchoCelda, altoCelda, contenedor, saltoY, x, y ,anchoMaximo,altoMaximo);                
+                contenedor.add(texto);                
+                break;                  
+        }
+        cursor++;
+        contenedor.repaint();
+    }   
+    this.repaint();
+}
+
+
+public void InterfazTabla(Panel contenedor)
+{
+    int x = 0;
+    int y = 0;
+    int saltoY = 0;
+    int saltoX = 0;
+    int anchoMaximo = 0;
+    int altoMaximo = 0;
+    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
+    scroll.removeAll();
+    for(Elemento aux: elementosContenedor)
+    {
+        switch(aux.getTipo())
+        {
+            case "boton":
+                Boton boton =(Boton)aux.getValor();                
+                boton.setPreferredSize(new java.awt.Dimension(boton.getAncho(),boton.getAlto()));
+                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());                                  
+                posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y,anchoMaximo,altoMaximo);         
+                contenedor.add(boton);
+                break;
+            case "enlace":
+                Enlace enlace =(Enlace)aux.getValor();   
+                enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
+                enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
+                posicionPanel(enlace.getAncho(), enlace.getAlto(),contenedor, saltoY, x, y,anchoMaximo,altoMaximo);        
+                contenedor.add(enlace);
+                break; 
+            case "salto":
+                if(saltoY == 0)
+                {
+                    saltoY = 10;
+                }                
+                x = 0;
+                y = y + saltoY;            
+                y= 0;                 
+                JLabel label = new JLabel();
+                label.setBackground(contenedor.getBackground());
+                label.setSize(saltoY, contenedor.getWidth()-x-50);
+                for(int contador = 0 ; contador<contenedor.getWidth()-x-50;contador++){label.setText(label.getText() + " ");}
+                //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));                
+                posicionPanel(label.getWidth(), label.getHeight(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                  
+                contenedor.add(label);                 
+                break;                 
+            case "spinner":
+                Spinner spinner =(Spinner)aux.getValor();
+                spinner.setBounds(x, y, spinner.getAncho(),spinner.getAlto());
+                if(esNumero(spinner.getCadena()))
+                {
+                    spinner.setValue(Integer.valueOf(spinner.getCadena()));
+                }    
+                spinner.setPreferredSize(new java.awt.Dimension(spinner.getAncho(),spinner.getAlto()));
+                posicionPanel(spinner.getAncho(), spinner.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                
+                contenedor.add(spinner);
+                break;                
+            case "cajaOpciones":
+                JComboBox opciones =(JComboBox)aux.getValor();
+                opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());    
+                opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));
+                posicionPanel(opciones.getWidth(), opciones.getHeight(),contenedor, saltoY, x, y, anchoMaximo,altoMaximo);                
+                contenedor.add(opciones);
+                break;                
+            case "imagen":
+                Imagen imagen =(Imagen)aux.getValor();
+                imagen.setBounds(x, y, imagen.getAncho(),imagen.getAlto());
+                ImageIcon icono = new ImageIcon(); 
+                if(imagen.getRuta()!=null )
+                {
+                    if(!imagen.getRuta().equals(""))
+                    {
+                        icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
+                    }   
+                    if(!imagen.getRuta().substring(0,1).equals("\""))
+                    {
+                        icono = new ImageIcon(imagen.getRuta());
+                    }  
+                    ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
+                    imagen.setIcon(iconoEscala);                     
+                    
+                }                    
+                imagen.setPreferredSize(new java.awt.Dimension(imagen.getAncho(),imagen.getAlto()));
+                posicionPanel(imagen.getAncho(), imagen.getAlto(), contenedor, saltoY, x, y ,anchoMaximo,altoMaximo);                
+                contenedor.add(imagen);       
+                break;                  
+            case "texto":
+                Texto texto =(Texto)aux.getValor();
+                if(texto.getAlto()==0 && texto.getAncho()==0)
+                {                    
+                    String[] auxiliar = texto.getCadena().split("\r");
+                    int alto= auxiliar.length*20;
+                    System.out.println("El texto no tiene dimensiones definidas");
+                    System.out.println("\t"+texto.getCadena());
+                    System.out.println("\tNo. líneas \t"+alto);
+                    int ancho = 0;
+                    for(String cad : auxiliar)
+                    {
+                        if(cad.length()>ancho){ancho=cad.length();}
+                        System.out.println("\tNo. caracteres \t"+ancho);
+                    }
+                    texto.setText(texto.getText());   
+                    texto.setAlto(alto);
+                    texto.setAncho(ancho*7);                    
+                }                
+                texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
+                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
+                posicionPanel(texto.getAncho(), texto.getAlto(), contenedor, saltoY, x, y ,anchoMaximo,altoMaximo);                
+                if(!texto.getText().equals("")){contenedor.add(texto);}
+                break;  
+                
+            case "caja":
+                Caja caja =(Caja)aux.getValor();
+                if(caja.getAlto()==0 && caja.getAncho()==0)
+                {
+                    String[] auxiliar = caja.getCadena().split("\r");
+                    int alto = auxiliar.length;
+                    int ancho = 0;
+                    String valorCaja= "";
+                    for(String cad : auxiliar)
+                    {
+                        valorCaja = valorCaja + cad;                        
+                        ancho = ancho + cad.length();
+                    }                    
+                    caja.setText(valorCaja);   
+                    caja.setAlto(20);
+                    caja.setAncho(ancho*7);
+                }
+                caja.setPreferredSize(new java.awt.Dimension(caja.getAncho(),caja.getAlto()));
+                caja.setBounds(x, y, caja.getAncho(),caja.getAlto());
+                posicionPanel(caja.getAncho(), caja.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                
+                contenedor.add(caja);                
+                break;                  
+                
+            case "area":
+                areaTexto area =(areaTexto)aux.getValor();
+                //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
+                JScrollPane nuevo = new JScrollPane(area);
+                nuevo.setBounds(x, y, area.getAncho(),area.getAlto());
+                area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto()));
+                posicionPanel(area.getAncho(), area.getAlto(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo); 
+                contenedor.add(nuevo);                
+                break;                 
+                
+            case "tabla":
+                Tabla tabla =(Tabla)aux.getValor();                
+                Panel tablaP = new Panel();
+                tablaP.setLayout(new GridBagLayout());
+                tablaP.setAncho(tabla.getAncho());
+                tablaP.setAlto(tabla.getAlto());
+                tablaP.setElementos(tabla.getElementos());
+                prepararPanel(tablaP);
+                tablaP.setBorder(BorderFactory.createLineBorder(Color.black));
+                tablaP.setBounds(x, y, tablaP.getWidth(),tablaP.getHeight());
+                Interfaz(tablaP);               
+                if(tablaP.getWidth()==0){ tablaP.setSize(contenedor.getWidth(), tablaP.getHeight());}
+                if(tablaP.getHeight()==0){tablaP.setSize(tablaP.getWidth(),100);}
+                if(tablaP.getWidth()==0 && tablaP.getHeight() ==0){tablaP.setSize(contenedor.getWidth(),100);}              
+                posicionPanel( tablaP.getWidth(),tablaP.getHeight(),contenedor, saltoY, x, y,anchoMaximo,altoMaximo); 
+                contenedor.add(tablaP);
                 break;     
                 
             case "panel":
@@ -2617,6 +2883,7 @@ public void Interfaz(Panel contenedor)
     
     this.repaint();
 }
+
 
 
 public void generarInterfaz()
@@ -2801,8 +3068,7 @@ public String quitarComillas(String cadena)
     }
     return cadena.trim();
 }
-   
-   
+     
 private static boolean esNumero(String cadena){
 	try 
         {
