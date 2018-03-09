@@ -280,10 +280,10 @@ public class Pagina extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MenuLayout.createSequentialGroup()
-                        .addComponent(botonAtras)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,10 +432,7 @@ public class Pagina extends javax.swing.JPanel {
     }//GEN-LAST:event_botonIrActionPerformed
 
     private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
-
-        
-        
-        
+                       
             Pagina pagina = new Pagina();
             String currentPath= PathActual()+"\\Historial.chtml"; 
         try {
@@ -445,6 +442,11 @@ public class Pagina extends javax.swing.JPanel {
         }
             pagina.textRuta.setText(currentPath); 
             scroll.add(pagina);
+        try {
+            pagina.analizar();
+        } catch (IOException ex) {
+            Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
+        }
             contenedorPaginas.addTab("Historial", null, pagina);            
                  
             
@@ -462,7 +464,8 @@ public class Pagina extends javax.swing.JPanel {
         for(String item : historial)
         {
             String partes[] = item.split(",");
-            contenido= contenido+"<texto alto=\"30\"; ancho=\"500\"; > " + partes[0] + " <fin-texto> \n "+
+            contenido= contenido+
+                    "<texto alto=\"30\"; ancho=\"500\"; > " + partes[0] + " <fin-texto> \n "+
                    "<enlace alto=\"30\"; ancho=\"200\"; ruta=\"" + partes[0] + "\";> Ir  <fin-enlace>\n "+
                    "<texto alto=\"30\"; ancho=\"300\"; > " + partes[1] + " <fin-texto> \n "+
                    "<salto-fin> \n";
