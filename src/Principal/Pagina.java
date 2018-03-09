@@ -6,29 +6,37 @@
 package Principal;
 
 
+import static Principal.Nav.contenedorPaginas;
 import Source.CHTML.Scanner;
 import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.Color;
 import java.awt.GridBagLayout;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -36,21 +44,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Pagina extends javax.swing.JPanel {
 
-    public static  int auxContador = 0;
-    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
-    public static ArrayList<Errores> erroresSintacticos = new ArrayList();
-    public static ArrayList<Errores> erroresLexicos = new ArrayList();
-    public static ArrayList<Errores> erroresSemanticos = new ArrayList();
+    public int auxContador = 0;
+    public ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
+    public ArrayList<Errores> erroresSintacticos = new ArrayList();
+    public ArrayList<Errores> erroresLexicos = new ArrayList();
+    public ArrayList<Errores> erroresSemanticos = new ArrayList();
+    public ArrayList<String> historial = new ArrayList();
     public String analisisLexico="";      
     public String analisisLexico_="";
-    public static String resultado="";
+    public String resultado="";
     public String ELexico="";
     public String analisisSintactico="";
     public String analisisSemantico="";   
     public Scanner s;
     public sintactico p;
-    public static nodoChtml raizChtml = new nodoChtml();
-    public static int contadorChtml=0;
+    public nodoChtml raizChtml = new nodoChtml();
+    public int contadorChtml=0;
     public int contadorPaginas=0;
     public String consolaSalida = "";
     
@@ -98,7 +107,8 @@ public class Pagina extends javax.swing.JPanel {
         //this.panelContenido.add(scroll);
         
         //
-        this.areaOpciones.hide();
+        //areaOpciones.setVisible(false);
+        //panelOpciones.setVisible(false);
                 
     }
 
@@ -124,6 +134,7 @@ public class Pagina extends javax.swing.JPanel {
         botonOpciones = new javax.swing.JButton();
         botonHistorial = new javax.swing.JButton();
         etiquetaNombre = new javax.swing.JLabel();
+        panelOpciones = new javax.swing.JPanel();
         areaOpciones = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -242,7 +253,7 @@ public class Pagina extends javax.swing.JPanel {
                 .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(etiquetaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                    .addComponent(etiquetaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                     .addComponent(textRuta)))
         );
         MenuLayout.setVerticalGroup(
@@ -267,6 +278,10 @@ public class Pagina extends javax.swing.JPanel {
 
         Panel.add(panelMenu, java.awt.BorderLayout.PAGE_START);
 
+        panelOpciones.setLayout(new javax.swing.OverlayLayout(panelOpciones));
+
+        areaOpciones.setToolTipText("");
+
         jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
 
         archivoCHTML.setColumns(20);
@@ -283,7 +298,7 @@ public class Pagina extends javax.swing.JPanel {
         ccssArea1.setRows(5);
         jScrollPane4.setViewportView(ccssArea1);
 
-        ccss1.addTab("tab1", jScrollPane4);
+        ccss1.addTab("1", jScrollPane4);
 
         jPanel2.add(ccss1);
 
@@ -342,7 +357,9 @@ public class Pagina extends javax.swing.JPanel {
 
         areaOpciones.addTab("Consola Errores", jPanel5);
 
-        Panel.add(areaOpciones, java.awt.BorderLayout.PAGE_END);
+        panelOpciones.add(areaOpciones);
+
+        Panel.add(panelOpciones, java.awt.BorderLayout.PAGE_END);
 
         add(Panel);
     }// </editor-fold>//GEN-END:initComponents
@@ -363,22 +380,41 @@ public class Pagina extends javax.swing.JPanel {
     }//GEN-LAST:event_botonIrActionPerformed
 
     private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
-        // TODO add your handling code here:
+
+            Pagina pagina = new Pagina();
+            pagina.textRuta.setText("C:\\Historial");
+            JTable tabla = new JTable();            
+            Panel contenedor = new Panel();
+            contenedor.setPreferredSize(new java.awt.Dimension(scroll.getWidth(),scroll.getHeight()));
+            int y = 0;
+            for(String visita : historial)
+            {
+                String[] partes = visita.split(",");
+                if(partes.length>1)
+                {            
+                    Enlace enlace =new Enlace();   
+                    enlace.setPreferredSize(new java.awt.Dimension(100,25));                                                             
+                    enlace.setBounds(10, y, 100, 25);
+                    contenedor.add(enlace);
+                    y = y + 30;
+                }
+            }            
+            pagina.add(contenedor);
+            contenedorPaginas.addTab("Nuevo", null, pagina);
+            this.repaint();
     }//GEN-LAST:event_botonHistorialActionPerformed
 
     private void botonOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionesActionPerformed
         if(flagOpciones==0)
         {
-            this.areaOpciones.hide();
+            panelOpciones.setVisible(true);            
             flagOpciones = 1;
-            //this.repaint();
         }
         if(flagOpciones==1)
         {
-            this.areaOpciones.show(true);
+            panelOpciones.setVisible(false);
             flagOpciones = 0;
-            //this.repaint();
-        }        
+        }          
     }//GEN-LAST:event_botonOpcionesActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -444,9 +480,97 @@ public void analizar() throws IOException
         imprimirResultado();
         imprimirLexicos();
         imprimirSintacticos();
-        imprimirSemanticos();                
+        imprimirSemanticos(); 
+        mostrarChtml();
+        mostrarCjs();
 } 
 
+public void mostrarCjs()
+{
+      File archivo = null;
+      FileReader fr = null;
+      BufferedReader br = null;
+      String contenido="";
+
+      String nombre="";
+      for(String texto: archivos)
+      {
+        try 
+        {
+           archivo = new File (texto);
+           fr = new FileReader (archivo);
+           br = new BufferedReader(fr);
+           String linea;
+           while((linea=br.readLine())!=null)
+               contenido = contenido + linea;              
+        }
+        catch(Exception e){
+           e.printStackTrace();
+        }finally{
+           try{                    
+              if( null != fr ){   
+                 fr.close();     
+              }                  
+           }catch (Exception e2){ 
+              e2.printStackTrace();
+           }
+        }
+        StringTokenizer token = new StringTokenizer(texto, "\\");
+        while (token.hasMoreTokens()) {
+                nombre = token.nextToken();                
+        }  
+        token  = new StringTokenizer(nombre, ".");
+        String tipo ="";
+        while (token.hasMoreTokens()) {
+                tipo = token.nextToken();                
+        }          
+        switch(tipo)
+        {
+            case "ccss":
+                JTextArea nuevo = new JTextArea(contenido);
+                ccss1.add(nombre, nuevo);                 
+                break;
+            case "cjs":
+                nuevo = new JTextArea(contenido);
+                cjs1.add(nombre, nuevo);                 
+                break;                
+        }
+        contenido="";
+      }
+}
+public void mostrarChtml()
+{
+      File archivo = null;
+      FileReader fr = null;
+      BufferedReader br = null;
+
+      try {
+         // Apertura del fichero y creacion de BufferedReader para poder
+         // hacer una lectura comoda (disponer del metodo readLine()).
+         archivo = new File (textRuta.getText());
+         fr = new FileReader (archivo);
+         br = new BufferedReader(fr);
+
+         // Lectura del fichero
+         String linea;
+         while((linea=br.readLine())!=null)
+            archivoCHTML.setText(archivoCHTML.getText() +"\n" + linea);
+      }
+      catch(Exception e){
+         e.printStackTrace();
+      }finally{
+         // En el finally cerramos el fichero, para asegurarnos
+         // que se cierra tanto si todo va bien como si salta 
+         // una excepcion.
+         try{                    
+            if( null != fr ){   
+               fr.close();     
+            }                  
+         }catch (Exception e2){ 
+            e2.printStackTrace();
+         }
+      }
+}
 public void limpiarSalidas()
 {
         filasErrores = new DefaultTableModel(); 
@@ -467,7 +591,12 @@ public void limpiarSalidas()
 public void compilar(){
 
         
-        String path=textRuta.getText();  
+        String path=textRuta.getText();
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        historial.add(path+ "," + date);
+        System.out.println(dateFormat.format(date));        
          try 
          {            
             s=new Scanner(new java.io.FileReader(path));                          
@@ -2230,12 +2359,13 @@ public void dibujarPanel(Panel contenedor)
                 }
                 JLabel label = new JLabel();
                 label.setBackground(contenedor.getBackground());
-                label.setSize(yMaxAux, contenedor.getWidth()-xMaxAux-50);
+                //label.setSize(yMaxAux, contenedor.getWidth()-xMaxAux-50);
+                label.setSize(contenedor.getWidth()-xMaxAux-50,yMaxAux);
                 for(int contador = 0 ; contador<contenedor.getWidth()-xMaxAux-50;contador++){label.setText(label.getText() + " ");}
                 //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));
                 posicionesPanel(label.getWidth(), label.getHeight(), contenedor);  
                 
-                contenedor.add(label);                
+                //contenedor.add(label);                
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();
@@ -2422,7 +2552,7 @@ public void posicionTabla(int ancho, int alto, Tab contenedor , int saltoY, int 
 
 }
    
-public void Interfaz(Panel contenedor)
+public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
 {
     int x = 0;
     int y = 0;
@@ -2460,8 +2590,8 @@ public void Interfaz(Panel contenedor)
                 y= 0;                 
                 JLabel label = new JLabel();
                 label.setBackground(contenedor.getBackground());
-                label.setSize(saltoY, contenedor.getWidth()-x-50);
-                for(int contador = 0 ; contador<contenedor.getWidth()-x-50;contador++){label.setText(label.getText() + " ");}
+                //label.setSize(saltoY, contenedor.getWidth()-x-50);
+                for(int contador = 0 ; contador<contenedor.getWidth()/2;contador++){label.setText(label.getText() + " ");}
                 //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));                
                 posicionPanel(label.getWidth(), label.getHeight(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                  
                 contenedor.add(label);                 
@@ -2742,7 +2872,8 @@ public void InterfazTabla(Panel contenedor)
                 y= 0;                 
                 JLabel label = new JLabel();
                 label.setBackground(contenedor.getBackground());
-                label.setSize(saltoY, contenedor.getWidth()-x-50);
+                //label.setSize(saltoY, contenedor.getWidth()-x-50);
+                //label.setSize(contenedor.getWidth()-x-50,saltoY);
                 for(int contador = 0 ; contador<contenedor.getWidth()-x-50;contador++){label.setText(label.getText() + " ");}
                 //label.setBorder(BorderFactory.createLineBorder(Color.BLUE));                
                 posicionPanel(label.getWidth(), label.getHeight(), contenedor, saltoY, x, y,anchoMaximo,altoMaximo);                  
@@ -3399,7 +3530,7 @@ private static boolean esNumero(String cadena){
     }  
     
     
-    public static void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
+    public void addChtml(String tipo, int linea, int columna, String descripcion, String valor)
     {                
         Interfaz.auxContador++;                                
         //Generamos la entrada en la tabla de simbolos.
@@ -3441,6 +3572,7 @@ private static boolean esNumero(String cadena){
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelMenu;
+    private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel scroll;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JTable tablaErrores;
