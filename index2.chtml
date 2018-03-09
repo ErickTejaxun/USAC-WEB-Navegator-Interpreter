@@ -13,9 +13,7 @@
 
 <//-Comentario -//>
 
-    <cuerpo fondo = "blue";> 
-            <texto alto="30"; ancho="300"; > Fri Mar 09 14:49:26 CST 2018 <fin-texto> 
-        <salto-fin>
+    <cuerpo fondo = "black";> 
         <salto-fin>
         <panel alto = "50"; ancho="500";> 
             <BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "120"; >Informacion<FIN-BOTON>                                 

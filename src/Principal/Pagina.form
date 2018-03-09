@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JMenuBar" name="jMenuBar1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit"/>
+          </Properties>
+        </Menu>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
   <Events>
     <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentResized"/>
   </Events>
@@ -124,22 +144,30 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="botonOpciones" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
-                              <Component id="botonAtras" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="botonAdelante" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
-                              <Component id="botonHistorial" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="botonOpciones" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="botonHistorial" min="-2" pref="76" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="botonAtras" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="botonAdelante" min="-2" pref="54" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="botonIr" min="-2" pref="65" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="botonIr" min="-2" pref="77" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="etiquetaNombre" alignment="0" pref="706" max="32767" attributes="0"/>
-                              <Component id="textRuta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textRuta" pref="775" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="etiquetaNombre" min="-2" pref="673" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="botonCerrar" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -147,15 +175,16 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="etiquetaNombre" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="etiquetaNombre" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="botonCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                  <Component id="botonAdelante" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="botonIr" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Component id="textRuta" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="botonAtras" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="botonAdelante" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="botonIr" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="textRuta" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="botonAtras" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -172,6 +201,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&lt;-"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAtrasActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botonAdelante">
                   <Properties>
@@ -193,6 +225,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="C:\u005cUsers\u005cerick\u005cDocuments\u005cNetBeansProjects\u005cUSAC-WEB\u005cprueba.html" containsInvalidXMLChars="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textRutaKeyPressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botonOpciones">
                   <Properties>
@@ -212,8 +247,16 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="etiquetaNombre">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Inicio"/>
+                    <Property name="text" type="java.lang.String" value="Nombre de la p&#xe1;gina"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="botonCerrar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="X"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCerrarActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
