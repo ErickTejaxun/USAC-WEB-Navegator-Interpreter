@@ -8,10 +8,7 @@ package Source.CHTML;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
-import java.io.PrintWriter;
-import Principal.Interfaz.*;
 import Principal.Errores;
-import Principal.Interfaz;
 import Principal.tablaSimbolos;
 import Source.CHTML.nodoChtml;
 import static Source.CHTML.sintactico.agregarRaiz;

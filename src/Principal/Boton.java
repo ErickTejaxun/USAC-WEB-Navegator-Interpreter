@@ -15,7 +15,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
-import static Principal.Nav.botonAgregar;
+import static Principal.Navegador.botonAgregar;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -32,19 +33,20 @@ public class Boton extends JButton
     private int ancho;
     private String metodo;
     
+    
     public Boton()
     {
         this.alto=30;
-        this.ancho=100;
-        this.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt) 
-            {
+        this.ancho=100;  
+        this.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 click(evt);
             }
         });
     }
 
+    
+    
     public void setMetodo(String metodo) {
         this.metodo = metodo;
     }
@@ -53,17 +55,12 @@ public class Boton extends JButton
         return metodo;
     }
     
-    
-    
-    public void actionPerformed(java.awt.event.ActionEvent evt) 
-    {
-        click(evt);
-    }
-            
-    private static void click(java.awt.event.ActionEvent evt)
-    {                           
+
+    private void click(java.awt.event.ActionEvent evt)
+    {                          
         System.out.println("-------------------------Soy un botón, prros.-----------------------------------------");
-    }     
+        Pagina.Mensaje(cadena, cadena);
+    }  
 
     public void setRuta(String ruta) {
         this.ruta = ruta;

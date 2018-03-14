@@ -1,0 +1,774 @@
+package Source.CJS;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.io.PrintWriter;
+import Principal.Interfaz.*;
+import Principal.Errores;
+import Principal.Interfaz;
+import Principal.tablaSimbolos;
+import Source.CJS.nodoChtml;
+
+//import static olc1_proyecto1.Menu.path;
+parser code
+{:
+	public String cadena="";
+    public static ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();	
+	public static ArrayList<Errores> erroresSintacticos = new ArrayList();
+	public static nodoChtml raizChtml ;
+
+	public static String ConvertirObjectToString(Object Obj)
+	 {
+		String Str="";
+		if(Obj!=null)
+		{
+			Str = Obj.toString();
+		}
+		return Str;
+	}
+
+	public static void agregarRaiz(nodoChtml encabezado, nodoChtml cuerpo)
+	{
+		raizChtml = new nodoChtml("DOCUMENTO");
+		raizChtml.setValue("DOCUMENTO");
+		raizChtml.setTipo("DOCUMENTO");				
+		raizChtml.add(encabezado);
+		raizChtml.add(cuerpo);
+	}
+	public static void erroresSintacticos(Symbol s)
+	{
+		System.out.println("Error de sintaxis. Linea: " + (s.right + 1) +
+		" Columna: " + s.left + ". Texto: \"" + s.value + "\"");
+		Errores errores_sintacticos=new Errores();
+		errores_sintacticos.setTipo("Sintactico");
+		errores_sintacticos.setLinea(s.right+1);
+		errores_sintacticos.setColumna(s.left);
+		errores_sintacticos.setDescripcion(ConvertirObjectToString(s.value));
+		//sintactico.listaSintactico.add(errores_sintacticos);
+		erroresSintacticos.add(errores_sintacticos);
+	}
+
+:}
+
+
+/*Terminlaes :v :v y más :v pro++ Gamer pro+, rank pro+ , primer nivel, nivel mundial, por tu salud.*/
+terminal String  documento, obtener, setelemento, observador;
+terminal String pcoma, dpuntos, comma,punto,para,parc, allav,cllav;
+
+terminal String  verdadero, falso,num,id, cadena, fecha, fechah, conteo, atexto, inc,dec,menos, potencia,por,div,modulo, mas
+                    , igualigual, diferente,menorq, mayorq, menorigual, mayorigual, lnot, land,lor, mensaje, imprimir, detener,
+                    retornar, mientras, defecto, caso, spara, si, sino,dimv,funcion, selecciona;
+
+//------> declaracion de no terminales
+non terminal INICIO;
+
+
+non terminal Nodo VPUNTUAL,VACCESO, EXPRESION,PRIMITIVAS, CPRIMITIVAS,OPSIMPLE,ACCION,CALL_METFUN,LEXPR,F,G,T,EXPARITMETICA,
+                    OPRELACIONAL,RELACIONAL, EXPNOT, EXPAND,EXPOR,SENTEMENSAJE,SENTEDETENER, SENTEIMPRIMIR,SENTERETORNAR,
+                    SENTEMIENTRAS,LIST_SENTE,DECLFOR,SENTEFOR,CDEFECTO, CASOS,LCASOS,VALCASO,SENTEIF,ASIGNACION,SENTESELECC,
+                    LVAR,DECLASIG, DECL_METFUN,PARAMETROS,SENTENCIA,DECLARACION, L_CJS, CJS,EVENTOBSERVADOR, EVTOBSER;
+
+//----> precedencia de menor a mayor 
+
+
+start with INICIO;
+
+/*--------------- 3ra Area: Reglas Semanticas -----------------------*/
+INICIO ::= L_CJS:a              {:
+                                    Nodo root=new Nodo("INICIO_CJS");
+                                    Nodo hijo=a;
+                                    root.agregarHijo(hijo);
+                                    
+                                    Raiz=root;
+                                    System.out.println("END_PARSER");
+                                :};
+
+L_CJS ::= L_CJS:n1 CJS:n2       {:
+                                    Nodo nodo=n1;
+                                    Nodo hijo=n2;
+                                    nodo.agregarHijo(hijo);
+                                    RESULT = nodo;
+                                :}
+        | CJS:n1                {:
+                                    Nodo nodo=new Nodo("L_CJS");
+                                    Nodo hijo=n1;
+                                    nodo.agregarHijo(hijo);
+                                    RESULT = nodo;
+                                :};
+
+CJS ::= DECL_METFUN:n1          {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | DECLARACION:n1        {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | DECLASIG:n1           {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | SENTEIMPRIMIR:n1      {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | SENTEMENSAJE:n1       {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | ASIGNACION:n1         {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | CALL_METFUN:n1  pcoma       {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        
+        | EVENTOBSERVADOR:n1    {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | SENTEFOR:n1      {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | SENTEMIENTRAS:n1      {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | SENTESELECC:n1      {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+        | SENTEIF:n1      {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :};
+
+
+
+
+
+DECL_METFUN ::= funcion:n1 id:n2 para PARAMETROS:n3 parc allav LIST_SENTE:n4 cllav
+                                {:
+                                    Nodo nodo=new Nodo("METFUNC",n1right,n1left);
+                                    Nodo hijo1=new Nodo("ID",n2.toString().toLowerCase(),n2right,n2left);
+                                    Nodo hijo2=n3;
+                                    Nodo hijo3=n4;
+
+                                    nodo.agregarHijo(hijo1);
+                                    nodo.agregarHijo(hijo2);
+                                    nodo.agregarHijo(hijo3);
+                                    RESULT = nodo;
+                                :}
+                | funcion:n1 id:n2 para parc allav LIST_SENTE:n3 cllav
+                                {:
+                                    Nodo nodo=new Nodo("METFUNC",n1right,n1left);
+                                    Nodo hijo1=new Nodo("ID",n2.toString().toLowerCase(),n2right,n2left);
+                                    Nodo hijo2=n3;
+
+                                    nodo.agregarHijo(hijo1);
+                                    nodo.agregarHijo(hijo2);
+                                    RESULT = nodo;
+                                :};
+
+PARAMETROS ::= LVAR:n1          {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :};
+
+LIST_SENTE ::= LIST_SENTE:n1 SENTENCIA:n2
+                                {:
+                                    Nodo nodo=n1;
+                                    Nodo hijo=n2;
+                                    nodo.agregarHijo(hijo);
+                                    RESULT = nodo;
+                                :}
+            | SENTENCIA:n1      {:
+                                    Nodo nodo=new Nodo("LIST_SENTE");
+                                    Nodo hijo=n1;
+                                    nodo.agregarHijo(hijo);
+                                    RESULT = nodo;
+                                :};
+
+SENTENCIA ::=  DECLARACION:n1   {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | DECLASIG:n1       {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | ASIGNACION:n1     {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTEIF:n1        {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTESELECC:n1    {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTEFOR:n1       {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTEMIENTRAS:n1  {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTERETORNAR:n1  {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTEDETENER:n1   {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTEIMPRIMIR:n1  {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | SENTEMENSAJE:n1   {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}
+            | CALL_METFUN:n1 pcoma  {:
+                                    Nodo nodo=n1;
+                                    RESULT = nodo;
+                                :}  ;
+
+
+DECLARACION ::= dimv:n1 LVAR:n2 pcoma               {:
+                                                        Nodo nodo=new Nodo("DECLVAR",n1right,n1left);
+                                                        Nodo hijo=n2;
+                                                        nodo.agregarHijo(hijo);
+                                                        RESULT = nodo;
+                                                    :}
+            | dimv:n1 LVAR:n2 allav EXPRESION:n3 cllav pcoma
+                                                   {:
+                                                        Nodo nodo=new Nodo("DECLVECT",n1right,n1left);
+                                                        Nodo hijo1=n2;
+
+                                                        Nodo hijo2=n3;
+
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :};
+
+LVAR ::= LVAR:n1 comma id:n2                        {:
+                                                        Nodo nodo=n1;
+                                                        Nodo hijo=new Nodo("VAR",n2.toString().toLowerCase(),n2right,n2left);
+                                                        nodo.agregarHijo(hijo);
+                                                        RESULT = nodo;
+                                                    :}
+            | id:n1                                 {:
+                                                        Nodo nodo=new Nodo("LVAR");
+                                                        Nodo hijo=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        nodo.agregarHijo(hijo);
+                                                        RESULT = nodo;
+                                                    :};
+
+DECLASIG ::= dimv LVAR:n1 dpuntos EXPRESION:n2 pcoma
+                                                    {:
+                                                        Nodo nodo=new Nodo("DECLASIGVAR");
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1=n1;
+                                                        hijo2=n2;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :}
+            | dimv LVAR:n1 dpuntos allav LEXPR:n2 cllav pcoma
+                                                    {:
+                                                        Nodo nodo=new Nodo("DECLASIGVECT");
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1=n1;
+                                                        hijo2=n2;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :}
+            | dimv LVAR:n1 dpuntos documento punto obtener para cadena:n2 parc pcoma
+                                                    {:
+                                                        Nodo nodo=new Nodo("DECLASIGOBJ");
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1=n1;
+                                                        hijo2=new Nodo("CAD", n2.toString().replace("\"", ""),n2right,n2left);
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :};
+
+EVENTOBSERVADOR::= documento punto observador para cadena:n1 comma EVTOBSER:n3 parc pcoma
+                                                    {:
+                                                        Nodo nodo=new Nodo("EVENTOBSERVADOR");
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1=new Nodo("CAD", n1.toString().replace("\"", ""),n1right,n1left);
+                                                        hijo2=n3;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :};
+
+EVTOBSER ::= DECL_METFUN:n1                         {:
+                                                        Nodo nodo=n1;
+                                                        RESULT = nodo;
+                                                    :}
+            | CALL_METFUN:n1                        {:
+                                                        Nodo nodo=n1;
+                                                        RESULT = nodo;
+                                                    :};
+
+
+LEXPR ::= LEXPR:n1 comma EXPRESION:n2               {:
+                                                        Nodo nodo=n1;
+                                                        Nodo hijo=n2;
+                                                        nodo.agregarHijo(hijo);
+                                                        RESULT = nodo;
+                                                        
+                                                    :}
+            | EXPRESION:n1                          {:
+                                                        Nodo nodo=new Nodo("LEXPR");
+                                                        Nodo hijo=n1;
+                                                        nodo.agregarHijo(hijo);
+                                                        RESULT = nodo;
+                                                        
+                                                    :};
+
+ASIGNACION ::= id:n1 dpuntos EXPRESION:n2 pcoma     {:
+                                                        Nodo nodo=new Nodo("ASIG_VAR");
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2=n2;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :}
+            | id:n1 allav EXPRESION:n2 cllav dpuntos EXPRESION:n3 pcoma
+                                                    {:
+                                                        Nodo nodo=new Nodo("ASIG_POSVECT");
+                                                        Nodo hijo1,hijo2,hijo3;
+                                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2=n2;
+                                                        hijo3=n3;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        nodo.agregarHijo(hijo3);
+                                                        RESULT = nodo;
+                                                    :}
+            | id:n1 dpuntos allav LEXPR:n2 cllav pcoma
+                                                    {:
+                                                        Nodo nodo=new Nodo("ASIG_VECT");
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2=n2;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :}
+            | OPSIMPLE:n1 pcoma                     {:
+                                                        Nodo nodo=n1;
+                                                        
+                                                        RESULT = nodo;
+                                                    :}
+            | id:n1 dpuntos documento punto obtener para cadena:n2 parc pcoma
+                                                    {:
+                                                        Nodo nodo =new Nodo("ASIG_OBJ");
+                                                        Nodo hijo1, hijo2;
+                                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2= new Nodo("CAD", n2.toString().replace("\"", ""),n2right,n2left);
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT=nodo;
+                                                    :}
+            | id:n1 punto setelemento para cadena:n2 comma cadena:n3  parc pcoma
+                                                    {:
+                                                        Nodo nodo =new Nodo("SET_OBJ");
+                                                        Nodo hijo1, hijo2,hijo3;
+                                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2= new Nodo("CAD", n2.toString().replace("\"", ""),n2right,n2left);
+                                                        hijo3= new Nodo("CAD", n3.toString().replace("\"", ""),n3right,n3left);
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        nodo.agregarHijo(hijo3);
+                                                        RESULT=nodo;
+                                                    :};
+
+SENTEIF ::= si:n1 para EXPRESION:n2 parc allav LIST_SENTE:n3 cllav
+                                                    {:
+                                                        Nodo nodo=new Nodo("IF",n1right,n1left);
+                                                        nodo.agregarHijos(n2,n3);
+                                                        RESULT = nodo;
+                                                    :}
+            | si:n1 para EXPRESION:n2 parc allav LIST_SENTE:n3 cllav sino allav LIST_SENTE:n4 cllav
+                                                    {:
+                                                        Nodo nodo=new Nodo("IF",n1right,n1left);
+                                                        nodo.agregarHijos(n2,n3);
+                                                        nodo.agregarHijo(n4);
+                                                        RESULT = nodo;
+                                                    :};
+
+SENTESELECC ::= selecciona:n1 para VALCASO:n2 parc allav LCASOS:n3 cllav
+                                                    {:
+                                                        Nodo nodo=new Nodo("SELECCIONAR",n1right,n1left);
+                                                        nodo.agregarHijos(n2,n3);
+                                                        RESULT = nodo;
+                                                    :}
+            | selecciona:n1 para VALCASO:n2 parc allav LCASOS:n3 CDEFECTO:n4 cllav
+                                                    {:
+                                                        Nodo nodo=new Nodo("SELECCIONAR",n1right,n1left);
+                                                        nodo.agregarHijos(n2,n3);
+                                                        nodo.agregarHijo(n4);
+                                                        RESULT = nodo;
+                                                    :};
+
+
+VALCASO ::= EXPRESION:n1                             {:
+                                                        Nodo nodo=n1;
+                                                        RESULT = nodo;
+                                                    :};
+
+LCASOS ::= LCASOS:n1  CASOS:n2                      {:
+                                                        Nodo nodo=n1;
+                                                        nodo.agregarHijo(n2);
+                                                        RESULT = nodo;
+                                                    :}
+            | CASOS:n1                              {:
+                                                        Nodo nodo=new Nodo("LCASOS");
+                                                        nodo.agregarHijo(n1);
+                                                        RESULT = nodo;
+                                                    :};
+
+CASOS ::= caso:n1 VPUNTUAL:n2 dpuntos LIST_SENTE:n3    {:
+                                                            Nodo nodo=new Nodo("CASOS",n1right,n1left);
+                                                            nodo.agregarHijos(n2,n3);
+                                                            RESULT = nodo;
+                                                        :};
+
+CDEFECTO ::= defecto:n1 dpuntos LIST_SENTE:n2       {:
+                                                        Nodo nodo = new Nodo("CDEFECTO",n1right,n1left);
+                                                        nodo.agregarHijo(n2);
+                                                        RESULT = nodo;
+                                                    :};
+
+SENTEFOR ::= spara:n1 para DECLFOR:n2 pcoma EXPRESION:n3 pcoma ACCION:n4 parc allav LIST_SENTE:n5 cllav
+                                                    {:
+                                                        Nodo nodo=new Nodo("FOR",n1right,n1left);
+                                                        nodo.agregarHijo(n2);
+                                                        nodo.agregarHijo(n3);
+                                                        nodo.agregarHijo(n4);
+                                                        nodo.agregarHijo(n5);
+
+                                                        RESULT = nodo;
+                                                    :}; 
+
+DECLFOR ::= dimv id:n1 dpuntos EXPRESION:n2         {:
+                                                        Nodo nodo=new Nodo("DECLASIGVAR",n1right,n1left);
+                                                        
+                                                        Nodo hijo1,hijo2;
+                                                        hijo1 = new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2=n2;
+
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                    :}
+            | id:n1 dpuntos EXPRESION:n2            {:
+                                                        Nodo nodo=new Nodo("ASIG_VAR",n1right,n1left);
+                                                        Nodo hijo1,hijo2;
+                                                        
+                                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                                        hijo2=n2;
+                                                        nodo.agregarHijos(hijo1,hijo2);
+                                                        RESULT = nodo;
+                                                        
+
+                                                    :};
+
+ACCION ::= inc:n1       {:
+                            Nodo nodo= new Nodo("INCR",n1.toString(),n1right,n1left);
+                            RESULT=nodo;
+                        :}
+            | dec:n1    {:
+                            Nodo nodo= new Nodo("DECR",n1.toString(),n1right,n1left);
+                            RESULT=nodo;
+                        :};
+
+SENTEMIENTRAS ::= mientras:n1 para EXPRESION:n2 parc allav LIST_SENTE:n3 cllav  {:
+                                                                                    Nodo nodo=new Nodo("MIENTRAS",n1right,n1left);
+                                                                                    nodo.agregarHijos(n2,n3);
+                                                                                    RESULT = nodo;
+                                                                                :};
+
+SENTERETORNAR ::= retornar:n1 EXPRESION:n2 pcoma            {:
+                                                                Nodo nodo=new Nodo("RETORNAR",n1right,n1left);
+                                                                nodo.agregarHijo(n2);
+                                                                RESULT = nodo;
+                                                            :};
+
+SENTEDETENER ::= detener:n1 pcoma                           {:
+                                                                Nodo nodo=new Nodo("DETENER",n1right,n1left);
+                                                                RESULT = nodo;
+                                                            :};
+
+SENTEIMPRIMIR ::= imprimir:n1 para EXPRESION:n2 parc pcoma  {:
+                                                                Nodo nodo=new Nodo("IMPRIMIR",n1right,n1left);
+                                                                nodo.agregarHijo(n2);
+                                                                RESULT = nodo;
+                                                            :};
+
+SENTEMENSAJE ::= mensaje:n1 para EXPRESION:n2 parc pcoma    {:
+                                                                Nodo nodo=new Nodo("MENSAJE",n1right,n1left);
+                                                                nodo.agregarHijo(n2);
+                                                                RESULT = nodo;
+                                                            :};
+
+EXPRESION ::= EXPOR:n1                  {:
+                                            Nodo nodo=n1;
+                                            RESULT = nodo;
+                                        :};
+
+EXPOR ::=  EXPOR:n1 lor:n2 EXPAND:n3    {:
+                                            Nodo nodo=new Nodo(n2.toString(),n2right,n2left);
+                                            nodo.agregarHijo(n1);
+                                            nodo.agregarHijo(n3);
+                                            RESULT = nodo;
+                                        :}
+        | EXPAND:n1                     {:
+                                            Nodo nodo=n1;
+                                            RESULT = nodo;
+                                        :};
+
+EXPAND ::= EXPAND:n1 land:n2 EXPNOT:n3  {:
+                                            Nodo nodo=new Nodo(n2.toString(),n2right,n2left);
+                                            nodo.agregarHijo(n1);
+                                            nodo.agregarHijo(n3);
+                                            RESULT = nodo;
+                                        :}
+        | EXPNOT:n1                     {:
+                                            Nodo nodo=n1;
+                                            RESULT = nodo;
+                                        :};
+
+EXPNOT ::= lnot:n1 RELACIONAL:n2        {:
+                                            Nodo nodo=new Nodo(n1.toString(),n1right,n1left);
+                                            nodo.agregarHijo(n2);
+                                            RESULT = nodo;
+                                        :}
+        | RELACIONAL:n1                 {:
+                                            Nodo nodo=n1;
+                                            RESULT = nodo;
+                                        :};
+
+
+RELACIONAL ::= EXPARITMETICA:n1 OPRELACIONAL:n2 EXPARITMETICA:n3    {:
+                                                                        Nodo nodo=n2;
+                                                                        nodo.agregarHijo(n1);
+                                                                        nodo.agregarHijo(n3);
+                                                                        RESULT = nodo;
+                                                                    :}
+                | EXPARITMETICA:n1                                  {:
+                                                                        Nodo nodo=n1;
+                                                                        RESULT = nodo;
+                                                                    :};
+                
+
+OPRELACIONAL ::= menorq:n1          {:
+                                        Nodo nodo= new Nodo(n1.toString(), n1right,n1left);
+                                        RESULT = nodo;
+                                    :}
+            | mayorq:n1             {:
+                                        Nodo nodo= new Nodo(n1.toString(), n1right,n1left);
+                                        RESULT = nodo;
+                                    :}
+            | menorigual:n1         {:
+                                        Nodo nodo= new Nodo(n1.toString(), n1right,n1left);
+                                        RESULT = nodo;
+                                    :}
+            | mayorigual:n1         {:
+                                        Nodo nodo= new Nodo(n1.toString(), n1right,n1left);
+                                        RESULT = nodo;
+                                    :}
+            | igualigual:n1         {:
+                                        Nodo nodo= new Nodo(n1.toString(), n1right,n1left);
+                                        RESULT = nodo;
+                                    :}
+            | diferente:n1          {:
+                                        Nodo nodo= new Nodo(n1.toString(), n1right,n1left);
+                                        RESULT = nodo;
+                                    :};
+
+EXPARITMETICA ::= EXPARITMETICA:n1 mas:n2 T:n3  {:
+                                        Nodo nodo = new Nodo(n2.toString(),n2right,n2left);
+                                        
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n3);
+                                        RESULT = nodo;
+                                    :}
+        | EXPARITMETICA:n1 menos:n2 T:n3        {:
+                                        Nodo nodo = new Nodo(n2.toString(),n2right,n2left);
+                                        
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n3);
+                                        RESULT = nodo;
+                                    :}
+        | T:n1                      {:
+                                        Nodo nodo=n1;
+                                        RESULT = nodo;
+                                    :};
+
+T ::= T:n1 por:n2 F:n3              {:
+                                        Nodo nodo = new Nodo(n2.toString(),n2right,n2left);
+                                        
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n3);
+                                        RESULT = nodo;
+                                    :}
+        | T:n1 div:n2 F:n3          {:
+                                        Nodo nodo = new Nodo(n2.toString(),n2right,n2left);
+                                        
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n3);
+                                        RESULT = nodo;
+                                    :}
+        | T:n1 modulo:n2 F:n3       {:
+                                        Nodo nodo = new Nodo(n2.toString(),n2right,n2left);
+                                        
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n3);
+                                        RESULT = nodo;
+                                    :}
+        | F:n1                      {:
+                                        Nodo nodo=n1;
+                                        RESULT = nodo;
+                                    :};
+
+F ::= F:n1 potencia:n2 G:n3         {:
+                                        Nodo nodo = new Nodo(n2.toString(),n2right,n2left);
+                                        
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n3);
+                                        RESULT = nodo;
+                                    :}
+        | G:n1                      {:
+                                        Nodo nodo=n1;
+                                        RESULT = nodo;
+                                    :};
+
+G ::=    para EXPRESION:n1 parc     {:
+                                        RESULT = n1;
+                                    :}
+        | VPUNTUAL:n1               {:
+                                        RESULT = n1;
+                                    :}
+        | VACCESO:n1                {:
+                                        RESULT = n1;
+                                    :}
+        | CALL_METFUN:n1            {:
+                                        RESULT = n1;
+                                    :}
+        | menos:n1 G:n2             {:
+                                        Nodo nodo=new Nodo("_", n1right,n1left);
+                                        nodo.agregarHijo(n2);
+                                        RESULT = nodo;
+                                    :}
+        | OPSIMPLE:n1               {:
+                                        RESULT = n1;
+                                    :}
+        | CPRIMITIVAS:n1            {:
+                                        RESULT = n1;
+                                    :};
+
+CALL_METFUN ::= id:n1 para  parc  {:
+                                        Nodo nodo=new Nodo("CALL_METFUN");
+                                        
+                                        Nodo hijo=new Nodo("ID",n1.toString().toLowerCase(),n1right,n1left);
+                                        nodo.agregarHijo(hijo);
+
+                                        RESULT = nodo;
+                                    :}
+        | id:n1 para LEXPR:n2 parc  {:
+                                        Nodo nodo=new Nodo("CALL_METFUN");
+                                        
+                                        Nodo hijo=new Nodo("ID",n1.toString().toLowerCase(),n1right,n1left);
+                                        nodo.agregarHijo(hijo);
+
+                                        Nodo hijo2;
+                                        hijo2=n2;
+                                        nodo.agregarHijo(hijo2);
+
+                                        RESULT = nodo;
+                                    :};
+
+
+VPUNTUAL ::= num:n1 {:  Nodo nodo;
+                        nodo= new Nodo("NUM", n1.toString(),n1right,n1left);
+                        RESULT=nodo;
+                    :}
+        | cadena:n1    {:
+                        Nodo nodo;
+                        nodo= new Nodo("CAD", n1.toString().replace("\"", ""),n1right,n1left);
+                        RESULT=nodo;
+                    :}
+        | fecha:n1  {:
+                        Nodo nodo;
+                        nodo= new Nodo("FECHA", n1.toString().replace("\'", ""),n1right,n1left);
+                        RESULT=nodo;
+                    :}
+        | fechah:n1 {:
+                        Nodo nodo;
+                        nodo= new Nodo("FECHAHORA", n1.toString().replace("\'", ""),n1right,n1left);
+                        RESULT=nodo;
+                    :}
+        | verdadero:n1  {:
+                        Nodo nodo;
+                        nodo= new Nodo("BOOL", n1.toString(),n1right,n1left);
+                        RESULT=nodo;
+                    :}
+        | falso:n1 {:
+                        Nodo nodo;
+                        nodo= new Nodo("BOOL", n1.toString(),n1right,n1left);
+                        RESULT=nodo;
+                    :};
+
+VACCESO ::= id:n1   {:  
+                        Nodo nodo=new Nodo("VACCESO");
+                        Nodo hijo;
+                        hijo=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                        nodo.agregarHijo(hijo);
+                        RESULT=nodo;
+                    :}
+        | id:n1 allav EXPRESION:n2 cllav {:   
+                                        Nodo nodo=new Nodo("VACCESOVECT");
+                                        
+                                        Nodo hijo1, hijo2;
+                                        hijo1=new Nodo("VAR",n1.toString().toLowerCase(),n1right,n1left);
+                                        nodo.agregarHijo(hijo1);
+
+                                        hijo2=n2;
+                                        nodo.agregarHijo(hijo2);
+                                        
+                                        RESULT=nodo;
+                                    :};
+
+CPRIMITIVAS ::= id:n1 punto PRIMITIVAS:n2 {:
+                                        Nodo nodo=new Nodo("CPRIMITIVAS");
+                                        Nodo nodo1,nodo2;
+
+                                        nodo1= new Nodo("VAR",n1.toString(),n1right,n1left);
+                                        nodo.agregarHijo(nodo1);
+
+                                        nodo2=n2;
+                                        nodo.agregarHijo(nodo2);
+
+                                        RESULT=nodo;
+                                    :};
+
+OPSIMPLE ::= VACCESO:n1 ACCION:n2   {:
+                                        Nodo nodo= new Nodo("OPSIMPLE");
+                                        nodo.agregarHijo(n1);
+                                        nodo.agregarHijo(n2);
+                                        RESULT = nodo;
+                                    :};
+
+PRIMITIVAS ::= conteo:n1 para parc  {:
+                                        Nodo nodo=new Nodo("CONTEO",n1.toString(),n1right,n1left);
+                                        RESULT= nodo;
+                                    :}
+        | atexto:n1 para parc          {:
+                                        Nodo nodo=new Nodo("ATEXTO",n1.toString(),n1right,n1left);
+                                        RESULT= nodo;
+                                    :};

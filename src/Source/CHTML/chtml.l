@@ -2,7 +2,6 @@ package Source.CHTML;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import Principal.Errores;
-import Principal.Interfaz;
 import Principal.tablaSimbolos;
 /*
 Directivas:
@@ -83,10 +82,10 @@ letra = ([a-zA-Z]|"ñ"|"á"|"é"|"í"|"ó"|"ú")
 linea = ([^\r\n\"\\])
 id = ({letra}({letra}|{digito}|"_"|"-")*)
 rgb  = ("#"{id}| "#"{digito} | "#"{digito}{id})
-direccionWindows= ("\"" ({letra}":"("\\"({id})+)+"."{id}) "\"")
+direccionWindows= ("\"" ({letra}":"("\\"({id}|" ")+)+"."{id}) "\"")
 direccionLinux=(("/"{linea}+))+
 
-path = ({letra}":"("\\"({id})+)+"."{id})
+path = ({letra}":"("\\"({id}|" ")+)+"."{id})
 
 
 idComillas = ("\""{id}"\""|"\""{digito}"\""|"\""{decimal}"\"") 
@@ -253,7 +252,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("panel: Declaracion panel");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                
@@ -270,7 +269,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-panel: Cierre panel");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                           
@@ -287,7 +286,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("texto: Inicio texto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(TEXTO1);                            
@@ -303,7 +302,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-texto: Fin texto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                                    
         return new Symbol(simbolos.finTexto, yychar, yyline, yytext());        
@@ -318,7 +317,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("imagen: Inicio imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(IMAGEN1);                                    
@@ -334,7 +333,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("boton: Inicio boton");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(BOTON1);                                    
@@ -350,7 +349,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-boton: Fin boton");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                                 
         return new Symbol(simbolos.finBoton, yychar, yyline, yytext());        
@@ -366,7 +365,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("enlace: Inicio enlace");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(ENLACE1);                                    
@@ -382,7 +381,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-enlace: Fin enlace");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                                 
         return new Symbol(simbolos.finEnlace, yychar, yyline, yytext());        
@@ -397,7 +396,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("tabla: Inicio tabla");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(T1);                                    
@@ -413,7 +412,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("inicioCajaArea: Inicio caja area de texto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(TA1);                                    
@@ -430,7 +429,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("finCajaArea: Fin caja area de texto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                                           
         return new Symbol(simbolos.finCajaArea, yychar, yyline, yytext());        
@@ -647,7 +646,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -663,7 +662,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -679,7 +678,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -696,7 +695,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -712,7 +711,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -728,7 +727,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -744,7 +743,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -761,7 +760,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -779,7 +778,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -877,7 +876,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -893,7 +892,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -909,7 +908,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -926,7 +925,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -942,7 +941,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -958,7 +957,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -974,7 +973,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -991,7 +990,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -1009,7 +1008,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -1098,7 +1097,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-tabla: Fin tabla");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);  
         yybegin(YYINITIAL);
@@ -1115,7 +1114,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fil_t: Inicio fila");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo); 
         yybegin(T3);                                
@@ -1143,7 +1142,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1159,7 +1158,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1175,7 +1174,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1192,7 +1191,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1208,7 +1207,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1224,7 +1223,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -1240,7 +1239,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1257,7 +1256,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -1275,7 +1274,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -1382,7 +1381,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("cb: Inicio Celda cabecera");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(T5);   
@@ -1399,7 +1398,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ct: Inicio Celda");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(T5); 
@@ -1426,7 +1425,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
@@ -1441,7 +1440,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1457,7 +1456,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1474,7 +1473,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1490,7 +1489,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1506,7 +1505,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -1522,7 +1521,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1539,7 +1538,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color. T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -1557,7 +1556,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma T5");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -1666,7 +1665,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("finCelda : Fin Celda");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
         yybegin(T4);       
@@ -1684,7 +1683,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("finCeldaCabecera : Fin cabecera");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);    
         yybegin(T4);  
@@ -1704,7 +1703,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("imagen : Inicio imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);    
         yybegin(TI);
@@ -1723,7 +1722,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("boton : Inicio boton");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);    
         yybegin(TB);                        
@@ -1752,7 +1751,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("click : Evento Click");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.click, yychar, yyline, yytext());
@@ -1767,7 +1766,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -1783,7 +1782,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("metodo : Llamada a metodo");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1799,7 +1798,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1815,7 +1814,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -1868,7 +1867,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1884,7 +1883,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1900,7 +1899,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1917,7 +1916,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1933,7 +1932,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1951,7 +1950,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -1968,7 +1967,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -2067,7 +2066,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-boton: Fin boton TB3");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);  
         cadena = "";          
@@ -2118,7 +2117,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2134,7 +2133,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2150,7 +2149,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2167,7 +2166,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2183,7 +2182,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2199,7 +2198,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -2215,7 +2214,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2232,7 +2231,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -2250,7 +2249,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("click : Evento Click");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.click, yychar, yyline, yytext());
@@ -2265,7 +2264,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -2281,7 +2280,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("metodo : Llamada a metodo");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2297,7 +2296,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2313,7 +2312,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -2387,7 +2386,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen TI2");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                          
         return new Symbol(simbolos.path, yychar, yyline, yytext());
@@ -2421,7 +2420,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-imagen: Fin imagen TI2");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);      
         cadena = "";                              
@@ -2491,7 +2490,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -2508,7 +2507,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2524,7 +2523,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -2543,7 +2542,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2559,7 +2558,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2575,7 +2574,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2592,7 +2591,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2608,7 +2607,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2626,7 +2625,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2643,7 +2642,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -2745,7 +2744,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("click : Evento Click");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.click, yychar, yyline, yytext());
@@ -2760,7 +2759,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -2776,7 +2775,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("metodo : Llamada a metodo");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2792,7 +2791,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2808,7 +2807,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -2860,7 +2859,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2876,7 +2875,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2892,7 +2891,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2909,7 +2908,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2925,7 +2924,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2943,7 +2942,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -2960,7 +2959,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -3044,7 +3043,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3060,7 +3059,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3076,7 +3075,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3093,7 +3092,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3109,7 +3108,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3125,7 +3124,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -3141,7 +3140,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3158,7 +3157,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -3176,7 +3175,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("click : Evento Click");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.click, yychar, yyline, yytext());
@@ -3191,7 +3190,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -3207,7 +3206,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("metodo : Llamada a metodo");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3223,7 +3222,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3239,7 +3238,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -3313,7 +3312,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("path : Direccion a imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                          
         return new Symbol(simbolos.path, yychar, yyline, yytext());
@@ -3347,7 +3346,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("fin-imagen: Fin imagen");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                                    
         return new Symbol(simbolos.finImagen, yychar, yyline, yytext());        
@@ -3375,7 +3374,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);                            
         return new Symbol(simbolos.idCcss, yychar, yyline, yytext());
@@ -3390,7 +3389,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3406,7 +3405,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3423,7 +3422,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3439,7 +3438,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3455,7 +3454,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -3471,7 +3470,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3488,7 +3487,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -3506,7 +3505,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     
@@ -3836,7 +3835,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id : Identificador grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3852,7 +3851,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("grupo : grupo ccss");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3868,7 +3867,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alto : Altura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3885,7 +3884,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("ancho : Anchura objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3901,7 +3900,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("alineado : Alineación objeto");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3917,7 +3916,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("= : Asignacion");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                
         tablaSimbolos_.add(simbolo);
                              
@@ -3933,7 +3932,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("valorAlineado : Alineación");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                             
@@ -3950,7 +3949,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("id: Posible nombre de color.");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
 
@@ -3968,7 +3967,7 @@ metodo = {id}"()"
         simbolo.setLinea(yyline);
         simbolo.setColumna(yychar);
         simbolo.setDescripcion("; : Punto coma");
-        simbolo.setIndex(auxContador++);
+        
         simbolo.setValor(yytext());                 
         tablaSimbolos_.add(simbolo);
                     

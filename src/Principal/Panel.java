@@ -30,10 +30,11 @@ public class Panel extends JPanel
     {       
         
         this.setSize(0,0);
-        this.setBounds(0, 0, 500,100);
-        this.setAlto(50);
-        this.setAncho(300);
+        //this.setBounds(0, 0, 500,100);
+        this.setAlto(0);
+        this.setAncho(0);
         
+        //this.setLayout(null);    
         //this.setLayout(new java.awt.CardLayout());        
     }
 

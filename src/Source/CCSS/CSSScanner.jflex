@@ -1,4 +1,6 @@
-﻿package olc1_proyecto1;
+package Analizadores.CCSS;
+
+import Principal.Errores;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 /*
@@ -18,568 +20,187 @@ eofval: especifica un valor de retorno al final del archivo
 	public static String txt_temporal="";
 	public static int linea=0;
 	public static int columna=0;
+
+    public static ArrayList<Errores> erroresLexicos = new ArrayList();    
+
 %}
 %cupsym simbolos
-%class Scanner
-%unicode
-%public
+%class Scanner /*Nombre de la clase a generar.*/
+%unicode /*Caracteres unicode*/
+%public /*Se generará una clase pública.*/
 %cup
 %full
-%line
-%char
-%ignorecase
+%line   /*Almacenar el número de linea actual.*/
+%char   /* Contador de caracteres.*/
+%ignorecase /*Indiferente entre mayusculas y minusculas*/
 %eofval{
 	return new Symbol(simbolos.EOF,new String("Fin del archivo"));
 %eofval}
 
-espacio = \t|\f|" "|\r|\n
-digito = [0-9][0-9]*
-decimal= {digito}"."{digito}
-simbolos1= "@"|":"|"!"|"¿"|"\""|"ñ"|","
-simbolos2= "("|")"|"*"|"-"|"+"|"."|"!"
-letra = [a-zA-Z]|"ñ"
-linea = [^\r\n\"\\]
-id = {letra}({letra}|{digito}|"_")*
-direccionWindows= ({letra}":"("\\"({linea})+)+) 
-direccionLinux=(("/"{linea}+))+
+%% //inicio de opciones
+   
 
-%state COMENTARIO,PHP
-%%
+%class AnalizadorLexico
 
-[\n] { yychar=0;}
 
-<YYINITIAL>"<compi>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<compi> : Inicio Documento  ");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.inicio, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"</compi>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</compi> : Fin Documento");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.fin, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"<h>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<h> : Inicio Cabecera");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.abrircabecera, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"</h>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</h> : Fin Cabecera");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.cerrarcabecera, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"<t>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<t> : Inicio Titulo de la pagina");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.abrirtitulo, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"</t>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</t> : Fin Titulo de la pagina");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.cerrartitulo, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"<cuerpo>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<cuerpo> : Inicio Cuerpo pagina");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.abrircuerpo, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"</cuerpo>"	{tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</t> : Fin Cuerpo pagina");
-			Menu.tabla_simbolos.add(simbolo);	
-			return new Symbol(simbolos.cerrarcuerpo, yychar, yyline, yytext()); 
-			}
-<YYINITIAL>"<esp>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<esp> : inicio espacio dentro de pagina");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrirespacio,yychar,yyline,yytext());
-			}
-<YYINITIAL>"</esp>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</esp> : Fin espacio dentro de pagina");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarespacio,yychar,yyline,yytext());
-			}
-<YYINITIAL>"<p>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<p> : Inicio parrafo");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrirparrafo,yychar,yyline,yytext());
-			}
-<YYINITIAL>"</p>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</p> : Fin parrafo");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarparrafo,yychar,yyline,yytext());
-			}
-<YYINITIAL>"<salto/>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<salto/> : Salto de linea");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.saltolinea,yychar,yyline,yytext());
-			}
-<YYINITIAL>"<tabla>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<tabla> : Incio Tabla");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrirtabla,yychar,yyline,yytext());
-			}
-<YYINITIAL>"</tabla>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</tabla> : Fin Tabla");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrartabla,yychar,yyline,yytext());
-			}
-<YYINITIAL>"<ft>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<ft> : Inicio Fila");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrirfila,yychar,yyline,yytext());
-			}
-<YYINITIAL>"</ft>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</ft> : Fin Fila");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarfila,yychar,yyline,yytext());
-			}
-<YYINITIAL>"<ct>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<ct> : Inicio Columna Cabecera");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrircolumnacabecera,yychar,yyline,yytext());
-			}
-<YYINITIAL>"</ct>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</ct> : Fin Columna Cabecera");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarcolumnacabecera,yychar,yyline,yytext());
-			}
-<YYINITIAL>"<tt>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("<tt> : Inicio Columna");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrircolumna,yychar,yyline,yytext());
-			}
-<YYINITIAL>"</tt>"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada HTML");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("</tt> : Fin Columna");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarcolumna,yychar,yyline,yytext());
-			}
-<YYINITIAL>{id}        {tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("ID");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.id, yychar, yyline, yytext());
-			}
-<YYINITIAL>{simbolos1}        {tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Simbolo");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.id, yychar, yyline, yytext());
-			}
-<YYINITIAL>{simbolos2}        {tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Simbolo");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.id, yychar, yyline, yytext());
-			}			
-<YYINITIAL>{direccionWindows}  {
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Path windos");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.urlw, yychar, yyline, yytext());
-			}
-<YYINITIAL>{direccionLinux}    {
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Path linux");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.urll, yychar, yyline, yytext());
-			}
-<YYINITIAL>{digito}	{
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Numero");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.numero, yychar, yyline, new Integer(yytext()));
-			/*return new Symbol(simbolos.numero, new Integer(yytext()));*/
-			}
-<YYINITIAL>{decimal}	{
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Numero");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.numero, yychar, yyline, new Integer(yytext());
-			/*return new Symbol(simbolos.numero, new Integer(yytext());*/
-			}
+%line
+%column    
+%unicode
+%char
+%cup
+%ignorecase
+%state COMENTARIO
+%state MULTILINEA
+%state CADENA
 
-<YYINITIAL>{espacio}			{System.out.println("Salto de linea");}	
-			
-<YYINITIAL>"<!" 		{
-					yybegin(COMENTARIO);
-					System.out.println("Inicio Comentario");
+%{  
 
-			}
-			
-<YYINITIAL>"<?php"    {
-					yybegin(PHP);
-					System.out.println("Comienza lenguaje php");
-					tablaSimbolos simbolo=new tablaSimbolos();
-					simbolo.setTipo("Palabra Reservada");
-					simbolo.setLinea(yyline);
-					simbolo.setColumna(yychar);
-					simbolo.setDescripcion(yytext());
-					Menu.tabla_simbolos.add(simbolo);
-					return new Symbol(simbolos.iniciophp, yychar, yyline, yytext());
-			}
+    String text = "";
 
-		
-<PHP>"$"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("'$' : Definicion de Variable");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.definicionvariable,yychar,yyline,yytext());
-			}
-<PHP>"("	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("'(' : abrir parentesis");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrirparentesis,yychar,yyline,yytext());
-			}
-<PHP>")"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("')' : cerrar parentesis");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarparentesis,yychar,yyline,yytext());
-			}
-<PHP>{espacio}			{System.out.println("Espacio,salto de linea etc.");}
-<PHP> "echo"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("'echo' funcion Imprimir");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.echo,yychar,yyline,yytext());
-			}
 
-<PHP>"="	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("'=' : Asignacion");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.asignacion,yychar,yyline,yytext());
-			}
-<PHP>{digito}	{
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Numero");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			/*return new Symbol(simbolos.numero, yychar, yyline, new Integer(yytext()).doubleValue());*/
-			return new Symbol(simbolos.numero, new Integer(yytext());
-			}
-<PHP>{decimal}	{
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Numero");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			
-			/*return new Symbol(simbolos.numero, yychar, yyline, new Integer(yytext()).doubleValue());*/
-			
-			 ArrayList<String> valores=new ArrayList();
-			StringTokenizer tokens=new StringTokenizer(yytext(),"\n ,()+-*/;:\".#$%&!?¡[]{}^~|",true);
-			while(tokens.hasMoreTokens()){
-				valores.add(tokens.nextToken());
-			}
-			return new Symbol(simbolos.numero, new Integer(valores.get(0));
-			
-			}
-<PHP>"."	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("'.' : punto/concatenacion");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.punto,yychar,yyline,yytext());
-			}
-<PHP>";"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("';' : Punto y coma");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.puntocoma,yychar,yyline,yytext());
-			}
-<PHP>"'"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("' : Comilla");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.comilla,yychar,yyline,yytext());
-			}
-<PHP>"true"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("true : Factor Booleano");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.verdadero,yychar,yyline,yytext());
-			}
-<PHP>"false"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada PHP");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("false : Factor Booleano");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.falso,yychar,yyline,yytext());
-			}
-<PHP>"*"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo Aritmetico");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("*");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.multiplicacion,yychar,yyline,yytext());
-			}
-<PHP>"-"    {tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo Aritmetico");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("-");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.resta,yychar,yyline,yytext());
-			}
-<PHP> "+"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo Aritmetico");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("+");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.suma,yychar,yyline,yytext());
-			}
-<PHP> "/"	{ tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo Aritmetico");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("/");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.division,yychar,yyline,yytext());
-			}
-<PHP> "{"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("{");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.abrircorchetes,yychar,yyline,yytext());
-			}
-<PHP> "}"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Simbolo");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("}");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.cerrarcorchetes,yychar,yyline,yytext());
-			}
-<PHP>"<"			{ 
-			tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador booleano");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("< : menor que");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.menorque,yychar,yyline,yytext());
-			}
-<PHP>	">"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador booleano");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("> : mayor que");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.mayorque,yychar,yyline,yytext());
-			}
-<PHP> "<="	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador booleano");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(">= : menor o igual que");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.menorigual,yychar,yyline,yytext());
-			}
-<PHP> ">="		{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador booleano");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(">= : mayor o igual que");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.mayorigual,yychar,yyline,yytext());
-			}
-<PHP> "!="	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador booleano");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("!= : distinto que");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.distinto,yychar,yyline,yytext());
-			}
-<PHP> "!"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador booleano");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion("! : negacion");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.negacion,yychar,yyline,yytext());
-			}
-<PHP> "&&"  {tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador Logico");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(" '&&' : 'y'");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.y,yychar,yyline,yytext());
-			}			
-<PHP>  "||"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Operador Logico");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(" '||' : 'o'");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.or,yychar,yyline,yytext());
-			}
-<PHP> "if"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(" 'if' : Operador booleano");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.si,yychar,yyline,yytext());
-			}
-<PHP> "else"	{tablaSimbolos simbolo = new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(" 'else' : Operador booleano");
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.sino,yychar,yyline,yytext());
-			}
-<PHP>{id}   {tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("ID");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.idVariable, yychar, yyline, yytext());
-			}
-<PHP>{simbolos1}   {tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("simbolo");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.idVariable, yychar, yyline, yytext());
-			}
-<PHP> "?>"  {yybegin(YYINITIAL);
-			System.out.println("Termina lenguaje php");
-			tablaSimbolos simbolo=new tablaSimbolos();
-			simbolo.setTipo("Palabra Reservada");
-			simbolo.setLinea(yyline);
-			simbolo.setColumna(yychar);
-			simbolo.setDescripcion(yytext());
-			Menu.tabla_simbolos.add(simbolo);
-			return new Symbol(simbolos.finphp, yychar, yyline, yytext());
-			
-			}
-			
-<COMENTARIO>{espacio} {}
-<COMENTARIO>[^"*/"] {System.out.println(yytext());}
-<COMENTARIO> "!>"	 {
-						yybegin(YYINITIAL);	}
-.			{
-			System.out.println("Caracter ilegal: " + yytext()+" Linea : "+yyline +" Columna: "+yychar); 
-			Errores errorLexico=new Errores();
-			errorLexico.setTipo("Lexico");
-			errorLexico.setLinea(yyline);
-			errorLexico.setColumna(yychar);
-			errorLexico.setDescripcion("Caracter Ilegal: "+yytext());
-			Menu.errores_lexicos.add(errorLexico);
-			//Proyecto1_Compiladores.listaLexico.add(errorLexico);
-			//Menu.listaLexico=Proyecto1_Compiladores.listaLexico;
-			}			
+    private Symbol symbol(int type) {
+        return new Symbol(type, yyline, yycolumn);
+    }
+    
 
+    private Symbol symbol(int type, Object value) {
+        return new Symbol(type, yyline, yycolumn, value);
+    }	 
+
+%}   
+
+
+%init{
+
+%init}
+
+
+
+grupo = "grupo"
+cor1 = "["
+cor2 = "]"
+asig = ":="
+puntocoma = ";"    
+sumar = "+"    
+resta = "-"    
+multi = "*"    
+divi = "/"    
+alineado="alineado"
+tamelemento="tamelemento"
+centrado= "centrado"
+izquierda="izquierda"
+derecha="derecha"
+justificado = "justificado"
+texto = "texto"
+formato = "formato"
+mayuscula = "mayuscula"
+minuscula = "minuscula"
+negrilla = "negrilla"
+cursiva = "cursiva"
+capitalt = "capital-t"
+letrax = "letra"
+tamtex = "tamtex"
+fondoelemento = "fondoelemento"
+autoredimension = "autoredimension"
+horizontal = "horizontal"
+vertical = "vertical"
+coma =","
+verdadero= "true"
+falso = "false"
+visible = "visible"
+borde = "borde"
+opaco = "opaque"
+colortext = "colortext"
+ide = "id"
+par1 = "("
+par2 = ")"
+comilla = "\""
+
+
+
+
+comment_multi = "/*"
+comment_multi2 = "*/"
+comment_una = "//"
+numero = [0-9]
+letra = [a-zA-Z]
+Salto = \r|\n|\r\n|\f
+Espacio     = {Salto} | [ \t\f]|" "
+entero  =             {numero} | {numero} {numero}+
+decimal =     [0-9]+ "." [0-9]+
+id =                    [a-zA-Z][a-zA-Z0-9_-]*
+
+
+
+%% //fin de opciones
+
+
+<YYINITIAL>
+{
+    {cor1}               { return new Symbol(sym.COR1,yyline,yycolumn,yytext()); }
+    {cor2}               { return new Symbol(sym.COR2,yyline,yycolumn,yytext()); }
+    {asig}               { return new Symbol(sym.IGUAL,yyline,yycolumn,yytext()); }
+    {puntocoma}          { return new Symbol(sym.PUNTOCOMA,yyline,yycolumn,yytext()); }
+    sumar}              { return new Symbol(sym.SUMA,yyline,yycolumn,yytext()); }
+    {resta}              { return new Symbol(sym.RESTA,yyline,yycolumn,yytext()); }
+    {multi}              { return new Symbol(sym.MULTI,yyline,yycolumn,yytext()); }
+    {divi}               { return new Symbol(sym.DIVI,yyline,yycolumn,yytext()); }
+    {alineado}           { return new Symbol(sym.ALINEADO,yyline,yycolumn,yytext()); }
+    {centrado}           { return new Symbol(sym.CENTRADO,yyline,yycolumn,yytext()); }
+    {izquierda}          { return new Symbol(sym.IZQUIERDA,yyline,yycolumn,yytext()); }
+    {derecha}            { return new Symbol(sym.DERECHA,yyline,yycolumn,yytext()); }
+    {justificado}        { return new Symbol(sym.JUSTIFICADO,yyline,yycolumn,yytext()); }
+    {texto}              { return new Symbol(sym.TEXTO,yyline,yycolumn,yytext()); }
+    {formato}            { return new Symbol(sym.FORMATO,yyline,yycolumn,yytext()); }
+    {mayuscula}          { return new Symbol(sym.MAYUSCULA,yyline,yycolumn,yytext()); }
+    {minuscula}          { return new Symbol(sym.MINUSCULA,yyline,yycolumn,yytext()); }
+    {negrilla}           { return new Symbol(sym.NEGRILLA,yyline,yycolumn,yytext()); }
+    {cursiva}            { return new Symbol(sym.CURSIVA,yyline,yycolumn,yytext()); }
+    {capitalt}           { return new Symbol(sym.CAPITALT,yyline,yycolumn,yytext()); }
+    {letrax}              { return new Symbol(sym.LETRA,yyline,yycolumn,yytext()); }
+    {tamtex}             { return new Symbol(sym.TAMTEX,yyline,yycolumn,yytext()); }
+    {fondoelemento}      { return new Symbol(sym.FONDOELEMENTO,yyline,yycolumn,yytext()); }
+    {autoredimension}    { return new Symbol(sym.AUTOREDIMENSION,yyline,yycolumn,yytext()); }
+    {horizontal}         { return new Symbol(sym.HORIZONTAL,yyline,yycolumn,yytext()); }
+    {vertical}           { return new Symbol(sym.VERTICAL,yyline,yycolumn,yytext()); }
+    {coma}               { return new Symbol(sym.COMA,yyline,yycolumn,yytext()); }
+    {verdadero}          { return new Symbol(sym.VERDADERO,yyline,yycolumn,yytext()); }
+    {falso}              { return new Symbol(sym.FALSO,yyline,yycolumn,yytext()); }
+    {visible}            { return new Symbol(sym.VISIBLE,yyline,yycolumn,yytext()); }
+    {borde}              { return new Symbol(sym.BORDE,yyline,yycolumn,yytext()); }
+    {opaco}              { return new Symbol(sym.OPACO,yyline,yycolumn,yytext()); }
+    {colortext}          { return new Symbol(sym.COLORTEXT,yyline,yycolumn,yytext()); }
+    {tamelemento}        { return new Symbol(sym.TAMELEMENTO,yyline,yycolumn,yytext()); }
+    {grupo}              { return new Symbol(sym.GRUPO,yyline,yycolumn,yytext()); }
+    {ide}                { return new Symbol(sym.ID,yyline,yycolumn,yytext()); }
+    {par1}               { return new Symbol(sym.PAR1,yyline,yycolumn,yytext()); }
+    {par2}               { return new Symbol(sym.PAR2,yyline,yycolumn,yytext()); }
+    {id}                 { return new Symbol(sym.IDENTIFIER,yyline,yycolumn,yytext()); }
+    {entero}             { return new Symbol(sym.ENTERO,yyline,yycolumn,yytext()); }
+    {decimal}            { return new Symbol(sym.DECIMAL,yyline,yycolumn,yytext()); }
+    {Espacio}            {     }
+    {comilla}            { yybegin(CADENA);  text = ""; }
+    {comment_una}        { yybegin(MULTILINEA); text = "";  }
+    {comment_multi}      {  yybegin(COMENTARIO);  text = "";   }
+
+}
+<CADENA>{comilla}               {   yybegin(YYINITIAL);  
+                                    //System.out.println(text);
+                                    return new Symbol(sym.CADENA,yyline,yycolumn,text);  
+                                }
+<CADENA>[^]                      {  text = text + yytext(); }
+
+<MULTILINEA>
+{           {Salto}            { yybegin(YYINITIAL); System.out.println("comentario: "+text);  }
+            [^]                 {  text = text + yytext(); }
+}
+
+<COMENTARIO>{
+    {comment_multi2}    {  yybegin(YYINITIAL); System.out.println("comentario: "+text);  }
+    [^]                 {  text = text + yytext(); }
+}
+
+[^]                  {System.out.println("caracter no reconocido "+yytext()+" "+yystate());}
+
+
+ 
