@@ -33,8 +33,8 @@ public class Enlace extends JButton
     
     public Enlace()
     {
-        this.alto=30;
-        this.ancho=100;
+        //this.alto=30;
+        //this.ancho=100;
         this.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt) 

@@ -166,6 +166,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
+        setPreferredSize(new java.awt.Dimension(800, 800));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -2712,7 +2713,7 @@ public int[] posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, i
     if(alto>saltoY){saltoY = alto;}    
     if(limite>0)
     {
-        if((x + ancho)>= limite-ancho)        
+        if((x + ancho)>= limite-ancho*2)        
         {
             x = 0;
             y = y + saltoY;            
@@ -2785,10 +2786,30 @@ public void calcularTamaño(Panel contenedor)
                 if(altoMaximo<boton.getAlto()){ altoMaximo = boton.getAlto();}
                 break;
             case "enlace":
-                Enlace enlace =(Enlace)aux.getValor();   
+                Enlace enlace =(Enlace)aux.getValor();
+                if(enlace.getAlto()==0 && enlace.getAncho()==0)
+                {
+                    
+                    String[] auxiliar = enlace.getCadena().split("\r");
+                    int alto= auxiliar.length;
+                    System.out.println("El texto no tiene dimensiones definidas");
+                    System.out.println("\t"+enlace.getCadena());
+                    System.out.println("\tNo. líneas \t"+alto);
+                    int ancho = 0;
+                    for(String cad : auxiliar)
+                    {
+                        if(cad.length()>ancho){ancho=cad.length();}
+                        System.out.println("\tNo. caracteres \t"+ancho);
+                    }
+                    enlace.setText(enlace.getText());   
+                    enlace.setAlto(alto*20);
+                    enlace.setAncho(ancho);                    
+                }
+                enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
+                enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
                 x+= enlace.getAncho();
                 if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<enlace.getAlto()){ altoMaximo = enlace.getAlto();}
+                if(altoMaximo<enlace.getAlto()){ altoMaximo = enlace.getAlto();} 
                 break; 
             case "salto":
                 if(altoMaximo == 0)
@@ -2899,13 +2920,14 @@ public void calcularTamaño(Panel contenedor)
                 Panel panel =(Panel)aux.getValor();
                 Interfaz(panel);                  
                 x+= panel.getAncho();
+                y+= panel.getAlto()+20;
                 if(anchoMaximo<x){anchoMaximo=x;}
                 if(altoMaximo<panel.getAlto()){ altoMaximo = panel.getAlto();} 
                 break;                  
         }        
     }     
-    contenedor.setAncho(anchoMaximo+70);
-    contenedor.setAlto(y +30);     
+    contenedor.setAncho(anchoMaximo+50);
+    contenedor.setAlto(y + 20);     
     
 }
 
@@ -2925,7 +2947,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
     int altoMaximo = 0;
     ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
     scroll.removeAll();
-    if(contenedor.getAncho()==0 && contenedor.getAlto()==0){calcularTamaño(contenedor);}
+    if(contenedor.getAncho()==0 || contenedor.getAlto()==0){calcularTamaño(contenedor);}
     for(Elemento aux: elementosContenedor)
     {
         switch(aux.getTipo())
@@ -2933,59 +2955,67 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
             case "boton":
                 Boton boton =(Boton)aux.getValor();                
                 boton.setPreferredSize(new java.awt.Dimension(boton.getAncho(),boton.getAlto()));                                                
-                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());
+                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());                
+                boton.addMouseListener(mouseListener);     
+                System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                contenedor.add(boton);          
                 val = posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];
-                
-//                boton.addActionListener(new java.awt.event.ActionListener() 
-//                {
-//                    @Override
-//                    public void actionPerformed(java.awt.event.ActionEvent evt) 
-//                    {
-//                        JOptionPane.showMessageDialog(null, "HUecos");
-//                    }
-//                });  
-               
-                
-                
-                boton.addMouseListener(mouseListener);     
-                System.out.println("Objeto insertado \tx: " +x + "\ty: ");
-                contenedor.add(boton);                
+                saltoY = val[2];                
                 break;
             case "enlace":
-                Enlace enlace =(Enlace)aux.getValor();   
+                Enlace enlace =(Enlace)aux.getValor();
+                if(enlace.getAlto()==0 && enlace.getAncho()==0)
+                {
+                    
+                    String[] auxiliar = enlace.getCadena().split("\r");
+                    int alto= auxiliar.length;
+                    System.out.println("El texto no tiene dimensiones definidas");
+                    System.out.println("\t"+enlace.getCadena());
+                    System.out.println("\tNo. líneas \t"+alto);
+                    int ancho = 0;
+                    for(String cad : auxiliar)
+                    {
+                        if(cad.length()>ancho){ancho=cad.length();}
+                        System.out.println("\tNo. caracteres \t"+ancho);
+                    }
+                    enlace.setText(enlace.getText());   
+                    enlace.setAlto(alto*20);
+                    enlace.setAncho(ancho*8);                    
+                }
                 enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
-                enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
+                enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                                                    
+                contenedor.add(enlace);
+                System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(enlace.getAncho(), enlace.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];       
-                contenedor.add(enlace);
+                saltoY = val[2];                
                 break; 
             case "salto":                
                 if(saltoY == 0)
                 {
-                    saltoY = 30;
+                    saltoY = 10;
                 }                
                 //y = y + saltoY;
                 Texto espacio = new Texto();
-                //espacio.setBackground(Color.blue);
+                espacio.setBackground(Color.blue);
                 espacio.setEnabled(false);
                 espacio.setBackground(contenedor.getBackground());
                 espacio.setPreferredSize(new java.awt.Dimension(contenedor.getAncho()-x-100, saltoY)); 
                 espacio.setAncho(contenedor.getAncho()-x);
                 espacio.setAlto(saltoY);
-                for(int cont = 0; cont< espacio.getAncho(); cont++){espacio.setText(espacio.getText() + " ");}
-                espacio.setBounds(x, y, espacio.getAncho(),espacio.getAlto());                
+                for(int cont = 0; cont< espacio.getAncho(); cont++){espacio.setText(espacio.getText() + "x");}
+                espacio.setBounds(x, y, espacio.getAncho(),espacio.getAlto());                 
+                contenedor.setAlto(contenedor.getAlto() + espacio.getAlto());
+                contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto() ));
+                //contenedor.add(espacio);
+                System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(espacio.getAncho(), espacio.getAlto(),  contenedor, saltoY, x, y);                 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];  
-                contenedor.setAlto(contenedor.getAlto() + espacio.getAlto());
-                contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto() ));
-                contenedor.add(espacio);
+                saltoY = val[2];                 
                 break;                 
             case "spinner":
                 Spinner spinner =(Spinner)aux.getValor();
@@ -2994,22 +3024,24 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 {
                     spinner.setValue(Integer.valueOf(spinner.getCadena()));
                 }    
-                spinner.setPreferredSize(new java.awt.Dimension(spinner.getAncho(),spinner.getAlto()));
+                spinner.setPreferredSize(new java.awt.Dimension(spinner.getAncho(),spinner.getAlto()));             
+                contenedor.add(spinner);
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(spinner.getAncho(), spinner.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];              
-                contenedor.add(spinner);
+                saltoY = val[2];                 
                 break;                
             case "cajaOpciones":
                 JComboBox opciones =(JComboBox)aux.getValor();
                 opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());    
-                opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));
+                opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));                              
+                contenedor.add(opciones);
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(opciones.getWidth(), opciones.getHeight(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];                                
-                contenedor.add(opciones);
+                saltoY = val[2];                  
                 break;                
             case "imagen":
                 Imagen imagen =(Imagen)aux.getValor();
@@ -3029,12 +3061,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                     imagen.setIcon(iconoEscala);                     
                     
                 }                    
-                imagen.setPreferredSize(new java.awt.Dimension(imagen.getAncho(),imagen.getAlto()));
+                imagen.setPreferredSize(new java.awt.Dimension(imagen.getAncho(),imagen.getAlto()));                
+                contenedor.add(imagen); 
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(imagen.getAncho(), imagen.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
                 saltoY = val[2];                 
-                contenedor.add(imagen);       
                 break;                  
             case "texto":
                 Texto texto =(Texto)aux.getValor();
@@ -3057,12 +3090,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                     texto.setAncho(ancho*10);                    
                 }
                 texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
-                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
+                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                                
+                contenedor.add(texto);
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y); 
                 val = posicionPanel(texto.getAncho(), texto.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
                 saltoY = val[2];                
-                contenedor.add(texto);                
                 break;  
                 
             case "caja":
@@ -3083,12 +3117,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                     caja.setAncho(ancho*7);
                 }
                 caja.setPreferredSize(new java.awt.Dimension(caja.getAncho(),caja.getAlto()));
-                caja.setBounds(x, y, caja.getAncho(),caja.getAlto());
+                caja.setBounds(x, y, caja.getAncho(),caja.getAlto());                 
+                contenedor.add(caja); 
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(caja.getAncho(), caja.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];                  
-                contenedor.add(caja);                
+                saltoY = val[2];                 
                 break;                  
                 
             case "area":
@@ -3096,12 +3131,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
                 JScrollPane nuevo = new JScrollPane(area);
                 nuevo.setBounds(x, y, area.getAncho(),area.getAlto());
-                area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto()));
+                area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto()));               
+                contenedor.add(nuevo); 
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(area.getAncho(), area.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];                   
-                contenedor.add(nuevo);                
+                saltoY = val[2];                    
                 break;                 
                 
             case "tabla":
@@ -3110,12 +3146,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 tabla.setBackground(Color.white);
                 //tabla.setBorder(BorderFactory.createLineBorder(Color.black));
                 tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
-                InterfazTabla(tabla);
+                InterfazTabla(tabla); 
+                contenedor.add(tabla);
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(tabla.getAncho(), tabla.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
-                saltoY = val[2];  
-                contenedor.add(tabla);
+                saltoY = val[2];                 
                 break;     
                 
             case "panel":
@@ -3129,12 +3166,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(contenedor.getWidth(),100);}    
                 if(panel.getAncho()==0){panel.setAncho(contenedor.getAncho());}
                 if(panel.getAlto()==0){panel.setAlto(100);}
-                panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));
+                panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                
+                contenedor.add(panel);
+                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(panel.getAncho(), panel.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
                 saltoY = val[2];                 
-                contenedor.add(panel);
                 break;                  
         }
         contenedor.repaint();
