@@ -24,16 +24,16 @@ public class Panel extends JPanel
     private int alto;
     private int ancho;
     private String metodo;
+    private boolean flagPanel;
     private ArrayList<Elemento> elementos = new ArrayList();
     
     public Panel()
     {       
-        
+        this.flagPanel=false;
         this.setSize(0,0);
         //this.setBounds(0, 0, 500,100);
         this.setAlto(0);
-        this.setAncho(0);
-        
+        this.setAncho(0);       
         //this.setLayout(null);    
         //this.setLayout(new java.awt.CardLayout());        
     }
@@ -42,6 +42,16 @@ public class Panel extends JPanel
         return ruta;
     }
 
+    public boolean isFlagPanel() {
+        return flagPanel;
+    }
+
+    public void setFlagPanel(boolean flagPanel) {
+        this.flagPanel = flagPanel;
+    }
+
+    
+    
     public ArrayList<Elemento> getElementos() {
         return elementos;
     }

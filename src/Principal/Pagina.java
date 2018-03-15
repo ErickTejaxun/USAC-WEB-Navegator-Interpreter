@@ -12,6 +12,7 @@ import Source.CHTML.dibujador;
 import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -907,16 +908,19 @@ public void compilar(){
                                 switch(hijoD.getValue())
                                 {
                                     case "\"izquierda\"":
-                                        panel.setAlineado("izquierda");
+                                        panel.setAlineado("izquierda");                                        
                                         panel.setAlignmentX(LEFT_ALIGNMENT);
+                                        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
                                         break;
                                     case "\"derecha\"":
                                         panel.setAlineado("derecha");
                                         panel.setAlignmentX(RIGHT_ALIGNMENT);
+                                        panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
                                         break;  
                                     case "\"centrado\"":
                                         panel.setAlineado("centrado");
                                         panel.setAlignmentX(CENTER_ALIGNMENT);
+                                        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
                                         break;   
                                     default :
                                         //filasErrores.addRow(new String[]{"CHTML",String.valueOf(hijoD.getLinea()),String.valueOf(hijoD.getColumna()),
@@ -2713,9 +2717,9 @@ public int[] posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, i
     if(alto>saltoY){saltoY = alto;}    
     if(limite>0)
     {
-        if((x + ancho)>= limite-ancho*2)        
+        if((x + ancho)>= limite-ancho)        
         {
-            x = 0;
+            x = 10;
             y = y + saltoY;            
             saltoY= 0;              
         }
@@ -2767,168 +2771,181 @@ public static void Mensaje(String mensaje, String titulo)
 }
    
 public void calcularTamaño(Panel contenedor)
-{        
-    int x = 0;
-    int y = 0;
-    int saltoY = 0;
-    int saltoX = 0;
-    int anchoMaximo = 0;
-    int altoMaximo = 0;
-    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
-    for(Elemento aux: elementosContenedor)
+{   
+    if(contenedor.getAlto()==0 || contenedor.getAncho()==0)
     {
-        switch(aux.getTipo())
+        int x = 0;
+        int y = 0;
+        int saltoY = 0;
+        int saltoX = 0;
+        int anchoMaximo = 0;
+        int altoMaximo = 0;
+        ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
+        for(Elemento aux: elementosContenedor)
         {
-            case "boton":
-                Boton boton =(Boton)aux.getValor();                
-                x+= boton.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<boton.getAlto()){ altoMaximo = boton.getAlto();}
-                break;
-            case "enlace":
-                Enlace enlace =(Enlace)aux.getValor();
-                if(enlace.getAlto()==0 && enlace.getAncho()==0)
-                {
-                    
-                    String[] auxiliar = enlace.getCadena().split("\r");
-                    int alto= auxiliar.length;
-                    System.out.println("El texto no tiene dimensiones definidas");
-                    System.out.println("\t"+enlace.getCadena());
-                    System.out.println("\tNo. líneas \t"+alto);
-                    int ancho = 0;
-                    for(String cad : auxiliar)
+            switch(aux.getTipo())
+            {
+                case "boton":
+                    Boton boton =(Boton)aux.getValor();                
+                    x+= boton.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<boton.getAlto()){ altoMaximo = boton.getAlto();}
+                    break;
+                case "enlace":
+                    Enlace enlace =(Enlace)aux.getValor();
+                    if(enlace.getAlto()==0 && enlace.getAncho()==0)
                     {
-                        if(cad.length()>ancho){ancho=cad.length();}
-                        System.out.println("\tNo. caracteres \t"+ancho);
+
+                        String[] auxiliar = enlace.getCadena().split("\r");
+                        int alto= auxiliar.length;
+                        System.out.println("El texto no tiene dimensiones definidas");
+                        System.out.println("\t"+enlace.getCadena());
+                        System.out.println("\tNo. líneas \t"+alto);
+                        int ancho = 0;
+                        for(String cad : auxiliar)
+                        {
+                            if(cad.length()>ancho){ancho=cad.length();}
+                            System.out.println("\tNo. caracteres \t"+ancho);
+                        }
+                        enlace.setText(enlace.getText());   
+                        enlace.setAlto(alto*20);
+                        enlace.setAncho(ancho);                    
                     }
-                    enlace.setText(enlace.getText());   
-                    enlace.setAlto(alto*20);
-                    enlace.setAncho(ancho);                    
-                }
-                enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
-                enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
-                x+= enlace.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<enlace.getAlto()){ altoMaximo = enlace.getAlto();} 
-                break; 
-            case "salto":
-                if(altoMaximo == 0)
-                {
-                    altoMaximo = 10;
-                } 
-                y = y + altoMaximo;                
-                altoMaximo=0;
-                x=0;                
-                break;                 
-            case "spinner":
-                Spinner spinner =(Spinner)aux.getValor();
-                x+= spinner.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<spinner.getAlto()){ altoMaximo = spinner.getAlto();}                               
-                break;                
-            case "cajaOpciones":
-                JComboBox opciones =(JComboBox)aux.getValor();
-                x+= opciones.getWidth();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<opciones.getHeight()){ altoMaximo = opciones.getHeight();}                                      
-                break;                
-            case "imagen":
-                Imagen imagen =(Imagen)aux.getValor();
-                imagen.setBounds(x, y, imagen.getAncho(),imagen.getAlto());
-                ImageIcon icono = new ImageIcon(); 
-                if(imagen.getRuta()!=null )
-                {
-                    if(!imagen.getRuta().equals(""))
+                    enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
+                    enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
+                    x+= enlace.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<enlace.getAlto()){ altoMaximo = enlace.getAlto();} 
+                    break; 
+                case "salto":
+                    if(altoMaximo == 0)
                     {
-                        icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
-                    }   
-                    if(!imagen.getRuta().substring(0,1).equals("\""))
+                        altoMaximo = 10;
+                    } 
+                    y = y + altoMaximo;                
+                    altoMaximo=0;
+                    x=0;                
+                    break;                 
+                case "spinner":
+                    Spinner spinner =(Spinner)aux.getValor();
+                    x+= spinner.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<spinner.getAlto()){ altoMaximo = spinner.getAlto();}                               
+                    break;                
+                case "cajaOpciones":
+                    JComboBox opciones =(JComboBox)aux.getValor();
+                    x+= opciones.getWidth();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<opciones.getHeight()){ altoMaximo = opciones.getHeight();}                                      
+                    break;                
+                case "imagen":
+                    Imagen imagen =(Imagen)aux.getValor();
+                    imagen.setBounds(x, y, imagen.getAncho(),imagen.getAlto());
+                    ImageIcon icono = new ImageIcon(); 
+                    if(imagen.getRuta()!=null )
                     {
-                        icono = new ImageIcon(imagen.getRuta());
-                    }  
-                    ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
-                    imagen.setIcon(iconoEscala);                     
-                    
-                }                                   
-                x+= imagen.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<imagen.getAlto()){ altoMaximo = imagen.getAlto();}    
-                break;                  
-            case "texto":
-                Texto texto =(Texto)aux.getValor();
-                if(texto.getAlto()==0 && texto.getAncho()==0)
-                {
-                    
-                    String[] auxiliar = texto.getCadena().split("\r");
-                    int alto= auxiliar.length;
-                    System.out.println("El texto no tiene dimensiones definidas");
-                    System.out.println("\t"+texto.getCadena());
-                    System.out.println("\tNo. líneas \t"+alto);
-                    int ancho = 0;
-                    for(String cad : auxiliar)
-                    {
-                        if(cad.length()>ancho){ancho=cad.length();}
-                        System.out.println("\tNo. caracteres \t"+ancho);
+                        if(!imagen.getRuta().equals(""))
+                        {
+                            icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
+                        }   
+                        if(!imagen.getRuta().substring(0,1).equals("\""))
+                        {
+                            icono = new ImageIcon(imagen.getRuta());
+                        }  
+                        ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
+                        imagen.setIcon(iconoEscala);                     
+
+                    }                                   
+                    x+= imagen.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<imagen.getAlto()){ altoMaximo = imagen.getAlto();}    
+                    break;                  
+                case "texto":
+                    Texto texto =(Texto)aux.getValor();
+                    if(texto.getAlto()==0 && texto.getAncho()==0)
+                    {                        
+                        String[] auxiliar = texto.getCadena().split("\t");
+                        int alto= auxiliar.length;
+                        System.out.println("El texto no tiene dimensiones definidas");
+                        System.out.println("\t"+texto.getCadena());
+                        System.out.println("\tNo. líneas \t"+alto);
+                        int ancho = 0;
+                        for(String cad : auxiliar)
+                        {
+                            if(cad.length()>ancho){ancho=cad.length();}
+                            System.out.println("\tNo. caracteres \t"+ancho);
+                        }
+                        texto.setText(texto.getText());   
+                        texto.setAlto(alto*20);
+                        texto.setAncho(ancho*alto*8);                    
                     }
-                    texto.setText(texto.getText());   
-                    texto.setAlto(alto*20);
-                    texto.setAncho(ancho*20);                    
-                }
-                texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
-                texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
-                x+= texto.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<texto.getAlto()){ altoMaximo = texto.getAlto();}     
-                break;
-            case "caja":
-                Caja caja =(Caja)aux.getValor();
-                if(caja.getAlto()==0 && caja.getAncho()==0)
-                {
-                    String[] auxiliar = caja.getCadena().split("\r");
-                    int alto = auxiliar.length;
-                    int ancho = 0;
-                    String valorCaja= "";
-                    for(String cad : auxiliar)
+                    texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
+                    texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
+                    x+= texto.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<texto.getAlto()){ altoMaximo = texto.getAlto();}     
+                    break;
+                case "caja":
+                    Caja caja =(Caja)aux.getValor();
+                    if(caja.getAlto()==0 && caja.getAncho()==0)
                     {
-                        valorCaja = valorCaja + cad;                        
-                        ancho = ancho + cad.length();
-                    }                    
-                    caja.setText(valorCaja);   
-                    caja.setAlto(20*alto);
-                    caja.setAncho(ancho*7);
-                }
-                x+= caja.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<caja.getAlto()){ altoMaximo = caja.getAlto();}               
-                break;                  
-                
-            case "area":
-                areaTexto area =(areaTexto)aux.getValor();
-                x+= area.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<area.getAlto()){ altoMaximo = area.getAlto();}                  
-                break;                 
-                
-            case "tabla":
-                Tab tabla =(Tab)aux.getValor();                               
-                x+= tabla.getAncho();
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<tabla.getAlto()){ altoMaximo = tabla.getAlto();} 
-                break;     
-                
-            case "panel":
-                Panel panel =(Panel)aux.getValor();
-                Interfaz(panel);                  
-                x+= panel.getAncho();
-                y+= panel.getAlto()+20;
-                if(anchoMaximo<x){anchoMaximo=x;}
-                if(altoMaximo<panel.getAlto()){ altoMaximo = panel.getAlto();} 
-                break;                  
-        }        
-    }     
-    contenedor.setAncho(anchoMaximo+50);
-    contenedor.setAlto(y + 20);     
-    
+                        String[] auxiliar = caja.getCadena().split("\r");
+                        int alto = auxiliar.length;
+                        int ancho = 0;
+                        String valorCaja= "";
+                        for(String cad : auxiliar)
+                        {
+                            valorCaja = valorCaja + cad;                        
+                            ancho = ancho + cad.length();
+                        }                    
+                        caja.setText(valorCaja);   
+                        caja.setAlto(20*alto);
+                        caja.setAncho(ancho*7);
+                    }
+                    x+= caja.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<caja.getAlto()){ altoMaximo = caja.getAlto();}               
+                    break;                  
+
+                case "area":
+                    areaTexto area =(areaTexto)aux.getValor();
+                    x+= area.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<area.getAlto()){ altoMaximo = area.getAlto();}                  
+                    break;                 
+
+                case "tabla":
+                    Tab tabla =(Tab)aux.getValor();                               
+                    x+= tabla.getAncho();
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<tabla.getAlto()){ altoMaximo = tabla.getAlto();} 
+                    break;     
+
+                case "panel":
+                    Panel panel =(Panel)aux.getValor();                
+                    contenedor.setFlagPanel(true);
+                    Interfaz(panel);                                  
+                    x+= panel.getAncho();
+                    y+= panel.getAlto()+20;
+                    if(anchoMaximo<x){anchoMaximo=x;}
+                    if(altoMaximo<panel.getAlto()){ altoMaximo = panel.getAlto();} 
+                    break;                  
+            }        
+        }     
+        contenedor.setAncho(anchoMaximo+50);
+        contenedor.setAlto(y + 20); 
+    }
+    else
+    {
+        for(Elemento elemento : contenedor.getElementos())
+        {
+            if(elemento.getTipo().equals("panel"))
+            {
+                contenedor.setFlagPanel(true);
+                break;
+            }
+        }
+    }        
 }
 
 public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
@@ -2939,23 +2956,28 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
     valores[1]= x;
     valores[2]= y; 
     */
-    int x = 0;
-    int y = 0;
+    int x = 10;
+    int y = 10;
     int saltoY = 0;
     int saltoX = 0;
     int anchoMaximo = 0;
     int altoMaximo = 0;
     ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
     scroll.removeAll();
-    if(contenedor.getAncho()==0 || contenedor.getAlto()==0){calcularTamaño(contenedor);}
+    calcularTamaño(contenedor);
+    if(!contenedor.isFlagPanel())
+    {
+        contenedor.setLayout(null);
+    }
     for(Elemento aux: elementosContenedor)
     {
         switch(aux.getTipo())
         {
             case "boton":
                 Boton boton =(Boton)aux.getValor();                
-                boton.setPreferredSize(new java.awt.Dimension(boton.getAncho(),boton.getAlto()));                                                
-                boton.setBounds(x, y, boton.getAncho(),boton.getAlto());                
+                boton.setPreferredSize(new java.awt.Dimension(boton.getAncho(),boton.getAlto()));                  
+                boton.setBounds(x, y, boton.getAncho(),boton.getAlto()); 
+                boton.removeMouseListener(mouseListener);
                 boton.addMouseListener(mouseListener);     
                 System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 contenedor.add(boton);          
@@ -3006,7 +3028,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 espacio.setPreferredSize(new java.awt.Dimension(contenedor.getAncho()-x-100, saltoY)); 
                 espacio.setAncho(contenedor.getAncho()-x);
                 espacio.setAlto(saltoY);
-                for(int cont = 0; cont< espacio.getAncho(); cont++){espacio.setText(espacio.getText() + "x");}
+                for(int cont = 0; cont< espacio.getAncho(); cont++){espacio.setText(espacio.getText() + "1");}
                 espacio.setBounds(x, y, espacio.getAncho(),espacio.getAlto());                 
                 contenedor.setAlto(contenedor.getAlto() + espacio.getAlto());
                 contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto() ));
@@ -3071,11 +3093,12 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 break;                  
             case "texto":
                 Texto texto =(Texto)aux.getValor();
+                //texto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 if(texto.getAlto()==0 && texto.getAncho()==0)
                 {
                     
-                    String[] auxiliar = texto.getCadena().split("\r");
-                    int alto= auxiliar.length*20;
+                    String[] auxiliar = texto.getCadena().split("\t");
+                    int alto= auxiliar.length;
                     System.out.println("El texto no tiene dimensiones definidas");
                     System.out.println("\t"+texto.getCadena());
                     System.out.println("\tNo. líneas \t"+alto);
@@ -3086,7 +3109,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                         System.out.println("\tNo. caracteres \t"+ancho);
                     }
                     texto.setText(texto.getText());   
-                    texto.setAlto(alto);
+                    texto.setAlto(alto*20);
                     texto.setAncho(ancho*10);                    
                 }
                 texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
@@ -3157,7 +3180,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 
             case "panel":
                 Panel panel =(Panel)aux.getValor();                                
-                prepararPanel(panel);
+                prepararPanel(panel);                
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
                 Interfaz(panel);               
@@ -3231,7 +3254,9 @@ public void InterfazTabla(Tab contenedor)
             case "boton":
                 Boton boton =(Boton)aux.getValor();                
                 boton.setPreferredSize(new java.awt.Dimension(anchoCelda,altoCelda));
-                boton.setBounds(x, y,anchoCelda, altoCelda);                                  
+                boton.setBounds(x, y,anchoCelda, altoCelda);   
+                boton.removeMouseListener(mouseListener);
+                boton.addMouseListener(mouseListener);                   
                 posicionTabla(anchoCelda, altoCelda,  contenedor, saltoY, x, y,anchoMaximo,altoMaximo);         
                 contenedor.add(boton);
                 break;                                           
@@ -4027,16 +4052,15 @@ private static boolean esNumero(String cadena){
     {
 
         @Override
-        public void mouseReleased(MouseEvent e) {
+        public void mouseReleased(MouseEvent e)
+        {
         }
 
         @Override
         public void mousePressed(MouseEvent e) 
-        {
-            Boton boton = (Boton)e.getSource();
-                        
-            Mensaje("Eveneto",boton.getMetodo());
-            // MouseEvent.BUTTON3 es el boton derecho            
+        {                
+            Boton boton = (Boton)e.getSource();                        
+            Mensaje("Eveneto",boton.getMetodo());           
         }
 
         @Override
@@ -4050,7 +4074,7 @@ private static boolean esNumero(String cadena){
         @Override
         public void mouseClicked(MouseEvent e) 
         {
-
+             
         }
     };    
     
