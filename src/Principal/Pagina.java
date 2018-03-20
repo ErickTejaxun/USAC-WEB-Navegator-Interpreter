@@ -13,7 +13,6 @@ import Source.CHTML.nodoChtml;
 import Source.CHTML.sintactico;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -31,7 +30,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -40,11 +38,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -53,7 +49,7 @@ import javax.swing.table.TableModel;
 public class Pagina extends javax.swing.JPanel implements ActionListener{
 
     public int auxContador = 0;
-    public int contadorPagina= 0;
+    public static int contadorPagina= 0;
     public ArrayList<tablaSimbolos> tablaSimbolos_ = new ArrayList();
     public ArrayList<Errores> erroresSintacticos = new ArrayList();
     public ArrayList<Errores> erroresLexicos = new ArrayList();
@@ -128,9 +124,6 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         Panel = new javax.swing.JPanel();
-        panelContenido = new javax.swing.JPanel();
-        scrollPanel = new javax.swing.JScrollPane();
-        scroll = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
         botonAtras = new javax.swing.JButton();
@@ -141,6 +134,9 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         botonHistorial = new javax.swing.JButton();
         etiquetaNombre = new javax.swing.JLabel();
         botonCerrar = new javax.swing.JButton();
+        panelContenido = new javax.swing.JPanel();
+        scrollPanel = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JPanel();
         panelOpciones = new javax.swing.JPanel();
         areaOpciones = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -157,9 +153,9 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSalida = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
+        panelErrores = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaErrores = new javax.swing.JTextArea();
+        contenedorErrores = new javax.swing.JPanel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -176,42 +172,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         setLayout(new javax.swing.OverlayLayout(this));
 
         Panel.setPreferredSize(new java.awt.Dimension(600, 600));
-        Panel.setLayout(new java.awt.BorderLayout(10, 0));
-
-        panelContenido.setBackground(new java.awt.Color(51, 204, 255));
-        panelContenido.setPreferredSize(new java.awt.Dimension(600, 600));
-        panelContenido.setLayout(new java.awt.CardLayout());
-
-        scrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPanel.setViewportBorder(javax.swing.BorderFactory.createCompoundBorder());
-        scrollPanel.setPreferredSize(new java.awt.Dimension(600, 600));
-
-        scroll.setBackground(new java.awt.Color(153, 255, 255));
-        scroll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        scroll.setMinimumSize(new java.awt.Dimension(0, 15767));
-        scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                scrollComponentResized(evt);
-            }
-        });
-
-        javax.swing.GroupLayout scrollLayout = new javax.swing.GroupLayout(scroll);
-        scroll.setLayout(scrollLayout);
-        scrollLayout.setHorizontalGroup(
-            scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1011, Short.MAX_VALUE)
-        );
-        scrollLayout.setVerticalGroup(
-            scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15767, Short.MAX_VALUE)
-        );
-
-        scrollPanel.setViewportView(scroll);
-
-        panelContenido.add(scrollPanel, "card2");
-
-        Panel.add(panelContenido, java.awt.BorderLayout.CENTER);
+        Panel.setLayout(new java.awt.BorderLayout());
 
         panelMenu.setBackground(new java.awt.Color(0, 255, 102));
         panelMenu.setLayout(new java.awt.BorderLayout());
@@ -276,7 +237,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addComponent(botonOpciones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(botonHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +247,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
                         .addComponent(botonIr, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                    .addComponent(textRuta)
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addComponent(etiquetaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -316,6 +277,43 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
 
         Panel.add(panelMenu, java.awt.BorderLayout.PAGE_START);
 
+        panelContenido.setBackground(new java.awt.Color(51, 204, 255));
+        panelContenido.setPreferredSize(new java.awt.Dimension(600, 600));
+        panelContenido.setLayout(new java.awt.CardLayout());
+
+        scrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPanel.setViewportBorder(javax.swing.BorderFactory.createCompoundBorder());
+        scrollPanel.setPreferredSize(new java.awt.Dimension(600, 600));
+
+        scroll.setBackground(new java.awt.Color(153, 255, 255));
+        scroll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        scroll.setMinimumSize(new java.awt.Dimension(0, 15767));
+        scroll.setPreferredSize(new java.awt.Dimension(600, 3000));
+        scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                scrollComponentResized(evt);
+            }
+        });
+
+        javax.swing.GroupLayout scrollLayout = new javax.swing.GroupLayout(scroll);
+        scroll.setLayout(scrollLayout);
+        scrollLayout.setHorizontalGroup(
+            scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2972, Short.MAX_VALUE)
+        );
+        scrollLayout.setVerticalGroup(
+            scrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15767, Short.MAX_VALUE)
+        );
+
+        scrollPanel.setViewportView(scroll);
+
+        panelContenido.add(scrollPanel, "card2");
+
+        Panel.add(panelContenido, java.awt.BorderLayout.CENTER);
+
+        panelOpciones.setPreferredSize(new java.awt.Dimension(457, 350));
         panelOpciones.setLayout(new javax.swing.OverlayLayout(panelOpciones));
 
         areaOpciones.setToolTipText("");
@@ -376,18 +374,14 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
 
         areaOpciones.addTab("Consolo Salida", jPanel4);
 
-        jPanel5.setLayout(new javax.swing.OverlayLayout(jPanel5));
+        panelErrores.setLayout(new javax.swing.OverlayLayout(panelErrores));
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        contenedorErrores.setLayout(new javax.swing.OverlayLayout(contenedorErrores));
+        jScrollPane2.setViewportView(contenedorErrores);
 
-        tablaErrores.setColumns(20);
-        tablaErrores.setRows(5);
-        jScrollPane2.setViewportView(tablaErrores);
+        panelErrores.add(jScrollPane2);
 
-        jPanel5.add(jScrollPane2);
-
-        areaOpciones.addTab("Consola Errores", jPanel5);
+        areaOpciones.addTab("Consola Errores", panelErrores);
 
         panelOpciones.add(areaOpciones);
 
@@ -397,18 +391,10 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdelanteActionPerformed
-        if(contadorPagina< historial.size() && contadorChtml>0)
-        {
-            try 
-            {
-                textRuta.setText(historial.get(contadorPagina));
-                analizar();
-                contadorPagina++;
-            } 
-            catch (IOException ex)
-            {
-                //Logger.getLogger(this.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+        try {
+            verPaginaSiguiente();
+        } catch (IOException ex) {
+            Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonAdelanteActionPerformed
 
@@ -423,7 +409,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         try 
         {
             analizar();
-            contadorPagina++;
+            Pagina.contadorPagina=0;
         } 
         catch (IOException ex)
         {
@@ -461,7 +447,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
             "< fin-encabezado >"
                  + "<cuerpo>\n  ";
         
-        for(String item : historial)
+        for(String item : Pagina.historial)
         {
             String partes[] = item.split(",");
             contenido= contenido+
@@ -507,20 +493,6 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
 
     }//GEN-LAST:event_formComponentResized
 
-    private void scrollComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_scrollComponentResized
-        posX = posY = xMax = yMax=  0;
-        //panelPrincipal = new Panel();        
-        panelPrincipal = new Panel();
-        panelPrincipal.setBounds(0, 0, scroll.getWidth(), Panel.getHeight());
-        panelPrincipal.setAncho(Panel.getWidth());
-        panelPrincipal.setAlto(scroll.getHeight());
-        prepararPanel(panelPrincipal);
-        generarObjetos(raizChtml,panelPrincipal); 
-        Interfaz(panelPrincipal); // Generamos la interfaz         
-        scroll.add(panelPrincipal); 
-
-    }//GEN-LAST:event_scrollComponentResized
-
     private void textRutaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRutaKeyPressed
           if(evt.getKeyCode() == evt.VK_ENTER) 
           {
@@ -539,26 +511,30 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     }//GEN-LAST:event_textRutaKeyPressed
 
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
-        if(contadorPagina>1)
-        {
-            try 
-            {
-                String rutaAuxiliar[] = historial.get(contadorPagina).split(",");
-                textRuta.setText(rutaAuxiliar[0]);
-                analizar();
-                contadorPagina++;
-            } 
-            catch (IOException ex)
-            {
-                //Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-        }        // TODO add your handling code here:
+        try {
+            verPaginaAnterior();
+        } catch (IOException ex) {
+            Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonAtrasActionPerformed
 
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
         int actual = Navegador.contenedorPaginas.getSelectedIndex();
         Navegador.contenedorPaginas.remove(actual);
     }//GEN-LAST:event_botonCerrarActionPerformed
+
+    private void scrollComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_scrollComponentResized
+        posX = posY = xMax = yMax=  0;
+        //panelPrincipal = new Panel();
+        panelPrincipal = new Panel();
+        panelPrincipal.setBounds(0, 0, scroll.getWidth(), Panel.getHeight());
+        panelPrincipal.setAncho(Panel.getWidth());
+        panelPrincipal.setAlto(scroll.getHeight());
+        prepararPanel(panelPrincipal);
+        generarObjetos(raizChtml,panelPrincipal);
+        Interfaz(panelPrincipal); // Generamos la interfaz
+        scroll.add(panelPrincipal);
+    }//GEN-LAST:event_scrollComponentResized
 
     private void botonActionPerformed(java.awt.event.ActionEvent evt)
     {
@@ -599,9 +575,9 @@ public void analizar() throws IOException
         /*Preparamos el panel a insertar a la página.*/
         posX = posY = xMax = yMax=  0;
         panelPrincipal = new Panel();        
-        panelPrincipal.setBounds(0, 0, scroll.getWidth(), scroll.getHeight());
+        panelPrincipal.setBounds(0, 0, scroll.getWidth(), 3000);
         panelPrincipal.setAncho(scroll.getWidth());
-        panelPrincipal.setAlto(scroll.getHeight());        
+        panelPrincipal.setAlto(3000);        
         prepararPanel(panelPrincipal);
         
         /*Analizamos el arbol y generamos lista de objetos*/
@@ -615,9 +591,7 @@ public void analizar() throws IOException
         Interfaz(panelPrincipal);   
         
         /*Agregamos el listener*/
-        
-        
-        
+                        
         /*Agregamos el panel a nuestro scroll(en pagina vacía).*/
         scroll.add(panelPrincipal);
         limpiarSalidas();
@@ -739,17 +713,18 @@ public void mostrarChtml()
       FileReader fr = null;
       BufferedReader br = null;
 
-      try {
-         // Apertura del fichero y creacion de BufferedReader para poder
-         // hacer una lectura comoda (disponer del metodo readLine()).
-         archivo = new File (textRuta.getText());
-         fr = new FileReader (archivo);
-         br = new BufferedReader(fr);
+      try 
+      {
+         archivo = new File (textRuta.getText());         
+         if(archivo.isFile() && archivo.exists())
+         {
+            fr = new FileReader (archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            while((linea=br.readLine())!=null)
+            archivoCHTML.setText(archivoCHTML.getText() +"\n" + linea);         
+         }
 
-         // Lectura del fichero
-         String linea;
-         while((linea=br.readLine())!=null)
-            archivoCHTML.setText(archivoCHTML.getText() +"\n" + linea);
       }
       catch(Exception e){
          e.printStackTrace();
@@ -775,7 +750,7 @@ public void limpiarSalidas()
         filasErrores.addColumn("Columna");
         filasErrores.addColumn("Tipo");
         filasErrores.addColumn("Descripción");
-        tablaErrores.setText("");        
+            
         filasSalidas.addColumn("Archivo");
         filasSalidas.addColumn("Línea");
         filasSalidas.addColumn("Columna");
@@ -785,43 +760,44 @@ public void limpiarSalidas()
 
 public void compilar(){
 
-        
+        Scanner.listaErrores.clear();
         String path=textRuta.getText();
+        path = quitarComillas(path);
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
-        historial.add(path+ "," + date);
-        System.out.println(dateFormat.format(date));        
-         try 
-         {            
-            scanner=new Scanner(new java.io.FileReader(path));      
-            erroresLexicos = Scanner.listaErrores;
-            parser = new sintactico(scanner);
-            parser.parse();
-            tablaSimbolos_ = Scanner.tablaSimbolos_;
-            raizChtml = sintactico.raizChtml;
-            int numero= tablaSimbolos_.size();
-            
-            
-            System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
-            for(int n=0;n<numero;n++)
-            {
-                
-                System.out.println(
-                        tablaSimbolos_.get(n).columna +
-                        "\t"+tablaSimbolos_.get(n).linea+
-                        "\t"+tablaSimbolos_.get(n).Valor+ 
-                        "\t"+tablaSimbolos_.get(n).tipo+ 
-                        "\t\t"+tablaSimbolos_.get(n).descripcion);
-            
-            }
-            System.out.println(numero);
- 
+        Pagina.historial.add(path+ "," + date);      
+        
+        File archivo = new File(path);             
+        if(archivo.exists() && !archivo.isDirectory())
+        {
+            try 
+            {            
+               scanner=new Scanner(new java.io.FileReader(path));      
+               erroresLexicos = Scanner.listaErrores;
+               parser = new sintactico(scanner);
+               parser.parse();
+               tablaSimbolos_ = Scanner.tablaSimbolos_;
+               raizChtml = sintactico.raizChtml;
+               int numero= tablaSimbolos_.size();
+               System.out.println("Columna\tLinea\tValor\tTipo\tDescripción");                
+               for(int n=0;n<numero;n++)
+               {
+                   System.out.println(
+                           tablaSimbolos_.get(n).columna +
+                           "\t"+tablaSimbolos_.get(n).linea+
+                           "\t"+tablaSimbolos_.get(n).Valor+ 
+                           "\t"+tablaSimbolos_.get(n).tipo+ 
+                           "\t\t"+tablaSimbolos_.get(n).descripcion);
+               }
+               System.out.println(numero);
+           }
+           catch(Exception e) { System.out.println(e.getMessage());}        
         }
-        catch(Exception e) { System.out.println(e.getMessage());}
-    
-    
-
+        else
+        {
+            JOptionPane.showMessageDialog(areaOpciones, "El archivo no ha sido encontrado.");
+        }
 }
 
 
@@ -881,6 +857,7 @@ public void compilar(){
                         {                                                                 
                             case "id":
                                 panel.setName(quitarComillas(hijoD.getValue()));
+                                panel.setId(quitarComillas(hijoD.getValue()));
                                 break;
                             case "grupo":
                                 panel.setGrupo(quitarComillas(hijoD.getValue()));                                    
@@ -2719,7 +2696,7 @@ public int[] posicionPanel(int ancho, int alto, Panel contenedor , int saltoY, i
     {
         if((x + ancho)>= limite-ancho)        
         {
-            x = 10;
+            x = contenedor.getInicio();
             y = y + saltoY;            
             saltoY= 0;              
         }
@@ -2795,7 +2772,6 @@ public void calcularTamaño(Panel contenedor)
                     Enlace enlace =(Enlace)aux.getValor();
                     if(enlace.getAlto()==0 && enlace.getAncho()==0)
                     {
-
                         String[] auxiliar = enlace.getCadena().split("\r");
                         int alto= auxiliar.length;
                         System.out.println("El texto no tiene dimensiones definidas");
@@ -2809,7 +2785,7 @@ public void calcularTamaño(Panel contenedor)
                         }
                         enlace.setText(enlace.getText());   
                         enlace.setAlto(alto*20);
-                        enlace.setAncho(ancho);                    
+                        enlace.setAncho(ancho*alto*8);                    
                     }
                     enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
                     enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                
@@ -2876,14 +2852,14 @@ public void calcularTamaño(Panel contenedor)
                             System.out.println("\tNo. caracteres \t"+ancho);
                         }
                         texto.setText(texto.getText());   
-                        texto.setAlto(alto*20);
-                        texto.setAncho(ancho*alto*8);                    
+                        texto.setAlto(alto*25);
+                        texto.setAncho(ancho*8);                    
                     }
                     texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
                     texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
                     x+= texto.getAncho();
                     if(anchoMaximo<x){anchoMaximo=x;}
-                    if(altoMaximo<texto.getAlto()){ altoMaximo = texto.getAlto();}     
+                    if(altoMaximo<=texto.getAlto()){ altoMaximo = texto.getAlto();}     
                     break;
                 case "caja":
                     Caja caja =(Caja)aux.getValor();
@@ -2926,14 +2902,17 @@ public void calcularTamaño(Panel contenedor)
                     contenedor.setFlagPanel(true);
                     Interfaz(panel);                                  
                     x+= panel.getAncho();
-                    y+= panel.getAlto()+20;
+                    y+= panel.getAlto();
                     if(anchoMaximo<x){anchoMaximo=x;}
                     if(altoMaximo<panel.getAlto()){ altoMaximo = panel.getAlto();} 
                     break;                  
             }        
-        }     
-        contenedor.setAncho(anchoMaximo+50);
-        contenedor.setAlto(y + 20); 
+        }   
+        
+        contenedor.setAncho(anchoMaximo+30);
+        contenedor.setAlto(y); 
+        if(y==0){contenedor.setAlto(altoMaximo+10);}
+        
     }
     else
     {
@@ -2951,24 +2930,47 @@ public void calcularTamaño(Panel contenedor)
 public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
 {           
     int val[] = new int[3];
-    /*
-    valores[0]= saltoY;
-    valores[1]= x;
-    valores[2]= y; 
-    */
     int x = 10;
-    int y = 10;
+    int y = 5;
     int saltoY = 0;
     int saltoX = 0;
     int anchoMaximo = 0;
     int altoMaximo = 0;
     ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
     scroll.removeAll();
+    
+    /*Verificamos el tipo de alineacion
+    Por defecto es izquierda
+    */
+    if(contenedor.getAncho()!=0)
+    {
+        Panel auxiliar = new Panel();
+        auxiliar.setElementos(contenedor.getElementos());
+        calcularTamaño(auxiliar);
+        if(!contenedor.getAlineado().equals(""))
+        {
+            if(quitarComillas(contenedor.getAlineado()).toLowerCase().equals("izquierda"))
+            {
+                x = 10;
+            }                
+            if(quitarComillas(contenedor.getAlineado()).toLowerCase().equals("derecha"))
+            {
+                x = contenedor.getAncho() - auxiliar.getAncho()-50;
+            }
+            if(quitarComillas(contenedor.getAlineado()).toLowerCase().equals("centrado"))
+            {        
+                x = (contenedor.getAncho() - auxiliar.getAncho()-50)/2;
+            }            
+        }
+        contenedor.setInicio(x);            
+    }      
+    
     calcularTamaño(contenedor);
+    //contenedor.setLayout(null);/*Verificar*/
     if(!contenedor.isFlagPanel())
     {
         contenedor.setLayout(null);
-    }
+    }           
     for(Elemento aux: elementosContenedor)
     {
         switch(aux.getTipo())
@@ -2979,7 +2981,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 boton.setBounds(x, y, boton.getAncho(),boton.getAlto()); 
                 boton.removeMouseListener(mouseListener);
                 boton.addMouseListener(mouseListener);     
-                System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 contenedor.add(boton);          
                 val = posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
@@ -2988,6 +2990,8 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 break;
             case "enlace":
                 Enlace enlace =(Enlace)aux.getValor();
+                enlace.removeMouseListener(listenerEnlace);
+                enlace.addMouseListener(listenerEnlace);                
                 if(enlace.getAlto()==0 && enlace.getAncho()==0)
                 {
                     
@@ -3005,11 +3009,11 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                     enlace.setText(enlace.getText());   
                     enlace.setAlto(alto*20);
                     enlace.setAncho(ancho*8);                    
-                }
+                }                                                                
                 enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
                 enlace.setBounds(x, y, enlace.getAncho(),enlace.getAlto());                                                    
                 contenedor.add(enlace);
-                System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado "+aux.getTipo()+" x: " +x + "\ty: "+ y);
                 val = posicionPanel(enlace.getAncho(), enlace.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3022,18 +3026,12 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 }                
                 //y = y + saltoY;
                 Texto espacio = new Texto();
-                espacio.setBackground(Color.blue);
-                espacio.setEnabled(false);
-                espacio.setBackground(contenedor.getBackground());
-                espacio.setPreferredSize(new java.awt.Dimension(contenedor.getAncho()-x-100, saltoY)); 
-                espacio.setAncho(contenedor.getAncho()-x);
-                espacio.setAlto(saltoY);
-                for(int cont = 0; cont< espacio.getAncho(); cont++){espacio.setText(espacio.getText() + "1");}
-                espacio.setBounds(x, y, espacio.getAncho(),espacio.getAlto());                 
-                contenedor.setAlto(contenedor.getAlto() + espacio.getAlto());
-                contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto() ));
-                //contenedor.add(espacio);
-                System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                espacio.setAncho(contenedor.getAncho()-x);                
+                espacio.setAlto(saltoY);                
+                contenedor.setAlto(contenedor.getAlto() + saltoY);
+                //contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto() ));
+                //if(!contenedor.isFlagPanel()){contenedor.add(espacio);}
+                //System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(espacio.getAncho(), espacio.getAlto(),  contenedor, saltoY, x, y);                 
                 x  = val[0];
                 y  = val[1];
@@ -3048,7 +3046,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 }    
                 spinner.setPreferredSize(new java.awt.Dimension(spinner.getAncho(),spinner.getAlto()));             
                 contenedor.add(spinner);
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(spinner.getAncho(), spinner.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3059,7 +3057,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());    
                 opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));                              
                 contenedor.add(opciones);
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(opciones.getWidth(), opciones.getHeight(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3085,7 +3083,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 }                    
                 imagen.setPreferredSize(new java.awt.Dimension(imagen.getAncho(),imagen.getAlto()));                
                 contenedor.add(imagen); 
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(imagen.getAncho(), imagen.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3094,10 +3092,12 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
             case "texto":
                 Texto texto =(Texto)aux.getValor();
                 //texto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                texto.setCadena(texto.getCadena().replace("\t", ""));
+                texto.setCadena(texto.getCadena().replace("\r", "\n"));
                 if(texto.getAlto()==0 && texto.getAncho()==0)
                 {
-                    
-                    String[] auxiliar = texto.getCadena().split("\t");
+                    //s = s.replace("xxxxx xxx xxxx ",s2)                     
+                    String[] auxiliar = texto.getCadena().split("\n");
                     int alto= auxiliar.length;
                     System.out.println("El texto no tiene dimensiones definidas");
                     System.out.println("\t"+texto.getCadena());
@@ -3115,7 +3115,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
                 texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                                
                 contenedor.add(texto);
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y); 
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y); 
                 val = posicionPanel(texto.getAncho(), texto.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3142,7 +3142,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 caja.setPreferredSize(new java.awt.Dimension(caja.getAncho(),caja.getAlto()));
                 caja.setBounds(x, y, caja.getAncho(),caja.getAlto());                 
                 contenedor.add(caja); 
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(caja.getAncho(), caja.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3156,7 +3156,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 nuevo.setBounds(x, y, area.getAncho(),area.getAlto());
                 area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto()));               
                 contenedor.add(nuevo); 
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(area.getAncho(), area.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3171,7 +3171,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
                 InterfazTabla(tabla); 
                 contenedor.add(tabla);
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(tabla.getAncho(), tabla.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3180,18 +3180,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 
             case "panel":
                 Panel panel =(Panel)aux.getValor();                                
-                prepararPanel(panel);                
+                //prepararPanel(panel);                
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
-                panel.setBounds(x, y, panel.getWidth(),panel.getHeight());
-                Interfaz(panel);               
-                if(panel.getWidth()==0){ panel.setSize(contenedor.getWidth(), panel.getHeight());}
-                if(panel.getHeight()==0){panel.setSize(panel.getWidth(),100);}
-                if(panel.getWidth()==0 && panel.getHeight() ==0){panel.setSize(contenedor.getWidth(),100);}    
-                if(panel.getAncho()==0){panel.setAncho(contenedor.getAncho());}
-                if(panel.getAlto()==0){panel.setAlto(100);}
-                panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                
-                contenedor.add(panel);
-                System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                                
+                panel.setBounds(x, y, panel.getAncho(),panel.getAlto());
+                Interfaz(panel);                               
+                System.out.println("Objeto insertado "+ panel.getId()+"\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y + "\tAncho:"+panel.getAncho()+ "\tAltura:"+panel.getAlto());
+                contenedor.add(panel);                
                 val = posicionPanel(panel.getAncho(), panel.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3992,29 +3987,47 @@ private static boolean esNumero(String cadena){
            //System.out.println (miDir.getCanonicalPath());
            path=miDir.getCanonicalPath();
          }
-         catch(Exception e) {
+         catch(Exception e) 
+         {
            e.printStackTrace();
-           }
+         }
          return path;
     }    
     
     public void errores_consola()
-    {                               
+    {                
+        
+        JTable tablaErrores = new JTable();        
+        filasErrores = new DefaultTableModel();        
+        filasErrores.addColumn("Archivo");
+        filasErrores.addColumn("Línea");
+        filasErrores.addColumn("Columna");
+        filasErrores.addColumn("Detalle"); 
+        filasErrores.addColumn("Tipo");         
+        filasErrores.addRow(new String[]{"Archivo","Linea","Columna","Detalle","Tipo"});
+        tablaErrores.setModel(filasErrores);        
+        
         String temporal=
         "Linea           Columna           Descripcion                TIPO";
         for(int x=0;x<erroresLexicos.size();x++)
         {
-            temporal+="\n"+x+"\t"+erroresLexicos.get(x).linea+"                "+erroresLexicos.get(x).columna+"          "+erroresLexicos.get(x).getDescripcion()+"       Lexico";          
+            filasErrores.addRow(new Object[]{this.PathActual(), erroresLexicos.get(x).linea,erroresLexicos.get(x).columna,erroresLexicos.get(x).getDescripcion(),"Lexico"});
+            temporal+="\n"+erroresLexicos.get(x).linea+"                "+erroresLexicos.get(x).columna+"          "+erroresLexicos.get(x).getDescripcion()+"       Lexico";          
         }
         for(int x=0;x<erroresSintacticos.size();x++){
-            temporal+="\n"+x+"\t"+erroresSintacticos.get(x).linea+"                "+erroresSintacticos.get(x).columna+"           "+erroresSintacticos.get(x).getDescripcion()+"       Sintactico";
+            filasErrores.addRow(new Object[]{this.PathActual(), erroresSintacticos.get(x).linea,erroresSintacticos.get(x).columna,erroresSintacticos.get(x).getDescripcion(),"Sintactico"});
         }
-        for(int x=0;x<erroresSemanticos.size();x++){
-            temporal+="\n"+x+"\t"+erroresSemanticos.get(x).linea+"               "+erroresSemanticos.get(x).columna+"              "+erroresSemanticos.get(x).getDescripcion()+"       Semantico";
-        }                
-        this.tablaErrores.setText(temporal);
-        this.tablaErrores.repaint();
-        System.out.println(temporal);                        
+        for(int x=0;x<erroresSemanticos.size();x++)
+        {
+            filasErrores.addRow(new Object[]{this.PathActual(), erroresSemanticos.get(x).linea,erroresSemanticos.get(x).columna,erroresSemanticos.get(x).getDescripcion(),"Semanticos"});
+        }                            
+        //tablaErrores.setText(temporal);
+        //Mensaje(temporal, temporal);
+
+        //panelErrores.add(tablaErrores);
+        contenedorErrores.removeAll();
+        contenedorErrores.add(tablaErrores);
+        //System.out.println(temporal);                        
     }  
     
     
@@ -4078,7 +4091,76 @@ private static boolean esNumero(String cadena){
         }
     };    
     
+    
+    MouseListener listenerEnlace= new MouseListener() 
+    {
 
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) 
+        {                
+            Enlace boton = (Enlace)e.getSource();                        
+            try {
+                //Mensaje("Eveneto",boton.getMetodo());
+                abrirEnlace(boton.getRuta());
+            } catch (IOException ex) {
+                Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) 
+        {
+             
+        }
+    };   
+    
+    public void abrirEnlace(String path) throws IOException
+    {
+            Pagina pagina = new Pagina();            
+            pagina.textRuta.setText(quitarComillas(path)); 
+            scroll.add(pagina);
+            pagina.analizar();
+            contenedorPaginas.addTab("Historial", null, pagina);                                                         
+    }
+
+    
+    public void verPaginaAnterior() throws IOException
+    {
+        if(Pagina.contadorPagina>1)
+        {
+
+                Pagina.contadorPagina--;
+                String rutaAuxiliar[] = Pagina.historial.get(Pagina.contadorPagina).split(",");
+                textRuta.setText(rutaAuxiliar[0]);
+                analizar();                            
+        }        
+    }
+    
+    public void verPaginaSiguiente() throws IOException
+    {
+        if(Pagina.contadorPagina< Pagina.historial.size())
+        {
+                Pagina.contadorPagina++;
+                String rutaAuxiliar[] = Pagina.historial.get(Pagina.contadorPagina).split(",");                
+                textRuta.setText(rutaAuxiliar[0]);
+                analizar();                
+        }    
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel Panel;
@@ -4094,6 +4176,7 @@ private static boolean esNumero(String cadena){
     private javax.swing.JTextArea ccssArea1;
     private javax.swing.JTabbedPane cjs1;
     private javax.swing.JTextArea cjsArea1;
+    private javax.swing.JPanel contenedorErrores;
     private javax.swing.JLabel etiquetaNombre;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -4102,18 +4185,17 @@ private static boolean esNumero(String cadena){
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel panelContenido;
+    private javax.swing.JPanel panelErrores;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel scroll;
     private javax.swing.JScrollPane scrollPanel;
-    private javax.swing.JTextArea tablaErrores;
     private javax.swing.JTable tablaSalida;
     private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables

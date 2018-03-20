@@ -3543,6 +3543,11 @@ metodo = {id}"()"
 <TEXTO2>
 {
 
+    {espacio}
+    {    
+        cadena = cadena + yytext();
+    }       
+
     [^]
     {  
         System.out.print(yytext());

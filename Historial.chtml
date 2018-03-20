@@ -2,13 +2,9 @@
     < encabezado >
 < titulo > Historial< fin-titulo> 
 < fin-encabezado ><cuerpo>
-  <texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Mar 13 17:21:53 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo2\carros_ventas.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros_ventas.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Mar 13 17:22:24 CST 2018 <fin-texto> 
+  <texto alto="30"; ancho="500"; > C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\prueba.html <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\prueba.html";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Sun Mar 18 17:25:05 CST 2018 <fin-texto> 
  <salto-fin> 
 < fin-cuerpo >
 <fin-chtml>

@@ -20,15 +20,17 @@ public class Panel extends JPanel
     private String grupo;
     private String id;
     private String cadena;
-    private String alineado;
+    private String alineado = "";
     private int alto;
     private int ancho;
     private String metodo;
     private boolean flagPanel;
+    private int inicio=0;
     private ArrayList<Elemento> elementos = new ArrayList();
     
     public Panel()
     {       
+        this.inicio=10;
         this.flagPanel=false;
         this.setSize(0,0);
         //this.setBounds(0, 0, 500,100);
@@ -37,7 +39,14 @@ public class Panel extends JPanel
         //this.setLayout(null);    
         //this.setLayout(new java.awt.CardLayout());        
     }
-
+    public void setInicio(int inicio)
+    {
+        this.inicio= inicio;
+    }
+    public int getInicio()
+    {
+        return inicio;
+    }
     public String getRuta() {
         return ruta;
     }

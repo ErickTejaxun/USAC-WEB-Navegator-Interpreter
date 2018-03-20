@@ -5,91 +5,35 @@
         <TITULO>Página de Requisitos MínimoS<FIN-TITULO>
     <FIN-ENCABEZADO> 
     <CUERPO>      
-        <//- al ingresar los elementos deberá de iniciar desde la parte inicial de la página -//>         
-        <//- área de botones para rediccionar -//>         
-        <PANEL alto="400"; ancho="400";id = "panel_1"; grupo= "panel_redireccion"; >
-            <TEXTO id="titulo_doc"; grupo= "titulo";>Página de Requisitos Mínimo<FIN-TEXTO>                     
-            <SALTO-FIN>            
-            <ENLACE  id="enlace_inicio"; ><FIN-ENLACE>
-            <ENLACE ruta="C:\Users\Braian\Documents\NetBeansProjects\OCL2Proyecto1_20122012\src\Archivos_Entrada\PaginaUno\index.chtml";>                            
-            Inicio<FIN-ENLACE>                        
-            <BOTON id="boton_inicio"; grupo = "boton_redireccion"; alto = "55"; ancho = "320";  >Páginas Web de Ventas de Automóviles <FIN-BOTON> 
-            <BOTON grupo = "boton_redireccion"; alto = "55"; ancho = "360"; >
-                   Páginas Web de Información Electrodomésticos<FIN-BOTON> 
-            <BOTON grupo = "boton_redireccion"; alto = "55"; ancho = "300";> Páginas Web de Implementación <FIN-BOTON>            
-        <FIN-PANEL>
-        <SALTO-FIN>
-        <PANEL alto="400"; ancho="400"; id = "panel_2"; grupo= "panel_area_dato"; >
-            <PANEL id = "panel_4"; alto ="320"; ancho="400"; grupo="formulario_1";>
-                <ENLACE
-                    ruta="C:\Users\Braian\Documents\NetBeansProjects\OCL2Proyecto1_20122012\src\Archivos_Entrada\PaginaUno\index.chtml";>                
-                        Enlace
-                <FIN-ENLACE>                                    
-                <TEXTO alto= "30"; ancho ="310"; id="titulo_fomulario"; 
-                    grupo="formulario_1"; >Formulario de Notas:
-                <FIN-TEXTO>
-                <SALTO-FIN> 
-                <SALTO-FIN>
-                <SALTO-FIN>
-                <TEXTO alto= "25"; ancho ="100"; grupo="formulario_1";>Nota Proyecto 1: <FIN-TEXTO>
-                <SPINNER ancho = "50"; alto ="25"; id="nota_1"; id="nota_1"; grupo="formulario_2";> <FIN-SPINNER> 
-                
-                <//- ingreso de espacios en blanco para las separaciones entre etiquetas -//>
-                <TEXTO>                <FIN-TEXTO>
-                <TEXTO alto= "16"; ancho ="90"; grupo="formulario_1";>Nota Proyecto 2: <FIN-TEXTO>
-                <SPINNER ancho = "50"; alto ="25"; id="nota_2";  id="nota_2"; grupo="formulario_2";> <FIN-SPINNER>
-                <//- se agregó dos salto de linea entre elementos -//>
-                <SALTO-FIN>
-                <SALTO-FIN>
-                <TEXTO alto= "16"; ancho ="105"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
-                <CAJA_TEXTO alto= "20"; ancho ="200";  id="nombre"; grupo="formulario_2";>Nombre<FIN-CAJA_TEXTO>             
+        <PANEL id = "panel_principal"; alto="200"; ancho="600";>
+                    <PANEL id = "p_redirecion";  grupo="f_p_redireccion"; >
+                        <BOTON grupo = "f_b_redireccion"; alto = "35"; ancho = "120"; ruta= "C:\proyecto1\informacion.chtml";>Informacion<FIN-BOTON>
+                        <BOTON grupo = "f_b_redireccion"; alto = "35"; ancho = "160"; ruta= "C:\proyecto1\tabla.chtml";>Tabla Estudiante<FIN-BOTON>
+                        <BOTON grupo = "f_b_redireccion"; alto = "35"; ancho = "100"; ruta= "C:\proyecto1\index.chtml";> Principal <FIN-BOTON>
+                        <SALTO-FIN>
+                        <ENLACE ruta="c:\proyecto1\Principal.chtml";> Primer Archivo <FIN-ENLACE>
+                        <//- <SALTO-FIN> -//>
+                        <ENLACE ruta="c:\proyecto1\Segundo.chtml";> Segundo Archivo <FIN-ENLACE>
+                        <//- <SALTO-FIN> -//>
+                        <ENLACE ruta="c:\proyecto1\Tercer.chtml";> Tercer Archivo <FIN-ENLACE>
+                        <//- <SALTO-FIN> -//>
+                        <ENLACE ruta="c:\proyecto1\Cuarto.chtml";> Cuarto Archivo <FIN-ENLACE>
+                        <//- <SALTO-FIN> -//>
+                    <FIN-PANEL>
+                    <SALTO-FIN>
+                    <PANEL id = "p_titulo"; grupo="f_p_titulo"; >
+                        <//- esta linea contiene salto de linea en el texto -//>
+                        <TEXTO id="titulo_pagina"; grupo= "titulo";>Calificacion Compiladores 2
+                         \t
+                        s
 
-                <SALTO-FIN>
-                <TEXTO alto= "16"; ancho ="65"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
-                <TEXTO_A alto="95"; ancho="200"; id="comentario"; grupo="formulario_2";><FIN-TEXTO_A>
-                <SALTO-FIN>                 
-                <CAJA id="caja_1"; grupo="panel_area_dato";>
-                    <OPCION id="opcion_1"; valor= "promedio"; >Promedio<FIN-OPCION>
-                    <OPCION valor= "suma"; >Suma<FIN-OPCION>
-                    <OPCION valor= "resta"; >Resta<FIN-OPCION>
-                    <OPCION valor= "multiplicar"; >Multiplicacion<FIN-OPCION>
-                    <OPCION valor= "7"; >Modulo P1 % 7<FIN-OPCION>
-                    <OPCION valor= "11"; >Modulo P2 % 11<FIN-OPCION>
-                <FIN-CAJA>                 
-                <BOTON click="operacion_datos()";  alto= "30"; ancho ="210"; 
-                    id="boto_cal"; grupo="formulario_2";> Calcular <FIN-BOTON>             
-            <FIN-PANEL>   
-            <PANEL alto="400"; ancho="400"; id = "panel_5"; alto ="320"; ancho="380";>
-                <TEXTO grupo = "salida_texto_1";>Opcion Seleccionada:<FIN-TEXTO>
-                <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_opcion";>--------<FIN-TEXTO>
-                <SALTO-FIN>
-                <TEXTO grupo = "salida_texto_1";>Nombre del Estudiante<FIN-TEXTO>
-                <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nombre"; >--------<FIN-TEXTO>
-                <SALTO-FIN>
-                <TEXTO grupo = "salida_texto_1";>Resultado: <FIN-TEXTO>
-                <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_resultado"; >--------<FIN-TEXTO>
-                <SALTO-FIN>
-                <TEXTO grupo = "salida_texto_1";>Comentario Realizado<FIN-TEXTO>
-                <TEXTO alto = "120"; ancho="200"; grupo = "salida_texto_2"; id= "r_comentario"; >--------<FIN-TEXTO>
-                <SALTO-FIN>
-                <TEXTO grupo = "salida_texto_1";>Nota P1:<FIN-TEXTO>
-                <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nota_1"; >--------<FIN-TEXTO>
-                <SALTO-FIN>
-                <TEXTO grupo = "salida_texto_1";>Nota P2:<FIN-TEXTO>
-                <TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nota_2"; >--------<FIN-TEXTO>
-                <SALTO-FIN>
-                <IMAGEN alto = "90"; ancho = "200"; id="imagen_1";>C:\Users\Braian\Desktop\3.png<FIN-IMAGEN>
-            <FIN-PANEL>                      
-        <FIN-PANEL>
-        <SALTO-FIN>
-        <CAJA_TEXTO grupo="estilo7"; ancho="200";>
-            Aqui 
-TAMbien
-        <FIN-CAJA_TEXTO>
-        <TEXTO_A grupo="estilo7"; ancho="200"; alineado="izquierda";>
-            Aqui 
 
-TAMbien
-        <FIN-TEXTO_A>
+                        Proyecto 1<FIN-TEXTO>
+                    <FIN-PANEL>
+                    <//- Se agregaron tres saltos de linea -//>
+        <fin-panel>                
+
+
+        
     <FIN-CUERPO>
 <FIN-CHTML>
