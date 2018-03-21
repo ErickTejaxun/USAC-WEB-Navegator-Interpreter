@@ -31,13 +31,10 @@ public class Panel extends JPanel
     public Panel()
     {       
         this.inicio=10;
-        this.flagPanel=false;
-        this.setSize(0,0);
-        //this.setBounds(0, 0, 500,100);
+        this.flagPanel=false;        
         this.setAlto(0);
         this.setAncho(0);       
-        //this.setLayout(null);    
-        //this.setLayout(new java.awt.CardLayout());        
+       
     }
     public void setInicio(int inicio)
     {

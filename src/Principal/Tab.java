@@ -28,8 +28,8 @@ public class Tab extends JPanel
     
     public Tab()
     {              
-        this.setAlto(200);
-        this.setAncho(200);        
+        this.setAlto(300);
+        this.setAncho(400);        
         //this.setLayout(new java.awt.CardLayout());        
     }
 

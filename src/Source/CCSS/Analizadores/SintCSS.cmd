@@ -1,0 +1,1 @@
+java -jar C:\Users\erick\Documents\NetBeansProjects\P1_C2\lib\java-cup-11b.jar -parser sintacticoCCSS -symbols symCCSS sintacCCSS.cup

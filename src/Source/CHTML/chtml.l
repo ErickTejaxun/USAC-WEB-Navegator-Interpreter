@@ -82,7 +82,7 @@ letra = ([a-zA-Z]|"ñ"|"á"|"é"|"í"|"ó"|"ú")
 linea = ([^\r\n\"\\])
 id = ({letra}({letra}|{digito}|"_"|"-")*)
 rgb  = ("#"{id}| "#"{digito} | "#"{digito}{id})
-direccionWindows= ("\"" ({letra}":"("\\"({id}|" ")+)+"."{id}) "\"")
+direccionWindows= ("\"" ({letra}":"("\\"({id}|" "|"_"|"-"|{digito})+)+"."{id}) "\"")
 direccionLinux=(("/"{linea}+))+
 
 path = ({letra}":"("\\"({id}|" ")+)+"."{id})

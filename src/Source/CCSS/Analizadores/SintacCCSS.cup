@@ -1,0 +1,380 @@
+    package Analizadores; 
+import java_cup.runtime.*;
+import AST.*;
+import javax.swing.*;
+parser code 
+{:
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public void syntax_error(Symbol s){ 
+        JOptionPane.showInputDialog("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+        String texto = "Identificador " +s.value + " no reconocido.";
+        Web.listaError.agregarError("Error sintactico",texto, s.left, s.right);
+    } 
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintáctico 
+     * en el que ya no es posible una recuperación de errores.
+     **/ 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        JOptionPane.showInputDialog("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        " no reconocido."); 
+        String texto = "Identificador " +s.value + " no reconocido.";
+        Web.listaError.agregarError("Error sintactico",texto, s.left, s.right);
+    }  
+
+    public nodo getRaiz(){
+        return action_obj.raiz;
+    }
+:} 
+
+action code{:
+    nodo raiz= null;
+
+:}
+
+//SIMBOLOS
+terminal String COR_IZQ, COR_DER, PAR_IZQ, IGUAL, COMA, MAS, MENOS, POR, PAR_DER, PUNTO_COMA, DIV;
+//palabras reservadas
+terminal String negrilla, cursiva, mayuscula, minuscula, capital, TRUE, FALSE, autoredimension, visible, borde;
+terminal String opaque, colorText, grupo, idToken, alineado, texto, formato, letra, tamTex, fondoElemento, horizontal;
+terminal String vertical, izquierda, derecha, centrado, justificado;
+//otras
+terminal String ID, NUMERO, CADENA;
+//no terminales
+non terminal nodo INICIO, LI_DEF, DEF, LI_ELE, LI_ATRIB, ATRIB, LI_FORM, FORM, AREA, AL, EXP, ELE;
+
+precedence left MAS,MENOS;
+precedence left POR,DIV;
+
+//simbolo inicial
+start with INICIO;
+
+//GRAMATICA
+INICIO ::= LI_DEF: li_def {:
+                RESULT = new nodo("INICIO");
+                RESULT.add(li_def);
+
+                raiz = RESULT;
+        
+            :}
+        ;
+
+LI_DEF ::= LI_DEF:lista  DEF:defini 
+        {:
+            nodo elementos = new nodo("Lista Definiciones");
+            elementos.add(lista);
+            elementos.add(defini);
+            RESULT = elementos;
+        :}
+
+        | DEF:defini
+        {:
+            nodo elementos = new nodo("Lista Definiciones");
+            elementos.add(defini);
+            RESULT = elementos;
+
+        :};
+     
+
+DEF ::= ID:identificador COR_IZQ LI_ELE:li  COR_DER
+        {:
+            nodo definiciones = new nodo("Definiciones");
+            nodo objeto = new nodo(identificador, "ID", identificadorleft, identificadorright);
+            definiciones.add(objeto);
+            definiciones.add(li);
+            RESULT =  definiciones;
+        :}
+        | ID:identificador COR_IZQ COR_DER
+        {:
+
+            nodo definiciones = new nodo("Definiciones");
+            nodo objeto = new nodo( identificador, "ID", identificadorleft, identificadorright);
+            definiciones.add(objeto);
+            RESULT = definiciones;
+
+        :}
+;
+
+LI_ELE ::= LI_ELE:li ELE:elemento
+        {:
+            nodo elem = new nodo("Elementos");
+            elem.add(li);
+            elem.add(elemento);
+            RESULT = elem;
+        :}
+
+        | ELE:elemento
+        {:
+
+            nodo ele = new nodo("Elementos");
+            ele.add(elemento);
+            RESULT = ele;
+        :}
+        ;
+
+ELE ::= grupo:group PAR_IZQ ID:id PAR_DER PUNTO_COMA LI_ATRIB:lis_atributos
+        {:
+            RESULT = new nodo(group,"GRUPO", idleft-1, idright-1);
+            nodo objeto = new nodo(id, "GRUPO", idleft,idright);
+            RESULT.add(objeto);
+            RESULT.add(lis_atributos);
+        :}
+        | idToken:idto PAR_IZQ ID:identificador PAR_DER PUNTO_COMA LI_ATRIB:lis_atributos
+        {:
+            RESULT = new nodo(idto,"GRUPO", identificadorleft-1, identificadorright-1);
+            nodo objeto = new nodo( identificador, "ID", identificadorleft, identificadorright);
+            RESULT.add(objeto);
+            RESULT.add(lis_atributos);
+        :}
+        | grupo:group PAR_IZQ ID:identificador PAR_DER PUNTO_COMA
+        {:
+            RESULT = new nodo(group, "GRUPO", identificadorleft-1, identificadorright-1);
+            nodo objeto = new nodo( identificador, "GRUPO", identificadorleft, identificadorright);
+            RESULT.add(objeto);
+        :}
+        | idToken:idto PAR_IZQ ID:id PAR_DER PUNTO_COMA
+        {:
+            RESULT = new nodo(idto,"GRUPO", idleft-1, idright-1);
+            nodo objeto = new nodo( id, "ID", idleft, idright);
+            RESULT.add(objeto);
+        :}
+
+        ;
+
+LI_ATRIB ::= LI_ATRIB:lis_atributos ATRIB:atributos
+        {:
+            nodo atributos_lis =  new nodo("ATRIBUTOS");
+            atributos_lis.add(lis_atributos);
+            atributos_lis.add(atributos);
+            RESULT = atributos_lis;
+        :}
+
+        | ATRIB:atributos
+        {:
+            nodo atri = new nodo("ATRIBUTOS");
+            atri.add(atributos);
+            RESULT = atri; 
+        :}
+        ;
+
+ATRIB ::= alineado IGUAL AL:alineado PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo aling = new nodo("Alineado");
+                //RESULT = new nodo("Alineado", alineadoleft-1, alineadoright-1);
+                RESULT.add(aling);
+                RESULT.add(alineado);
+            :}
+        | texto:textos IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo text = new nodo(textos);
+                RESULT.add(text);
+                RESULT.add(e);
+            :}
+        | formato:formato IGUAL LI_FORM:lista_forma PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo form =new nodo(formato);
+                RESULT = lista_forma;
+            :}
+        | letra:letra IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo letra1 =  new nodo("Letra");
+                RESULT.add(letra1);
+                RESULT.add(e);
+            :}
+        | tamTex:tamtexto IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo tamtextos= new nodo(tamtexto);
+                RESULT.add(tamtextos);
+                RESULT.add(e);
+            :}
+        | fondoElemento:fondoelemento IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo fondito =  new nodo("FondoElemento");
+                RESULT.add(fondito);
+                RESULT.add(e);
+            :}
+        | autoredimension IGUAL COR_IZQ EXP:e COMA AREA:area COR_DER PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo autore = new nodo("AutoRedimension");
+                RESULT.add(autore);
+                RESULT.add(e);
+                RESULT.add(area);   
+            :}
+        | visible IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+
+                nodo visibilito = new nodo("Visible");
+                RESULT.add(visibilito);
+                RESULT.add(e);
+            :}
+        | borde IGUAL COR_IZQ EXP:e1 COMA EXP:e2 COMA EXP:e3 COR_DER PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+                nodo bordito = new nodo("Borde" );
+                RESULT.add(bordito);
+                RESULT.add(e1);
+                RESULT.add(e2);
+                RESULT.add(e3);
+            :}
+        | opaque IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+
+                nodo opa = new nodo("Opaque");
+                RESULT.add(opa);
+                RESULT.add(e);
+            :}
+        | colorText IGUAL EXP:e PUNTO_COMA
+            {:
+                RESULT = new nodo("ATRIBUTO");
+
+                nodo colorte = new nodo("ColorTexto");
+                RESULT.add(colorte);
+                RESULT.add(e);
+            :}
+        ;
+
+LI_FORM ::= LI_FORM:lista_forma COMA FORM:formato
+            {:  
+
+                lista_forma.add(formato);
+                RESULT = lista_forma;
+            :}
+
+        | FORM:formato
+            {:
+                nodo form = new nodo("FORMATO");
+                form.add(formato);
+                RESULT = form;
+            :}
+        ;
+FORM ::= negrilla:formato 
+                 {:
+                    //RESULT = new nodo("FORMATO");
+                    nodo negrita = new nodo(formato, "Form", formatoleft, formatoright);
+                    
+                    RESULT = negrita;
+                    
+                :}
+        |cursiva: formato
+                 {: 
+                   // RESULT = new nodo("FORMATO");
+                    nodo cursiva = new nodo(formato, "Form", formatoleft, formatoright);
+                    RESULT =  cursiva;
+
+                 :}
+        |mayuscula:formato
+                {: 
+                   // RESULT = new nodo("FORMATO");
+                    nodo mayus = new nodo(formato, "Form", formatoleft, formatoright);
+                    RESULT = mayus;
+                :}
+        |minuscula:formato
+                {: 
+                   // RESULT = new nodo("FORMATO");
+                    
+                    nodo minus = new nodo(formato, "Form", formatoleft, formatoright);
+                    RESULT = minus;
+                :}
+        |capital:formato
+                {: 
+
+                    nodo capi = new nodo(formato, "Form", formatoleft, formatoright);
+                    RESULT = capi;
+                :}
+        ;
+AREA ::= vertical:area {: RESULT = new nodo(area,"Area", arealeft, arearight);:} 
+        |horizontal:area {: RESULT = new nodo(area,"Area", arealeft, arearight);:}
+        ;
+
+EXP ::= EXP:e1 MAS:mas EXP:e2
+        {:
+            //RESULT = new nodo("Expresion", e1left-1, e1right-1);
+            nodo op = new nodo(mas, "OP", masleft, masright);
+            op.add(e1);
+            op.add(e2);
+            RESULT = op;
+        :}
+        | EXP:e1 MENOS:menos EXP:e2
+        {:
+            //RESULT = new nodo("Expresion", e1left-1, e1right-1);
+            nodo op = new nodo(menos, "OP", menosleft, menosright);
+            op.add(e1);
+            op.add(e2);
+            RESULT = op;
+        :}
+        | EXP:e1 POR:por EXP:e2
+        {:
+            //RESULT = new nodo("Expresion", e1left-1, e1right-1);
+            nodo op = new nodo( por, "OP", porleft, porright);
+            op.add(e1);
+            op.add(e2);
+            RESULT = op;
+        :}
+        | EXP:e1 DIV:div EXP:e2
+        {:
+            //RESULT = new nodo("Expresion", e1left-1, e1right-1);
+            nodo op = new nodo( div, "OP", divleft, divright);
+            op.add(e1);
+            op.add(e2);
+            RESULT = op;
+        :}
+        | MENOS:menos EXP:e
+        {:
+            //RESULT = new nodo("Expresion", eleft-1, eright-1);
+            nodo op  = new nodo( menos, "DECREMENTO",  menosleft, menosright);
+            op.add(e);
+            RESULT = op;
+        :}
+        | PAR_IZQ EXP:e PAR_DER
+        {:
+            RESULT = e;
+        :}
+        | ID:id
+        {:
+            //RESULT = new nodo("Expresion", idleft-1, idright-1);
+            nodo objeto = new nodo(id, "ID",idleft,idright);
+            RESULT = objeto;
+        :}
+
+        | NUMERO:numero
+          {:
+            //RESULT = new nodo("Expresion", numeroleft-1, numeroright-1);
+            nodo objeto = new nodo( numero, "Numero",numeroleft,numeroright);
+            RESULT = objeto;
+        :}
+        | TRUE:verdadero
+        {:
+            RESULT = new nodo( verdadero,"BOOLEANO", verdaderoleft-1, verdaderoright-1);
+         
+        :}
+        | FALSE:falso
+        {:
+            RESULT = new nodo(falso, "BOOLEANO", falsoleft-1, falsoright-1);
+     
+        :}
+        | CADENA:cadena
+        {:
+            RESULT = new nodo( cadena, "CADENA", cadenaleft-1, cadenaright-1);
+            
+        :}
+        ;
+AL ::= izquierda:alineado{: RESULT = new nodo(alineado, "ALINEADO", alineadoleft, alineadoright);:}
+        | derecha:alineado{: RESULT = new nodo(alineado, "ALINEADO", alineadoleft, alineadoright);:}
+        | centrado:alineado{: RESULT = new nodo(alineado,"ALINEADO", alineadoleft, alineadoright);:}
+        | justificado:alineado{: RESULT = new nodo(alineado, "ALINEADO", alineadoleft, alineadoright);:}
+        ;
+
+

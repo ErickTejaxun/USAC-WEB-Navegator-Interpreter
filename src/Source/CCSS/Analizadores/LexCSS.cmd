@@ -1,0 +1,1 @@
+java -jar C:\Users\erick\Documents\NetBeansProjects\P1_C2\lib\jflex-1.6.1.jar lexicoCCSS.jflex

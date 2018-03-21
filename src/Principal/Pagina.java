@@ -20,11 +20,15 @@ import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -568,6 +572,8 @@ public void analizar() throws IOException
             errores_consola();
         }  
         
+        ponerTitulo();
+        
         /*Generamos la gráfica del arbol.*/
         dibujador aux = new dibujador();           
         aux.generarGrafica(raizChtml);
@@ -590,7 +596,8 @@ public void analizar() throws IOException
         /*A partir de la lista de objetos los dibujamos sobre el panelPrincipal.*/
         Interfaz(panelPrincipal);   
         
-        /*Agregamos el listener*/
+        /*Analizar los archivos cjs y ccss*/
+        analizarArchivos();
                         
         /*Agregamos el panel a nuestro scroll(en pagina vacía).*/
         scroll.add(panelPrincipal);
@@ -603,6 +610,39 @@ public void analizar() throws IOException
         mostrarChtml();
         mostrarCjs();
 } 
+
+
+
+    public static void interpretarccss(String path) {
+        Source.CCSS.Analizadores.sintacticoCCSS pars;
+        try {
+            InputStream is = new FileInputStream(path);
+            Reader reader = new InputStreamReader(is);
+            pars=new Source.CCSS.Analizadores.sintacticoCCSS(new Source.CCSS.Analizadores.lexicoCCSS(reader));
+            pars.parse(); 
+            
+            Source.CCSS.AST.nodo raiz = pars.getRaiz();
+            Source.CCSS.Ejecucion.recorrerArbol.recorrido(raiz);            
+            Source.CCSS.AST.graficarAST graficar = new Source.CCSS.AST.graficarAST(raiz);
+            Source.CCSS.Ejecucion.listaElemento.imprimirBloque();
+        } catch (Exception ex) {
+            System.out.println("Error fatal en compilación de entrada." );
+            System.out.println("Causa: "+ex.getMessage());
+        } 
+    }
+
+
+
+public void ponerTitulo()
+{       
+    String ruta = textRuta.getText();
+    StringTokenizer token = new StringTokenizer(ruta, "\\");
+    while (token.hasMoreTokens()) {
+            ruta = token.nextToken();                
+    }       
+    
+    int panelActual =  Navegador.contenedorPaginas.getSelectedIndex();      
+}
 
 public MouseListener agregarListener()
 {
@@ -642,7 +682,7 @@ public MouseListener agregarListener()
 
 public void mostrarCjs()
 {
-        ccss1.removeAll();
+      ccss1.removeAll();
       cjs1.removeAll();
       File archivo = null;
       FileReader fr = null;
@@ -705,6 +745,29 @@ public void mostrarCjs()
         }
 
         contenido="";
+      }
+}
+
+
+public void analizarArchivos()
+{
+      String nombre="";
+      for(String texto: archivos)
+      {                    
+            StringTokenizer token  = new StringTokenizer(texto, ".");
+            String tipo ="";
+            while (token.hasMoreTokens()) 
+            {
+                    tipo = token.nextToken();                
+            }          
+            switch(tipo)
+            {
+                case "ccss":
+                    interpretarccss(texto);
+                    break;
+                case "cjs":              
+                    break;   
+            }                   
       }
 }
 public void mostrarChtml()
@@ -775,6 +838,7 @@ public void compilar(){
             {            
                scanner=new Scanner(new java.io.FileReader(path));      
                erroresLexicos = Scanner.listaErrores;
+               Scanner.tablaSimbolos_.clear();
                parser = new sintactico(scanner);
                parser.parse();
                tablaSimbolos_ = Scanner.tablaSimbolos_;
@@ -2757,9 +2821,11 @@ public void calcularTamaño(Panel contenedor)
         int saltoX = 0;
         int anchoMaximo = 0;
         int altoMaximo = 0;
-        ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
+        ArrayList<Elemento> elementosContenedor = contenedor.getElementos(); 
+        Elemento finalAuxiliar = null;
         for(Elemento aux: elementosContenedor)
         {
+            finalAuxiliar = aux;
             switch(aux.getTipo())
             {
                 case "boton":
@@ -2784,7 +2850,7 @@ public void calcularTamaño(Panel contenedor)
                             System.out.println("\tNo. caracteres \t"+ancho);
                         }
                         enlace.setText(enlace.getText());   
-                        enlace.setAlto(alto*20);
+                        enlace.setAlto(alto*25);
                         enlace.setAncho(ancho*alto*8);                    
                     }
                     enlace.setPreferredSize(new java.awt.Dimension(enlace.getAncho(),enlace.getAlto()));
@@ -2812,7 +2878,7 @@ public void calcularTamaño(Panel contenedor)
                     JComboBox opciones =(JComboBox)aux.getValor();
                     x+= opciones.getWidth();
                     if(anchoMaximo<x){anchoMaximo=x;}
-                    if(altoMaximo<opciones.getHeight()){ altoMaximo = opciones.getHeight();}                                      
+                    if(altoMaximo<25){ altoMaximo = 25;}                                      
                     break;                
                 case "imagen":
                     Imagen imagen =(Imagen)aux.getValor();
@@ -2908,11 +2974,18 @@ public void calcularTamaño(Panel contenedor)
                     break;                  
             }        
         }   
+
         
-        contenedor.setAncho(anchoMaximo+30);
-        contenedor.setAlto(y); 
-        if(y==0){contenedor.setAlto(altoMaximo+10);}
-        
+        if(altoMaximo!=0)
+        {
+            contenedor.setAncho(anchoMaximo+50);
+            contenedor.setAlto(y+altoMaximo+50);            
+        }
+        else
+        {
+            contenedor.setAncho(anchoMaximo+50);
+            contenedor.setAlto(y+50);             
+        }                
     }
     else
     {
@@ -2966,11 +3039,17 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
     }      
     
     calcularTamaño(contenedor);
+    //contenedor.setLayout(null);
     //contenedor.setLayout(null);/*Verificar*/
     if(!contenedor.isFlagPanel())
     {
         contenedor.setLayout(null);
     }           
+    else
+    {
+        //contenedor.setAncho(contenedor.getAncho()/2);
+        contenedor.setAlto(contenedor.getAlto()/2);    
+    }
     for(Elemento aux: elementosContenedor)
     {
         switch(aux.getTipo())
@@ -3022,16 +3101,24 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
             case "salto":                
                 if(saltoY == 0)
                 {
-                    saltoY = 10;
+                    saltoY = 5;
                 }                
                 //y = y + saltoY;
                 Texto espacio = new Texto();
-                espacio.setAncho(contenedor.getAncho()-x);                
-                espacio.setAlto(saltoY);                
-                contenedor.setAlto(contenedor.getAlto() + saltoY);
-                //contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto() ));
-                //if(!contenedor.isFlagPanel()){contenedor.add(espacio);}
-                //System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                //espacio.setBackground(Color.black);
+                espacio.setBackground(contenedor.getBackground());
+                espacio.setEnabled(false);
+                espacio.setAncho(contenedor.getAncho()-x-30);                
+                espacio.setAlto(saltoY); 
+                
+                for(int cont=0; cont<espacio.getAncho();cont++){espacio.setText(espacio.getText() +" ");}                
+                if(contenedor.isFlagPanel())
+                {
+                    espacio.setPreferredSize(new java.awt.Dimension(espacio.getAncho(),espacio.getAlto() ));
+                    contenedor.add(espacio); 
+                    contenedor.setAlto(contenedor.getAlto()+espacio.getAlto());
+                    contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto()+espacio.getAlto() ));
+                }                
                 val = posicionPanel(espacio.getAncho(), espacio.getAlto(),  contenedor, saltoY, x, y);                 
                 x  = val[0];
                 y  = val[1];
@@ -3184,7 +3271,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                                
                 panel.setBounds(x, y, panel.getAncho(),panel.getAlto());
-                Interfaz(panel);                               
+                //Interfaz(panel);                               
                 System.out.println("Objeto insertado "+ panel.getId()+"\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y + "\tAncho:"+panel.getAncho()+ "\tAltura:"+panel.getAlto());
                 contenedor.add(panel);                
                 val = posicionPanel(panel.getAncho(), panel.getAlto(),  contenedor, saltoY, x, y); 
