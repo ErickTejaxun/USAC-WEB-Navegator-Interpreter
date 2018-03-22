@@ -24,14 +24,14 @@ import java.awt.event.ActionEvent;
  */
 public class Boton extends JButton
 {
-    private String ruta;
-    private String grupo;
-    private String id;
-    private String cadena;
+    private String ruta="";
+    private String grupo="";
+    private String id="";
+    private String cadena="";
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo;
+    private String metodo="";
     
     
     public Boton()

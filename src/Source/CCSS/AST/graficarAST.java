@@ -23,7 +23,7 @@ public class graficarAST {
         cadenaDot = cadenaDot + "}";
         try {
 
-            archivoDot = new File("Graficas\\" + nombre + ".txt");
+            archivoDot = new File(PathActual()+"\\"+nombre+".txt");
             FileWriter archivo = new FileWriter(archivoDot);
             archivo.write(cadenaDot);
             archivo.close();
@@ -94,7 +94,19 @@ public class graficarAST {
         }
     }
     
-    
+    public String PathActual(){
+        String path="";
+         File miDir = new File (".");
+         try {
+           //System.out.println (miDir.getCanonicalPath());
+           path=miDir.getCanonicalPath();
+         }
+         catch(Exception e) 
+         {
+           e.printStackTrace();
+         }
+         return path;
+    }      
     
     private void pintar(String titulo) {
 
