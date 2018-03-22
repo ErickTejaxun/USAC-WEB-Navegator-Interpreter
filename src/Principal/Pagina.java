@@ -3262,7 +3262,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 
             case "tabla":
                 Tab tabla =(Tab)aux.getValor();               
-                tabla.setSize(tabla.getAncho(), tabla.getAncho());
+                tabla.setSize(tabla.getAncho(), tabla.getAlto());
                 tabla.setBackground(Color.white);
                 //tabla.setBorder(BorderFactory.createLineBorder(Color.black));
                 tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
@@ -3273,8 +3273,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 x  = val[0];
                 y  = val[1];
                 saltoY = val[2];                 
-                break;     
-                
+                break;                     
             case "panel":
                 Panel panel =(Panel)aux.getValor();                                
                 //prepararPanel(panel);                
