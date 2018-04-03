@@ -3493,43 +3493,43 @@ private static boolean esNumero(String cadena){
        {              
             switch(color)
             {
-                case "\"blue\"":
+                case "blue":
                     retorno = Color.blue;
                     break;
-                case "\"black\"":
+                case "black":
                     retorno = Color.BLACK;
                     break;
-                case "\"gray\"":
+                case "gray":
                     retorno = Color.GRAY;
                     break;
-                case "\"cyan\"":
+                case "cyan":
                     retorno = Color.CYAN;
                     break;
-                case "\"dark_gray\"":
+                case "dark_gray":
                     retorno = Color.DARK_GRAY;
                     break;   
-                case "\"green\"":
+                case "green":
                     retorno = Color.GREEN;
                     break;
-                case "\"light_gray\"":
+                case "light_gray":
                     retorno = Color.LIGHT_GRAY;
                     break;
-                case "\"magenta\"":
+                case "magenta":
                     retorno = Color.MAGENTA;
                     break;
-                case "\"orange\"":
+                case "orange":
                     retorno = Color.ORANGE;
                     break;
-                case "\"pink\"":
+                case "pink":
                     retorno = Color.PINK;
                     break;
-                case "\"red\"":
+                case "red":
                     retorno = Color.RED;
                     break;
-                case "\"white\"":
+                case "white":
                     retorno = Color.WHITE;
                     break;
-                case "\"yellow\"":
+                case "yellow":
                     retorno = Color.YELLOW;
                     break;  
                 default:
@@ -4052,7 +4052,7 @@ private static boolean esNumero(String cadena){
             //f_b_redireccion
             switch(elemento.getTipo())
             {                        
-                case "panel":
+                case "panel": // ----------------------------------------------------------------PANEL----------------------------------------------------------------------------
                     Panel panel = (Panel)elemento.getValor();
                     Source.CCSS.Ejecucion.nodoLista nodoEstilo = buscarEstilo(panel.getGrupo());               
 
@@ -4170,16 +4170,88 @@ private static boolean esNumero(String cadena){
                                         {
                                             valor = (String)estilo.getValor();
                                             valor = quitarComillas(valor);
+                                            panel.setBackground(colorFuente(valor));
                                             //valor = (String)estilo.getValor();
                                             //panel.setColorFuente(colorFuente(valor));
                                         }
-                                        break;//Fin colortext                                      
+                                        break;//Fin colortext 
+                                    case "borde":
+                                        valor = "";
+                                        if(estilo.getValor() instanceof ArrayList)
+                                        {
+                                            ArrayList arreglo = (ArrayList)estilo.getValor();
+                                            String color ="";
+                                            Boolean borde = true;
+                                            int grosor = 10;
+                                            
+                                            for(Object item : arreglo )
+                                            {
+                                                if(item instanceof String)
+                                                {
+                                                    color = quitarComillas((String)item);
+                                                }
+                                                if(item instanceof Boolean)
+                                                {                                                                                                                                                        
+                                                    borde = (boolean)item;
+                                                }
+                                                if(item instanceof Double)
+                                                {
+                                                    Double auxiliar = (Double)item;
+                                                    grosor = auxiliar.intValue();
+                                                }
+                                            }
+                                            
+                                            if(!color.equals(""))
+                                            {
+                                                panel.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                            }                                            
+                                        }                                        
+                                        break; // Fin caso borde   
+                                    case "opaque":
+                                        valor ="";
+                                        Boolean opacacidad = true;
+                                        if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                                        panel.setOpaque(opacacidad);
+                                        break;//Fin Opacacidad   
+                                    case "autoredimension":
+                                        if(estilo.getValor() instanceof ArrayList)
+                                        {
+                                            ArrayList arreglo = (ArrayList)estilo.getValor();
+                                            Object valoRedimension = arreglo.get(0);
+                                            Object area =  arreglo.get(1);
+                                            int alto = panel.getAlto();
+                                            int ancho = panel.getAncho(); 
+                                            panel.setAlto(0);
+                                            panel.setAncho(0);
+                                            if(area instanceof String)
+                                            {                                                
+                                                if(valoRedimension instanceof Boolean)
+                                                {
+                                                    if((boolean)valoRedimension)
+                                                    {
+                                                        calcularTamaño(panel);                                                                                                                 
+                                                        switch(quitarComillas((String)area).toLowerCase())
+                                                        {
+                                                            case "horizontal":
+                                                                panel.setAlto(alto);
+                                                                panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));
+                                                                break;
+                                                            case "vertical":  
+                                                                panel.setAncho(ancho);
+                                                                panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                                                                
+                                                                break;
+                                                        }                                                        
+                                                    }
+                                                }                                                
+                                            }                                              
+                                        }
+                                        break;//Fin Opacacidad                                                                                
                                 }// Fin switch                                                                                                    
                             } // Fin if instancia estilo
                         }//Fin for
                     }//Fin if !=null
-                    break;// Fin caso Panel------------------------------------ 
-                case "imagen": // ----------------------------------------------Imagen---------------------------------
+                    break;// ---------------------------------------------------------------FIN PANEL------------------------------------------------------------------- 
+                case "imagen": // ----------------------------------------------------------Imagen----------------------------------------------------------------------
                     Imagen imagen = (Imagen)elemento.getValor();
                     nodoEstilo = buscarEstilo(imagen.getGrupo());               
                     /*Aplicamos los estilos*/                                       
@@ -4342,8 +4414,8 @@ private static boolean esNumero(String cadena){
                             } // Fin if instancia estilo
                         }//Fin for
                     }//Fin if !=null
-                    break;// Fin caso Imagen------------------------------------                   
-                case "boton":
+                    break;// Fin caso --------------------------------------------------IMAGEN-----------------------------------------------------------------                 
+                case "boton"://----------------------------------------------------------BOTON-----------------------------------------------------------------
                     Boton boton = (Boton)elemento.getValor();
                     nodoEstilo = buscarEstilo(boton.getGrupo());            
                     /*Aplicamos los estilos*/
