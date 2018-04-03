@@ -11,6 +11,8 @@ import java.util.ArrayList;
  *
  * @author erick
  */
-public class listaBloque {
-    public static ArrayList<nodoLista> lbloques = new ArrayList<>();
+public class listaBloque 
+{
+    public static ArrayList<nodoLista> lbloques = new ArrayList<>();    
+        
 }

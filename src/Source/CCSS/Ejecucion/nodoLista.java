@@ -16,6 +16,11 @@ public class nodoLista {
     public String tipo;
     public String identificador;
     public ArrayList atributos;
+    
+    public String getIdentificador() {
+        return identificador;
+    }
+
 
     public nodoLista(String nombreBloque, String tipo, String identificador, ArrayList atributos) {
         this.nombreBloque = nombreBloque;
@@ -54,6 +59,10 @@ public class nodoLista {
 
     public void setAtributos(ArrayList atributos) {
         this.atributos = atributos;
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
     }
     
     

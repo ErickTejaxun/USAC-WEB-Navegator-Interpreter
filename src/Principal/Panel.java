@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Principal;
+import java.awt.Font;
 import java.util.ArrayList;
+import java.awt.Color;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
@@ -27,15 +29,51 @@ public class Panel extends JPanel
     private boolean flagPanel;
     private int inicio=0;
     private ArrayList<Elemento> elementos = new ArrayList();
+    private Font fuente = new Font("Tahoma",0,11);
+    private String estilo="";
+    private String texto ="";
+    private Color colorFuente = Color.BLACK;
     
     public Panel()
     {       
         this.inicio=10;
         this.flagPanel=false;        
         this.setAlto(0);
-        this.setAncho(0);       
-       
+        this.setAncho(0);                  
+        
     }
+
+    public Color getColorFuente() {
+        return colorFuente;
+    }
+
+    public void setColorFuente(Color colorFuente) {
+        this.colorFuente = colorFuente;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+            
+    public void setFuente(Font letra) {
+        this.fuente = letra;
+    }
+
+    public void setEstilo(String estilo) {
+        this.estilo = estilo;
+    }
+
+    public Font getFuente() {
+        return fuente;
+    }
+
+    public String getEstilo() {
+        return estilo;
+    }               
     public void setInicio(int inicio)
     {
         this.inicio= inicio;

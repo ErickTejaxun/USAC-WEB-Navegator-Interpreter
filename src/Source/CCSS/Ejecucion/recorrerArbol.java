@@ -17,7 +17,8 @@ public class recorrerArbol {
     
     public static String nombregeneral="";
     
-    public static Object recorrido(nodo raiz){
+    public static Object recorrido(nodo raiz)
+    {
         Object result = null;
         
             if (raiz != null){
