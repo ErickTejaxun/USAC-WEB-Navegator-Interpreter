@@ -3,7 +3,7 @@
 
 /*------------  1ra Area: Codigo de Usuario ---------*/
 //------> Paquetes,importaciones
-package Source.CJS;
+package Source.CJS.Analizadores;
 import java_cup.runtime.*;
 import java.util.LinkedList;
 
@@ -14,7 +14,7 @@ import java.util.LinkedList;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>lexico_cjs.jflex</tt>
  */
-public class ScannerCjs implements java_cup.runtime.Scanner {
+public class lexico_cjs implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -609,7 +609,7 @@ public class ScannerCjs implements java_cup.runtime.Scanner {
 
   /* user code: */
     //----> Codigo de usuario en sintaxis java
-    public static LinkedList<ErrorCjs> TablaEL = new LinkedList<ErrorCjs>(); 
+    public static LinkedList<Terror> TablaEL = new LinkedList<Terror>(); 
 
 
   /**
@@ -617,7 +617,7 @@ public class ScannerCjs implements java_cup.runtime.Scanner {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  public ScannerCjs(java.io.Reader in) {
+  public lexico_cjs(java.io.Reader in) {
     this.zzReader = in;
   }
 
@@ -975,26 +975,26 @@ public class ScannerCjs implements java_cup.runtime.Scanner {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          { return new java_cup.runtime.Symbol(SimbolosCjs.EOF); }
+          { return new java_cup.runtime.Symbol(Symcjs.EOF); }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
             { System.out.println("Error Lexico"+yytext()+" Linea "+yyline+" Columna "+yycolumn);
-                          ErrorCjs datos = new ErrorCjs(yytext(),yyline,yycolumn,"Error Lexico","Simbolo no existe en el lenguaje");
+                          Terror datos = new Terror(yytext(),yyline,yycolumn,"Error Lexico","Simbolo no existe en el lenguaje");
                           TablaEL.add(datos);
             }
           case 55: break;
           case 2: 
-            { System.out.println("Reconocio "+yytext()+" num"); return new Symbol(SimbolosCjs.num, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" num"); return new Symbol(Symcjs.num, yycolumn, yyline, yytext());
             }
           case 56: break;
           case 3: 
-            { System.out.println("Reconocio "+yytext()+" identificador"); return new Symbol(SimbolosCjs.id, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" identificador"); return new Symbol(Symcjs.id, yycolumn, yyline, yytext());
             }
           case 57: break;
           case 4: 
-            { System.out.println("Reconocio "+yytext()+" punto"); return new Symbol(SimbolosCjs.punto, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" punto"); return new Symbol(Symcjs.punto, yycolumn, yyline, yytext());
             }
           case 58: break;
           case 5: 
@@ -1002,67 +1002,67 @@ public class ScannerCjs implements java_cup.runtime.Scanner {
             }
           case 59: break;
           case 6: 
-            { System.out.println("Reconocio "+yytext()+" div"); return new Symbol(SimbolosCjs.div, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" div"); return new Symbol(Symcjs.div, yycolumn, yyline, yytext());
             }
           case 60: break;
           case 7: 
-            { System.out.println("Reconocio "+yytext()+" por"); return new Symbol(SimbolosCjs.por, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" por"); return new Symbol(Symcjs.por, yycolumn, yyline, yytext());
             }
           case 61: break;
           case 8: 
-            { System.out.println("Reconocio "+yytext()+" allaves"); return new Symbol(SimbolosCjs.allav, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" allaves"); return new Symbol(Symcjs.allav, yycolumn, yyline, yytext());
             }
           case 62: break;
           case 9: 
-            { System.out.println("Reconocio "+yytext()+" cllaves"); return new Symbol(SimbolosCjs.cllav, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" cllaves"); return new Symbol(Symcjs.cllav, yycolumn, yyline, yytext());
             }
           case 63: break;
           case 10: 
-            { System.out.println("Reconocio "+yytext()+" menos"); return new Symbol(SimbolosCjs.menos, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" menos"); return new Symbol(Symcjs.menos, yycolumn, yyline, yytext());
             }
           case 64: break;
           case 11: 
-            { System.out.println("Reconocio "+yytext()+" dospuntos"); return new Symbol(SimbolosCjs.dpuntos, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" dospuntos"); return new Symbol(Symcjs.dpuntos, yycolumn, yyline, yytext());
             }
           case 65: break;
           case 12: 
-            { System.out.println("Reconocio "+yytext()+" puntoycoma"); return new Symbol(SimbolosCjs.pcoma, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" puntoycoma"); return new Symbol(Symcjs.pcoma, yycolumn, yyline, yytext());
             }
           case 66: break;
           case 13: 
-            { System.out.println("Reconocio "+yytext()+" comma"); return new Symbol(SimbolosCjs.comma, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" comma"); return new Symbol(Symcjs.comma, yycolumn, yyline, yytext());
             }
           case 67: break;
           case 14: 
-            { System.out.println("Reconocio "+yytext()+" mas"); return new Symbol(SimbolosCjs.mas, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" mas"); return new Symbol(Symcjs.mas, yycolumn, yyline, yytext());
             }
           case 68: break;
           case 15: 
-            { System.out.println("Reconocio "+yytext()+" potencia"); return new Symbol(SimbolosCjs.potencia, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" potencia"); return new Symbol(Symcjs.potencia, yycolumn, yyline, yytext());
             }
           case 69: break;
           case 16: 
-            { System.out.println("Reconocio "+yytext()+" modulo"); return new Symbol(SimbolosCjs.modulo, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" modulo"); return new Symbol(Symcjs.modulo, yycolumn, yyline, yytext());
             }
           case 70: break;
           case 17: 
-            { System.out.println("Reconocio "+yytext()+" para"); return new Symbol(SimbolosCjs.para, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" para"); return new Symbol(Symcjs.para, yycolumn, yyline, yytext());
             }
           case 71: break;
           case 18: 
-            { System.out.println("Reconocio "+yytext()+" parc"); return new Symbol(SimbolosCjs.parc, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" parc"); return new Symbol(Symcjs.parc, yycolumn, yyline, yytext());
             }
           case 72: break;
           case 19: 
-            { System.out.println("Reconocio "+yytext()+" lnot"); return new Symbol(SimbolosCjs.lnot, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" lnot"); return new Symbol(Symcjs.lnot, yycolumn, yyline, yytext());
             }
           case 73: break;
           case 20: 
-            { System.out.println("Reconocio "+yytext()+" menorq"); return new Symbol(SimbolosCjs.menorq, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" menorq"); return new Symbol(Symcjs.menorq, yycolumn, yyline, yytext());
             }
           case 74: break;
           case 21: 
-            { System.out.println("Reconocio "+yytext()+" mayorq"); return new Symbol(SimbolosCjs.mayorq, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" mayorq"); return new Symbol(Symcjs.mayorq, yycolumn, yyline, yytext());
             }
           case 75: break;
           case 22: 
@@ -1070,131 +1070,131 @@ public class ScannerCjs implements java_cup.runtime.Scanner {
             }
           case 76: break;
           case 23: 
-            { System.out.println("Reconocio "+yytext()+" decremento"); return new Symbol(SimbolosCjs.dec, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" decremento"); return new Symbol(Symcjs.dec, yycolumn, yyline, yytext());
             }
           case 77: break;
           case 24: 
-            { System.out.println("Reconocio "+yytext()+" cadena"); return new Symbol(SimbolosCjs.cadena, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" cadena"); return new Symbol(Symcjs.cadena, yycolumn, yyline, yytext());
             }
           case 78: break;
           case 25: 
-            { System.out.println("Reconocio "+yytext()+" incremento"); return new Symbol(SimbolosCjs.inc, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" incremento"); return new Symbol(Symcjs.inc, yycolumn, yyline, yytext());
             }
           case 79: break;
           case 26: 
-            { System.out.println("Reconocio "+yytext()+" igualigual"); return new Symbol(SimbolosCjs.igualigual, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" igualigual"); return new Symbol(Symcjs.igualigual, yycolumn, yyline, yytext());
             }
           case 80: break;
           case 27: 
-            { System.out.println("Reconocio "+yytext()+" diferente"); return new Symbol(SimbolosCjs.diferente, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" diferente"); return new Symbol(Symcjs.diferente, yycolumn, yyline, yytext());
             }
           case 81: break;
           case 28: 
-            { System.out.println("Reconocio "+yytext()+" menorigual"); return new Symbol(SimbolosCjs.menorigual, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" menorigual"); return new Symbol(Symcjs.menorigual, yycolumn, yyline, yytext());
             }
           case 82: break;
           case 29: 
-            { System.out.println("Reconocio "+yytext()+" mayorigual"); return new Symbol(SimbolosCjs.mayorigual, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" mayorigual"); return new Symbol(Symcjs.mayorigual, yycolumn, yyline, yytext());
             }
           case 83: break;
           case 30: 
-            { System.out.println("Reconocio "+yytext()+" land"); return new Symbol(SimbolosCjs.land, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" land"); return new Symbol(Symcjs.land, yycolumn, yyline, yytext());
             }
           case 84: break;
           case 31: 
-            { System.out.println("Reconocio "+yytext()+" lor"); return new Symbol(SimbolosCjs.lor, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" lor"); return new Symbol(Symcjs.lor, yycolumn, yyline, yytext());
             }
           case 85: break;
           case 32: 
-            { System.out.println("Reconocio "+yytext()+" si"); return new Symbol(SimbolosCjs.si, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" si"); return new Symbol(Symcjs.si, yycolumn, yyline, yytext());
             }
           case 86: break;
           case 33: 
-            { System.out.println("Reconocio "+yytext()+" dimv"); return new Symbol(SimbolosCjs.dimv, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" dimv"); return new Symbol(Symcjs.dimv, yycolumn, yyline, yytext());
             }
           case 87: break;
           case 34: 
-            { System.out.println("Reconocio "+yytext()+" true"); return new Symbol(SimbolosCjs.verdadero, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" true"); return new Symbol(Symcjs.verdadero, yycolumn, yyline, yytext());
             }
           case 88: break;
           case 35: 
-            { System.out.println("Reconocio "+yytext()+" sino"); return new Symbol(SimbolosCjs.sino, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" sino"); return new Symbol(Symcjs.sino, yycolumn, yyline, yytext());
             }
           case 89: break;
           case 36: 
-            { System.out.println("Reconocio "+yytext()+" caso"); return new Symbol(SimbolosCjs.caso, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" caso"); return new Symbol(Symcjs.caso, yycolumn, yyline, yytext());
             }
           case 90: break;
           case 37: 
-            { System.out.println("Reconocio "+yytext()+" para"); return new Symbol(SimbolosCjs.spara, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" para"); return new Symbol(Symcjs.spara, yycolumn, yyline, yytext());
             }
           case 91: break;
           case 38: 
-            { System.out.println("Reconocio "+yytext()+" false"); return new Symbol(SimbolosCjs.falso, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" false"); return new Symbol(Symcjs.falso, yycolumn, yyline, yytext());
             }
           case 92: break;
           case 39: 
-            { System.out.println("Reconocio "+yytext()+" atexto"); return new Symbol(SimbolosCjs.atexto, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" atexto"); return new Symbol(Symcjs.atexto, yycolumn, yyline, yytext());
             }
           case 93: break;
           case 40: 
-            { System.out.println("Reconocio "+yytext()+" conteo"); return new Symbol(SimbolosCjs.conteo, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" conteo"); return new Symbol(Symcjs.conteo, yycolumn, yyline, yytext());
             }
           case 94: break;
           case 41: 
-            { System.out.println("Reconocio "+yytext()+" detener"); return new Symbol(SimbolosCjs.detener, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" detener"); return new Symbol(Symcjs.detener, yycolumn, yyline, yytext());
             }
           case 95: break;
           case 42: 
-            { System.out.println("Reconocio "+yytext()+" defecto"); return new Symbol(SimbolosCjs.defecto, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" defecto"); return new Symbol(Symcjs.defecto, yycolumn, yyline, yytext());
             }
           case 96: break;
           case 43: 
-            { System.out.println("Reconocio "+yytext()+" obtener"); return new Symbol(SimbolosCjs.obtener, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" obtener"); return new Symbol(Symcjs.obtener, yycolumn, yyline, yytext());
             }
           case 97: break;
           case 44: 
-            { System.out.println("Reconocio "+yytext()+" mensaje"); return new Symbol(SimbolosCjs.mensaje, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" mensaje"); return new Symbol(Symcjs.mensaje, yycolumn, yyline, yytext());
             }
           case 98: break;
           case 45: 
-            { System.out.println("Reconocio "+yytext()+" funcion"); return new Symbol(SimbolosCjs.funcion, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" funcion"); return new Symbol(Symcjs.funcion, yycolumn, yyline, yytext());
             }
           case 99: break;
           case 46: 
-            { System.out.println("Reconocio "+yytext()+" imprimir"); return new Symbol(SimbolosCjs.imprimir, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" imprimir"); return new Symbol(Symcjs.imprimir, yycolumn, yyline, yytext());
             }
           case 100: break;
           case 47: 
-            { System.out.println("Reconocio "+yytext()+" mientras"); return new Symbol(SimbolosCjs.mientras, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" mientras"); return new Symbol(Symcjs.mientras, yycolumn, yyline, yytext());
             }
           case 101: break;
           case 48: 
-            { System.out.println("Reconocio "+yytext()+" retornar"); return new Symbol(SimbolosCjs.retornar, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" retornar"); return new Symbol(Symcjs.retornar, yycolumn, yyline, yytext());
             }
           case 102: break;
           case 49: 
-            { System.out.println("Reconocio "+yytext()+" documento"); return new Symbol(SimbolosCjs.documento, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" documento"); return new Symbol(Symcjs.documento, yycolumn, yyline, yytext());
             }
           case 103: break;
           case 50: 
-            { System.out.println("Reconocio "+yytext()+" observador"); return new Symbol(SimbolosCjs.observador, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" observador"); return new Symbol(Symcjs.observador, yycolumn, yyline, yytext());
             }
           case 104: break;
           case 51: 
-            { System.out.println("Reconocio "+yytext()+" selecciona"); return new Symbol(SimbolosCjs.selecciona, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" selecciona"); return new Symbol(Symcjs.selecciona, yycolumn, yyline, yytext());
             }
           case 105: break;
           case 52: 
-            { System.out.println("Reconocio "+yytext()+" setelemento"); return new Symbol(SimbolosCjs.setelemento, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" setelemento"); return new Symbol(Symcjs.setelemento, yycolumn, yyline, yytext());
             }
           case 106: break;
           case 53: 
-            { System.out.println("Reconocio "+yytext()+" fecha"); return new Symbol(SimbolosCjs.fecha, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" fecha"); return new Symbol(Symcjs.fecha, yycolumn, yyline, yytext());
             }
           case 107: break;
           case 54: 
-            { System.out.println("Reconocio "+yytext()+" fechahora"); return new Symbol(SimbolosCjs.fechah, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio "+yytext()+" fechahora"); return new Symbol(Symcjs.fechah, yycolumn, yyline, yytext());
             }
           case 108: break;
           default:

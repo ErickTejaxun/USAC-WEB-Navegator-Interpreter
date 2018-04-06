@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS.Ejecucion;
+package Source.CJS.principal;
 
-import Source.CJS.Ejecucion.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -13,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
 public class Simbolo implements Cloneable  {
     
@@ -37,7 +36,7 @@ public class Simbolo implements Cloneable  {
     boolean isArray;
 
     //parte de funcion
-    public Procedimiento metodo;
+    public Proc metodo;
     
     public Simbolo() {
         this.value = "";
@@ -78,6 +77,7 @@ public class Simbolo implements Cloneable  {
         
         
         obj.isobjeto = isobjeto;
+        obj.existe=existe;
         obj.statico = statico;
         obj.atributos=atributos;
 

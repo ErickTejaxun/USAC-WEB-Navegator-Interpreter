@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS.Ejecucion;
+package Source.CJS.principal;
 
-import Source.CJS.Ejecucion.*;
 import java.text.Collator;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
 public class Operacion {
     
-    Nodo evaluacion = null;
+    Nodo valorEval = null;
 
-    public boolean cast(Simbolo var, Simbolo value) {
+    public boolean casteoAsignacion(Simbolo var, Simbolo value) {
 
         if ((var.tipe.equals("bool") || var.tipe.equals("") )&& value.tipe.equals("bool")) {
             return true;
@@ -73,7 +72,7 @@ public class Operacion {
             valor.value = expr1.value + expr2.value;
 
         } else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -99,7 +98,7 @@ public class Operacion {
             valor.value = String.valueOf(var);
 
         } else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -127,7 +126,7 @@ public class Operacion {
         }else if (expr1.tipe.equals("bool") && expr2.tipe.equals("bool")) {
             valor = _and(expr1, expr2);
         } else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -155,7 +154,7 @@ public class Operacion {
         }else if (expr1.tipe.equals("bool") && expr2.tipe.equals("bool")) {
             valor = _and(expr1, expr2);
         } else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -171,7 +170,7 @@ public class Operacion {
             valor.value = String.valueOf(var);
 
         } else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -197,7 +196,7 @@ public class Operacion {
             valor.value = String.valueOf(var);
 
         }else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -223,7 +222,7 @@ public class Operacion {
             valor.value = String.valueOf(var);
 
         }else {
-            imprimirError(" en la operacion de suma tipos invalidos");
+            msjError(" en la operacion de suma tipos invalidos");
             System.out.println("Error en la Suma");
         }
 
@@ -258,7 +257,7 @@ public class Operacion {
             valor.value = (comparador.compare(val1.value, val2.value) == -1) ? "1" : "0";
 
         } else {
-            imprimirError(" en operador relacional de menor tipos invalidos");
+            msjError(" en operador relacional de menor tipos invalidos");
             System.out.println("Error en Menor");
         }
 
@@ -279,7 +278,7 @@ public class Operacion {
             valor.value = (comparador.compare(val1.value, val2.value) == 1) ? "1" : "0";
 
         } else {
-            imprimirError(" en operador relacional de mayor tipos invalidos");
+            msjError(" en operador relacional de mayor tipos invalidos");
             System.out.println("Error en mayor");
         }
 
@@ -299,7 +298,7 @@ public class Operacion {
             valor.value = (res == -1 || res == 0) ? "1" : "0";
 
         } else {
-            imprimirError(" en operador relacional de menorIgual tipos invalidos");
+            msjError(" en operador relacional de menorIgual tipos invalidos");
             System.out.println("Error en Menor igual");
         }
 
@@ -319,7 +318,7 @@ public class Operacion {
             int res = comparador.compare(val1.value, val2.value);
             valor.value = (res == 1 || res == 0) ? "1" : "0";
         } else {
-            imprimirError(" en operador relacional de mayorIguals tipos invalidos");
+            msjError(" en operador relacional de mayorIguals tipos invalidos");
             System.out.println("Error en Mayor igual");
         }
         return valor;
@@ -349,7 +348,7 @@ public class Operacion {
             }
             valor.tipe = "bool";
         } else {
-            imprimirError(" en operador logico de OR no es de tipo Boolean");
+            msjError(" en operador logico de OR no es de tipo Boolean");
             System.out.println("Error en or");
         }
         return valor;
@@ -379,7 +378,7 @@ public class Operacion {
             valor.tipe = "bool";
 
         } else {
-            imprimirError(" en operador logico de AND no es de tipo Boolean");
+            msjError(" en operador logico de AND no es de tipo Boolean");
             System.out.println("Error en and");
         }
 
@@ -395,7 +394,7 @@ public class Operacion {
             }
             valor.tipe = "bool";
         } else {
-            imprimirError(" en operador logico de NOT no es de tipo Boolean");
+            msjError(" en operador logico de NOT no es de tipo Boolean");
             System.out.println("Error en NOT");
         }
 
@@ -411,7 +410,7 @@ public class Operacion {
                 break;
             }
             default: {
-                imprimirError(" nos se puede incrementar, tipo de dato incorrecto");
+                msjError(" nos se puede incrementar, tipo de dato incorrecto");
                 System.out.println("Error Semantico el tipo de dato no se puede incremetnar");
                 break;
             }
@@ -428,7 +427,7 @@ public class Operacion {
                 break;
             }
             default: {
-                imprimirError(" nos se puede decrementar, tipo dato incorrecto");
+                msjError(" nos se puede decrementar, tipo dato incorrecto");
                 System.out.println("Error Semantico el tipo de dato no se puede decrementar");
                 break;
             }
@@ -436,15 +435,9 @@ public class Operacion {
         return temp;
     }
 
-    private void imprimirError(String texto) {
-        if (evaluacion != null) {
-            /*Token val = (Token) evaluacion.jjtGetValue();
-            Editor.errores.add(
-                    new ErrorS("Semantico",
-                            String.valueOf(val.beginLine),
-                            String.valueOf(val.beginColumn),
-                            "<b>" + val.image + "</b>" + texto));
-            */
+    private void msjError(String texto) {
+        if (valorEval != null) {
+            System.out.println("Error: "+ texto+": "+valorEval.row+": "+valorEval.col);
         }
     }
 
@@ -458,22 +451,22 @@ public class Operacion {
      * @param valor
      * @return
      */
-    public Simbolo getVariable(String id, Ejecutador tablas, Simbolo valor) {
+    public Simbolo getVariable(String id, Execute tablas, Simbolo valor) {
 
         boolean find = false;
-        String key = tablas.nombreMetodo + ">" + id;
-        if (tablas.tablaSimbolosLocal.containsKey(key)) {
-            valor = tablas.tablaSimbolosLocal.get(key);
+        String key = tablas.nameMetod + ">" + id;
+        if (tablas.tablaLocal.containsKey(key)) {
+            valor = tablas.tablaLocal.get(key);
             find = true;
         } else {
             key = id;
-            if (tablas.tablaSimbolosGlobal.containsKey(key)) {
-                valor = tablas.tablaSimbolosGlobal.get(key);
+            if (tablas.tablaGlobal.containsKey(key)) {
+                valor = tablas.tablaGlobal.get(key);
                 find = true;
             }
         }
         if (!find) {
-            imprimirError(" la variable no esta declarada en este ambito");
+            msjError(" la variable no esta declarada en este ambito");
             System.out.println("Error la variable no existe o no esta declarada " + id);
         }
         return valor;

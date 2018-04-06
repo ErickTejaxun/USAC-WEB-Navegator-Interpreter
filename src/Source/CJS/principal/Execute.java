@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS.Ejecucion;
+package Source.CJS.principal;
 
-
-import Source.CJS.ErrorCjs;
+import Source.CJS.Analizadores.Terror;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -17,51 +16,53 @@ import javax.xml.bind.ParseConversionEvent;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
-public class Ejecutador {
-    public Hashtable<String, Simbolo> tablaSimbolosLocal;
-    public Hashtable<String, Simbolo> tablaSimbolosGlobal;
-    public static LinkedList<ErrorCjs> tablaErrores = new LinkedList<ErrorCjs>();
+public class Execute {
+    public Hashtable<String, Simbolo> tablaLocal;//guardamos solo variables
+    public Hashtable<String, Simbolo> tablaGlobal;//guardamos metodo y atributos
+    public static LinkedList<Terror> TablaES = new LinkedList<Terror>();
     public ArrayList<Nodo> inicial;
-    public ArrayList<Nodo> objetosTemporales;
-    public Simbolo nombreSimbolo;
+    public ArrayList<Nodo> obj_temporal;
+    
     public String path;
-    String nombreMetodo;
+    String nameMetod;
     String tiposMet;
     Operacion operar;
+    //ExecuteArray executeArray;
     boolean exit;
     boolean retorno;
     boolean continuar;
     Simbolo retorna;
 
 
-    public Hashtable<String, Simbolo> tablitaObjetos;
+    public Hashtable<String, Simbolo> tablitaObjetos;//guardamos solo objetos
  
   
     JTextArea txtArea;
     HashMap<String, Simbolo> hashtemp;
     
-    public Ejecutador() {
+    public Execute() {
         
-        tablaSimbolosLocal = new Hashtable<>();
-        tablaSimbolosGlobal = new Hashtable<>();
+        tablaLocal = new Hashtable<>();
+        tablaGlobal = new Hashtable<>();
         
         inicial = new ArrayList<>();
         operar = new Operacion();
-        nombreMetodo = "";
+        //executeArray = new ExecuteArray();
+        nameMetod = "";
         retorna = null;
-        nombreSimbolo = new Simbolo();
+        
         retorno = false;
         path = "";
         
         tablitaObjetos = new Hashtable<>();
-        objetosTemporales=new ArrayList<>();
+        obj_temporal=new ArrayList<>();
         
     }
     
     @SuppressWarnings("UnusedAssignment")
-    public Simbolo cargarVariablesFuncion(Nodo raiz) {
+    public Simbolo addVariables_Funciones(Nodo raiz) {
         
          Simbolo result = null;
         if (raiz == null) {
@@ -71,7 +72,7 @@ public class Ejecutador {
             case "INICIO_CJS": {
                 
                 for(Nodo l_cjs: raiz.hijos){
-                    cargarVariablesFuncion(l_cjs);
+                    addVariables_Funciones(l_cjs);
                     
                 }                
                 break;
@@ -79,22 +80,22 @@ public class Ejecutador {
             case "L_CJS": {
                 
                 for(Nodo cjs: raiz.hijos){
-                    cargarVariablesFuncion(cjs);
+                    addVariables_Funciones(cjs);
                     
                 }                
                 break;
             }
             case "METFUNC": {
                 Simbolo newFuntion = new Simbolo();
-                newFuntion.metodo = new Procedimiento();
+                newFuntion.metodo = new Proc();
                 
                 newFuntion.tipe = "void";
                 newFuntion.rol = "metodo";
                 
                 newFuntion.name = raiz.hijos.get(0).valor;
                 
-                nombreMetodo=raiz.hijos.get(0).valor.toLowerCase();
-                String key = null;
+                nameMetod=raiz.hijos.get(0).valor.toLowerCase();
+                String key;
                 
                    //////tiene parametros
                 if(raiz.hijos.size()==3){
@@ -105,22 +106,29 @@ public class Ejecutador {
                     sentencias=raiz.hijos.get(2);
                     tiposMet = "";
                     tipoParametros(param, 1, null);//tipos de parametros                      
-                    nombreMetodo += tiposMet;
+                    nameMetod += tiposMet;
                     tipoParametros(param, 2, newFuntion.metodo.parametro);//agregando los parametros a la funcion
                     newFuntion.metodo.sentencias = sentencias;
                                     
                 }
                 //sin parametros
-                else if(raiz.hijos.size()==2)
-                newFuntion.name = key = nombreMetodo;
-                if(!tablaSimbolosGlobal.containsKey(key)){
-                    tablaSimbolosGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
+                else if(raiz.hijos.size()==2){
+                     Nodo ident,sentencias;
+                     ident=raiz.hijos.get(0);
+                     sentencias=raiz.hijos.get(1);
+                     newFuntion.metodo.sentencias = sentencias;
+                     
+                    
+                }
+                newFuntion.name = key = nameMetod;
+                if(!tablaGlobal.containsKey(key)){
+                    tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
                     
                 }else{
-                    ErrorCjs datos = new ErrorCjs(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion");
-                    tablaErrores.add(datos);
+                    Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion");
+                    TablaES.add(datos);
                 }
-                  nombreMetodo="";
+                  nameMetod="";
                 break;
             }
             case "DECLVAR":{
@@ -153,11 +161,15 @@ public class Ejecutador {
                 break;
             }
             case "DECLASIGOBJ":{
-                objetosTemporales.add(raiz);
+                inicial.add(raiz);
                 break;
             }
             case "EVENTOBSERVADOR":{
-                objetosTemporales.add(raiz);
+                inicial.add(raiz);
+                break;
+            }
+            case "OBJETOOBSERVADOR":{
+                inicial.add(raiz);
                 break;
             }
             case "ASIG_VAR":{
@@ -181,6 +193,10 @@ public class Ejecutador {
                 break;
             }
             case "SET_OBJ":{
+                inicial.add(raiz);
+                break;
+            }
+            case "SET_OBJETO":{
                 inicial.add(raiz);
                 break;
             }
@@ -244,9 +260,9 @@ public class Ejecutador {
                     
                     declararVar(variable,"", 0);
                                       
-                    operar.evaluacion = variable;
+                    operar.valorEval = variable;
                     
-                    Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                    Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                     
                     asignacion(var, variable, value);
                     
@@ -270,10 +286,141 @@ public class Ejecutador {
                 break;
             }
             case "DECLASIGOBJ":{
+                Nodo lista=raiz.hijos.get(0);
+                Simbolo value = Expre(raiz.hijos.get(1));
                 
+                for(Nodo variable:lista.hijos){
+                    
+                    declararVar(variable,"", 0);
+                                      
+                    operar.valorEval = variable;
+                    
+                    Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                    var.isobjeto=true;
+                    /// 
+                    var.existe=false;
+                    asignacion(var, variable, value);
+                    
+                }
                 break;
             }
             case "EVENTOBSERVADOR":{
+                Simbolo tipo=Expre(raiz.hijos.get(0));/////////////////////
+                String namefucion="";
+                    ///////////////////////////////////////////////////tipo de vento
+                if(raiz.hijos.get(1).token.equals("FUN")){
+                    Nodo funcion=raiz.hijos.get(1);
+                    
+                    
+                    //funcion a ejecutar
+                    Simbolo newFuntion = new Simbolo();
+                    newFuntion.metodo = new Proc();
+                
+                    newFuntion.tipe = "void";
+                    newFuntion.rol = "metodo";
+                
+                    newFuntion.name = funcion.hijos.get(0).valor;
+                
+                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    String key;
+                    
+                    if(funcion.hijos.size()==2){
+                     Nodo sentencias;
+                     
+                     sentencias=funcion.hijos.get(1);
+                     newFuntion.metodo.sentencias = sentencias;
+                     
+                    
+                }
+                newFuntion.name = key = nameMetod;
+                if(!tablaGlobal.containsKey(key)){
+                    tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
+                    
+                }else{
+                    Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion");
+                    TablaES.add(datos);
+                }
+                  nameMetod="";
+                  namefucion=key;
+                  //////////////namefuncion=key,nombre funcion
+                  //////////////tipo.valor, tipo de evento
+                }else if(raiz.hijos.get(1).token.equals("CALL_METFUN")){
+                    
+                    Nodo funcion=raiz.hijos.get(1);
+                    String Nombre="";///nombre funcion;
+                    if(funcion.hijos.size()==1){
+                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
+                    }
+                   
+                    namefucion=Nombre;
+                    //////tipo evento;; tipo.valor;
+                    //////funcion sin parametros;; Nombre;
+                    ///funcion con parametros, usar tipo Nodo
+                }
+                break;
+            }
+            case "OBJETOOBSERVADOR":{
+                Nodo variable=raiz.hijos.get(0);
+                operar.valorEval = variable;
+                    
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                Simbolo tipo=Expre(raiz.hijos.get(1));
+                String Namefuncion="";
+                
+                if(raiz.hijos.get(2).token.equals("FUN")){
+                    Nodo funcion=raiz.hijos.get(2);
+                    
+                    
+                    //funcion a ejecutar
+                    Simbolo newFuntion = new Simbolo();
+                    newFuntion.metodo = new Proc();
+                
+                    newFuntion.tipe = "void";
+                    newFuntion.rol = "metodo";
+                
+                    newFuntion.name = funcion.hijos.get(0).valor;
+                
+                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    String key;
+                    
+                    if(funcion.hijos.size()==2){
+                     Nodo sentencias;
+                     
+                     sentencias=funcion.hijos.get(1);
+                     newFuntion.metodo.sentencias = sentencias;
+                     
+                    
+                }
+                newFuntion.name = key = nameMetod;
+                if(!tablaGlobal.containsKey(key)){
+                    tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
+                    
+                }else{
+                    Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion");
+                    TablaES.add(datos);
+                }
+                  nameMetod="";
+                  Namefuncion=key;
+                  //////////////key,nombre funcion
+                  //////////////tipo.valor, tipo de evento
+                }else if(raiz.hijos.get(1).token.equals("CALL_METFUN")){
+                    
+                    Nodo funcion=raiz.hijos.get(1);
+                    String Nombre="";///nombre funcion;
+                    if(funcion.hijos.size()==1){
+                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
+                    }
+                    Namefuncion=Nombre;
+                    //////tipo evento;; tipo.valor;
+                    //////funcion sin parametros;; Nombre;
+                    ///funcion con parametros usar Nodo
+                }
+                
+                if(var.isobjeto && var.existe){
+                    
+                }else{
+                    msjError(raiz, "Error no es elemento chtml, o no existe");
+                }
                 
                 break;
             }
@@ -283,9 +430,9 @@ public class Ejecutador {
                 
                 Simbolo value=Expre(exp);
                 
-                operar.evaluacion = variable;
+                operar.valorEval = variable;
                     
-                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                     
                 asignacion(var, variable, value);
                 break;
@@ -298,9 +445,9 @@ public class Ejecutador {
                 Simbolo value=Expre(expr);
                 Simbolo pos=Expre(posicion);
                 
-                operar.evaluacion = variable;
+                operar.valorEval = variable;
                     
-                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                     
                     
                     try {
@@ -326,9 +473,9 @@ public class Ejecutador {
                 Nodo variable=raiz.hijos.get(0);
                 Nodo lexrp=raiz.hijos.get(1);
                 
-                operar.evaluacion = variable;
+                operar.valorEval = variable;
                     
-                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                 
                 var.tamvec=lexrp.hijos.size();
                 if(var.isArray){
@@ -350,13 +497,12 @@ public class Ejecutador {
                 Nodo operacion=raiz.hijos.get(1);
                 
                 
-                Nodo acceder=var.hijos.get(0);
-                
-                if(acceder.token.equals("VACCESO")){
-                    accion(raiz);
+                                
+                if(var.token.equals("VACCESO")){
+                    accion(var,operacion);
                     
-                }else if(acceder.token.equals("VACCESOVECT")){
-                    operar.evaluacion = raiz;
+                }else if(var.token.equals("VACCESOVECT")){
+                    operar.valorEval = raiz;
                     
                     Nodo nvar=raiz.hijos.get(0).hijos.get(0);
                     
@@ -364,7 +510,7 @@ public class Ejecutador {
                     Simbolo pos=Expre(posicion);
                     
                     
-                    Simbolo variable = operar.getVariable(nvar.valor, Ejecutador.this, new Simbolo());
+                    Simbolo variable = operar.getVariable(nvar.valor, Execute.this, new Simbolo());
                     //es para verificar si la variable existe
                     
                     try {
@@ -383,8 +529,8 @@ public class Ejecutador {
                             }else if(operacion.token.equals("DECR")){
                                 valor=operar.decremetar(valor);
                             }
-                                variable.tipoarreglo.add(i, valor.tipe);
-                                variable.arreglo.add(i, valor.value);
+                                variable.tipoarreglo.set(i, valor.tipe);
+                                variable.arreglo.set(i, valor.value);
                                 
                                 Simbolo variab=new  Simbolo();
                                 asignacion(variable, raiz,variab );
@@ -405,11 +551,66 @@ public class Ejecutador {
                 break;
             }
             case "ASIG_OBJ":{
-                inicial.add(raiz);
+                Nodo objeto=raiz.hijos.get(1);
+                Simbolo objj=Expre(objeto);
+                //////////////////////////////////////
+                ///////////////objj.value;
+                
+                Nodo variable=raiz.hijos.get(0);
+                operar.valorEval = variable;
+                    
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                
+                ///////////////////////////////////////////////////////////////////////////////
+                //buscar objeto
+                boolean existeobjeto=false;
+                
+                if (existeobjeto) {
+                    asignacion(var, raiz, objj);
+                    
+                }else {
+                    msjError(raiz, "Objeto CHTML no existe");
+                }
+                
+
                 break;
             }
             case "SET_OBJ":{
-                inicial.add(raiz);
+                Nodo variable=raiz.hijos.get(0);
+                operar.valorEval = variable;
+                    
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                
+                Simbolo tipo=Expre(raiz.hijos.get(1));
+                Simbolo valor=Expre(raiz.hijos.get(2));
+                
+                if (var.isobjeto && var.existe) {
+                    ///modificar objeto chtml
+                    //
+                    //
+                    //
+                }else{
+                    msjError(raiz, var.value+" no es un objeto ó no existe");
+                }
+                //
+                
+                //
+                break;
+            }
+            case "SET_OBJETO":{
+                Simbolo objeto=Expre(raiz.hijos.get(0));
+                Simbolo tipo =Expre(raiz.hijos.get(1));
+                Simbolo valor=Expre(raiz.hijos.get(2));
+                
+                //buscar objeto
+                boolean existeobjeto=false;
+                
+                if (existeobjeto) {
+                    //modificarlo
+                    
+                }else {
+                    msjError(raiz, "Objeto CHTML no existe");
+                }
                 break;
             }
             case "IF":{
@@ -459,7 +660,7 @@ public class Ejecutador {
                     Simbolo var = new Simbolo();
                     var.name = parametro.valor;
                     var.tipe = "";
-                    var.ambito = nombreMetodo;
+                    var.ambito = nameMetod;
                     var.rol = "Parametro";
                     var.acceso = "privado";
                     parame.add((Simbolo) var);                    
@@ -483,9 +684,9 @@ public class Ejecutador {
         
         if (caso == 1) {
                     key = ambito + ">" + var.name;
-                    tablaSimbolosLocal.put(key, var);
+                    tablaLocal.put(key, var);
                 } else {
-                    tablaSimbolosGlobal.put(key, var);
+                    tablaGlobal.put(key, var);
                 }
         
         
@@ -517,8 +718,8 @@ public class Ejecutador {
         }
         } catch (NumberFormatException e) {
             
-            ErrorCjs error = new ErrorCjs(root.valor,root.row, root.col,"Semantico" , "tamano vector");
-            tablaErrores.add(error);
+            Terror error = new Terror(root.valor,root.row, root.col,"Semantico" , "tamano vector");
+            TablaES.add(error);
       //No problem this time, but still it is good practice to care about exceptions.
       //Never trust user input :)
       //Do something! Anything to handle the exception.
@@ -531,9 +732,9 @@ public class Ejecutador {
         
         if (caso == 1) {
                     key = ambito + ">" + var.name;
-                    tablaSimbolosLocal.put(key, var);
+                    tablaLocal.put(key, var);
                 } else {
-                    tablaSimbolosGlobal.put(key, var);
+                    tablaGlobal.put(key, var);
                 }
         
         
@@ -568,9 +769,9 @@ public class Ejecutador {
         
         if (caso == 1) {
                     key = ambito + ">" + var.name;
-                    tablaSimbolosLocal.put(key, var);
+                    tablaLocal.put(key, var);
                 } else {
-                    tablaSimbolosGlobal.put(key, var);
+                    tablaGlobal.put(key, var);
                 }
         
         
@@ -716,7 +917,7 @@ public class Ejecutador {
     @SuppressWarnings("UnusedAssignment")
     private Simbolo getValue(Nodo expr) {//H
         Simbolo valor = new Simbolo();
-        operar.evaluacion = expr;
+        operar.valorEval = expr;
         switch (expr.token) {
             case "NUM": {//entero
                 valor.tipe = "double";
@@ -755,7 +956,7 @@ public class Ejecutador {
             case "VACCESO": {//variable
                 Nodo var= expr.hijos.get(0);
                 
-                valor = operar.getVariable(var.valor, Ejecutador.this, valor);
+                valor = operar.getVariable(var.valor, Execute.this, valor);
                 break;
             }
             case "VACCESOVECT": {//vector
@@ -763,7 +964,7 @@ public class Ejecutador {
                 Nodo pos=expr.hijos.get(1);
                 
                 Simbolo posicion=Expre(pos);
-                valor = operar.getVariable(var.valor, Ejecutador.this, valor);
+                valor = operar.getVariable(var.valor, Execute.this, valor);
                 
                 try {
                         if(posicion.tipe.equals("double") && valor.isArray){
@@ -802,7 +1003,7 @@ public class Ejecutador {
                 Nodo var= expr.hijos.get(0);
                 Nodo tipo=expr.hijos.get(1);
                
-                valor = operar.getVariable(var.valor, Ejecutador.this, valor);
+                valor = operar.getVariable(var.valor, Execute.this, valor);
                 
                 try {
                         if(valor.isArray){
@@ -858,9 +1059,9 @@ public class Ejecutador {
         //recorremos tabla Global
         
 
-        if (tablaSimbolosGlobal.containsKey(idMetodo)) {
-            Simbolo main_ = tablaSimbolosGlobal.get(idMetodo);
-            nombreMetodo = idMetodo;
+        if (tablaGlobal.containsKey(idMetodo)) {
+            Simbolo main_ = tablaGlobal.get(idMetodo);
+            nameMetod = idMetodo;
             exit = false;
             retorno = false;
             executeCode(main_.metodo.sentencias);
@@ -871,31 +1072,31 @@ public class Ejecutador {
     }
     
     protected Simbolo callMetodo(Nodo root, Simbolo valor, int opcion) {
-        String actualAmb = nombreMetodo;
+        String actualAmb = nameMetod;
         tiposMet = "";
         if (root.hijos.size() == 2) {
             tipoParametro2((Nodo)root.hijos.get(1), null, 0, 1);
         }
-        nombreMetodo = root.hijos.get(0).valor.toLowerCase() + tiposMet;//nombre del metodo a llamar con tipo parametros
+        nameMetod = root.hijos.get(0).valor.toLowerCase() + tiposMet;//nombre del metodo a llamar con tipo parametros
 
-        String key = nombreMetodo;
-        if (tablaSimbolosGlobal.containsKey(key)) {
+        String key = nameMetod;
+        if (tablaGlobal.containsKey(key)) {
 
-            Simbolo myMeto = tablaSimbolosGlobal.get(key);//obteniendo la funcion
-            Procedimiento funcion = myMeto.metodo;
+            Simbolo myMeto = tablaGlobal.get(key);//obteniendo la funcion
+            Proc funcion = myMeto.metodo;
 
-            Ejecutador ejecut = new Ejecutador();
-            ejecut.tablaSimbolosGlobal = this.tablaSimbolosGlobal;
-            ejecut.nombreMetodo = nombreMetodo;
+            Execute ejecut = new Execute();
+            ejecut.tablaGlobal = this.tablaGlobal;
+            ejecut.nameMetod = nameMetod;
             ejecut.tablitaObjetos = this.tablitaObjetos;
 
-            if (funcion.parametro.isEmpty() && root.hijos.size() == 2) {//si no tiene parametros lo ejecuta
+            if (funcion.parametro.isEmpty() && root.hijos.size() == 1) {//si no tiene parametros lo ejecuta
                 ejecut.executeCode(funcion.sentencias);
             } else {
                 //colocando parametros
-                nombreMetodo = actualAmb;
+                nameMetod = actualAmb;
                 tipoParametro2((Nodo)root.hijos.get(1), funcion.parametro, 0, 2);//obteniendo valores                
-                setParametrosInTabla(funcion.parametro, ejecut.tablaSimbolosLocal);//pasandolos a la tabla de simbolos
+                setParametrosInTabla(funcion.parametro, ejecut.tablaLocal);//pasandolos a la tabla de simbolos
                 ejecut.executeCode(funcion.sentencias);
             }
             if (opcion == 1) {//para retornar el valor
@@ -907,7 +1108,7 @@ public class Ejecutador {
                     valor.value = ejecut.retorna.value;
                     valor.isArray=ejecut.retorna.isArray;
                     valor.arreglo=ejecut.retorna.arreglo;
-                    valor.tipoarreglo=ejecut.retorna.arreglo;
+                    valor.tipoarreglo=ejecut.retorna.tipoarreglo;
                     
                     valor.isobjeto = ejecut.retorna.isobjeto;
                     valor.acceso = ejecut.retorna.acceso;
@@ -924,16 +1125,16 @@ public class Ejecutador {
             //tablaLocal.putAll(aux);
             
             //obteniendo las variables del metodo llamado
-            copiarData(tablaSimbolosLocal, ejecut.tablaSimbolosLocal);
+            copiarData(tablaLocal, ejecut.tablaLocal);
             retorno = false;
             exit = false;
             continuar = false;
             retorna = null;
         } else {
             msjError(root, " metodo no esta declarado");
-            System.out.println("No Existe el metodo " + nombreMetodo);
+            System.out.println("No Existe el metodo " + nameMetod);
         }
-        nombreMetodo = actualAmb;
+        nameMetod = actualAmb;
         return valor;
     }
     
@@ -962,7 +1163,7 @@ public class Ejecutador {
                 
                 for(Nodo variable:lista.hijos){
                     
-                    declararVar(variable,nombreMetodo, 1);
+                    declararVar(variable,nameMetod, 1);
                 }
                 break;
             }
@@ -973,7 +1174,7 @@ public class Ejecutador {
                 
                 for(Nodo variable:lista.hijos){
                     
-                    declararVect(variable,nombreMetodo,va, 1);
+                    declararVect(variable,nameMetod,va, 1);
                 }
                 
                 break;
@@ -984,11 +1185,11 @@ public class Ejecutador {
                 
                 for(Nodo variable:lista.hijos){
                     
-                    declararVar(variable,nombreMetodo, 1);
+                    declararVar(variable,nameMetod, 1);
                                       
-                    operar.evaluacion = variable;
+                    operar.valorEval = variable;
                     
-                    Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                    Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                     
                     asignacion(var, variable, value);
                     
@@ -1006,20 +1207,160 @@ public class Ejecutador {
                 
                 for(Nodo variable:lista.hijos){
                     
-                    declararAsigVect(variable,nombreMetodo, 1,lexp);
+                    declararAsigVect(variable,nameMetod, 1,lexp);
                 }
                 
                 break;
             }
+            case "DECLASIGOBJ":{
+                Nodo lista=root.hijos.get(0);
+                Simbolo value = Expre(root.hijos.get(1));
+                
+                for(Nodo variable:lista.hijos){
+                    
+                    declararVar(variable,"", 1);
+                                      
+                    operar.valorEval = variable;
+                    
+                    Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                    var.isobjeto=true;
+                    /// 
+                    var.existe=false;
+                    asignacion(var, variable, value);
+                    
+                }
+                break;
+            }
+            case "EVENTOBSERVADOR":{
+                Simbolo tipo=Expre(root.hijos.get(0));/////////////////////
+                String namefucion="";
+                    ///////////////////////////////////////////////////tipo de vento
+                if(root.hijos.get(1).token.equals("FUN")){
+                    Nodo funcion=root.hijos.get(1);
+                    
+                    
+                    //funcion a ejecutar
+                    Simbolo newFuntion = new Simbolo();
+                    newFuntion.metodo = new Proc();
+                
+                    newFuntion.tipe = "void";
+                    newFuntion.rol = "metodo";
+                
+                    newFuntion.name = funcion.hijos.get(0).valor;
+                
+                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    String key;
+                    
+                    if(funcion.hijos.size()==2){
+                     Nodo sentencias;
+                     
+                     sentencias=funcion.hijos.get(1);
+                     newFuntion.metodo.sentencias = sentencias;
+                     
+                    
+                }
+                newFuntion.name = key = nameMetod;
+                if(!tablaGlobal.containsKey(key)){
+                    tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
+                    
+                }else{
+                    Terror datos = new Terror(key,root.row,root.col,"Error SEMANTICO","Ya existe funcion");
+                    TablaES.add(datos);
+                }
+                  nameMetod="";
+                  namefucion=key;
+                  //////////////namefuncion=key,nombre funcion
+                  //////////////tipo.valor, tipo de evento
+                }else if(root.hijos.get(1).token.equals("CALL_METFUN")){
+                    
+                    Nodo funcion=root.hijos.get(1);
+                    String Nombre="";///nombre funcion;
+                    if(funcion.hijos.size()==1){
+                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
+                    }
+                   
+                    namefucion=Nombre;
+                    //////tipo evento;; tipo.valor;
+                    //////funcion sin parametros;; Nombre;
+                    ///funcion con parametros, usar tipo Nodo
+                }
+                break;
+            }
+            case "OBJETOOBSERVADOR":{
+                Nodo variable=root.hijos.get(0);
+                operar.valorEval = variable;
+                    
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                Simbolo tipo=Expre(root.hijos.get(1));
+                String Namefuncion="";
+                
+                if(root.hijos.get(2).token.equals("FUN")){
+                    Nodo funcion=root.hijos.get(2);
+                    
+                    
+                    //funcion a ejecutar
+                    Simbolo newFuntion = new Simbolo();
+                    newFuntion.metodo = new Proc();
+                
+                    newFuntion.tipe = "void";
+                    newFuntion.rol = "metodo";
+                
+                    newFuntion.name = funcion.hijos.get(0).valor;
+                
+                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    String key;
+                    
+                    if(funcion.hijos.size()==2){
+                     Nodo sentencias;
+                     
+                     sentencias=funcion.hijos.get(1);
+                     newFuntion.metodo.sentencias = sentencias;
+                     
+                    
+                }
+                newFuntion.name = key = nameMetod;
+                if(!tablaGlobal.containsKey(key)){
+                    tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
+                    
+                }else{
+                    Terror datos = new Terror(key,root.row,root.col,"Error SEMANTICO","Ya existe funcion");
+                    TablaES.add(datos);
+                }
+                  nameMetod="";
+                  Namefuncion=key;
+                  //////////////key,nombre funcion
+                  //////////////tipo.valor, tipo de evento
+                }else if(root.hijos.get(1).token.equals("CALL_METFUN")){
+                    
+                    Nodo funcion=root.hijos.get(1);
+                    String Nombre="";///nombre funcion;
+                    if(funcion.hijos.size()==1){
+                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
+                    }
+                    Namefuncion=Nombre;
+                    //////tipo evento;; tipo.valor;
+                    //////funcion sin parametros;; Nombre;
+                    ///funcion con parametros usar Nodo
+                }
+                
+                if(var.isobjeto && var.existe){
+                    
+                }else{
+                    msjError(root, "Error no es elemento chtml, o no existe");
+                }
+                
+                break;
+            }
+            
             case "ASIG_VAR":{
                 Nodo variable=root.hijos.get(0);
                 Nodo exp=root.hijos.get(1);
                 
                 Simbolo value=Expre(exp);
                 
-                operar.evaluacion = variable;
+                operar.valorEval = variable;
                     
-                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                     
                 asignacion(var, variable, value);
                 
@@ -1033,9 +1374,9 @@ public class Ejecutador {
                 Simbolo value=Expre(expr);
                 Simbolo pos=Expre(posicion);
                 
-                operar.evaluacion = variable;
+                operar.valorEval = variable;
                     
-                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                     
                     
                     try {
@@ -1065,9 +1406,9 @@ public class Ejecutador {
                 Nodo variable=root.hijos.get(0);
                 Nodo lexrp=root.hijos.get(1);
                 
-                operar.evaluacion = variable;
+                operar.valorEval = variable;
                     
-                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Ejecutador.this, new Simbolo());
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                 
                 var.tamvec=lexrp.hijos.size();
                 if(var.isArray){
@@ -1093,13 +1434,12 @@ public class Ejecutador {
                 Nodo operacion=root.hijos.get(1);
                 
                 
-                Nodo acceder=var.hijos.get(0);
-                
-                if(acceder.token.equals("VACCESO")){
-                    accion(root);
+                                
+                if(var.token.equals("VACCESO")){
+                    accion(var,operacion);
                     
-                }else if(acceder.token.equals("VACCESOVECT")){
-                    operar.evaluacion = root;
+                }else if(var.token.equals("VACCESOVECT")){
+                    operar.valorEval = root;
                     
                     Nodo nvar=root.hijos.get(0).hijos.get(0);
                     
@@ -1107,7 +1447,7 @@ public class Ejecutador {
                     Simbolo pos=Expre(posicion);
                     
                     
-                    Simbolo variable = operar.getVariable(nvar.valor, Ejecutador.this, new Simbolo());
+                    Simbolo variable = operar.getVariable(nvar.valor, Execute.this, new Simbolo());
                     //es para verificar si la variable existe
                     
                     try {
@@ -1126,8 +1466,8 @@ public class Ejecutador {
                             }else if(operacion.token.equals("DECR")){
                                 valor=operar.decremetar(valor);
                             }
-                                variable.tipoarreglo.add(i, valor.tipe);
-                                variable.arreglo.add(i, valor.value);
+                                variable.tipoarreglo.set(i, valor.tipe);
+                                variable.arreglo.set(i, valor.value);
                                 
                                 Simbolo variab=new  Simbolo();
                                 asignacion(variable, root,variab );
@@ -1149,11 +1489,66 @@ public class Ejecutador {
                 break;
             }
             case "ASIG_OBJ":{
+                Nodo objeto=root.hijos.get(1);
+                Simbolo objj=Expre(objeto);
+                //////////////////////////////////////
+                ///////////////objj.value;
+                
+                Nodo variable=root.hijos.get(0);
+                operar.valorEval = variable;
+                    
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
+                
+                ///////////////////////////////////////////////////////////////////////////////
+                //buscar objeto
+                boolean existeobjeto=false;
+                
+                if (existeobjeto) {
+                    asignacion(var, root, objj);
+                    
+                }else {
+                    msjError(root, "Objeto CHTML no existe");
+                }
                 
                 break;
             }
             case "SET_OBJ":{
+                Nodo variable=root.hijos.get(0);
+                operar.valorEval = variable;
+                    
+                Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
                 
+                Simbolo tipo=Expre(root.hijos.get(1));
+                Simbolo valor=Expre(root.hijos.get(2));
+                
+                if (var.isobjeto && var.existe) {
+                    ///modificar objeto chtml
+                    //
+                    //
+                    //
+                }else{
+                    msjError(root, var.value+" no es un objeto ó no existe");
+                }
+                //
+                
+                //
+                
+                break;
+            }
+            case "SET_OBJETO":{
+                Simbolo objeto=Expre(root.hijos.get(0));
+                Simbolo tipo =Expre(root.hijos.get(1));
+                Simbolo valor=Expre(root.hijos.get(2));
+                
+                //buscar objeto
+                boolean existeobjeto=false;
+                
+                if (existeobjeto) {
+                    //modificarlo
+                    
+                }else {
+                    msjError(root, "Objeto CHTML no existe");
+                }
                 break;
             }
             
@@ -1185,7 +1580,7 @@ public class Ejecutador {
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
             }
-            case "MIENRAS": {
+            case "MIENTRAS": {
                 exit = false;
                 //continuar = false;
 
@@ -1223,12 +1618,12 @@ public class Ejecutador {
                 
                 for(Nodo caso: lcaso.hijos){
                 
-                    caso.tipocase = expr.tipe;
-                    caso.valcase= expr.value;
-                    executeCode(caso);
+                    caso.tipocase = expr.tipe;//le mandamos el tipo a los case
+                    caso.valcase= expr.value;//mandamos el valor a los case
+                    executeCode(caso);//nos indica si cumplio con algun case o no
                 }
                 
-                if (!exit && root.hijos.size() == 3 && !retorno) {
+                if (!exit && root.hijos.size() == 3 && !retorno) {//si no cumplio con algun case error
                     executeCode((Nodo) root.hijos.get(2));
                 }
                 exit = false;
@@ -1237,12 +1632,14 @@ public class Ejecutador {
             }
             case "CASOS": {
               
-                Simbolo expr = Expre((Nodo) root.hijos.get(0));                
-                if (expr.value.equals(root.valcase) || valcase.equals("true")) {                    
-                    executeCode((Nodo) root.hijos.get(1));
-                    if (!exit  && !retorno) {
+                Simbolo expr = Expre((Nodo) root.hijos.get(0));
+                //System.out.println("otro caso " + expr.value);
+                if (expr.value.equals(root.valcase) || valcase.equals("true")) {//si cumple con un case o que se ejecute simultaneo el otro porque no vino un salir
+                    //System.out.println("son iguales");
+                    executeCode((Nodo) root.hijos.get(1));//si no vino salir en este case se ejecuta el resto
+                    if (!exit  && !retorno) {//si no hay break o retorno
                         
-                        valcase = "true";
+                        valcase = "true";//le mandamos true para que se ejecute el siguiente case
                         
                     }else{
                         valcase="false";
@@ -1374,7 +1771,7 @@ public class Ejecutador {
     }
     private void asignacion(Simbolo variable, Nodo root, Simbolo valor) {
         
-        if (operar.cast(variable, valor)) {
+        if (operar.casteoAsignacion(variable, valor)) {
             variable.value = valor.value;
             variable.tipe=valor.tipe;
         } else {
@@ -1384,8 +1781,8 @@ public class Ejecutador {
     }
 
     private boolean incrementar(Nodo root){
-        operar.evaluacion = root;
-        Simbolo variable = operar.getVariable(root.valor, Ejecutador.this, new Simbolo());//es para verificar si la variable existe
+        operar.valorEval = root;
+        Simbolo variable = operar.getVariable(root.valor, Execute.this, new Simbolo());//es para verificar si la variable existe
         if (variable.name.equals("")) {
             return false;
         }
@@ -1396,8 +1793,8 @@ public class Ejecutador {
     }
     
     private boolean decrementar(Nodo root){
-        operar.evaluacion = root;
-        Simbolo variable = operar.getVariable(root.valor, Ejecutador.this, new Simbolo());//es para verificar si la variable existe
+        operar.valorEval = root;
+        Simbolo variable = operar.getVariable(root.valor, Execute.this, new Simbolo());//es para verificar si la variable existe
         if (variable.name.equals("")) {
             return false;
         }
@@ -1406,15 +1803,15 @@ public class Ejecutador {
         
         return true;
     }
-    private boolean accion(Nodo root) {
-        operar.evaluacion = root;
-        Simbolo variable = operar.getVariable(root.hijos.get(0).hijos.get(0).valor, Ejecutador.this, new Simbolo());//es para verificar si la variable existe
+    private boolean accion(Nodo var,Nodo operacion) {
+        operar.valorEval = var;
+        Simbolo variable = operar.getVariable(var.hijos.get(0).valor.toLowerCase(), Execute.this, new Simbolo());//es para verificar si la variable existe
         if (variable.name.equals("")) {
             return false;
         }
         
        
-        switch (root.hijos.get(1).token) {
+        switch (operacion.token) {
             
             case "INCR": {//++
                
@@ -1433,7 +1830,7 @@ public class Ejecutador {
     }
         protected void msjError(Nodo root, String texto) {
         String val = (String) root.token;
-        tablaErrores.add(new ErrorCjs(val,root.row,root.col,"Error Semantico",texto));
+        TablaES.add(new Terror(val,root.row,root.col,"Error Semantico",texto));
     }
 
 }

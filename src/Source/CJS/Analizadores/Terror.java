@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS;
+package Source.CJS.Analizadores;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
-public class ErrorCjs {
+public class Terror {
      String lexema,tipo,descripcion;
     int linea,columna;
     
-    public ErrorCjs(String le, int li, int co, String t,String de){
+    public Terror(String le, int li, int co, String t,String de){
         lexema = le;
         linea = li;
         columna = co;

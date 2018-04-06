@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS.Ejecucion;
+package Source.CJS.principal;
 
-import Source.CJS.Ejecucion.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,16 +13,16 @@ import java.io.PrintWriter;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
-public class DibujadorEjecucion {
+public class Grafica {
     File f;
     FileWriter fw;
     BufferedWriter bw;
     PrintWriter pw;
     int indice;
     
-    public DibujadorEjecucion(){
+    public Grafica(){
         this.f = null;
         this.fw = null;
         this.bw = null;
@@ -31,8 +30,8 @@ public class DibujadorEjecucion {
         this.indice = -1;
     }
     
-    public void grafica(Nodo raiz, String nombre) throws IOException{
-        
+    public void graficar(Nodo raiz, String nombre) throws IOException{
+        ProcessBuilder proceso;
         String dopath="C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
         String tparam="-Tpng";
         String oparam="-o";
@@ -60,10 +59,10 @@ public class DibujadorEjecucion {
         pw.println("node [shape= square];");
 
         indice = 0;
-        crearNodo(raiz);
+        crear_nodos(raiz);
 
         indice = 0;
-        aristas(raiz, 0);
+        enlazar_nodos(raiz, 0);
 
         pw.println("}");
         //**
@@ -74,35 +73,37 @@ public class DibujadorEjecucion {
 
 
         try{
-            Runtime rt = Runtime.getRuntime();
-            rt.exec(cmd);
-            
+            proceso=new ProcessBuilder(dopath,tparam,oparam,archivo_destino,archivo_origen);
+            //Runtime rt = Runtime.getRuntime();
+            //rt.exec(cmd);
+            proceso.redirectErrorStream(true);
+            proceso.start();
         }catch(Exception e){ 
             System.err.println(e.getMessage()); 
         }
     }
 
-    private void crearNodo(Nodo raiz) {
+    private void crear_nodos(Nodo raiz) {
         if(raiz != null)
         {
             String token = raiz.token;
             String valor = raiz.valor.equals("") ? "" : "\n" + raiz.valor;
             
-            pw.println("node"+indice+"[label = " +"\""+ token + " " + valor + "\","+ "];");
+            pw.println("node"+indice+"[label = " +"\""+ token.replace("\"'","") + " " + valor.replace("\"'","") + "\","+ "];");
             indice++;
             for(Nodo nodo: raiz.hijos)
-                crearNodo(nodo);
+                crear_nodos(nodo);
         }
     }
 
-    private void aristas(Nodo raiz, int actual) {
+    private void enlazar_nodos(Nodo raiz, int actual) {
         if(raiz != null)
         {
             for( Nodo nodo: raiz.hijos)
             {
                 indice++;
                 pw.println("\"node" + actual + "\"--" + "\"node" + indice+ "\"");
-                aristas(nodo,indice);
+                enlazar_nodos(nodo,indice);
             }
         }
     }

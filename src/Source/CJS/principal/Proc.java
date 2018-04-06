@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS.Ejecucion;
+package Source.CJS.principal;
 
-import Source.CJS.Ejecucion.*;
 import java.util.ArrayList;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
-public class Procedimiento {
+public class Proc {
     
     Nodo sentencias;
     Object retornar;
     ArrayList<Simbolo> parametro;
     int N;
 
-    public Procedimiento() {
+    public Proc() {
         parametro = new ArrayList<>();
         sentencias = null;
         retornar = null;

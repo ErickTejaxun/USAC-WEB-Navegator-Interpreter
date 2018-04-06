@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Source.CJS.Ejecucion;
+package Source.CJS.principal;
 
-import Source.CJS.Ejecucion.*;
 import java.util.ArrayList;
 
 /**
  *
- * @author erick
+ * @author BARRIOS
  */
 public class Nodo {
     public String token;
@@ -85,6 +84,9 @@ public class Nodo {
         if(index < this.hijos.size())
             return this.hijos.get(index);
         else{
+            System.err.println("Error accesando hijo ["+ index +"], el indice mayor es ["+ (this.hijos.size() - 1) +"] hijos");
+            System.err.println("Token padre => " + this.token + " Valor padre => " + this.valor);
+            System.out.println("Fila => " + this.row + " Columna => " + this.col + "\n");
             return null;
         }
     }
