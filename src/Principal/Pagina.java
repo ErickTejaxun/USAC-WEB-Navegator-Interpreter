@@ -5586,16 +5586,83 @@ private static boolean esNumero(String cadena){
         erroresSemanticos.add(error);
     }
     
-    public boolean existeElemento(String id)
+    public boolean existeElemento(String id, ArrayList<Elemento> elementosLista)
     {
         boolean result=false;
-        for(Elemento item: this.elementos)
+        
+  
+        for(Elemento item :elementosLista)
         {
-            if(item.getNombre().equals(id))
-            {
-                return true;
-            }
-        }
+           if(item.getNombre().equals(id))
+           {
+               return true;
+           }
+           else
+           {
+               if(item.getValor() instanceof ArrayList)
+               {
+                   ArrayList items = (ArrayList)item.getValor();
+                   for(Object obj : items)
+                   {
+                       if(obj instanceof Elemento)
+                       {
+                           Elemento temp = (Elemento) obj;
+                           switch(temp.getTipo().toLowerCase())
+                           {
+                               case "boton":
+                                   Boton btn = (Boton)temp.getValor();
+                                   if(btn.getId().equals(id)){return true;}
+                                   break;
+                               case "caja":
+                                   Caja cjt = (Caja)temp.getValor();
+                                   if(cjt.getId().equals(id)){return true;}
+                                   break;  
+                               case "cajaopciones":
+                                   CajaOpciones cjtO = (CajaOpciones)temp.getValor();
+                                   if(cjtO.getId().equals(id)){return true;}
+                                   break;  
+                               case "enlace":
+                                   Enlace enlace = (Enlace)temp.getValor();
+                                   if(enlace.getId().equals(id)){return true;}
+                                   break;     
+                               case "imagen":
+                                   Imagen img = (Imagen)temp.getValor();
+                                   if(img.getId().equals(id)){return true;}
+                                   break;    
+                               case "panel":
+                                   Panel pnl = (Panel)temp.getValor();
+                                   if(pnl.getId().equals(id)){return true;}
+                                   else
+                                   {
+                                       result = existeElemento(id,pnl.getElementos());
+                                   }
+                                   break; 
+                               case "spinner":
+                                   Spinner spn = (Spinner)temp.getValor();
+                                   if(spn.getId().equals(id)){return true;}
+                                   break;  
+                               case "tabla":
+                                   Tab tab = (Tab)temp.getValor();
+                                   if(tab.getId().equals(id)){return true;}
+                                   else
+                                   {
+                                       result = existeElemento(id,tab.getElementos());
+                                   }                                   
+                                   break; 
+                               case "texto":
+                                   Texto txt = (Texto)temp.getValor();
+                                   if(txt.getId().equals(id)){return true;}
+                                   break;  
+                               case "areatexto":
+                                   areaTexto txtArea = (areaTexto)temp.getValor();
+                                   if(txtArea.getId().equals(id)){return true;}
+                                   break;                                     
+                           }
+                       }                       
+                   }
+               }
+           }
+        }        
         return result;
     }
     

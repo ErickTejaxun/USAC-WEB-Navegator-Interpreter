@@ -2,53 +2,73 @@
     < encabezado >
 < titulo > Historial< fin-titulo> 
 < fin-encabezado ><cuerpo>
-  <texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 17:58:08 CST 2018 <fin-texto> 
+  <texto alto="30"; ancho="500"; > C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\prueba.html <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Users\erick\Documents\NetBeansProjects\USAC-WEB\prueba.html";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:44:57 CST 2018 <fin-texto> 
  <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 17:58:28 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 17:58:59 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 17:59:13 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 17:59:26 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 17:59:41 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 18:00:09 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\proyecto1\tabla.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\proyecto1\tabla.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 18:00:43 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 18:00:52 CST 2018 <fin-texto> 
- <salto-fin> 
-<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 18:00:57 CST 2018 <fin-texto> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entradax\archivo1\Principal.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entradax\archivo1\Principal.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:45:10 CST 2018 <fin-texto> 
  <salto-fin> 
 <texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo2\informacion_ventas.chtml <fin-texto> 
  <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\informacion_ventas.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 18:01:01 CST 2018 <fin-texto> 
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:45:20 CST 2018 <fin-texto> 
  <salto-fin> 
 <texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo2\carros_ventas.chtml <fin-texto> 
  <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros_ventas.chtml";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Tue Apr 03 18:04:15 CST 2018 <fin-texto> 
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:45:29 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo2\contactenos_ventas.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\contactenos_ventas.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:45:44 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo3\Inicio.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo3\Inicio.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:45:56 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo3\Inicio.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo3\Inicio.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:46:04 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo3\Chat.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo3\Chat.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:46:08 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo3\AcercaDe.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo3\AcercaDe.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:46:18 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo3\Facturacion.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo3\Facturacion.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:46:29 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo3\Facturacion.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo3\Facturacion.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:13 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\Entrada 4 _1\Incio1.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\Entrada 4 _1\Incio1.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:21 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:26 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:30 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\Entrada 4 _1\pagina22.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\Entrada 4 _1\pagina22.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:34 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\Entrada 4 _1\pagina22.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\Entrada 4 _1\pagina22.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:41 CST 2018 <fin-texto> 
+ <salto-fin> 
+<texto alto="30"; ancho="500"; > C:\Archivos de Entrada\Entrada 4 _1\Pagina33.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\Entrada 4 _1\Pagina33.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Fri Apr 06 15:47:46 CST 2018 <fin-texto> 
  <salto-fin> 
 < fin-cuerpo >
 <fin-chtml>
