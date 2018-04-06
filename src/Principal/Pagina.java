@@ -48,6 +48,8 @@ import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import Source.CCSS.*;
 import Source.CCSS.Ejecucion.*;
+import java.awt.LayoutManager;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 /**
@@ -441,10 +443,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         } catch (IOException ex) {
             Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
         }
-            contenedorPaginas.addTab("Historial", null, pagina);            
-                 
-            
-                        
+           contenedorPaginas.addTab("Historial", null, pagina);                                                               
     }//GEN-LAST:event_botonHistorialActionPerformed
 
     public void imprimirHistorial() throws IOException
@@ -611,7 +610,7 @@ public void analizar() throws IOException
         /*A partir de la lista de objetos los dibujamos sobre el panelPrincipal.*/
         Interfaz(panelPrincipal);   
         
-
+        //interpretarcjs(texto, this);
         
         
                         
@@ -722,7 +721,7 @@ public void mostrarCjs()
                br = new BufferedReader(fr);
                String linea;
                while((linea=br.readLine())!=null)
-                   contenido = contenido + linea;              
+                   contenido = contenido +"\n"+ linea;              
             }
             catch(Exception e){
                e.printStackTrace();
@@ -747,12 +746,19 @@ public void mostrarCjs()
             switch(tipo)
             {
                 case "ccss":
+                                        
+                    JPanel contPanel = new JPanel();
+                    contPanel.setLayout(new javax.swing.OverlayLayout(contPanel));
                     JTextArea nuevo = new JTextArea(contenido);
-                    ccss1.add(nombre, nuevo);                 
+                    contPanel.add(nuevo);                    
+                    ccss1.add(nombre,  new JScrollPane(contPanel));                 
                     break;
-                case "cjs":
+                case "cjs":  
+                    contPanel = new JPanel();
+                    contPanel.setLayout(new javax.swing.OverlayLayout(contPanel));
                     nuevo = new JTextArea(contenido);
-                    cjs1.add(nombre, nuevo);                 
+                    contPanel.add(nuevo);
+                    cjs1.add(nombre, new JScrollPane(contPanel));                 
                     break;   
                  default:
                      archivoCHTML.setText(contenido);
@@ -782,7 +788,8 @@ public void analizarArchivos()
                     /*Quitar lo static y poner que nos devuelva la lista.*/
                     interpretarccss(texto);
                     break;
-                case "cjs":              
+                case "cjs":
+                    
                     break;   
             }                   
       }
@@ -3079,6 +3086,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 boton.addMouseListener(mouseListener);     
                 //System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);}
                 aplicarEstilo(aux, contenedor);
+                //aplicarObservador(aux);
                 contenedor.add(boton);          
                 val = posicionPanel(boton.getAncho(), boton.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
@@ -3125,15 +3133,18 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 //y = y + saltoY;
                 Texto espacio = new Texto();
                 //espacio.setBackground(Color.black);
-                espacio.setBackground(contenedor.getBackground());
+                //espacio.setBackground(contenedor.getBackground());
+                espacio.setBackground(Color.PINK);
                 espacio.setEnabled(false);
                 espacio.setAncho(contenedor.getAncho()-x-30);                
-                espacio.setAlto(saltoY); 
+                espacio.setAlto(saltoY);
+                //contenedor.setAlto(contenedor.getAlto()+ saltoY);
                 
                 for(int cont=0; cont<espacio.getAncho();cont++){espacio.setText(espacio.getText() +" ");}                
                 if(contenedor.isFlagPanel())
                 {
                     espacio.setPreferredSize(new java.awt.Dimension(espacio.getAncho(),espacio.getAlto() ));
+                    espacio.setOpaque(false);
                     contenedor.add(espacio); 
                     contenedor.setAlto(contenedor.getAlto()+espacio.getAlto());
                     contenedor.setPreferredSize(new java.awt.Dimension(contenedor.getAncho(), contenedor.getAlto()+espacio.getAlto() ));
@@ -3295,9 +3306,11 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                                
                 panel.setBounds(x, y, panel.getAncho(),panel.getAlto());
-                //Interfaz(panel);                               
+                //Interfaz(panel);
+                //aplicarObservador(aux);
                 //System.out.println("Objeto insertado "+ panel.getId()+"\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y + "\tAncho:"+panel.getAncho()+ "\tAltura:"+panel.getAlto());
                 aplicarEstilo(aux, contenedor);
+                //aplicarObservador(aux);
                 contenedor.add(panel);                
                 val = posicionPanel(panel.getAncho(), panel.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
@@ -3312,8 +3325,8 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
 
 public void InterfazTabla(Tab contenedor)
 {
-    int x = 0;
-    int y = 0;
+    int x = 20;
+    int y = 20;
     int saltoY = 0;
     int saltoX = 0;
     int anchoMaximo = 0;
@@ -4156,14 +4169,14 @@ private static boolean esNumero(String cadena){
                                         if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
                                         panel.setVisible(visibilidad);
                                         break;//Fin visible   
-                                    case "colortext":
+                                    case "colortexto":
                                         valor ="";
                                         if(estilo.getValor() instanceof String)
                                         {
                                             valor = (String)estilo.getValor();
                                             panel.setColorFuente(colorFuente(valor));
                                         }
-                                        break;//Fin colortext     
+                                        break;//Fin colortexto    
                                     case "fondoelemento":
                                         valor ="";
                                         if(estilo.getValor() instanceof String)
@@ -4251,6 +4264,11 @@ private static boolean esNumero(String cadena){
                         }//Fin for
                     }//Fin if !=null
                     break;// ---------------------------------------------------------------FIN PANEL------------------------------------------------------------------- 
+                    //----------------------------------------------------------------------AREA TEXTO------------------------------------------------------------------
+                    
+                    
+                    
+                    //---------------------------------------------------------------------FIN AREA TEXTO---------------------------------------------------------------                                                                                                                                                                                    
                 case "imagen": // ----------------------------------------------------------Imagen----------------------------------------------------------------------
                     Imagen imagen = (Imagen)elemento.getValor();
                     nodoEstilo = buscarEstilo(imagen.getGrupo());               
@@ -4389,15 +4407,14 @@ private static boolean esNumero(String cadena){
                                                 }
                                                 if(item instanceof Boolean)
                                                 {                                                                                                                                                        
-                                                    borde = (Boolean)estilo.getValor();
+                                                     borde = (Boolean)item;                                                                                                       
                                                 }
                                                 if(item instanceof Double)
                                                 {
                                                     Double auxiliar = (Double)item;
                                                     grosor = auxiliar.intValue();
                                                 }
-                                            }
-                                            
+                                            }                                            
                                             if(!color.equals(""))
                                             {
                                                 imagen.setBorder(new LineBorder(colorFuente(color),grosor, borde));
@@ -4409,7 +4426,7 @@ private static boolean esNumero(String cadena){
                                         Boolean opacacidad = true;
                                         if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
                                         imagen.setOpaque(opacacidad);
-                                        break;//Fin Opacacidad                                         
+                                        break;//Fin Opacacidad                                       
                                 }// Fin switch                                                                                                    
                             } // Fin if instancia estilo
                         }//Fin for
@@ -4425,9 +4442,61 @@ private static boolean esNumero(String cadena){
                         for(Object estiloElemento: nodoEstilo.getAtributos())
                         {
                             if(estiloElemento instanceof ArrayList)
-                            {  
-
-                            }
+                            { 
+                                ArrayList arreglo = (ArrayList)estiloElemento;
+                                for(Object element: arreglo)
+                                {
+                                    if(element instanceof Source.CCSS.AST.nodo)
+                                    {
+                                        Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                                        switch(quitarComillas(elementArray.texto).toLowerCase())
+                                        {
+                                            case "minuscula":                                                
+                                                    boton.setText(boton.getText().toLowerCase());                                                    
+                                                break;
+                                            case "mayuscula": 
+                                                    boton.setText(boton.getText().toUpperCase());                                                                                                        
+                                                break;
+                                            case "negrilla":
+                                                if(boton.getFont().getStyle()==2)
+                                                {
+                                                    boton.setFont(new Font(boton.getFont().getName(),3,boton.getFont().getSize()));
+                                                }
+                                                else
+                                                {
+                                                    boton.setFont(new Font(boton.getFont().getName(),1,boton.getFont().getSize()));
+                                                }
+                                                break;
+                                            case "cursiva":
+                                                if(boton.getFont().getSize()==1)
+                                                {
+                                                    boton.setFont(new Font(boton.getFont().getName(),3,boton.getFont().getSize()));
+                                                }
+                                                else
+                                                {
+                                                    boton.setFont(new Font(boton.getFont().getName(),2,boton.getFont().getSize()));
+                                                }
+                                                break;
+                                            case "capital-t":
+                                                String[] palabras = boton.getText().split(" ");
+                                                String cadena = "";
+                                                if(palabras.length>0)
+                                                {
+                                                    for(String palabra: palabras)
+                                                    {
+                                                        if(palabra.length()>2)
+                                                        {
+                                                            palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length());                                                       
+                                                            cadena = cadena + palabra;                                                            
+                                                        }
+                                                    }
+                                                }
+                                                boton.setText(cadena);
+                                                break;
+                                        }//Fin switch formato
+                                    }// Fin verificacion de tipo Source.CCSS. nodo                                
+                                }// Fin for de array
+                            }// Fin verificacion tipo arrayList 
                             if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
                             {
                                 Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
@@ -4438,8 +4507,15 @@ private static boolean esNumero(String cadena){
                                         if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
                                         switch(valor.toLowerCase())
                                         {
-                                            case "izquierda":                                        
+                                            case "izquierda": 
+                                                boton.setAlignmentX(LEFT_ALIGNMENT);
                                                 break;
+                                            case "derecha": 
+                                                boton.setAlignmentX(RIGHT_ALIGNMENT);
+                                                break;
+                                            case "centrado": 
+                                                boton.setAlignmentX(CENTER_ALIGNMENT);
+                                                break;                                                
                                         }
                                         break;// Fin caso alineado                                    
                                     case "texto":
@@ -4479,7 +4555,65 @@ private static boolean esNumero(String cadena){
                                         Boolean visibilidad = true;
                                         if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
                                         boton.setVisible(visibilidad);
-                                        break;//Fin visible                                                                        
+                                        break;//Fin visible 
+                                    case "fondoelemento":
+                                        valor ="";
+                                        if(estilo.getValor() instanceof String)
+                                        {
+                                            valor = (String)estilo.getValor();
+                                            valor = quitarComillas(valor);
+                                            boton.setBackground(colorFuente(valor));
+                                            //valor = (String)estilo.getValor();
+                                            //panel.setColorFuente(colorFuente(valor));
+                                        }
+                                        break;//Fin colortext  
+                                        
+                                    case "borde":
+                                        valor = "";
+                                        if(estilo.getValor() instanceof ArrayList)
+                                        {
+                                            ArrayList arreglo = (ArrayList)estilo.getValor();
+                                            String color ="";
+                                            Boolean borde = true;
+                                            int grosor = 10;
+                                            
+                                            for(Object item : arreglo )
+                                            {
+                                                if(item instanceof String)
+                                                {
+                                                    color = quitarComillas((String)item);
+                                                }
+                                                if(item instanceof Boolean)
+                                                {                                                                                                                                                        
+                                                     borde = (Boolean)item;                                                                                                       
+                                                }
+                                                if(item instanceof Double)
+                                                {
+                                                    Double auxiliar = (Double)item;
+                                                    grosor = auxiliar.intValue();
+                                                }
+                                            }                                            
+                                            if(!color.equals(""))
+                                            {
+                                                boton.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                            }                                            
+                                        }
+                                        break; // Fin caso borde   
+                                    case "opaque":
+                                        valor ="";
+                                        Boolean opacacidad = true;
+                                        if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                                        boton.setOpaque(!opacacidad);
+                                        break;//Fin Opacacidad      
+                                    case "colortexto":                                        
+                                        valor ="";
+                                        if(estilo.getValor() instanceof String)
+                                        {
+                                            valor = (String)estilo.getValor();
+                                            //boton.setColorFuente(colorFuente(valor));
+                                            boton.setForeground(colorFuente(valor));
+                                        }
+                                        break;//Fin colortext                                          
                                 }// Fin switch                                                                                                    
                             } // Fin if instancia estilo
                         }//Fin for
@@ -4590,6 +4724,28 @@ private static boolean esNumero(String cadena){
         error.setTipo("Semantico");        
         erroresSemanticos.add(error);
     }
+    
+    public boolean existeElemento(String id)
+    {
+        boolean result=false;
+        for(Elemento item: this.elementos)
+        {
+            if(item.getNombre().equals(id))
+            {
+                return true;
+            }
+        }
+        return result;
+    }
+    
+    
+    public void modificarElemento(String id, String tipo, String valor)
+    {
+        
+    }
+    
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
