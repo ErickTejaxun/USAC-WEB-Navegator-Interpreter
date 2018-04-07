@@ -94,8 +94,8 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     int flagOpciones = 0;
     int posX, posXAux = 0;
     int posY, posYAux = 0;
-    Color colorFondo = Color.WHITE ;
-    ArrayList<Elemento> elementos = new ArrayList();
+    public Color colorFondo = Color.WHITE ;
+    public ArrayList<Elemento> elementos = new ArrayList();
     int xMax,  xMaxAux=0;
     int yMax, yMaxAux=0;
     int flagTabla = 0; // 0 Significa Que no pertence a tabla, 1. que sí.
@@ -5772,6 +5772,180 @@ private static boolean esNumero(String cadena){
            }
         }        
         return result;
+    }
+    
+    
+    public void modificarAtributo(String id, String atributo, String valor)
+    {
+        modAtributo(id, elementos, atributo, valor);        
+    }
+    
+    
+    public boolean modAtributo(String id, ArrayList<Elemento> elementosLista,String atributo, Object val)
+    {
+        boolean result=false;
+        
+  
+        for(Elemento item :elementosLista)
+        {
+           if(item.getNombre().equals(id))
+           {
+               return true;
+           }
+           else
+           {
+               if(val instanceof String)
+               {
+                    String valor = (String)val;
+                    if(item.getValor() instanceof ArrayList)
+                    {
+                        ArrayList items = (ArrayList)item.getValor();
+                        for(Object obj : items)
+                        {
+                            if(obj instanceof Elemento)
+                            {
+                                Elemento temp = (Elemento) obj;
+                                switch(temp.getTipo().toLowerCase())
+                                {
+                                    case "boton":
+                                        Boton btn = (Boton)temp.getValor();
+                                        if(btn.getId().equals(id))
+                                        {
+
+                                        }
+                                        break;
+                                    case "caja":
+                                        Caja cjt = (Caja)temp.getValor();
+                                        if(cjt.getId().equals(id)){return true;}
+                                        break;  
+                                    case "cajaopciones":
+                                        CajaOpciones cjtO = (CajaOpciones)temp.getValor();
+                                        if(cjtO.getId().equals(id)){return true;}
+                                        break;  
+                                    case "enlace":
+                                        Enlace enlace = (Enlace)temp.getValor();
+                                        if(enlace.getId().equals(id)){return true;}
+                                        break;     
+                                    case "imagen":
+                                        Imagen img = (Imagen)temp.getValor();
+                                        if(img.getId().equals(id)){return true;}
+                                        break;    
+                                    case "panel":
+                                        Panel pnl = (Panel)temp.getValor();
+                                        if(pnl.getId().equals(id))
+                                        {
+                                            modificarAtributosPanel(pnl,atributo,valor);
+                                        }
+                                        else
+                                        {
+                                            result = existeElemento(id,pnl.getElementos());
+                                        }
+                                        break; 
+                                    case "spinner":
+                                        Spinner spn = (Spinner)temp.getValor();
+                                        if(spn.getId().equals(id)){return true;}
+                                        break;  
+                                    case "tabla":
+                                        Tab tab = (Tab)temp.getValor();
+                                        if(tab.getId().equals(id)){return true;}
+                                        else
+                                        {
+                                            result = existeElemento(id,tab.getElementos());
+                                        }                                   
+                                        break; 
+                                    case "texto":
+                                        Texto txt = (Texto)temp.getValor();
+                                        if(txt.getId().equals(id)){return true;}
+                                        break;  
+                                    case "areatexto":
+                                        areaTexto txtArea = (areaTexto)temp.getValor();
+                                        if(txtArea.getId().equals(id)){return true;}
+                                        break;                                     
+                                }
+                            }                       
+                        }
+                    }
+               }
+           }
+        }        
+        return result;
+    }    
+    
+    public void modificarAtributosPanel(Panel panel, String atributo, String valor)
+    {
+        switch(atributo)
+        {
+            case "alineado":                                                                                                
+                switch(valor)
+                {
+                    case "izquierda":                                        
+                        break;
+                }
+                break;// Fin caso alineado                                    
+            case "texto":
+                valor = valor;
+                panel.setTexto(quitarComillas(valor));
+
+                break; 
+            case "letra":
+                valor ="";
+                if(valor instanceof String){ valor = valor; valor= quitarComillas(valor);}                                                                   
+                try 
+                {
+                    Font fuente = panel.getFont();                                                                                
+                    panel.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                } 
+                catch (Exception e)
+                {
+                }                               
+                break;  // Fin caso letra   
+            case "tamtex":
+                Double tamTex = 0.00;
+                                                                                 
+                try 
+                {
+                    tamTex = Double.valueOf(valor);
+                    Font fuente = panel.getFont();  
+                    if(tamTex==0){tamTex = (double)fuente.getSize();}
+                    int tamText = tamTex.intValue();
+                    panel.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                } 
+                catch (Exception e){}  
+                break; //Fin caso tamtex  
+            case "visible":
+                valor ="";
+                Boolean visibilidad = true;
+                if(valor.equals("true")){visibilidad= true;}   
+                if(valor.equals("false")){visibilidad= false;}
+                panel.setVisible(visibilidad);
+                break;//Fin visible   
+            case "colortexto":
+                valor ="";
+                if(valor instanceof String)
+                {
+                    valor = valor;
+                    panel.setColorFuente(colorFuente(valor));
+                }
+                break;//Fin colortexto    
+            case "fondoelemento":
+                valor ="";
+                if(valor instanceof String)
+                {
+                    valor = valor;
+                    valor = quitarComillas(valor);
+                    panel.setBackground(colorFuente(valor));
+                    //valor = valor;
+                    //panel.setColorFuente(colorFuente(valor));
+                }
+                break;//Fin colortext  
+            case "opaque":
+                valor ="";
+                Boolean opacacidad = true;
+                if(valor.equals("true")){opacacidad = true;}
+                if(valor.equals("false")){opacacidad = false;}                
+                panel.setOpaque(opacacidad);
+                break;//Fin Opacacidad                                                                                  
+        }// Fin switch                            
     }
     
     
