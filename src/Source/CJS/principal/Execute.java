@@ -1080,7 +1080,7 @@ public class Execute {
 
       
         //recorremos tabla Global
-        
+        idMetodo = idMetodo.toLowerCase();
 
         if (tablaGlobal.containsKey(idMetodo.toLowerCase())) {
             Simbolo main_ = tablaGlobal.get(idMetodo);
@@ -1603,7 +1603,7 @@ public class Execute {
             case "MENSAJE":{
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
-                page.mensajeEmergente("Mensaje", expr.value);
+                //page.mensajeEmergente("Mensaje", expr.value);
             }
             case "MIENTRAS": {
                 exit = false;

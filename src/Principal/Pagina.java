@@ -4056,8 +4056,13 @@ private static boolean esNumero(String cadena){
 
             if(!boton.getMetodo().equals(""))
             {
-                //Mensaje("Llamada a funcion.",boton.getMetodo());                
-                ejecucion.Executemetodo(boton.getMetodo().substring(0,boton.getMetodo().length()-2));
+                //Mensaje("Llamada a funcion.",boton.getMetodo());   
+                if(boton.getMetodo().length()>4)
+                {
+                    mensajeEmergente("Metodo", boton.getMetodo());
+                    ejecucion.Executemetodo(boton.getMetodo().substring(0,boton.getMetodo().length()-2));
+                }
+                
             }
                        
         }
