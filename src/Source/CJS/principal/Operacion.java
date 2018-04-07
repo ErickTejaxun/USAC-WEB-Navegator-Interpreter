@@ -6,6 +6,7 @@
 package Source.CJS.principal;
 
 import java.text.Collator;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -232,6 +233,24 @@ public class Operacion {
 
     public Simbolo igualar(Simbolo val1, Simbolo val2) {
         Simbolo valor = new Simbolo();
+        if(val1.tipe.equals("double")&& val2.tipe.equals("double")){            
+            if(val1.value.equals("0") || val2.value.equals("0")){
+                StringTokenizer vv1 = new StringTokenizer(val1.value, ".");
+                StringTokenizer vv2 = new StringTokenizer(val1.value, ".");
+                String v1 = vv1.nextToken();
+                String v2 = vv2.nextToken();
+                //System.out.println(vv1+":"+vv2);
+                val1.value=v1;
+                val2.value=v2;
+                //System.out.println("ceros");
+            }else{
+                val1.value=Double.parseDouble(val1.value)+"";
+                val2.value=Double.parseDouble(val2.value)+"";
+                //System.out.println("diferente a ceros");
+            }
+            
+            
+        }
         valor.value = (val1.value.equals(val2.value)) ? "1" : "0";
         valor.tipe = "bool";
         return valor;
@@ -239,6 +258,24 @@ public class Operacion {
 
     public Simbolo distinto(Simbolo val1, Simbolo val2) {
         Simbolo valor = new Simbolo();
+        if(val1.tipe.equals("double")&& val2.tipe.equals("double")){            
+            if(val1.value.equals("0") || val2.value.equals("0")){
+                StringTokenizer vv1 = new StringTokenizer(val1.value, ".");
+                StringTokenizer vv2 = new StringTokenizer(val1.value, ".");
+                String v1 = vv1.nextToken();
+                String v2 = vv2.nextToken();
+                //System.out.println(vv1+":"+vv2);
+                val1.value=v1;
+                val2.value=v2;
+                //System.out.println("ceros");
+            }else{
+                val1.value=Double.parseDouble(val1.value)+"";
+                val2.value=Double.parseDouble(val2.value)+"";
+                //System.out.println("diferente a ceros");
+            }
+            
+            
+        }
         valor.value = (!val1.value.equals(val2.value)) ? "1" : "0";
         valor.tipe = "bool";
         return valor;
