@@ -1084,7 +1084,8 @@ public class Execute {
         //recorremos tabla Global
         idMetodo = idMetodo.toLowerCase();
 
-        if (tablaGlobal.containsKey(idMetodo.toLowerCase())) {
+        if (tablaGlobal.containsKey(idMetodo.toLowerCase())) 
+        {
             Simbolo main_ = tablaGlobal.get(idMetodo);
             nameMetod = idMetodo;
             exit = false;
@@ -1093,6 +1094,26 @@ public class Execute {
         } else{
             msjError(new Nodo(),"No existe metodo");
         }
+        
+
+        //Imprimir hashtable
+        /*
+        Simbolo sim = tablaGlobal.get("valor1");
+        if(sim!=null)
+        {
+            System.out.print(sim.name+ ":\t"+ sim.value);
+            String men = sim.name+ ":\t"+ sim.value;
+            sim = tablaGlobal.get("valor2");
+            if(sim!=null)
+            {
+                System.out.println(sim.name+ "  :\t"+ sim.value);
+                Navegador.mensaje(men + "   " + sim.name+ ":"+ sim.value);
+            }              
+        }*/
+
+      
+        
+                
        
     }
     
@@ -1155,7 +1176,9 @@ public class Execute {
             exit = false;
             continuar = false;
             retorna = null;
-        } else {
+        }
+        else 
+        {
             msjError(root, " metodo no esta declarado");
             System.out.println("No Existe el metodo " + nameMetod);
         }
