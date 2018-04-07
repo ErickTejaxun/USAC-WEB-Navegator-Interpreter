@@ -48,7 +48,11 @@ import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import Source.CCSS.*;
 import Source.CCSS.Ejecucion.*;
+import Source.CJS.Analizadores.lexico_cjs;
+import Source.CJS.Analizadores.sintactico_cjs;
+import Source.CJS.principal.Execute;
 import java.awt.LayoutManager;
+import java.io.StringReader;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -65,6 +69,12 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     public ArrayList<Errores> erroresLexicos = new ArrayList();
     public ArrayList<Errores> erroresSemanticos = new ArrayList();
     public ArrayList<Errores> listaErrores = new ArrayList();  /* Errores */
+    
+    
+    public ArrayList<Salida> listaConsola = new ArrayList();
+    
+    
+    
     public static ArrayList<String> historial = new ArrayList();
     public String analisisLexico="";      
     public String analisisLexico_="";
@@ -94,6 +104,9 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     Pagina panelActual = null;
     public int anchoActual=0;
     public Panel panelPrincipal = new Panel();
+    public Execute ejecucion;
+    
+    public String pathCjs="";
     
     
     //JScrollPane scroll = new JScrollPane();
@@ -161,7 +174,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         jScrollPane5 = new javax.swing.JScrollPane();
         cjsArea1 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollSalidas = new javax.swing.JScrollPane();
         tablaSalida = new javax.swing.JTable();
         panelErrores = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -372,7 +385,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
                 "Archivo", "Línea", "Columna", "Salida"
             }
         ));
-        jScrollPane1.setViewportView(tablaSalida);
+        scrollSalidas.setViewportView(tablaSalida);
         if (tablaSalida.getColumnModel().getColumnCount() > 0) {
             tablaSalida.getColumnModel().getColumn(0).setHeaderValue("Archivo");
             tablaSalida.getColumnModel().getColumn(1).setHeaderValue("Línea");
@@ -380,7 +393,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
             tablaSalida.getColumnModel().getColumn(3).setHeaderValue("Salida");
         }
 
-        jPanel4.add(jScrollPane1);
+        jPanel4.add(scrollSalidas);
 
         areaOpciones.addTab("Consolo Salida", jPanel4);
 
@@ -612,11 +625,11 @@ public void analizar() throws IOException
         
         //interpretarcjs(texto, this);
         
-        
+        lanzarCjs();
                         
         /*Agregamos el panel a nuestro scroll(en pagina vacía).*/
         scroll.add(panelPrincipal);
-        limpiarSalidas();
+        
         imprimirReporteLexico();
         imprimirResultado();
         imprimirLexicos();
@@ -625,8 +638,32 @@ public void analizar() throws IOException
         mostrarChtml();
         mostrarCjs();
 } 
+    
+    public void interprestarCjs(String path) throws FileNotFoundException
+    {
+        InputStream is = new FileInputStream(path);
+        Reader reader = new InputStreamReader(is);        
+        lexico_cjs lex=new  lexico_cjs(new BufferedReader(reader));
+        sintactico_cjs sintactico=new sintactico_cjs(lex);
+        try {
+            sintactico.parse();
+            if(sintactico.Raiz!=null){
+                //graficar.graficar(sintactico.Raiz, "prueba");
+                System.out.println("graficado");
+                
+                ejecucion=new  Execute(this);
+                ejecucion.addVariables_Funciones(sintactico.Raiz);
+                ejecucion.InitialExecute();
+                
 
-
+                
+                
+                //System.out.print("finejecucion");
+            }
+        } catch (Exception ex) {
+            //Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
 
     public static void interpretarccss(String path) {
         Source.CCSS.Analizadores.sintacticoCCSS pars;
@@ -794,6 +831,34 @@ public void analizarArchivos()
             }                   
       }
 }
+
+
+public void lanzarCjs() throws FileNotFoundException
+{
+      String nombre="";
+      for(String texto: archivos)
+      {                    
+            StringTokenizer token  = new StringTokenizer(texto, ".");
+            String tipo ="";
+            while (token.hasMoreTokens()) 
+            {
+                    tipo = token.nextToken();                
+            }          
+            switch(tipo)
+            {
+                case "ccss":
+                    /*Quitar lo static y poner que nos devuelva la lista.*/
+                    //interpretarccss(texto);
+                    break;
+                case "cjs":
+                    this.pathCjs = texto;
+                    interprestarCjs(texto);
+                    break;   
+            }                   
+      }
+}
+
+
 public void mostrarChtml()
 {
       File archivo = null;
@@ -3086,8 +3151,8 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 Boton boton =(Boton)aux.getValor();                
                 boton.setPreferredSize(new java.awt.Dimension(boton.getAncho(),boton.getAlto()));                  
                 boton.setBounds(x, y, boton.getAncho(),boton.getAlto()); 
-                boton.removeMouseListener(mouseListener);
-                boton.addMouseListener(mouseListener);     
+                boton.removeMouseListener(mouseListenerBoton);
+                boton.addMouseListener(mouseListenerBoton);     
                 //System.out.println("Objeto insertado "+aux.getTipo()+" \tx: " +x + "\ty: "+ y);}
                 aplicarEstilo(aux, contenedor);
                 //aplicarObservador(aux);
@@ -3379,8 +3444,8 @@ public void InterfazTabla(Tab contenedor)
                 Boton boton =(Boton)aux.getValor();                
                 boton.setPreferredSize(new java.awt.Dimension(anchoCelda,altoCelda));
                 boton.setBounds(x, y,anchoCelda, altoCelda);   
-                boton.removeMouseListener(mouseListener);
-                boton.addMouseListener(mouseListener);                   
+                boton.removeMouseListener(mouseListenerBoton);
+                boton.addMouseListener(mouseListenerBoton);                   
                 posicionTabla(anchoCelda, altoCelda,  contenedor, saltoY, x, y,anchoMaximo,altoMaximo);  
                 aplicarEstilo(aux,contenedor);
                 contenedor.add(boton);
@@ -3904,6 +3969,34 @@ private static boolean esNumero(String cadena){
     }  
     
     
+    
+    
+    public void imprimirSalidaConsola()
+    {                
+        
+        JTable tablaSalida = new JTable();        
+        DefaultTableModel filasSalida = new DefaultTableModel();        
+        filasSalida.addColumn("Archivo");
+        filasSalida.addColumn("Línea");
+        filasSalida.addColumn("Columna");
+        filasSalida.addColumn("Salida");             
+        filasSalida.addRow(new String[]{"Archivo","Linea","Columna","Salida"});
+        tablaSalida.setModel(filasSalida);        
+        
+
+        for(Salida out: this.listaConsola)
+        {
+            filasSalida.addRow(new Object[]{out.getArchivo(), out.getLinea(), out.getColumna(), out.getSalida()});            
+        }
+
+        JPanel salidaPanel = new JPanel();
+        salidaPanel.add(tablaSalida);
+        scrollSalidas.add(salidaPanel);
+        
+        //System.out.println(temporal);                        
+    }    
+    
+    
     @Override
     public void actionPerformed(ActionEvent evento)
     {
@@ -3934,7 +4027,7 @@ private static boolean esNumero(String cadena){
     
     
     
-    MouseListener mouseListener= new MouseListener() 
+    MouseListener mouseListenerBoton= new MouseListener() 
     {
 
         @Override
@@ -3963,7 +4056,8 @@ private static boolean esNumero(String cadena){
 
             if(!boton.getMetodo().equals(""))
             {
-                Mensaje("Llamada a funcion.",boton.getMetodo());
+                //Mensaje("Llamada a funcion.",boton.getMetodo());                
+                ejecucion.Executemetodo(boton.getMetodo().substring(0,boton.getMetodo().length()-2));
             }
                        
         }
@@ -5673,7 +5767,18 @@ private static boolean esNumero(String cadena){
     }
     
     
+    public void mensajeEmergente(String titulo, String mensaje)
+    {
+        JOptionPane.showMessageDialog(this, mensaje, titulo, HEIGHT);
+    }
     
+    
+    public void agregarSalidaConsola(String path, int linea, int col, String out)
+    {
+        Salida nueva = new Salida(path, linea, col, out);
+        listaConsola.add(nueva);
+        //String path, int linea, int col, String out
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
@@ -5699,7 +5804,6 @@ private static boolean esNumero(String cadena){
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -5710,6 +5814,7 @@ private static boolean esNumero(String cadena){
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel scroll;
     private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JScrollPane scrollSalidas;
     private javax.swing.JTable tablaSalida;
     private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables

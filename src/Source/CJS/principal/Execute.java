@@ -5,6 +5,7 @@
  */
 package Source.CJS.principal;
 
+import Principal.Pagina;
 import Source.CJS.Analizadores.Terror;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -24,6 +25,9 @@ public class Execute {
     public static LinkedList<Terror> TablaES = new LinkedList<Terror>();
     public ArrayList<Nodo> inicial;
     public ArrayList<Nodo> obj_temporal;
+    
+    //***
+    public Pagina page;
     
     public String path;
     String nameMetod;
@@ -60,6 +64,25 @@ public class Execute {
         obj_temporal=new ArrayList<>();
         
     }
+    
+    public Execute(Pagina page) {
+        
+        tablaLocal = new Hashtable<>();
+        tablaGlobal = new Hashtable<>();
+        
+        inicial = new ArrayList<>();
+        operar = new Operacion();
+        //executeArray = new ExecuteArray();
+        nameMetod = "";
+        retorna = null;
+        
+        retorno = false;
+        path = "";
+        
+        tablitaObjetos = new Hashtable<>();
+        obj_temporal=new ArrayList<>();
+        this.page = page;
+    }    
     
     @SuppressWarnings("UnusedAssignment")
     public Simbolo addVariables_Funciones(Nodo raiz) {
@@ -1059,7 +1082,7 @@ public class Execute {
         //recorremos tabla Global
         
 
-        if (tablaGlobal.containsKey(idMetodo)) {
+        if (tablaGlobal.containsKey(idMetodo.toLowerCase())) {
             Simbolo main_ = tablaGlobal.get(idMetodo);
             nameMetod = idMetodo;
             exit = false;
@@ -1573,12 +1596,14 @@ public class Execute {
                 
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("Print( " + expr.value + " );");
+                page.agregarSalidaConsola(page.pathCjs, 0, 0, expr.value);
                 //Consola.writeln(expr.value);
                 break;
             }
             case "MENSAJE":{
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
+                page.mensajeEmergente("Mensaje", expr.value);
             }
             case "MIENTRAS": {
                 exit = false;
