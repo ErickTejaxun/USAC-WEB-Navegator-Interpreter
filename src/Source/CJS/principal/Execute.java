@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,6 +7,7 @@
 package Source.CJS.principal;
 
 import Principal.Pagina;
+import Principal.Navegador;
 import Source.CJS.Analizadores.Terror;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -331,7 +333,7 @@ public class Execute {
                 Simbolo tipo=Expre(raiz.hijos.get(0));/////////////////////
                 String namefucion="";
                     ///////////////////////////////////////////////////tipo de vento
-                if(raiz.hijos.get(1).token.equals("FUN")){
+                if(raiz.hijos.get(1).token.equals("FUNC")){
                     Nodo funcion=raiz.hijos.get(1);
                     
                     
@@ -390,7 +392,7 @@ public class Execute {
                 Simbolo tipo=Expre(raiz.hijos.get(1));
                 String Namefuncion="";
                 
-                if(raiz.hijos.get(2).token.equals("FUN")){
+                if(raiz.hijos.get(2).token.equals("FUNC")){
                     Nodo funcion=raiz.hijos.get(2);
                     
                     
@@ -1258,7 +1260,7 @@ public class Execute {
                 Simbolo tipo=Expre(root.hijos.get(0));/////////////////////
                 String namefucion="";
                     ///////////////////////////////////////////////////tipo de vento
-                if(root.hijos.get(1).token.equals("FUN")){
+                if(root.hijos.get(1).token.equals("FUNC")){
                     Nodo funcion=root.hijos.get(1);
                     
                     
@@ -1317,7 +1319,7 @@ public class Execute {
                 Simbolo tipo=Expre(root.hijos.get(1));
                 String Namefuncion="";
                 
-                if(root.hijos.get(2).token.equals("FUN")){
+                if(root.hijos.get(2).token.equals("FUNC")){
                     Nodo funcion=root.hijos.get(2);
                     
                     
@@ -1604,6 +1606,7 @@ public class Execute {
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
                 //page.mensajeEmergente("Mensaje", expr.value);
+                Navegador.mensaje(expr.value);
             }
             case "MIENTRAS": {
                 exit = false;
@@ -1796,13 +1799,19 @@ public class Execute {
     }
     private void asignacion(Simbolo variable, Nodo root, Simbolo valor) {
         
-        if (operar.casteoAsignacion(variable, valor)) {
+        //if (operar.casteoAsignacion(variable, valor)) {
             variable.value = valor.value;
             variable.tipe=valor.tipe;
-        } else {
-            msjError(root, " no es posible realizar la asignacion,\n porque no se puede castear");
-            System.out.println("Error en asignacion no se puede asignar");
-        }
+            variable.isobjeto=valor.isobjeto;
+            variable.existe=valor.existe;
+            variable.tamvec=valor.tamvec;
+            variable.arreglo=valor.arreglo;
+            variable.tipoarreglo=valor.tipoarreglo;
+            variable.isArray=valor.isArray;
+        //} else {
+            //msjError(root, " no es posible realizar la asignacion,\n porque no se puede castear");
+            //System.out.println("Error en asignacion no se puede asignar");
+        //}
     }
 
     private boolean incrementar(Nodo root){

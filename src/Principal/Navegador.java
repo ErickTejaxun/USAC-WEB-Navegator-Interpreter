@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
@@ -13,10 +14,11 @@ public class Navegador implements ActionListener{
 
     public static JButton botonAgregar = new JButton("+");
     final static JTabbedPane contenedorPaginas = new JTabbedPane();
+    public static JFrame ventana;
 
     public static void main(String[] args) 
     {
-        JFrame ventana = new JFrame();
+        ventana = new JFrame();
         ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         contenedorPaginas.addTab("", null, new JScrollPane());
@@ -39,6 +41,12 @@ public class Navegador implements ActionListener{
         
         
     }
+    
+    public static void mensaje(String mensaje)
+    {
+        JOptionPane.showMessageDialog(ventana, mensaje, "Mensaje", 0);
+    }
+    
 
     public static void addButtonToTab(final JTabbedPane tabEntity) 
     {

@@ -106,7 +106,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     public Panel panelPrincipal = new Panel();
     public Execute ejecucion;
     
-    public String pathCjs="";
+    public String pathCjs="";    
     
     
     //JScrollPane scroll = new JScrollPane();
@@ -637,6 +637,11 @@ public void analizar() throws IOException
         imprimirSemanticos(); 
         mostrarChtml();
         mostrarCjs();
+        
+        
+        
+        //
+        //ejecucion.page = this;        
 } 
     
     public void interprestarCjs(String path) throws FileNotFoundException
@@ -652,6 +657,7 @@ public void analizar() throws IOException
                 System.out.println("graficado");
                 
                 ejecucion=new  Execute(this);
+                ejecucion.page = this;
                 ejecucion.addVariables_Funciones(sintactico.Raiz);
                 ejecucion.InitialExecute();
                 
@@ -3364,7 +3370,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 aplicarEstilo(aux, contenedor);
                 contenedor.add(tabla);
                 //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
-                val = posicionPanel(tabla.getAncho(), tabla.getAlto(),  contenedor, saltoY, x, y); 
+                val = posicionPanel(tabla.getWidth(), tabla.getHeight(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
                 saltoY = val[2];                 
@@ -4059,8 +4065,11 @@ private static boolean esNumero(String cadena){
                 //Mensaje("Llamada a funcion.",boton.getMetodo());   
                 if(boton.getMetodo().length()>4)
                 {
-                    mensajeEmergente("Metodo", boton.getMetodo());
-                    ejecucion.Executemetodo(boton.getMetodo().substring(0,boton.getMetodo().length()-2));
+                    //mensajeEmergente("Metodo", boton.getMetodo());
+                    String metodo = boton.getMetodo().substring(0,boton.getMetodo().length()-2);
+                    //mensajeEmergente("Metodo", metodo);
+                    if(ejecucion!=null){ejecucion.Executemetodo(metodo);}
+                    
                 }
                 
             }
