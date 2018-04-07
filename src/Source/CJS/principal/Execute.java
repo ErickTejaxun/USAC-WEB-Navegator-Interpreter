@@ -14,6 +14,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.StringTokenizer;
 import javax.swing.JTextArea;
 import javax.xml.bind.ParseConversionEvent;
 
@@ -589,8 +590,11 @@ public class Execute {
                 ///////////////////////////////////////////////////////////////////////////////
                 //buscar objeto
                 boolean existeobjeto=false;
+                //existeobjeto=page.existeElemento(objj.value,page.elementos);
                 
                 if (existeobjeto) {
+                    objj.existe=true;
+                    objj.isobjeto=true;
                     asignacion(var, raiz, objj);
                     
                 }else {
@@ -610,6 +614,8 @@ public class Execute {
                 Simbolo valor=Expre(raiz.hijos.get(2));
                 
                 if (var.isobjeto && var.existe) {
+                    //page.modificarAtributo(var.value, tipo.value, valor.value);
+                    
                     ///modificar objeto chtml
                     //
                     //
@@ -1137,6 +1143,8 @@ public class Execute {
                     
                     valor.isobjeto = ejecut.retorna.isobjeto;
                     valor.acceso = ejecut.retorna.acceso;
+                    valor.existe=ejecut.retorna.existe;
+                    valor.tamvec=ejecut.retorna.tamvec;
                     if (valor.isobjeto) {
                         valor.atributos = ejecut.retorna.atributos;
                     }
@@ -1406,8 +1414,9 @@ public class Execute {
                     
                     try {
                         if(pos.tipe.equals("double") && var.isArray){
-                            
-                            int i=Integer.valueOf(pos.value);
+                            StringTokenizer vv1 = new StringTokenizer(pos.value, ".");
+                            String v1 = vv1.nextToken();
+                            int i=Integer.valueOf(v1);
                             if(i<var.tamvec){
                             var.tipoarreglo.set(i, value.tipe);
                             var.arreglo.set(i, value.value);
@@ -1598,7 +1607,7 @@ public class Execute {
                 
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("Print( " + expr.value + " );");
-                page.agregarSalidaConsola(page.pathCjs, 0, 0, expr.value);
+                //page.agregarSalidaConsola(page.pathCjs, 0, 0, expr.value);
                 //Consola.writeln(expr.value);
                 break;
             }
@@ -1606,7 +1615,9 @@ public class Execute {
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
                 //page.mensajeEmergente("Mensaje", expr.value);
-                Navegador.mensaje(expr.value);
+                //Navegador.mensaje(expr.value);
+                
+                break;
             }
             case "MIENTRAS": {
                 exit = false;
@@ -1802,12 +1813,14 @@ public class Execute {
         //if (operar.casteoAsignacion(variable, valor)) {
             variable.value = valor.value;
             variable.tipe=valor.tipe;
+            if(!variable.isArray){
             variable.isobjeto=valor.isobjeto;
             variable.existe=valor.existe;
             variable.tamvec=valor.tamvec;
             variable.arreglo=valor.arreglo;
             variable.tipoarreglo=valor.tipoarreglo;
             variable.isArray=valor.isArray;
+            }
         //} else {
             //msjError(root, " no es posible realizar la asignacion,\n porque no se puede castear");
             //System.out.println("Error en asignacion no se puede asignar");

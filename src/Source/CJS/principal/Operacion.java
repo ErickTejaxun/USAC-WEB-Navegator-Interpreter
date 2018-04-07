@@ -236,7 +236,7 @@ public class Operacion {
         if(val1.tipe.equals("double")&& val2.tipe.equals("double")){            
             if(val1.value.equals("0") || val2.value.equals("0")){
                 StringTokenizer vv1 = new StringTokenizer(val1.value, ".");
-                StringTokenizer vv2 = new StringTokenizer(val1.value, ".");
+                StringTokenizer vv2 = new StringTokenizer(val2.value, ".");
                 String v1 = vv1.nextToken();
                 String v2 = vv2.nextToken();
                 //System.out.println(vv1+":"+vv2);
@@ -261,7 +261,7 @@ public class Operacion {
         if(val1.tipe.equals("double")&& val2.tipe.equals("double")){            
             if(val1.value.equals("0") || val2.value.equals("0")){
                 StringTokenizer vv1 = new StringTokenizer(val1.value, ".");
-                StringTokenizer vv2 = new StringTokenizer(val1.value, ".");
+                StringTokenizer vv2 = new StringTokenizer(val2.value, ".");
                 String v1 = vv1.nextToken();
                 String v2 = vv2.nextToken();
                 //System.out.println(vv1+":"+vv2);
