@@ -590,7 +590,7 @@ public class Execute {
                 ///////////////////////////////////////////////////////////////////////////////
                 //buscar objeto
                 boolean existeobjeto=false;
-                //existeobjeto=page.existeElemento(objj.value,page.elementos);
+                existeobjeto=page.existeElemento(objj.value,page.elementos);
                 
                 if (existeobjeto) {
                     objj.existe=true;
@@ -614,7 +614,7 @@ public class Execute {
                 Simbolo valor=Expre(raiz.hijos.get(2));
                 
                 if (var.isobjeto && var.existe) {
-                    //page.modificarAtributo(var.value, tipo.value, valor.value);
+                    page.modificarAtributo(var.value, tipo.value, valor.value);
                     
                     ///modificar objeto chtml
                     //
@@ -635,9 +635,10 @@ public class Execute {
                 
                 //buscar objeto
                 boolean existeobjeto=false;
-                
+                existeobjeto=page.existeElemento(objeto.value,page.elementos);
                 if (existeobjeto) {
                     //modificarlo
+                    page.modificarAtributo(objeto.value, tipo.value, valor.value);
                     
                 }else {
                     msjError(raiz, "Objeto CHTML no existe");

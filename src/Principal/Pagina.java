@@ -5775,9 +5775,10 @@ private static boolean esNumero(String cadena){
     }
     
     
-    public void modificarAtributo(String id, String atributo, String valor)
+    public void modificarAtributo(String id, String atributo, Object valor)
     {
-        modAtributo(id, elementos, atributo, valor);        
+        modAtributo(id, elementos, atributo, valor);
+        Interfaz(panelPrincipal);
     }
     
     
