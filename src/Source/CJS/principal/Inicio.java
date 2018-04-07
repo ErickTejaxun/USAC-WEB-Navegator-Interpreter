@@ -102,6 +102,14 @@ public class Inicio extends javax.swing.JFrame {
                 ejecucion.addVariables_Funciones(sintactico.Raiz);
                 ejecucion.InitialExecute();
                 
+                //ejecucion.Executemetodo("operarr7");
+                
+                //ejecucion.Executemetodo("operarr8");
+
+                //ejecucion.Executemetodo("operarmas");
+                ejecucion.Executemetodo("enviar");
+                ejecucion.Executemetodo("activarconexion");
+                
                 //System.out.print("finejecucion");
             }
         } catch (Exception ex) {
