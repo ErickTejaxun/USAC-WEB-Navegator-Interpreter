@@ -1,1030 +1,1030 @@
-digraph lista{ rankdir=TB;node [shape = box, style=rounded]; nodo267121027[label="INICIO Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo267121027"-> "nodo1145484482"
-nodo1145484482[label="Lista Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1145484482"-> "nodo1118278129"
-"nodo1145484482"-> "nodo1296833237"
-nodo1118278129[label="Lista Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1118278129"-> "nodo494640406"
-"nodo1118278129"-> "nodo1818942175"
-nodo494640406[label="Lista Definiciones Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo494640406"-> "nodo305985210"
-nodo305985210[label="Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo305985210"-> "nodo1066126490"
-"nodo305985210"-> "nodo2128176464"
-nodo1066126490[label="formulario_inicial  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2128176464[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2128176464"-> "nodo1155527798"
-"nodo2128176464"-> "nodo824394609"
-nodo1155527798[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1155527798"-> "nodo1345169107"
-"nodo1155527798"-> "nodo1701558883"
-nodo1345169107[label="Elementos Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1345169107"-> "nodo1579982588"
-nodo1579982588[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1579982588"-> "nodo1975481987"
-"nodo1579982588"-> "nodo1218010585"
-nodo1975481987[label="grupoPaneles  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1218010585[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1218010585"-> "nodo1889095179"
-"nodo1218010585"-> "nodo1257829786"
-nodo1889095179[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1889095179"-> "nodo1149081896"
-"nodo1889095179"-> "nodo1183343595"
-nodo1149081896[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1149081896"-> "nodo2086376487"
-"nodo1149081896"-> "nodo1904405011"
-nodo2086376487[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2086376487"-> "nodo1495177682"
-"nodo2086376487"-> "nodo1552690721"
-nodo1495177682[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1495177682"-> "nodo2094424891"
-"nodo1495177682"-> "nodo451071168"
-nodo2094424891[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2094424891"-> "nodo924780103"
-nodo924780103[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo924780103"-> "nodo174050211"
-"nodo924780103"-> "nodo1163902568"
-nodo174050211[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1163902568[label="izquierda  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo451071168[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo451071168"-> "nodo1230499535"
-"nodo451071168"-> "nodo104199324"
-nodo1230499535[label="Visible Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo104199324[label="TRUE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1552690721[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1552690721"-> "nodo1925391658"
-"nodo1552690721"-> "nodo1247242724"
-nodo1925391658[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1247242724[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1904405011[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1904405011"-> "nodo1015072759"
-"nodo1904405011"-> "nodo364398063"
-"nodo1904405011"-> "nodo2126104583"
-"nodo1904405011"-> "nodo265328253"
-nodo1015072759[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo364398063[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo364398063"-> "nodo894785295"
-"nodo364398063"-> "nodo1653996407"
-nodo894785295[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1653996407[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2126104583[label="\"#ffffff\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo265328253[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1183343595[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1183343595"-> "nodo1390214866"
-"nodo1183343595"-> "nodo1496643978"
-"nodo1183343595"-> "nodo1179005068"
-"nodo1183343595"-> "nodo197469552"
-nodo1390214866[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1496643978[label="-  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1496643978"-> "nodo1054498996"
-"nodo1496643978"-> "nodo1088173644"
-nodo1054498996[label="/  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1054498996"-> "nodo938065035"
-"nodo1054498996"-> "nodo354808227"
-nodo938065035[label="10  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo354808227[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1088173644[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1179005068[label="\"blue\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo197469552[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1257829786[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1257829786"-> "nodo2014833779"
-"nodo1257829786"-> "nodo1498991467"
-nodo2014833779[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1498991467[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1701558883[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1701558883"-> "nodo590297391"
-"nodo1701558883"-> "nodo431844352"
-nodo590297391[label="grupo_cajas_1  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo431844352[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo431844352"-> "nodo1586396976"
-"nodo431844352"-> "nodo1100149785"
-nodo1586396976[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1586396976"-> "nodo464407365"
-"nodo1586396976"-> "nodo1761737052"
-nodo464407365[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo464407365"-> "nodo1155234995"
-"nodo464407365"-> "nodo314534413"
-nodo1155234995[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1155234995"-> "nodo2065887100"
-"nodo1155234995"-> "nodo495919709"
-nodo2065887100[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2065887100"-> "nodo45018043"
-"nodo2065887100"-> "nodo1797789409"
-nodo45018043[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo45018043"-> "nodo127753719"
-nodo127753719[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo127753719"-> "nodo1675889299"
-"nodo127753719"-> "nodo383964775"
-nodo1675889299[label="mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo383964775[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1797789409[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1797789409"-> "nodo1037456708"
-"nodo1797789409"-> "nodo1347016172"
-nodo1037456708[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1347016172[label="\"Courier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo495919709[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo495919709"-> "nodo322633188"
-"nodo495919709"-> "nodo325799946"
-nodo322633188[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo325799946[label="13  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo314534413[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo314534413"-> "nodo471354198"
-"nodo314534413"-> "nodo48237452"
-nodo471354198[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo48237452[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1761737052[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1761737052"-> "nodo1181815785"
-"nodo1761737052"-> "nodo257155117"
-nodo1181815785[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo257155117[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1100149785[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1100149785"-> "nodo1364154474"
-"nodo1100149785"-> "nodo1399948708"
-"nodo1100149785"-> "nodo500247160"
-"nodo1100149785"-> "nodo219407207"
-nodo1364154474[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1399948708[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo500247160[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo219407207[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo824394609[label="ID  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo824394609"-> "nodo649356967"
-"nodo824394609"-> "nodo2042076016"
-nodo649356967[label="titulogaleria  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2042076016[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2042076016"-> "nodo1830943956"
-"nodo2042076016"-> "nodo2142970572"
-nodo1830943956[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1830943956"-> "nodo2059395778"
-"nodo1830943956"-> "nodo1058446078"
-nodo2059395778[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2059395778"-> "nodo1572017812"
-"nodo2059395778"-> "nodo2067325612"
-nodo1572017812[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1572017812"-> "nodo2115282683"
-"nodo1572017812"-> "nodo1977483949"
-nodo2115282683[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2115282683"-> "nodo815578420"
-"nodo2115282683"-> "nodo210572297"
-nodo815578420[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo815578420"-> "nodo1467303965"
-nodo1467303965[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1467303965"-> "nodo1379660596"
-"nodo1467303965"-> "nodo127635802"
-"nodo1467303965"-> "nodo1674768636"
-nodo1379660596[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo127635802[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1674768636[label="capital-t  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo210572297[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo210572297"-> "nodo513440059"
-"nodo210572297"-> "nodo330668943"
-nodo513440059[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo330668943[label="\"Courier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1977483949[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1977483949"-> "nodo1224722914"
-"nodo1977483949"-> "nodo1021216017"
-nodo1224722914[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1021216017[label="15.5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2067325612[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2067325612"-> "nodo1908437008"
-"nodo2067325612"-> "nodo1310127172"
-nodo1908437008[label="Texto Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1310127172[label="\"Galerio de Autos mas vendidos\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1058446078[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1058446078"-> "nodo2014348477"
-"nodo1058446078"-> "nodo808349859"
-nodo2014348477[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo808349859[label="izquierda  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2142970572[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2142970572"-> "nodo1109186118"
-"nodo2142970572"-> "nodo1003597461"
-nodo1109186118[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1003597461[label="faLSe  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1818942175[label="Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1818942175"-> "nodo1192812606"
-"nodo1818942175"-> "nodo74459926"
-nodo1192812606[label="Ventas_carritos  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo74459926[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo74459926"-> "nodo553284408"
-"nodo74459926"-> "nodo376030388"
-nodo553284408[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo553284408"-> "nodo384884567"
-"nodo553284408"-> "nodo333278724"
-nodo384884567[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo384884567"-> "nodo1624095988"
-"nodo384884567"-> "nodo945395773"
-nodo1624095988[label="Elementos Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1624095988"-> "nodo683926022"
-nodo683926022[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo683926022"-> "nodo1352008788"
-"nodo683926022"-> "nodo1571891374"
-nodo1352008788[label="grupoCarrito  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1571891374[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1571891374"-> "nodo694016853"
-"nodo1571891374"-> "nodo515493802"
-nodo694016853[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo694016853"-> "nodo2121125005"
-"nodo694016853"-> "nodo718110646"
-nodo2121125005[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2121125005"-> "nodo1829609161"
-"nodo2121125005"-> "nodo1033492573"
-nodo1829609161[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1829609161"-> "nodo755000007"
-"nodo1829609161"-> "nodo1827772446"
-nodo755000007[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo755000007"-> "nodo1837869215"
-nodo1837869215[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1837869215"-> "nodo514051651"
-"nodo1837869215"-> "nodo815497482"
-nodo514051651[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo815497482[label="centrado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1827772446[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1827772446"-> "nodo1355472495"
-"nodo1827772446"-> "nodo1614105529"
-nodo1355472495[label="Visible Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1614105529[label="TRUE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1033492573[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1033492573"-> "nodo1625571370"
-"nodo1033492573"-> "nodo211488493"
-nodo1625571370[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo211488493[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo718110646[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo718110646"-> "nodo178553015"
-"nodo718110646"-> "nodo1074166489"
-"nodo718110646"-> "nodo44140515"
-"nodo718110646"-> "nodo1444482364"
-nodo178553015[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1074166489[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo44140515[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1444482364[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo515493802[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo515493802"-> "nodo2014748272"
-"nodo515493802"-> "nodo196469529"
-nodo2014748272[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo196469529[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo945395773[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo945395773"-> "nodo86373139"
-"nodo945395773"-> "nodo466320998"
-nodo86373139[label="grupo_menu  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo466320998[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo466320998"-> "nodo1466074737"
-"nodo466320998"-> "nodo1944783535"
-nodo1466074737[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1466074737"-> "nodo1509741226"
-"nodo1466074737"-> "nodo428130237"
-nodo1509741226[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1509741226"-> "nodo1519842290"
-"nodo1509741226"-> "nodo1896031357"
-nodo1519842290[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1519842290"-> "nodo1314247029"
-"nodo1519842290"-> "nodo1922098773"
-nodo1314247029[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1314247029"-> "nodo536117910"
-"nodo1314247029"-> "nodo2000448985"
-nodo536117910[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo536117910"-> "nodo394449970"
-nodo394449970[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo394449970"-> "nodo1658137305"
-"nodo394449970"-> "nodo1502540839"
-nodo1658137305[label="mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1502540839[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2000448985[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2000448985"-> "nodo1304959082"
-"nodo2000448985"-> "nodo1282041509"
-nodo1304959082[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1282041509[label="\"Courier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1922098773[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1922098773"-> "nodo119672339"
-"nodo1922098773"-> "nodo698613020"
-nodo119672339[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo698613020[label="13  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1896031357[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1896031357"-> "nodo606452490"
-"nodo1896031357"-> "nodo996523621"
-nodo606452490[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo996523621[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo428130237[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo428130237"-> "nodo748711308"
-"nodo428130237"-> "nodo450706969"
-nodo748711308[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo450706969[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1944783535[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1944783535"-> "nodo329853859"
-"nodo1944783535"-> "nodo94976293"
-"nodo1944783535"-> "nodo709556241"
-"nodo1944783535"-> "nodo1502881463"
-nodo329853859[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo94976293[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo709556241[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1502881463[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo333278724[label="ID  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo333278724"-> "nodo62585365"
-"nodo333278724"-> "nodo1335266134"
-nodo62585365[label="panel_carrito  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1335266134[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1335266134"-> "nodo845248709"
-"nodo1335266134"-> "nodo1253589408"
-nodo845248709[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo845248709"-> "nodo503738544"
-"nodo845248709"-> "nodo1697747997"
-nodo503738544[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo503738544"-> "nodo1555001134"
-nodo1555001134[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1555001134"-> "nodo1418891354"
-"nodo1555001134"-> "nodo2042427784"
-nodo1418891354[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo2042427784[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1697747997[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1697747997"-> "nodo281287646"
-"nodo1697747997"-> "nodo926269687"
-"nodo1697747997"-> "nodo2003142155"
-"nodo1697747997"-> "nodo1770738134"
-nodo281287646[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo926269687[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2003142155[label="\"green\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1770738134[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1253589408[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1253589408"-> "nodo1495379410"
-"nodo1253589408"-> "nodo1074461817"
-nodo1495379410[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1074461817[label="faLSe  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo376030388[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo376030388"-> "nodo461664173"
-"nodo376030388"-> "nodo682789098"
-nodo461664173[label="negrita  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo682789098[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo682789098"-> "nodo2083127059"
-"nodo682789098"-> "nodo1800879579"
-nodo2083127059[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2083127059"-> "nodo1402392091"
-"nodo2083127059"-> "nodo1876945243"
-nodo1402392091[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1402392091"-> "nodo1555907284"
-"nodo1402392091"-> "nodo248911229"
-nodo1555907284[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1555907284"-> "nodo1809183914"
-nodo1809183914[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1809183914"-> "nodo2068864442"
-"nodo1809183914"-> "nodo1296899046"
-"nodo1809183914"-> "nodo1930330831"
-nodo2068864442[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1296899046[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1930330831[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo248911229[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo248911229"-> "nodo934955168"
-"nodo248911229"-> "nodo1325301344"
-nodo934955168[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1325301344[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1876945243[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1876945243"-> "nodo1808391794"
-"nodo1876945243"-> "nodo1817588030"
-nodo1808391794[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1817588030[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1817588030"-> "nodo156015452"
-"nodo1817588030"-> "nodo880601451"
-nodo156015452[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo156015452"-> "nodo291740632"
-"nodo156015452"-> "nodo1289848587"
-nodo291740632[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1289848587[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo880601451[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1800879579[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1800879579"-> "nodo555377584"
-"nodo1800879579"-> "nodo1929306441"
-nodo555377584[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1929306441[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1296833237[label="Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1296833237"-> "nodo2135824789"
-"nodo1296833237"-> "nodo1071055016"
-nodo2135824789[label="Formular_informacion  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1071055016[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1071055016"-> "nodo1294136065"
-"nodo1071055016"-> "nodo1221830469"
-nodo1294136065[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1294136065"-> "nodo1205771643"
-"nodo1294136065"-> "nodo1074468712"
-nodo1205771643[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1205771643"-> "nodo451628691"
-"nodo1205771643"-> "nodo1339505412"
-nodo451628691[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo451628691"-> "nodo2094088896"
-"nodo451628691"-> "nodo1694083685"
-nodo2094088896[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2094088896"-> "nodo614924223"
-"nodo2094088896"-> "nodo1382018868"
-nodo614924223[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo614924223"-> "nodo611217661"
-"nodo614924223"-> "nodo233659543"
-nodo611217661[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo611217661"-> "nodo514130322"
-"nodo611217661"-> "nodo867068733"
-nodo514130322[label="Elementos Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo514130322"-> "nodo1678777389"
-nodo1678777389[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1678777389"-> "nodo58654172"
-"nodo1678777389"-> "nodo903988656"
-nodo58654172[label="panel_menu  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo903988656[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo903988656"-> "nodo1968617394"
-"nodo903988656"-> "nodo289619009"
-nodo1968617394[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1968617394"-> "nodo1697096616"
-"nodo1968617394"-> "nodo1590699769"
-nodo1697096616[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1697096616"-> "nodo519823798"
-"nodo1697096616"-> "nodo382887708"
-nodo519823798[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo519823798"-> "nodo1320205453"
-"nodo519823798"-> "nodo294173772"
-nodo1320205453[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1320205453"-> "nodo1346308506"
-"nodo1320205453"-> "nodo1431338502"
-nodo1346308506[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1346308506"-> "nodo516945141"
-"nodo1346308506"-> "nodo1248940476"
-nodo516945141[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo516945141"-> "nodo1646981809"
-nodo1646981809[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1646981809"-> "nodo878448828"
-"nodo1646981809"-> "nodo1440035486"
-"nodo1646981809"-> "nodo367621417"
-nodo878448828[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1440035486[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo367621417[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1248940476[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1248940476"-> "nodo543400543"
-"nodo1248940476"-> "nodo1961795359"
-nodo543400543[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1961795359[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1431338502[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1431338502"-> "nodo139657950"
-"nodo1431338502"-> "nodo1456307904"
-nodo139657950[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1456307904[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1456307904"-> "nodo1795247900"
-"nodo1456307904"-> "nodo1805071108"
-nodo1795247900[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1795247900"-> "nodo2067962202"
-"nodo1795247900"-> "nodo1187304332"
-nodo2067962202[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1187304332[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1805071108[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo294173772[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo294173772"-> "nodo668736999"
-"nodo294173772"-> "nodo1971393803"
-nodo668736999[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1971393803[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo382887708[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo382887708"-> "nodo442944168"
-"nodo382887708"-> "nodo2061382363"
-nodo442944168[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo2061382363[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1590699769[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1590699769"-> "nodo1034562370"
-"nodo1590699769"-> "nodo1082017969"
-"nodo1590699769"-> "nodo1826744732"
-"nodo1590699769"-> "nodo1730299441"
-nodo1034562370[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1082017969[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1082017969"-> "nodo197038508"
-"nodo1082017969"-> "nodo968326058"
-nodo197038508[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo968326058[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1826744732[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1730299441[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo289619009[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo289619009"-> "nodo1517930505"
-"nodo289619009"-> "nodo798953145"
-nodo1517930505[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo798953145[label="derecha  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo867068733[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo867068733"-> "nodo1356056855"
-"nodo867068733"-> "nodo1388020364"
-nodo1356056855[label="panel_info  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1388020364[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1388020364"-> "nodo1184248146"
-"nodo1388020364"-> "nodo296424959"
-nodo1184248146[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1184248146"-> "nodo1610542508"
-"nodo1184248146"-> "nodo1373612861"
-nodo1610542508[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1610542508"-> "nodo640945397"
-"nodo1610542508"-> "nodo1878647073"
-nodo640945397[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo640945397"-> "nodo1203954431"
-"nodo640945397"-> "nodo1801990009"
-nodo1203954431[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1203954431"-> "nodo1841157445"
-"nodo1203954431"-> "nodo1299042618"
-nodo1841157445[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1841157445"-> "nodo501745522"
-"nodo1841157445"-> "nodo936501329"
-nodo501745522[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo501745522"-> "nodo885333011"
-nodo885333011[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo885333011"-> "nodo394457008"
-"nodo885333011"-> "nodo1250732453"
-nodo394457008[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1250732453[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo936501329[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo936501329"-> "nodo1919355853"
-"nodo936501329"-> "nodo1860088854"
-nodo1919355853[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1860088854[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1299042618[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1299042618"-> "nodo1847666962"
-"nodo1299042618"-> "nodo1095722226"
-nodo1847666962[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1095722226[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1095722226"-> "nodo196879989"
-"nodo1095722226"-> "nodo274291984"
-nodo196879989[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo196879989"-> "nodo2002231216"
-"nodo196879989"-> "nodo1300569436"
-nodo2002231216[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1300569436[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo274291984[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1801990009[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1801990009"-> "nodo668996887"
-"nodo1801990009"-> "nodo2097900838"
-nodo668996887[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo2097900838[label="\"#ff00FF\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1878647073[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1878647073"-> "nodo921356072"
-"nodo1878647073"-> "nodo1407206228"
-nodo921356072[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1407206228[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1373612861[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1373612861"-> "nodo1947188370"
-"nodo1373612861"-> "nodo1389071720"
-"nodo1373612861"-> "nodo855163806"
-"nodo1373612861"-> "nodo1674828918"
-nodo1947188370[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1389071720[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1389071720"-> "nodo1781598130"
-"nodo1389071720"-> "nodo1679783761"
-nodo1781598130[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1679783761[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo855163806[label="\"blue\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1674828918[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo296424959[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo296424959"-> "nodo269462655"
-"nodo296424959"-> "nodo1833099876"
-nodo269462655[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1833099876[label="izquierda  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo233659543[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo233659543"-> "nodo254567657"
-"nodo233659543"-> "nodo269889442"
-nodo254567657[label="panel_mision  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo269889442[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo269889442"-> "nodo2107053451"
-"nodo269889442"-> "nodo121411999"
-nodo2107053451[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2107053451"-> "nodo1809563325"
-"nodo2107053451"-> "nodo1242691419"
-nodo1809563325[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1809563325"-> "nodo258967775"
-"nodo1809563325"-> "nodo1820072140"
-nodo258967775[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo258967775"-> "nodo1516535208"
-"nodo258967775"-> "nodo520807056"
-nodo1516535208[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1516535208"-> "nodo1817229534"
-"nodo1516535208"-> "nodo1625716704"
-nodo1817229534[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1817229534"-> "nodo429313897"
-"nodo1817229534"-> "nodo1371578537"
-nodo429313897[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo429313897"-> "nodo952067079"
-nodo952067079[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo952067079"-> "nodo1807043975"
-"nodo952067079"-> "nodo1148660255"
-nodo1807043975[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1148660255[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1371578537[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1371578537"-> "nodo275124176"
-"nodo1371578537"-> "nodo1396366983"
-nodo275124176[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1396366983[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1625716704[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1625716704"-> "nodo304248850"
-"nodo1625716704"-> "nodo1878564763"
-nodo304248850[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1878564763[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1878564763"-> "nodo1329595707"
-"nodo1878564763"-> "nodo1242248370"
-nodo1329595707[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1329595707"-> "nodo1265121033"
-"nodo1329595707"-> "nodo1623682488"
-nodo1265121033[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1623682488[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1242248370[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo520807056[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo520807056"-> "nodo794940742"
-"nodo520807056"-> "nodo1021102780"
-nodo794940742[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1021102780[label="\"#0000FF\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1820072140[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1820072140"-> "nodo914780753"
-"nodo1820072140"-> "nodo1836544916"
-nodo914780753[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1836544916[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1242691419[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1242691419"-> "nodo1276989593"
-"nodo1242691419"-> "nodo382659212"
-"nodo1242691419"-> "nodo333387518"
-"nodo1242691419"-> "nodo1172454594"
-nodo1276989593[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo382659212[label="-  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo382659212"-> "nodo1667052927"
-"nodo382659212"-> "nodo36055314"
-nodo1667052927[label="8  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo36055314[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo36055314"-> "nodo1764079438"
-"nodo36055314"-> "nodo1031111300"
-nodo1764079438[label="6  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1031111300[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo333387518[label="\"blue\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1172454594[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo121411999[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo121411999"-> "nodo923381400"
-"nodo121411999"-> "nodo81035218"
-nodo923381400[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo81035218[label="centrado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1382018868[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1382018868"-> "nodo1083127745"
-"nodo1382018868"-> "nodo1375730934"
-nodo1083127745[label="panel_vision  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1375730934[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1375730934"-> "nodo737731903"
-"nodo1375730934"-> "nodo217392509"
-nodo737731903[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo737731903"-> "nodo905783837"
-"nodo737731903"-> "nodo457930776"
-nodo905783837[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo905783837"-> "nodo2004264787"
-"nodo905783837"-> "nodo1376631309"
-nodo2004264787[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2004264787"-> "nodo243060627"
-"nodo2004264787"-> "nodo1312292348"
-nodo243060627[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo243060627"-> "nodo213489494"
-"nodo243060627"-> "nodo870029598"
-nodo213489494[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo213489494"-> "nodo1530124449"
-"nodo213489494"-> "nodo714741286"
-nodo1530124449[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1530124449"-> "nodo1784231684"
-nodo1784231684[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1784231684"-> "nodo86331448"
-"nodo1784231684"-> "nodo1075209965"
-nodo86331448[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1075209965[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo714741286[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo714741286"-> "nodo986145775"
-"nodo714741286"-> "nodo419791524"
-nodo986145775[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo419791524[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo870029598[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo870029598"-> "nodo906929452"
-"nodo870029598"-> "nodo1172081678"
-nodo906929452[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1172081678[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1172081678"-> "nodo1149589313"
-"nodo1172081678"-> "nodo1897983447"
-nodo1149589313[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1149589313"-> "nodo843321626"
-"nodo1149589313"-> "nodo333006752"
-nodo843321626[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo333006752[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1897983447[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1312292348[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1312292348"-> "nodo2106078661"
-"nodo1312292348"-> "nodo187707894"
-nodo2106078661[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo187707894[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1376631309[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1376631309"-> "nodo426655051"
-"nodo1376631309"-> "nodo1087606145"
-nodo426655051[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1087606145[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo457930776[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo457930776"-> "nodo2085203523"
-"nodo457930776"-> "nodo1987878845"
-"nodo457930776"-> "nodo504389724"
-"nodo457930776"-> "nodo1123244442"
-nodo2085203523[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1987878845[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1987878845"-> "nodo1945754673"
-"nodo1987878845"-> "nodo1634346116"
-nodo1945754673[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1634346116[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo504389724[label="\"pink\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1123244442[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo217392509[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo217392509"-> "nodo2095430261"
-"nodo217392509"-> "nodo604115962"
-nodo2095430261[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo604115962[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1694083685[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1694083685"-> "nodo430398239"
-"nodo1694083685"-> "nodo702087851"
-nodo430398239[label="titulo  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo702087851[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo702087851"-> "nodo2017342455"
-"nodo702087851"-> "nodo1284989641"
-nodo2017342455[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2017342455"-> "nodo1867233255"
-"nodo2017342455"-> "nodo249969919"
-nodo1867233255[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1867233255"-> "nodo130942815"
-"nodo1867233255"-> "nodo1891150917"
-nodo130942815[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo130942815"-> "nodo1123993914"
-"nodo130942815"-> "nodo2101347422"
-nodo1123993914[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1123993914"-> "nodo180555862"
-"nodo1123993914"-> "nodo1059872719"
-nodo180555862[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo180555862"-> "nodo187688457"
-"nodo180555862"-> "nodo1991274950"
-nodo187688457[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo187688457"-> "nodo1684246246"
-nodo1684246246[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1684246246"-> "nodo963409794"
-"nodo1684246246"-> "nodo1292357896"
-"nodo1684246246"-> "nodo944551727"
-nodo963409794[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1292357896[label="negrilla  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo944551727[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1991274950[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1991274950"-> "nodo1075841662"
-"nodo1991274950"-> "nodo439002527"
-nodo1075841662[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo439002527[label="\"Calibri\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1059872719[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1059872719"-> "nodo1767290947"
-"nodo1059872719"-> "nodo880713609"
-nodo1767290947[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo880713609[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo880713609"-> "nodo1959596162"
-"nodo880713609"-> "nodo998528473"
-nodo1959596162[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1959596162"-> "nodo1733064266"
-"nodo1959596162"-> "nodo655245309"
-nodo1733064266[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo655245309[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo998528473[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2101347422[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2101347422"-> "nodo1004237470"
-"nodo2101347422"-> "nodo577295009"
-nodo1004237470[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo577295009[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1891150917[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1891150917"-> "nodo638717568"
-"nodo1891150917"-> "nodo1890925672"
-nodo638717568[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1890925672[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo249969919[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo249969919"-> "nodo278589282"
-"nodo249969919"-> "nodo1946409482"
-"nodo249969919"-> "nodo1112779780"
-"nodo249969919"-> "nodo459054682"
-nodo278589282[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1946409482[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1946409482"-> "nodo1559925676"
-"nodo1946409482"-> "nodo918802867"
-nodo1559925676[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo918802867[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1112779780[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo459054682[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1284989641[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1284989641"-> "nodo1773103331"
-"nodo1284989641"-> "nodo377390530"
-nodo1773103331[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo377390530[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1339505412[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1339505412"-> "nodo504435538"
-"nodo1339505412"-> "nodo913774442"
-nodo504435538[label="parrafo  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo913774442[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo913774442"-> "nodo613255479"
-"nodo913774442"-> "nodo1178552561"
-nodo613255479[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo613255479"-> "nodo1344428263"
-"nodo613255479"-> "nodo1583405518"
-nodo1344428263[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1344428263"-> "nodo384579332"
-"nodo1344428263"-> "nodo715693544"
-nodo384579332[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo384579332"-> "nodo1745816890"
-"nodo384579332"-> "nodo813242204"
-nodo1745816890[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1745816890"-> "nodo1205490240"
-"nodo1745816890"-> "nodo695455886"
-nodo1205490240[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1205490240"-> "nodo965045831"
-"nodo1205490240"-> "nodo1102990812"
-nodo965045831[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo965045831"-> "nodo1424187385"
-nodo1424187385[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1424187385"-> "nodo1671627339"
-"nodo1424187385"-> "nodo1908850478"
-nodo1671627339[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1908850478[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1102990812[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1102990812"-> "nodo1118162023"
-"nodo1102990812"-> "nodo217538397"
-nodo1118162023[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo217538397[label="\"Calibri\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo695455886[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo695455886"-> "nodo2008917458"
-"nodo695455886"-> "nodo868637636"
-nodo2008917458[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo868637636[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo868637636"-> "nodo1609330479"
-"nodo868637636"-> "nodo1775750712"
-nodo1609330479[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1609330479"-> "nodo1943959013"
-"nodo1609330479"-> "nodo1925650465"
-nodo1943959013[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1925650465[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1775750712[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo813242204[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo813242204"-> "nodo1324258369"
-"nodo813242204"-> "nodo421471658"
-nodo1324258369[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo421471658[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo715693544[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo715693544"-> "nodo435034673"
-"nodo715693544"-> "nodo1403129661"
-nodo435034673[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1403129661[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1583405518[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1583405518"-> "nodo1767167380"
-"nodo1583405518"-> "nodo151424865"
-"nodo1583405518"-> "nodo1615868898"
-"nodo1583405518"-> "nodo600314674"
-nodo1767167380[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo151424865[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo151424865"-> "nodo1820297898"
-"nodo151424865"-> "nodo1371499971"
-nodo1820297898[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1371499971[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1615868898[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo600314674[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1178552561[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1178552561"-> "nodo806456117"
-"nodo1178552561"-> "nodo1403215750"
-nodo806456117[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1403215750[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1074468712[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1074468712"-> "nodo1134146946"
-"nodo1074468712"-> "nodo1776421191"
-nodo1134146946[label="boton_redireccion  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1776421191[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1776421191"-> "nodo1427533677"
-"nodo1776421191"-> "nodo478168358"
-nodo1427533677[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1427533677"-> "nodo314300049"
-"nodo1427533677"-> "nodo1802128816"
-nodo314300049[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo314300049"-> "nodo224471735"
-"nodo314300049"-> "nodo332855112"
-nodo224471735[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo224471735"-> "nodo1595254013"
-"nodo224471735"-> "nodo1714124130"
-nodo1595254013[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1595254013"-> "nodo1645989762"
-"nodo1595254013"-> "nodo1188235326"
-nodo1645989762[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1645989762"-> "nodo882081365"
-"nodo1645989762"-> "nodo162438592"
-nodo882081365[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo882081365"-> "nodo905262248"
-nodo905262248[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo905262248"-> "nodo1807304912"
-"nodo905262248"-> "nodo1148711460"
-nodo1807304912[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1148711460[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo162438592[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo162438592"-> "nodo969553911"
-"nodo162438592"-> "nodo629543954"
-nodo969553911[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo629543954[label="\"Curier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1188235326[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1188235326"-> "nodo81274810"
-"nodo1188235326"-> "nodo2135229399"
-nodo81274810[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo2135229399[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo2135229399"-> "nodo391702087"
-"nodo2135229399"-> "nodo40588858"
-nodo391702087[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo391702087"-> "nodo1204507706"
-"nodo391702087"-> "nodo273132719"
-nodo1204507706[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo273132719[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo40588858[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1714124130[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1714124130"-> "nodo1081940542"
-"nodo1714124130"-> "nodo410996365"
-nodo1081940542[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo410996365[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo332855112[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo332855112"-> "nodo92844860"
-"nodo332855112"-> "nodo679953910"
-nodo92844860[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo679953910[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1802128816[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1802128816"-> "nodo8586802"
-"nodo1802128816"-> "nodo1659517833"
-"nodo1802128816"-> "nodo582706619"
-"nodo1802128816"-> "nodo805383407"
-nodo8586802[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1659517833[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1659517833"-> "nodo673914443"
-"nodo1659517833"-> "nodo464412340"
-nodo673914443[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo464412340[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo582706619[label="\"pink\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo805383407[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo478168358[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo478168358"-> "nodo1648453319"
-"nodo478168358"-> "nodo1537099828"
-nodo1648453319[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1537099828[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1221830469[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1221830469"-> "nodo725081162"
-"nodo1221830469"-> "nodo1116044390"
-nodo725081162[label="tablas  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1116044390[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1116044390"-> "nodo723209647"
-"nodo1116044390"-> "nodo40730384"
-nodo723209647[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo723209647"-> "nodo388839067"
-"nodo723209647"-> "nodo2124553812"
-nodo388839067[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo388839067"-> "nodo254099994"
-"nodo388839067"-> "nodo1717119249"
-nodo254099994[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo254099994"-> "nodo415122095"
-"nodo254099994"-> "nodo1979760466"
-nodo415122095[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo415122095"-> "nodo1393563162"
-"nodo415122095"-> "nodo2083433672"
-nodo1393563162[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1393563162"-> "nodo384774872"
-"nodo1393563162"-> "nodo1701242232"
-nodo384774872[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo384774872"-> "nodo907382536"
-nodo907382536[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo907382536"-> "nodo1062485486"
-"nodo907382536"-> "nodo1346543918"
-nodo1062485486[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1346543918[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1701242232[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1701242232"-> "nodo39703419"
-"nodo1701242232"-> "nodo405430775"
-nodo39703419[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo405430775[label="\"Curier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2083433672[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2083433672"-> "nodo110068817"
-"nodo2083433672"-> "nodo1124142719"
-nodo110068817[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1124142719[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1124142719"-> "nodo799787887"
-"nodo1124142719"-> "nodo1682256564"
-nodo799787887[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo799787887"-> "nodo504532833"
-"nodo799787887"-> "nodo1428883498"
-nodo504532833[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1428883498[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1682256564[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1979760466[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1979760466"-> "nodo615137619"
-"nodo1979760466"-> "nodo1773602784"
-nodo615137619[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1773602784[label="\"black\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1717119249[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo1717119249"-> "nodo1666511920"
-"nodo1717119249"-> "nodo1848887848"
-nodo1666511920[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1848887848[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2124553812[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo2124553812"-> "nodo417709668"
-"nodo2124553812"-> "nodo1228681887"
-"nodo2124553812"-> "nodo219003644"
-"nodo2124553812"-> "nodo2107589631"
-nodo417709668[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo1228681887[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
-"nodo1228681887"-> "nodo1220330678"
-"nodo1228681887"-> "nodo1622978548"
-nodo1220330678[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo1622978548[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo219003644[label="\"pink\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo2107589631[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
-nodo40730384[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-"nodo40730384"-> "nodo8794949"
-"nodo40730384"-> "nodo125896721"
-nodo8794949[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
-nodo125896721[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+digraph lista{ rankdir=TB;node [shape = box, style=rounded]; nodo1991457354[label="INICIO Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1991457354"-> "nodo223745135"
+nodo223745135[label="Lista Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo223745135"-> "nodo1179508968"
+"nodo223745135"-> "nodo1496459305"
+nodo1179508968[label="Lista Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1179508968"-> "nodo918304815"
+"nodo1179508968"-> "nodo200583163"
+nodo918304815[label="Lista Definiciones Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo918304815"-> "nodo571956429"
+nodo571956429[label="Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo571956429"-> "nodo1781287878"
+"nodo571956429"-> "nodo1032223724"
+nodo1781287878[label="formulario_inicial  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1032223724[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1032223724"-> "nodo325310680"
+"nodo1032223724"-> "nodo185208653"
+nodo325310680[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo325310680"-> "nodo57673617"
+"nodo325310680"-> "nodo229065992"
+nodo57673617[label="Elementos Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo57673617"-> "nodo9431420"
+nodo9431420[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo9431420"-> "nodo1537539655"
+"nodo9431420"-> "nodo1483421229"
+nodo1537539655[label="grupoPaneles  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1483421229[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1483421229"-> "nodo1867753261"
+"nodo1483421229"-> "nodo283666354"
+nodo1867753261[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1867753261"-> "nodo1824716078"
+"nodo1867753261"-> "nodo1838775493"
+nodo1824716078[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1824716078"-> "nodo520209556"
+"nodo1824716078"-> "nodo1283974449"
+nodo520209556[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo520209556"-> "nodo932643338"
+"nodo520209556"-> "nodo298725225"
+nodo932643338[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo932643338"-> "nodo16411808"
+"nodo932643338"-> "nodo1931980771"
+nodo16411808[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo16411808"-> "nodo2083484895"
+nodo2083484895[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2083484895"-> "nodo486193492"
+"nodo2083484895"-> "nodo1337350407"
+nodo486193492[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1337350407[label="izquierda  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1931980771[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1931980771"-> "nodo27312037"
+"nodo1931980771"-> "nodo112114370"
+nodo27312037[label="Visible Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo112114370[label="TRUE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo298725225[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo298725225"-> "nodo1339523930"
+"nodo298725225"-> "nodo844400070"
+nodo1339523930[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo844400070[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1283974449[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1283974449"-> "nodo906840510"
+"nodo1283974449"-> "nodo1166449943"
+"nodo1283974449"-> "nodo909646766"
+"nodo1283974449"-> "nodo550814234"
+nodo906840510[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1166449943[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1166449943"-> "nodo2093498119"
+"nodo1166449943"-> "nodo223837100"
+nodo2093498119[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo223837100[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo909646766[label="\"#ffffff\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo550814234[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1838775493[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1838775493"-> "nodo2076501187"
+"nodo1838775493"-> "nodo2105945523"
+"nodo1838775493"-> "nodo1082856707"
+"nodo1838775493"-> "nodo1983351973"
+nodo2076501187[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2105945523[label="-  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo2105945523"-> "nodo705272924"
+"nodo2105945523"-> "nodo1722734363"
+nodo705272924[label="/  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo705272924"-> "nodo2123752896"
+"nodo705272924"-> "nodo873270291"
+nodo2123752896[label="10  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo873270291[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1722734363[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1082856707[label="\"blue\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1983351973[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo283666354[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo283666354"-> "nodo1375772082"
+"nodo283666354"-> "nodo1116118758"
+nodo1375772082[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1116118758[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo229065992[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo229065992"-> "nodo325896339"
+"nodo229065992"-> "nodo1331508089"
+nodo325896339[label="grupo_cajas_1  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1331508089[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1331508089"-> "nodo426170925"
+"nodo1331508089"-> "nodo1868633673"
+nodo426170925[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo426170925"-> "nodo440169318"
+"nodo426170925"-> "nodo1012686243"
+nodo440169318[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo440169318"-> "nodo323248055"
+"nodo440169318"-> "nodo1953546440"
+nodo323248055[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo323248055"-> "nodo229517923"
+"nodo323248055"-> "nodo1405214512"
+nodo229517923[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo229517923"-> "nodo1657379608"
+"nodo229517923"-> "nodo273506569"
+nodo1657379608[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1657379608"-> "nodo1825356881"
+nodo1825356881[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1825356881"-> "nodo824821415"
+"nodo1825356881"-> "nodo521571009"
+nodo824821415[label="mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo521571009[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo273506569[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo273506569"-> "nodo1688790275"
+"nodo273506569"-> "nodo1829757939"
+nodo1688790275[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1829757939[label="\"Courier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1405214512[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1405214512"-> "nodo309070859"
+"nodo1405214512"-> "nodo965200901"
+nodo309070859[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo965200901[label="13  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1953546440[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1953546440"-> "nodo446998219"
+"nodo1953546440"-> "nodo145149463"
+nodo446998219[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo145149463[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1012686243[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1012686243"-> "nodo2061014876"
+"nodo1012686243"-> "nodo2109250534"
+nodo2061014876[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2109250534[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1868633673[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1868633673"-> "nodo1108732004"
+"nodo1868633673"-> "nodo2096975943"
+"nodo1868633673"-> "nodo1109482227"
+"nodo1868633673"-> "nodo2071961338"
+nodo1108732004[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2096975943[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1109482227[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2071961338[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo185208653[label="ID  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo185208653"-> "nodo373559097"
+"nodo185208653"-> "nodo2955998"
+nodo373559097[label="titulogaleria  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2955998[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2955998"-> "nodo1217605354"
+"nodo2955998"-> "nodo1335681356"
+nodo1217605354[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1217605354"-> "nodo2039939649"
+"nodo1217605354"-> "nodo285477959"
+nodo2039939649[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2039939649"-> "nodo1076987123"
+"nodo2039939649"-> "nodo1754241848"
+nodo1076987123[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1076987123"-> "nodo692787554"
+"nodo1076987123"-> "nodo412896824"
+nodo692787554[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo692787554"-> "nodo1413896132"
+"nodo692787554"-> "nodo1074024495"
+nodo1413896132[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1413896132"-> "nodo838193476"
+nodo838193476[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo838193476"-> "nodo1264760012"
+"nodo838193476"-> "nodo771502611"
+"nodo838193476"-> "nodo1327209131"
+nodo1264760012[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo771502611[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1327209131[label="capital-t  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1074024495[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1074024495"-> "nodo1358634493"
+"nodo1074024495"-> "nodo241244154"
+nodo1358634493[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo241244154[label="\"Courier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo412896824[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo412896824"-> "nodo1119993999"
+"nodo412896824"-> "nodo1369228478"
+nodo1119993999[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1369228478[label="15.5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1754241848[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1754241848"-> "nodo1501577093"
+"nodo1754241848"-> "nodo1608007048"
+nodo1501577093[label="Texto Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1608007048[label="\"Galerio de Autos mas vendidos\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo285477959[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo285477959"-> "nodo324094788"
+"nodo285477959"-> "nodo618644644"
+nodo324094788[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo618644644[label="izquierda  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1335681356[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1335681356"-> "nodo2088479661"
+"nodo1335681356"-> "nodo1657929175"
+nodo2088479661[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1657929175[label="faLSe  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo200583163[label="Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo200583163"-> "nodo2068025762"
+"nodo200583163"-> "nodo560173194"
+nodo2068025762[label="Ventas_carritos  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo560173194[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo560173194"-> "nodo6582728"
+"nodo560173194"-> "nodo1840646998"
+nodo6582728[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo6582728"-> "nodo178215363"
+"nodo6582728"-> "nodo927301594"
+nodo178215363[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo178215363"-> "nodo344761035"
+"nodo178215363"-> "nodo1228797879"
+nodo344761035[label="Elementos Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo344761035"-> "nodo966585874"
+nodo966585874[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo966585874"-> "nodo624684372"
+"nodo966585874"-> "nodo1422956994"
+nodo624684372[label="grupoCarrito  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1422956994[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1422956994"-> "nodo1928744096"
+"nodo1422956994"-> "nodo742707346"
+nodo1928744096[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1928744096"-> "nodo1450166531"
+"nodo1928744096"-> "nodo102847621"
+nodo1450166531[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1450166531"-> "nodo1181911981"
+"nodo1450166531"-> "nodo1287132081"
+nodo1181911981[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1181911981"-> "nodo1689779444"
+"nodo1181911981"-> "nodo1748900251"
+nodo1689779444[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1689779444"-> "nodo977520850"
+nodo977520850[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo977520850"-> "nodo912941488"
+"nodo977520850"-> "nodo1835105237"
+nodo912941488[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1835105237[label="centrado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1748900251[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1748900251"-> "nodo1972065571"
+"nodo1748900251"-> "nodo1361712664"
+nodo1972065571[label="Visible Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1361712664[label="TRUE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1287132081[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1287132081"-> "nodo883464812"
+"nodo1287132081"-> "nodo1391583487"
+nodo883464812[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1391583487[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo102847621[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo102847621"-> "nodo2105312719"
+"nodo102847621"-> "nodo2095568558"
+"nodo102847621"-> "nodo208423076"
+"nodo102847621"-> "nodo1363650510"
+nodo2105312719[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2095568558[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo208423076[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1363650510[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo742707346[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo742707346"-> "nodo1208750804"
+"nodo742707346"-> "nodo178061277"
+nodo1208750804[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo178061277[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1228797879[label="GRUPO  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1228797879"-> "nodo1692122946"
+"nodo1228797879"-> "nodo139337152"
+nodo1692122946[label="grupo_menu  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo139337152[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo139337152"-> "nodo545006767"
+"nodo139337152"-> "nodo1307792746"
+nodo545006767[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo545006767"-> "nodo1953219129"
+"nodo545006767"-> "nodo204697961"
+nodo1953219129[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1953219129"-> "nodo1303078172"
+"nodo1953219129"-> "nodo446968262"
+nodo1303078172[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1303078172"-> "nodo821314209"
+"nodo1303078172"-> "nodo660325871"
+nodo821314209[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo821314209"-> "nodo835635101"
+"nodo821314209"-> "nodo182446691"
+nodo835635101[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo835635101"-> "nodo413941971"
+nodo413941971[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo413941971"-> "nodo1629592212"
+"nodo413941971"-> "nodo647252738"
+nodo1629592212[label="mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo647252738[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo182446691[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo182446691"-> "nodo1408053569"
+"nodo182446691"-> "nodo700274999"
+nodo1408053569[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo700274999[label="\"Courier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo660325871[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo660325871"-> "nodo1143313326"
+"nodo660325871"-> "nodo1080888435"
+nodo1143313326[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1080888435[label="13  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo446968262[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo446968262"-> "nodo2058373638"
+"nodo446968262"-> "nodo956813446"
+nodo2058373638[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo956813446[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo204697961[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo204697961"-> "nodo1373084907"
+"nodo204697961"-> "nodo2037455926"
+nodo1373084907[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2037455926[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1307792746[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1307792746"-> "nodo23693668"
+"nodo1307792746"-> "nodo107870767"
+"nodo1307792746"-> "nodo1798311629"
+"nodo1307792746"-> "nodo441532209"
+nodo23693668[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo107870767[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1798311629[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo441532209[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo927301594[label="ID  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo927301594"-> "nodo1472112566"
+"nodo927301594"-> "nodo1047237612"
+nodo1472112566[label="panel_carrito  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1047237612[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1047237612"-> "nodo1439085706"
+"nodo1047237612"-> "nodo1182642612"
+nodo1439085706[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1439085706"-> "nodo1683766746"
+"nodo1439085706"-> "nodo113915470"
+nodo1683766746[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1683766746"-> "nodo1716039929"
+nodo1716039929[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1716039929"-> "nodo1301499285"
+"nodo1716039929"-> "nodo1218710288"
+nodo1301499285[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1218710288[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo113915470[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo113915470"-> "nodo529218572"
+"nodo113915470"-> "nodo1021806716"
+"nodo113915470"-> "nodo1800373648"
+"nodo113915470"-> "nodo64745314"
+nodo529218572[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1021806716[label="5  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1800373648[label="\"green\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo64745314[label="true  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1182642612[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1182642612"-> "nodo1173801033"
+"nodo1182642612"-> "nodo1171397859"
+nodo1173801033[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1171397859[label="faLSe  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1840646998[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1840646998"-> "nodo1378251468"
+"nodo1840646998"-> "nodo249181973"
+nodo1378251468[label="negrita  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo249181973[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo249181973"-> "nodo2099057159"
+"nodo249181973"-> "nodo687684675"
+nodo2099057159[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2099057159"-> "nodo1236048770"
+"nodo2099057159"-> "nodo378634045"
+nodo1236048770[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1236048770"-> "nodo50973378"
+"nodo1236048770"-> "nodo1121444292"
+nodo50973378[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo50973378"-> "nodo1862931095"
+nodo1862931095[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1862931095"-> "nodo1920987356"
+"nodo1862931095"-> "nodo1072524171"
+"nodo1862931095"-> "nodo1120498803"
+nodo1920987356[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1072524171[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1120498803[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1121444292[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1121444292"-> "nodo2112378903"
+"nodo1121444292"-> "nodo1880931942"
+nodo2112378903[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1880931942[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo378634045[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo378634045"-> "nodo620311261"
+"nodo378634045"-> "nodo756723933"
+nodo620311261[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo756723933[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo756723933"-> "nodo302869897"
+"nodo756723933"-> "nodo125247008"
+nodo302869897[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo302869897"-> "nodo1794485193"
+"nodo302869897"-> "nodo303133202"
+nodo1794485193[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo303133202[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo125247008[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo687684675[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo687684675"-> "nodo1804150012"
+"nodo687684675"-> "nodo1420865971"
+nodo1804150012[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1420865971[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1496459305[label="Definiciones Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1496459305"-> "nodo324854543"
+"nodo1496459305"-> "nodo180654740"
+nodo324854543[label="Formular_informacion  [ID] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo180654740[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo180654740"-> "nodo675867124"
+"nodo180654740"-> "nodo2032461927"
+nodo675867124[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo675867124"-> "nodo219424983"
+"nodo675867124"-> "nodo602561491"
+nodo219424983[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo219424983"-> "nodo1275203859"
+"nodo219424983"-> "nodo314294052"
+nodo1275203859[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1275203859"-> "nodo1053130548"
+"nodo1275203859"-> "nodo1333825532"
+nodo1053130548[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1053130548"-> "nodo332826006"
+"nodo1053130548"-> "nodo1549486679"
+nodo332826006[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo332826006"-> "nodo1232249399"
+"nodo332826006"-> "nodo46545802"
+nodo1232249399[label="Elementos Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1232249399"-> "nodo622589041"
+"nodo1232249399"-> "nodo596904823"
+nodo622589041[label="Elementos Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo622589041"-> "nodo2133550632"
+nodo2133550632[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo2133550632"-> "nodo1275205676"
+"nodo2133550632"-> "nodo910218657"
+nodo1275205676[label="panel_menu  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo910218657[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo910218657"-> "nodo898416557"
+"nodo910218657"-> "nodo296916242"
+nodo898416557[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo898416557"-> "nodo1294810224"
+"nodo898416557"-> "nodo2104497577"
+nodo1294810224[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1294810224"-> "nodo768719997"
+"nodo1294810224"-> "nodo684635856"
+nodo768719997[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo768719997"-> "nodo212128005"
+"nodo768719997"-> "nodo1904496741"
+nodo212128005[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo212128005"-> "nodo1368795260"
+"nodo212128005"-> "nodo204700840"
+nodo1368795260[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1368795260"-> "nodo641050834"
+"nodo1368795260"-> "nodo1977733897"
+nodo641050834[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo641050834"-> "nodo357879809"
+nodo357879809[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo357879809"-> "nodo34940991"
+"nodo357879809"-> "nodo166552471"
+"nodo357879809"-> "nodo1919914040"
+nodo34940991[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo166552471[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1919914040[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1977733897[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1977733897"-> "nodo1099469484"
+"nodo1977733897"-> "nodo1786191474"
+nodo1099469484[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1786191474[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo204700840[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo204700840"-> "nodo140781936"
+"nodo204700840"-> "nodo109352468"
+nodo140781936[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo109352468[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo109352468"-> "nodo60586394"
+"nodo109352468"-> "nodo1363833621"
+nodo60586394[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo60586394"-> "nodo2018312165"
+"nodo60586394"-> "nodo1515909838"
+nodo2018312165[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1515909838[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1363833621[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1904496741[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1904496741"-> "nodo988414134"
+"nodo1904496741"-> "nodo943332901"
+nodo988414134[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo943332901[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo684635856[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo684635856"-> "nodo664169744"
+"nodo684635856"-> "nodo718747566"
+nodo664169744[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo718747566[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2104497577[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2104497577"-> "nodo1087532530"
+"nodo2104497577"-> "nodo678529275"
+"nodo2104497577"-> "nodo1016827400"
+"nodo2104497577"-> "nodo794997874"
+nodo1087532530[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo678529275[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo678529275"-> "nodo2089611665"
+"nodo678529275"-> "nodo1486788779"
+nodo2089611665[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1486788779[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1016827400[label="\"yellow\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo794997874[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo296916242[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo296916242"-> "nodo940947070"
+"nodo296916242"-> "nodo49173546"
+nodo940947070[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo49173546[label="derecha  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo596904823[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo596904823"-> "nodo435498399"
+"nodo596904823"-> "nodo889370058"
+nodo435498399[label="panel_info  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo889370058[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo889370058"-> "nodo540099410"
+"nodo889370058"-> "nodo1343097978"
+nodo540099410[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo540099410"-> "nodo1613187633"
+"nodo540099410"-> "nodo1076567834"
+nodo1613187633[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1613187633"-> "nodo1789587358"
+"nodo1613187633"-> "nodo1256670061"
+nodo1789587358[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1789587358"-> "nodo273411778"
+"nodo1789587358"-> "nodo142667806"
+nodo273411778[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo273411778"-> "nodo904607887"
+"nodo273411778"-> "nodo1172830580"
+nodo904607887[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo904607887"-> "nodo177550068"
+"nodo904607887"-> "nodo93991864"
+nodo177550068[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo177550068"-> "nodo1767464132"
+nodo1767464132[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1767464132"-> "nodo319763650"
+"nodo1767464132"-> "nodo816756421"
+nodo319763650[label="NEGRILLA  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo816756421[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo93991864[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo93991864"-> "nodo1685931163"
+"nodo93991864"-> "nodo1205967788"
+nodo1685931163[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1205967788[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1172830580[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1172830580"-> "nodo765595318"
+"nodo1172830580"-> "nodo1761578329"
+nodo765595318[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1761578329[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1761578329"-> "nodo1722303809"
+"nodo1761578329"-> "nodo761237187"
+nodo1722303809[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1722303809"-> "nodo280359520"
+"nodo1722303809"-> "nodo78917738"
+nodo280359520[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo78917738[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo761237187[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo142667806[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo142667806"-> "nodo538116080"
+"nodo142667806"-> "nodo1902789799"
+nodo538116080[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1902789799[label="\"#ff00FF\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1256670061[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1256670061"-> "nodo1316199960"
+"nodo1256670061"-> "nodo1809957084"
+nodo1316199960[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1809957084[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1076567834[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1076567834"-> "nodo1555779375"
+"nodo1076567834"-> "nodo2144827235"
+"nodo1076567834"-> "nodo763799007"
+"nodo1076567834"-> "nodo1216640915"
+nodo1555779375[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2144827235[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo2144827235"-> "nodo1321241499"
+"nodo2144827235"-> "nodo174625103"
+nodo1321241499[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo174625103[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo763799007[label="\"blue\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1216640915[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1343097978[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1343097978"-> "nodo307783040"
+"nodo1343097978"-> "nodo2030805175"
+nodo307783040[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2030805175[label="izquierda  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo46545802[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo46545802"-> "nodo861761630"
+"nodo46545802"-> "nodo2112978323"
+nodo861761630[label="panel_mision  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2112978323[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2112978323"-> "nodo752116680"
+"nodo2112978323"-> "nodo142504189"
+nodo752116680[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo752116680"-> "nodo1350123052"
+"nodo752116680"-> "nodo647154773"
+nodo1350123052[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1350123052"-> "nodo701968748"
+"nodo1350123052"-> "nodo1381324083"
+nodo701968748[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo701968748"-> "nodo1262782731"
+"nodo701968748"-> "nodo2072249426"
+nodo1262782731[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1262782731"-> "nodo1799886367"
+"nodo1262782731"-> "nodo323758728"
+nodo1799886367[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1799886367"-> "nodo2091902267"
+"nodo1799886367"-> "nodo668129384"
+nodo2091902267[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2091902267"-> "nodo201448035"
+nodo201448035[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo201448035"-> "nodo2129377537"
+"nodo201448035"-> "nodo2104364506"
+nodo2129377537[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2104364506[label="Mayuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo668129384[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo668129384"-> "nodo1280215943"
+"nodo668129384"-> "nodo1310626479"
+nodo1280215943[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1310626479[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo323758728[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo323758728"-> "nodo1830689244"
+"nodo323758728"-> "nodo1611913592"
+nodo1830689244[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1611913592[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1611913592"-> "nodo1480156238"
+"nodo1611913592"-> "nodo1653087756"
+nodo1480156238[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1480156238"-> "nodo2135239544"
+"nodo1480156238"-> "nodo31716849"
+nodo2135239544[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo31716849[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1653087756[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2072249426[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2072249426"-> "nodo317450903"
+"nodo2072249426"-> "nodo808582840"
+nodo317450903[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo808582840[label="\"#0000FF\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1381324083[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1381324083"-> "nodo1727597869"
+"nodo1381324083"-> "nodo2016092286"
+nodo1727597869[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2016092286[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo647154773[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo647154773"-> "nodo895075006"
+"nodo647154773"-> "nodo170012307"
+"nodo647154773"-> "nodo614259359"
+"nodo647154773"-> "nodo93660834"
+nodo895075006[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo170012307[label="-  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo170012307"-> "nodo2124568732"
+"nodo170012307"-> "nodo1710208877"
+nodo2124568732[label="8  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1710208877[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1710208877"-> "nodo660984173"
+"nodo1710208877"-> "nodo191451925"
+nodo660984173[label="6  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo191451925[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo614259359[label="\"blue\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo93660834[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo142504189[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo142504189"-> "nodo1734577244"
+"nodo142504189"-> "nodo2133789442"
+nodo1734577244[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo2133789442[label="centrado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1549486679[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1549486679"-> "nodo1984451379"
+"nodo1549486679"-> "nodo939018004"
+nodo1984451379[label="panel_vision  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo939018004[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo939018004"-> "nodo1283603675"
+"nodo939018004"-> "nodo1274169682"
+nodo1283603675[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1283603675"-> "nodo2140621524"
+"nodo1283603675"-> "nodo170025685"
+nodo2140621524[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2140621524"-> "nodo1469834158"
+"nodo2140621524"-> "nodo242915542"
+nodo1469834158[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1469834158"-> "nodo1266590247"
+"nodo1469834158"-> "nodo1381193047"
+nodo1266590247[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1266590247"-> "nodo1524451872"
+"nodo1266590247"-> "nodo3921285"
+nodo1524451872[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1524451872"-> "nodo1055531071"
+"nodo1524451872"-> "nodo1994072920"
+nodo1055531071[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1055531071"-> "nodo1189604329"
+nodo1189604329[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1189604329"-> "nodo414095693"
+"nodo1189604329"-> "nodo2007673279"
+nodo414095693[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2007673279[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1994072920[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1994072920"-> "nodo1489278449"
+"nodo1994072920"-> "nodo562398627"
+nodo1489278449[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo562398627[label="\"Arial\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo3921285[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo3921285"-> "nodo1301087279"
+"nodo3921285"-> "nodo1875422064"
+nodo1301087279[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1875422064[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1875422064"-> "nodo333434981"
+"nodo1875422064"-> "nodo519759648"
+nodo333434981[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo333434981"-> "nodo1005790380"
+"nodo333434981"-> "nodo290102153"
+nodo1005790380[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo290102153[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo519759648[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1381193047[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1381193047"-> "nodo2096839997"
+"nodo1381193047"-> "nodo896599653"
+nodo2096839997[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo896599653[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo242915542[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo242915542"-> "nodo386236963"
+"nodo242915542"-> "nodo1389807001"
+nodo386236963[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1389807001[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo170025685[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo170025685"-> "nodo2011236395"
+"nodo170025685"-> "nodo1251895964"
+"nodo170025685"-> "nodo1907486070"
+"nodo170025685"-> "nodo363795668"
+nodo2011236395[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1251895964[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1251895964"-> "nodo1785787930"
+"nodo1251895964"-> "nodo1392749378"
+nodo1785787930[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1392749378[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1907486070[label="\"pink\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo363795668[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1274169682[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1274169682"-> "nodo757540361"
+"nodo1274169682"-> "nodo1086557901"
+nodo757540361[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1086557901[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1333825532[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1333825532"-> "nodo762208489"
+"nodo1333825532"-> "nodo1668908989"
+nodo762208489[label="titulo  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1668908989[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1668908989"-> "nodo2012934837"
+"nodo1668908989"-> "nodo722714465"
+nodo2012934837[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2012934837"-> "nodo1965353922"
+"nodo2012934837"-> "nodo1523572404"
+nodo1965353922[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1965353922"-> "nodo2055266306"
+"nodo1965353922"-> "nodo1281273988"
+nodo2055266306[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2055266306"-> "nodo519452726"
+"nodo2055266306"-> "nodo988311330"
+nodo519452726[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo519452726"-> "nodo1192560781"
+"nodo519452726"-> "nodo2121685627"
+nodo1192560781[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1192560781"-> "nodo1366223371"
+"nodo1192560781"-> "nodo671485563"
+nodo1366223371[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1366223371"-> "nodo1194863254"
+nodo1194863254[label="FORMATO Hijos: 3  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1194863254"-> "nodo189863304"
+"nodo1194863254"-> "nodo759797851"
+"nodo1194863254"-> "nodo899956319"
+nodo189863304[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo759797851[label="negrilla  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo899956319[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo671485563[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo671485563"-> "nodo869195495"
+"nodo671485563"-> "nodo816865347"
+nodo869195495[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo816865347[label="\"Calibri\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2121685627[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2121685627"-> "nodo1364897102"
+"nodo2121685627"-> "nodo1167603708"
+nodo1364897102[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1167603708[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1167603708"-> "nodo6615118"
+"nodo1167603708"-> "nodo862272121"
+nodo6615118[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo6615118"-> "nodo936493446"
+"nodo6615118"-> "nodo871511895"
+nodo936493446[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo871511895[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo862272121[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo988311330[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo988311330"-> "nodo338909159"
+"nodo988311330"-> "nodo236917226"
+nodo338909159[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo236917226[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1281273988[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1281273988"-> "nodo930819166"
+"nodo1281273988"-> "nodo361885033"
+nodo930819166[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo361885033[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1523572404[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1523572404"-> "nodo462625875"
+"nodo1523572404"-> "nodo1836437130"
+"nodo1523572404"-> "nodo58853030"
+"nodo1523572404"-> "nodo425871642"
+nodo462625875[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1836437130[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1836437130"-> "nodo445689825"
+"nodo1836437130"-> "nodo1498559399"
+nodo445689825[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1498559399[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo58853030[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo425871642[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo722714465[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo722714465"-> "nodo1249290525"
+"nodo722714465"-> "nodo1104614352"
+nodo1249290525[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1104614352[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo314294052[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo314294052"-> "nodo1588020140"
+"nodo314294052"-> "nodo371231956"
+nodo1588020140[label="parrafo  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo371231956[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo371231956"-> "nodo1776415052"
+"nodo371231956"-> "nodo282146355"
+nodo1776415052[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1776415052"-> "nodo1947188646"
+"nodo1776415052"-> "nodo1717291487"
+nodo1947188646[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1947188646"-> "nodo14036937"
+"nodo1947188646"-> "nodo430956878"
+nodo14036937[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo14036937"-> "nodo281316688"
+"nodo14036937"-> "nodo686406566"
+nodo281316688[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo281316688"-> "nodo435183893"
+"nodo281316688"-> "nodo2134071028"
+nodo435183893[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo435183893"-> "nodo1261042255"
+"nodo435183893"-> "nodo788028423"
+nodo1261042255[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1261042255"-> "nodo882534404"
+nodo882534404[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo882534404"-> "nodo1375407253"
+"nodo882534404"-> "nodo1434746727"
+nodo1375407253[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1434746727[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo788028423[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo788028423"-> "nodo963647924"
+"nodo788028423"-> "nodo1590529238"
+nodo963647924[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1590529238[label="\"Calibri\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2134071028[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2134071028"-> "nodo1474018366"
+"nodo2134071028"-> "nodo559062757"
+nodo1474018366[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo559062757[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo559062757"-> "nodo408329922"
+"nodo559062757"-> "nodo718215714"
+nodo408329922[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo408329922"-> "nodo553613577"
+"nodo408329922"-> "nodo368016965"
+nodo553613577[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo368016965[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo718215714[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo686406566[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo686406566"-> "nodo962810548"
+"nodo686406566"-> "nodo1806647728"
+nodo962810548[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1806647728[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo430956878[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo430956878"-> "nodo818109181"
+"nodo430956878"-> "nodo1588594678"
+nodo818109181[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1588594678[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1717291487[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1717291487"-> "nodo2103777382"
+"nodo1717291487"-> "nodo1817601211"
+"nodo1717291487"-> "nodo1189662590"
+"nodo1717291487"-> "nodo406450146"
+nodo2103777382[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1817601211[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1817601211"-> "nodo1296724651"
+"nodo1817601211"-> "nodo317109253"
+nodo1296724651[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo317109253[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1189662590[label="\"red\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo406450146[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo282146355[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo282146355"-> "nodo318048792"
+"nodo282146355"-> "nodo1172615515"
+nodo318048792[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1172615515[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo602561491[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo602561491"-> "nodo1529171046"
+"nodo602561491"-> "nodo2093260187"
+nodo1529171046[label="boton_redireccion  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2093260187[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo2093260187"-> "nodo1188818385"
+"nodo2093260187"-> "nodo651551288"
+nodo1188818385[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1188818385"-> "nodo1474485496"
+"nodo1188818385"-> "nodo252885978"
+nodo1474485496[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1474485496"-> "nodo373193356"
+"nodo1474485496"-> "nodo527670865"
+nodo373193356[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo373193356"-> "nodo1580700763"
+"nodo373193356"-> "nodo1155606572"
+nodo1580700763[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1580700763"-> "nodo569294886"
+"nodo1580700763"-> "nodo577524572"
+nodo569294886[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo569294886"-> "nodo1083936262"
+"nodo569294886"-> "nodo234253937"
+nodo1083936262[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1083936262"-> "nodo1515085849"
+nodo1515085849[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1515085849"-> "nodo452476607"
+"nodo1515085849"-> "nodo110065752"
+nodo452476607[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo110065752[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo234253937[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo234253937"-> "nodo942938910"
+"nodo234253937"-> "nodo299104937"
+nodo942938910[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo299104937[label="\"Curier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo577524572[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo577524572"-> "nodo1250239466"
+"nodo577524572"-> "nodo934661978"
+nodo1250239466[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo934661978[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo934661978"-> "nodo801234521"
+"nodo934661978"-> "nodo566849466"
+nodo801234521[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo801234521"-> "nodo1118863898"
+"nodo801234521"-> "nodo1533430281"
+nodo1118863898[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1533430281[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo566849466[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1155606572[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1155606572"-> "nodo2054452266"
+"nodo1155606572"-> "nodo279601249"
+nodo2054452266[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo279601249[label="\"#ff0000\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo527670865[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo527670865"-> "nodo1447854140"
+"nodo527670865"-> "nodo1066643198"
+nodo1447854140[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1066643198[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo252885978[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo252885978"-> "nodo1713330178"
+"nodo252885978"-> "nodo628463048"
+"nodo252885978"-> "nodo394964026"
+"nodo252885978"-> "nodo902567019"
+nodo1713330178[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo628463048[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo628463048"-> "nodo697275800"
+"nodo628463048"-> "nodo543006388"
+nodo697275800[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo543006388[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo394964026[label="\"pink\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo902567019[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo651551288[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo651551288"-> "nodo1660161529"
+"nodo651551288"-> "nodo927867520"
+nodo1660161529[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo927867520[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2032461927[label="grupo  [GRUPO] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo2032461927"-> "nodo1647854244"
+"nodo2032461927"-> "nodo777832553"
+nodo1647854244[label="tablas  [GRUPO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo777832553[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo777832553"-> "nodo1812304798"
+"nodo777832553"-> "nodo714733244"
+nodo1812304798[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1812304798"-> "nodo177519657"
+"nodo1812304798"-> "nodo1111696018"
+nodo177519657[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo177519657"-> "nodo35307559"
+"nodo177519657"-> "nodo1741945550"
+nodo35307559[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo35307559"-> "nodo1208575977"
+"nodo35307559"-> "nodo327519176"
+nodo1208575977[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1208575977"-> "nodo1196063335"
+"nodo1208575977"-> "nodo1060634058"
+nodo1196063335[label="ATRIBUTOS Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1196063335"-> "nodo1006822378"
+"nodo1196063335"-> "nodo57078889"
+nodo1006822378[label="ATRIBUTOS Hijos: 1  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1006822378"-> "nodo401293088"
+nodo401293088[label="FORMATO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo401293088"-> "nodo397564346"
+"nodo401293088"-> "nodo1015346453"
+nodo397564346[label="cursiva  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1015346453[label="minuscula  [Form] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo57078889[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo57078889"-> "nodo150309712"
+"nodo57078889"-> "nodo1177139025"
+nodo150309712[label="Letra Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1177139025[label="\"Curier New\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1060634058[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1060634058"-> "nodo1137920423"
+"nodo1060634058"-> "nodo1491345557"
+nodo1137920423[label="Tamtex Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo1491345557[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo1491345557"-> "nodo2087690194"
+"nodo1491345557"-> "nodo2012687409"
+nodo2087690194[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo2087690194"-> "nodo774954265"
+"nodo2087690194"-> "nodo1462345922"
+nodo774954265[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1462345922[label="2  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo2012687409[label="4  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo327519176[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo327519176"-> "nodo1463301370"
+"nodo327519176"-> "nodo434117768"
+nodo1463301370[label="FondoElemento Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo434117768[label="\"black\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1741945550[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1741945550"-> "nodo823182008"
+"nodo1741945550"-> "nodo723864552"
+nodo823182008[label="Opaque Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo723864552[label="TruE  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1111696018[label="ATRIBUTO Hijos: 4  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo1111696018"-> "nodo1034691986"
+"nodo1111696018"-> "nodo607218419"
+"nodo1111696018"-> "nodo318990799"
+"nodo1111696018"-> "nodo318249548"
+nodo1034691986[label="Borde Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo607218419[label="*  [OP] Hijos2   ", color="cyan", style ="filled", shape="doublecircle"]; 
+"nodo607218419"-> "nodo1319386420"
+"nodo607218419"-> "nodo1634574561"
+nodo1319386420[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo1634574561[label="3  [Numero] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo318990799[label="\"pink\"  [CADENA] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo318249548[label="false  [BOOLEANO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
+nodo714733244[label="ATRIBUTO Hijos: 2  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+"nodo714733244"-> "nodo1764286482"
+"nodo714733244"-> "nodo995142913"
+nodo1764286482[label="Alineado Hijos: 0  ", color="cyan", style ="filled", shape="doublecircle"] ; 
+nodo995142913[label="justificado  [ALINEADO] Hijos0   ", color="cyan", style ="filled", shape="doublecircle"]; 
 }
