@@ -51,6 +51,7 @@ import Source.CCSS.Ejecucion.*;
 import Source.CJS.Analizadores.lexico_cjs;
 import Source.CJS.Analizadores.sintactico_cjs;
 import Source.CJS.principal.Execute;
+import java.awt.Component;
 import java.awt.LayoutManager;
 import java.io.StringReader;
 import javax.swing.JPanel;
@@ -3102,7 +3103,8 @@ public void calcularTamaño(Panel contenedor)
 
 public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
 {           
-    contenedor.removeAll();
+
+    //contenedor.removeAll();
     int val[] = new int[3];
     int x = 10;
     int y = 5;
@@ -3110,9 +3112,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
     int saltoX = 0;
     int anchoMaximo = 0;
     int altoMaximo = 0;
-    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
-    scroll.removeAll();
-    
+    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();            
     /*Verificamos el tipo de alineacion
     Por defecto es izquierda
     */
@@ -3363,12 +3363,12 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 break;                 
                 
             case "tabla":
-                Tab tabla =(Tab)aux.getValor();               
+                Tab tabla =(Tab)aux.getValor(); 
+                tabla.removeAll();
                 tabla.setSize(tabla.getAncho(), tabla.getAlto());
                 tabla.setBackground(Color.white);
                 //tabla.setBorder(BorderFactory.createLineBorder(Color.black));
-                tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
-                InterfazTabla(tabla); 
+                tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));                
                 aplicarEstilo(aux, contenedor);
                 contenedor.add(tabla);
                 //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
@@ -3378,16 +3378,11 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 saltoY = val[2];                 
                 break;                     
             case "panel":
-                Panel panel =(Panel)aux.getValor();                                
-                //prepararPanel(panel);                
+                Panel panel =(Panel)aux.getValor();                                                 
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                                
-                panel.setBounds(x, y, panel.getAncho(),panel.getAlto());
-                //Interfaz(panel);
-                //aplicarObservador(aux);
-                //System.out.println("Objeto insertado "+ panel.getId()+"\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y + "\tAncho:"+panel.getAncho()+ "\tAltura:"+panel.getAlto());
-                aplicarEstilo(aux, contenedor);
-                //aplicarObservador(aux);
+                panel.setBounds(x, y, panel.getAncho(),panel.getAlto());                
+                aplicarEstilo(aux, contenedor);                
                 contenedor.add(panel);                
                 val = posicionPanel(panel.getAncho(), panel.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
@@ -5775,28 +5770,35 @@ private static boolean esNumero(String cadena){
                    }
                }
            }
-        }        
-        Mensaje(id, "Resultado de la busqueda "+ result);
-        return result;
-        
+        }                
+        return false;        
     }
     
     
     public void modificarAtributo(String id, String atributo, Object valor)
     {
-        //modAtributo(id, elementos, atributo, valor);
-        this.scroll.removeAll();
-        panelPrincipal.removeAll();
-        posX = posY = xMax = yMax=  0;                
-        panelPrincipal.setAncho(scroll.getWidth());
-        panelPrincipal.setAlto(3000);        
-        prepararPanel(panelPrincipal);
+        if(valor instanceof String)
+        {            
+            String val= (String)valor;
+            Component[] components = panelPrincipal.getComponents();
+            for (Component componente : components) {
+                if (componente instanceof Panel)
+                {
+                    Panel pnl = (Panel)componente;
+                    if(pnl.getId().equals(id))
+                    {
+                        switch(atributo)
+                        {
+                            case "fondoelemento":
+                                pnl.setBackground(colorFuente(val));
+                                break;
+                        }
+                    }
+                }
+            }            
+        }
         
-        Interfaz(panelPrincipal);
-        this.scroll.add(panelPrincipal);
-        
-        
-        
+        this.repaint();
     }
     
     
