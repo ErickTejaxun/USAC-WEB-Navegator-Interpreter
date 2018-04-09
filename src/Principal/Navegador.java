@@ -1,5 +1,6 @@
 package Principal;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,8 @@ public class Navegador implements ActionListener{
     public static void main(String[] args) 
     {
         ventana = new JFrame();
+        ventana.setBackground(Color.BLUE);
+        ventana.setTitle("USAC-WEB 1.0.0.0");
         ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         contenedorPaginas.addTab("", null, new JScrollPane());

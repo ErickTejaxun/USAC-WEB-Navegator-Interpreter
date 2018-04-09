@@ -1600,9 +1600,11 @@ public class Execute {
                 
                 //buscar objeto
                 boolean existeobjeto=false;
-                
+                existeobjeto=page.existeElemento(objeto.value,page.elementos);
                 if (existeobjeto) {
                     //modificarlo
+                                        
+                    page.modificarAtributo(objeto.value, tipo.value, valor.value);
                     
                 }else {
                     msjError(root, "Objeto CHTML no existe");
@@ -1639,7 +1641,7 @@ public class Execute {
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
                 //page.mensajeEmergente("Mensaje", expr.value);
-                //Navegador.mensaje(expr.value);
+                Navegador.mensaje(expr.value);
                 
                 break;
             }

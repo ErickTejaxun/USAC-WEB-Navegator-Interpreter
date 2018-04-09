@@ -24,12 +24,12 @@ import static Principal.Navegador.botonAgregar;
 public class Enlace extends JButton
 {
     private String ruta="";
-    private String grupo;
-    private String id;
+    private String grupo="";
+    private String id="";
     private String cadena="";
-    private String alineado;
-    private int alto;
-    private int ancho;
+    private String alineado="";
+    private int alto=0;
+    private int ancho=0;
     
     public Enlace()
     {

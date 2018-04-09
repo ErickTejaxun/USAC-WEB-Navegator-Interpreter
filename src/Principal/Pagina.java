@@ -200,6 +200,8 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         panelMenu.setBackground(new java.awt.Color(0, 255, 102));
         panelMenu.setLayout(new java.awt.BorderLayout());
 
+        Menu.setForeground(new java.awt.Color(255, 204, 0));
+
         botonAtras.setText("<-");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +223,6 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
             }
         });
 
-        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\prueba.html");
         textRuta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textRutaKeyPressed(evt);
@@ -242,7 +243,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
             }
         });
 
-        etiquetaNombre.setText("Nombre de la página");
+        etiquetaNombre.setText("USAC WEB NAVEGATOR");
 
         botonCerrar.setText("X");
         botonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -3101,6 +3102,7 @@ public void calcularTamaño(Panel contenedor)
 
 public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
 {           
+    contenedor.removeAll();
     int val[] = new int[3];
     int x = 10;
     int y = 5;
@@ -5707,9 +5709,12 @@ private static boolean esNumero(String cadena){
            }
            else
            {
-               if(item.getValor() instanceof ArrayList)
+               
+               if(item.getValor() instanceof Panel)
                {
-                   ArrayList items = (ArrayList)item.getValor();
+                   Panel panelInicial = (Panel)item.getValor();
+                   
+                   ArrayList items = panelInicial.getElementos();
                    for(Object obj : items)
                    {
                        if(obj instanceof Elemento)
@@ -5771,14 +5776,27 @@ private static boolean esNumero(String cadena){
                }
            }
         }        
+        Mensaje(id, "Resultado de la busqueda "+ result);
         return result;
+        
     }
     
     
     public void modificarAtributo(String id, String atributo, Object valor)
     {
-        modAtributo(id, elementos, atributo, valor);
+        //modAtributo(id, elementos, atributo, valor);
+        this.scroll.removeAll();
+        panelPrincipal.removeAll();
+        posX = posY = xMax = yMax=  0;                
+        panelPrincipal.setAncho(scroll.getWidth());
+        panelPrincipal.setAlto(3000);        
+        prepararPanel(panelPrincipal);
+        
         Interfaz(panelPrincipal);
+        this.scroll.add(panelPrincipal);
+        
+        
+        
     }
     
     

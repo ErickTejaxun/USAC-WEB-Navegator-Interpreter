@@ -66,6 +66,11 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="Menu">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="cc" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                   <BorderConstraints direction="Center"/>
@@ -154,9 +159,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="textRuta">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="C:\u005cUsers\u005cerick\u005cDocuments\u005cNetBeansProjects\u005cUSAC-WEB\u005cprueba.html" containsInvalidXMLChars="true"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textRutaKeyPressed"/>
                   </Events>
@@ -179,7 +181,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="etiquetaNombre">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre de la p&#xe1;gina"/>
+                    <Property name="text" type="java.lang.String" value="USAC WEB NAVEGATOR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="botonCerrar">

@@ -1,0 +1,38 @@
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace USAC_WEB.jar
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Process process = new Process();
+            String direccion = "C:\\ProgramData\\Oracle\\Java\\javapath\\java1";
+            String argumentos = "-jar C:\\Users\\USAC-WEB.jar";           
+            process.StartInfo.FileName = direccion;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.Arguments = argumentos;
+
+            process.Start();
+
+            
+            StreamReader reader = process.StandardOutput;
+            string output = reader.ReadToEnd();
+
+            
+            Console.WriteLine(output);
+
+            process.WaitForExit();
+            process.Close();
+        }
+    }
+}
