@@ -51,6 +51,7 @@ import Source.CCSS.Ejecucion.*;
 import Source.CJS.Analizadores.lexico_cjs;
 import Source.CJS.Analizadores.sintactico_cjs;
 import Source.CJS.principal.Execute;
+import java.awt.Component;
 import java.awt.LayoutManager;
 import java.io.StringReader;
 import javax.swing.JPanel;
@@ -200,6 +201,8 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         panelMenu.setBackground(new java.awt.Color(0, 255, 102));
         panelMenu.setLayout(new java.awt.BorderLayout());
 
+        Menu.setForeground(new java.awt.Color(255, 204, 0));
+
         botonAtras.setText("<-");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +224,6 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
             }
         });
 
-        textRuta.setText("C:\\Users\\erick\\Documents\\NetBeansProjects\\USAC-WEB\\prueba.html");
         textRuta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textRutaKeyPressed(evt);
@@ -242,7 +244,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
             }
         });
 
-        etiquetaNombre.setText("Nombre de la página");
+        etiquetaNombre.setText("USAC WEB NAVEGATOR");
 
         botonCerrar.setText("X");
         botonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -2988,10 +2990,13 @@ public void calcularTamaño(Panel contenedor)
                         if(!imagen.getRuta().equals(""))
                         {
                             icono =   new ImageIcon(imagen.getRuta().substring(1,imagen.getRuta().length()-1));
-                        }   
-                        if(!imagen.getRuta().substring(0,1).equals("\""))
+                        }
+                        if(imagen.getRuta().length()>2)
                         {
-                            icono = new ImageIcon(imagen.getRuta());
+                            if(!imagen.getRuta().substring(0,1).equals("\""))
+                            {
+                                icono = new ImageIcon(imagen.getRuta());
+                            }
                         }  
                         ImageIcon iconoEscala = new ImageIcon(icono.getImage().getScaledInstance(imagen.getAncho(), imagen.getAlto(), java.awt.Image.SCALE_DEFAULT));                
                         imagen.setIcon(iconoEscala);                     
@@ -3101,6 +3106,7 @@ public void calcularTamaño(Panel contenedor)
 
 public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
 {           
+    //contenedor.removeAll();
     int val[] = new int[3];
     int x = 10;
     int y = 5;
@@ -3108,9 +3114,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
     int saltoX = 0;
     int anchoMaximo = 0;
     int altoMaximo = 0;
-    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();    
-    scroll.removeAll();
-    
+    ArrayList<Elemento> elementosContenedor = contenedor.getElementos();            
     /*Verificamos el tipo de alineacion
     Por defecto es izquierda
     */
@@ -3361,12 +3365,12 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 break;                 
                 
             case "tabla":
-                Tab tabla =(Tab)aux.getValor();               
+                Tab tabla =(Tab)aux.getValor(); 
+                tabla.removeAll();
                 tabla.setSize(tabla.getAncho(), tabla.getAlto());
                 tabla.setBackground(Color.white);
                 //tabla.setBorder(BorderFactory.createLineBorder(Color.black));
-                tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));
-                InterfazTabla(tabla); 
+                tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));                
                 aplicarEstilo(aux, contenedor);
                 contenedor.add(tabla);
                 //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
@@ -3376,16 +3380,11 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 saltoY = val[2];                 
                 break;                     
             case "panel":
-                Panel panel =(Panel)aux.getValor();                                
-                //prepararPanel(panel);                
+                Panel panel =(Panel)aux.getValor();                                                 
                 panel.setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.setPreferredSize(new java.awt.Dimension(panel.getAncho(),panel.getAlto()));                                
-                panel.setBounds(x, y, panel.getAncho(),panel.getAlto());
-                //Interfaz(panel);
-                //aplicarObservador(aux);
-                //System.out.println("Objeto insertado "+ panel.getId()+"\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y + "\tAncho:"+panel.getAncho()+ "\tAltura:"+panel.getAlto());
-                aplicarEstilo(aux, contenedor);
-                //aplicarObservador(aux);
+                panel.setBounds(x, y, panel.getAncho(),panel.getAlto());                
+                aplicarEstilo(aux, contenedor);                
                 contenedor.add(panel);                
                 val = posicionPanel(panel.getAncho(), panel.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
@@ -5707,9 +5706,12 @@ private static boolean esNumero(String cadena){
            }
            else
            {
-               if(item.getValor() instanceof ArrayList)
+               
+               if(item.getValor() instanceof Panel)
                {
-                   ArrayList items = (ArrayList)item.getValor();
+                   Panel panelInicial = (Panel)item.getValor();
+                   
+                   ArrayList items = panelInicial.getElementos();
                    for(Object obj : items)
                    {
                        if(obj instanceof Elemento)
@@ -5742,7 +5744,11 @@ private static boolean esNumero(String cadena){
                                    if(pnl.getId().equals(id)){return true;}
                                    else
                                    {
-                                       result = existeElemento(id,pnl.getElementos());
+                                       result = false;
+                                       if(pnl.getElementos().isEmpty())
+                                       {
+                                           result =existeElemento(id,pnl.getElementos());
+                                       }                                       
                                    }
                                    break; 
                                case "spinner":
@@ -5754,7 +5760,11 @@ private static boolean esNumero(String cadena){
                                    if(tab.getId().equals(id)){return true;}
                                    else
                                    {
-                                       result = existeElemento(id,tab.getElementos());
+                                       result = false;
+                                       if(tab.getElementos().isEmpty())
+                                       {
+                                           result =existeElemento(id,tab.getElementos());
+                                       }
                                    }                                   
                                    break; 
                                case "texto":
@@ -5770,15 +5780,232 @@ private static boolean esNumero(String cadena){
                    }
                }
            }
-        }        
-        return result;
+        }                
+        return false;        
     }
     
     
+    public boolean existeElementos(String id, ArrayList<Elemento> elementosLista)
+    {
+        return existeElement(id, panelPrincipal);
+    }
+    
+    public boolean existeElement(String id, Panel contenedor)
+    {
+        Component[] componentes = contenedor.getComponents();
+        boolean existe = false;
+        for(Component comp: componentes)
+        {
+            if(comp instanceof Panel){ Panel pnl = (Panel)comp; if(pnl.getId().equals(id)){return true;}else{ existe=existeElement(id,pnl);}}
+            if(comp instanceof Boton){ Boton item = (Boton)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Caja){ Caja item = (Caja)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof CajaOpciones){ CajaOpciones item = (CajaOpciones)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Enlace){ Enlace item = (Enlace)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Imagen){ Imagen item = (Imagen)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Spinner){ Spinner item = (Spinner)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Tab){ Tab item = (Tab)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Texto){ Texto item = (Texto)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof areaTexto){ areaTexto item = (areaTexto)comp; if(item.getId().equals(id)){return true;}}            
+        }               
+        return existe;        
+    }    
+    
     public void modificarAtributo(String id, String atributo, Object valor)
     {
-        modAtributo(id, elementos, atributo, valor);
-        Interfaz(panelPrincipal);
+        modificarAtri(id, atributo, valor, panelPrincipal);
+    }    
+    public void modificarAtri(String id, String atributo, Object valor, Panel contenedor)
+    {
+        Component[] componentes = contenedor.getComponents();
+        for(Component comp: componentes)
+        {
+            if(valor instanceof String)
+            {
+                if(comp instanceof Panel)
+                {
+                    Panel pan = (Panel)comp;
+                    modificarAtri(id, atributo, valor, pan);
+                }
+                String id_ = (String)valor;
+                switch(atributo)
+                {                    
+                    case "id":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setId(id_);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setId(id_);}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setId(id_);}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setId(id_);}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setId(id_);}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setId(id_);}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setId(id_);}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setId(id_);}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setId(id_);}
+                        break;
+                    case "grupo":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setGrupo(id_);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setGrupo(id_);}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setGrupo(id_);}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setGrupo(id_);}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setGrupo(id_);}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setGrupo(id_);}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setGrupo(id_);}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setGrupo(id_);}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setGrupo(id_);}
+                        break;
+                    case "alineado":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setAlineado(id_);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setAlineado(id_);}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setAlineado(id_);}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setAlineado(id_);}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setAlineado(id_);}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setAlineado(id_);}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setAlineado(id_);}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setAlineado(id_);}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setAlineado(id_);}                        
+                        break;   
+                    case "text":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setTexto(id_);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setText(id_);}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setText(id_);}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.addItem(id_);}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setText(id_);}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setText(id_);}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(esNumero(id_)){spn.setValue(Integer.valueOf(id_));}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; }
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setText(id_);}                       
+                        break; 
+                    case "letra":                        
+                        if(comp instanceof Boton)
+                        {
+                            Boton btn = (Boton)comp; 
+                            if(id.equals(btn.getId()))
+                            {
+                                if(esNumero(id_))
+                                {
+                                    btn.setFont(new Font(btn.getFont().getName(),btn.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    btn.setFont(new Font(id_,btn.getFont().getStyle(),btn.getFont().getSize()));
+                                }
+                            }
+                        }
+                        if(comp instanceof Caja)
+                        {
+                            Caja cjt = (Caja)comp; 
+                            if(esNumero(id_))
+                            {
+                                cjt.setFont(new Font(cjt.getFont().getName(),cjt.getFont().getStyle(),Integer.valueOf(id_)));
+                            }
+                            else
+                            {
+                                cjt.setFont(new Font(id_,cjt.getFont().getStyle(),cjt.getFont().getSize()));
+                            }
+                        }      
+                        if(comp instanceof CajaOpciones)
+                        {
+                            CajaOpciones cjtO = (CajaOpciones)comp; 
+                            if(esNumero(id_))
+                            {
+                                cjtO.setFont(new Font(cjtO.getFont().getName(),cjtO.getFont().getStyle(),Integer.valueOf(id_)));
+                            }
+                            else
+                            {
+                                cjtO.setFont(new Font(id_,cjtO.getFont().getStyle(),cjtO.getFont().getSize()));
+                            }
+                        }   
+                        if(comp instanceof Enlace)
+                        {
+                            Enlace enl = (Enlace)comp; 
+                            if(esNumero(id_))
+                            {
+                                enl.setFont(new Font(enl.getFont().getName(),enl.getFont().getStyle(),Integer.valueOf(id_)));
+                            }
+                            else
+                            {
+                                enl.setFont(new Font(id_,enl.getFont().getStyle(),enl.getFont().getSize()));
+                            }
+                        }   
+                        if(comp instanceof Spinner)
+                        {
+                            Spinner spn = (Spinner)comp; 
+                            if(esNumero(id_))
+                            {
+                                spn.setFont(new Font(spn.getFont().getName(),spn.getFont().getStyle(),Integer.valueOf(id_)));
+                            }
+                            else
+                            {
+                                spn.setFont(new Font(id_,spn.getFont().getStyle(),spn.getFont().getSize()));
+                            }
+                        }   
+                        if(comp instanceof areaTexto)
+                        {
+                            areaTexto areaT = (areaTexto)comp; 
+                            if(esNumero(id_))
+                            {
+                                areaT.setFont(new Font(areaT.getFont().getName(),areaT.getFont().getStyle(),Integer.valueOf(id_)));
+                            }
+                            else
+                            {
+                                areaT.setFont(new Font(id_,areaT.getFont().getStyle(),areaT.getFont().getSize()));
+                            }
+                        }                                                                                              
+                        break;  
+                    case "fondoelemento":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setBackground(colorFuente(id_));}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setBackground(colorFuente(id_));}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setBackground(colorFuente(id_));}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setBackground(colorFuente(id_));}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setBackground(colorFuente(id_));}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setBackground(colorFuente(id_));}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setBackground(colorFuente(id_));}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setBackground(colorFuente(id_));}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setBackground(colorFuente(id_));}
+                        if(id.equals("cuerpo")){panelPrincipal.setBackground(colorFuente(id_));}
+                        break;                        
+                    case "visible":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setVisible(true);}if(id_.equals("false")){pnl.setVisible(false);}} }
+                        if(comp instanceof Boton){Boton btn = (Boton)comp;if(id.equals(btn.getId())){ if(id_.equals("true")){btn.setVisible(true);}if(id_.equals("false")){btn.setVisible(false);} }}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id_.equals("true")){cjt.setVisible(true);}if(id_.equals("false")){cjt.setVisible(false);} }
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id_.equals("true")){cjtO.setVisible(true);}if(id_.equals("false")){cjtO.setVisible(false);} }
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id_.equals("true")){enl.setVisible(true);}if(id_.equals("false")){enl.setVisible(false);} }
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id_.equals("true")){img.setVisible(true);}if(id_.equals("false")){img.setVisible(false);} }
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id_.equals("true")){spn.setVisible(true);}if(id_.equals("false")){spn.setVisible(false);} }
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id_.equals("true")){tab.setVisible(true);}if(id_.equals("false")){tab.setVisible(false);} }
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id_.equals("true")){areaT.setVisible(true);}if(id_.equals("false")){areaT.setVisible(false);} }
+                        break; 
+                    case "colortext":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setForeground(colorFuente(id_));}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setForeground(colorFuente(id_));}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setForeground(colorFuente(id_));}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setForeground(colorFuente(id_));}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setForeground(colorFuente(id_));}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setForeground(colorFuente(id_));}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setForeground(colorFuente(id_));}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setForeground(colorFuente(id_));}
+                        break;  
+                    case "opaque":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){if(id_.equals("true")){btn.setOpaque(false);}if(id_.equals("false")){btn.setOpaque(true);} }}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id_.equals("true")){cjt.setOpaque(false);}if(id_.equals("false")){cjt.setOpaque(true);} }
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id_.equals("true")){cjtO.setOpaque(false);}if(id_.equals("false")){cjtO.setOpaque(true);} }
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id_.equals("true")){enl.setOpaque(false);}if(id_.equals("false")){enl.setOpaque(true);} }
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id_.equals("true")){img.setOpaque(false);}if(id_.equals("false")){img.setOpaque(true);} }
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id_.equals("true")){spn.setOpaque(false);}if(id_.equals("false")){spn.setOpaque(true);} }
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id_.equals("true")){tab.setOpaque(false);}if(id_.equals("false")){tab.setOpaque(true);} }
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id_.equals("true")){areaT.setOpaque(false);}if(id_.equals("false")){areaT.setOpaque(true);} }
+                        break;                        
+                }
+                
+                
+            }// Si Valor es String
+            
+            if(valor instanceof Source.CJS.principal.Nodo)
+            {
+                
+            }
+        }                                
+        this.repaint();
     }
     
     

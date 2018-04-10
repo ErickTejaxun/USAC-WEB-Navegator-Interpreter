@@ -17,6 +17,7 @@ import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import static Principal.Navegador.botonAgregar;
 import java.awt.event.ActionEvent;
+import Source.CJS.principal.Nodo;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Boton extends JButton
     private int alto;
     private int ancho;
     private String metodo="";
+    private Nodo metodo_;
     
     
     public Boton()
@@ -43,6 +45,14 @@ public class Boton extends JButton
                 click(evt);
             }
         });
+    }
+
+    public Nodo getMetodo_() {
+        return metodo_;
+    }
+
+    public void setMetodo_(Nodo metodo_) {
+        this.metodo_ = metodo_;
     }
 
     

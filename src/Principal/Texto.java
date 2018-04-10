@@ -16,13 +16,13 @@ import javax.swing.plaf.ComponentUI;
  */
 public class Texto extends JTextPane 
 {
-    String ruta;
-    String grupo;
-    String id;
-    String cadena;
-    String alineado;
-    int alto;
-    int ancho;    
+    String ruta="";
+    String grupo="";
+    String id="";
+    String cadena="";
+    String alineado="";
+    int alto=0;
+    int ancho=0;    
 
     public Texto() 
     {

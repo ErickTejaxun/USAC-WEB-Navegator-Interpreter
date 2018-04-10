@@ -8,6 +8,7 @@ package Source.CJS.principal;
 
 import Principal.Pagina;
 import Principal.Navegador;
+import static Principal.Pagina.Mensaje;
 import Source.CJS.Analizadores.Terror;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -591,7 +592,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objj.value,page.elementos);
-                
+                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
                     objj.existe=true;
                     objj.isobjeto=true;
@@ -636,6 +637,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objeto.value,page.elementos);
+                Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
                     page.modificarAtributo(objeto.value, tipo.value, valor.value);
@@ -735,8 +737,8 @@ public class Execute {
         var.value="0";
        
         try {
-        if(dim.tipe.equalsIgnoreCase("double")){
-            
+        if(dim.tipe.equalsIgnoreCase("double"))
+        {            
             var.isArray=true;
             int dd=Integer.parseInt(dim.value);
             var.tamvec=dd;
@@ -1601,9 +1603,12 @@ public class Execute {
                 
                 //buscar objeto
                 boolean existeobjeto=false;
-                
+                existeobjeto=page.existeElemento(objeto.value,page.elementos);
+                Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
+                                        
+                    page.modificarAtributo(objeto.value, tipo.value, valor.value);
                     
                 }else {
                     msjError(root, "Objeto CHTML no existe");
@@ -1640,7 +1645,7 @@ public class Execute {
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("MENSAJE( " + expr.value + " );");
                 //page.mensajeEmergente("Mensaje", expr.value);
-                //Navegador.mensaje(expr.value);
+                Navegador.mensaje(expr.value);
                 
                 break;
             }

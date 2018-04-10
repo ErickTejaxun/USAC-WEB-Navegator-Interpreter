@@ -14,7 +14,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
-
+import Source.CJS.principal.Nodo;
 /**
  *
  * @author erick
@@ -30,6 +30,7 @@ public class Imagen extends JButton
     private int alto;
     private int ancho;
     private String metodo;
+    private Nodo metodo_;
 
     public String getMetodo() {
         return metodo;
@@ -51,6 +52,14 @@ public class Imagen extends JButton
 
     public void setGrupo(String grupo) {
         this.grupo = grupo;
+    }
+
+    public void setMetodo_(Nodo metodo_) {
+        this.metodo_ = metodo_;
+    }
+
+    public Nodo getMetodo_() {
+        return metodo_;
     }
 
     public void setId(String id) {
