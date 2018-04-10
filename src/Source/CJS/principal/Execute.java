@@ -1047,7 +1047,7 @@ public class Execute {
                             String cadena="";
                             
                             for(int i=0;i<valor.tamvec;i++){
-                                cadena+=valor.arreglo.get(i);
+                                cadena+=valor.arreglo.get(i)+",";
                             
                             }
                             valor.value=cadena;

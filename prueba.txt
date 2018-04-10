@@ -679,7 +679,7 @@ node473[label = "NUM
 node474[label = "VACCESO ",];
 node475[label = "VAR 
 aux",];
-node476[label = "IMPRIMIR ",];
+node476[label = "MENSAJE ",];
 node477[label = "CPRIMITIVAS ",];
 node478[label = "VAR 
 vectorPrecios",];

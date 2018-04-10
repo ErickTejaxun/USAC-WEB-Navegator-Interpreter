@@ -109,8 +109,9 @@ public class Inicio extends javax.swing.JFrame {
                 //ejecucion.Executemetodo("operarmas");
                 //ejecucion.Executemetodo("enviar");
                 ejecucion.Executemetodo("monto1");
-                ejecucion.Executemetodo("buy_mazda");
+                
                 ejecucion.Executemetodo("buy_toyota");
+                ejecucion.Executemetodo("buy_mazda");
                 ejecucion.Executemetodo("buy_ford");
                 ejecucion.Executemetodo("ordenarburbuja");
                 
