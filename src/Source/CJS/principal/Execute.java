@@ -743,7 +743,7 @@ public class Execute {
             
             for(int i=0;i<dd;i++){
                 var.arreglo.add("0");
-                var.tipoarreglo.add("");
+                var.tipoarreglo.add("double");
             
             }
             
@@ -783,7 +783,6 @@ public class Execute {
         var.value="0";
         var.isArray=true;
         var.tamvec=lexpr.hijos.size();
-        
         
         for(int i=0;i<lexpr.hijos.size();i++){
             
@@ -1000,8 +999,10 @@ public class Execute {
                 
                 try {
                         if(posicion.tipe.equals("double") && valor.isArray){
-                            
-                            int i=Integer.valueOf(posicion.value);
+                            StringTokenizer vv1 = new StringTokenizer(posicion.value, ".");
+                
+                            String v1 = vv1.nextToken();
+                            int i=Integer.valueOf(v1);
                             if(i<valor.tamvec){
                                                         
                             Simbolo variab=new  Simbolo();
@@ -1035,7 +1036,7 @@ public class Execute {
                 Nodo var= expr.hijos.get(0);
                 Nodo tipo=expr.hijos.get(1);
                
-                valor = operar.getVariable(var.valor, Execute.this, valor);
+                valor = operar.getVariable(var.valor.toLowerCase(), Execute.this, valor);
                 
                 try {
                         if(valor.isArray){
