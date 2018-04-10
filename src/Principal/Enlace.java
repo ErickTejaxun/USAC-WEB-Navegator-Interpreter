@@ -16,6 +16,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import static Principal.Navegador.botonAgregar;
+import Source.CJS.principal.Nodo;
 
 /**
  *
@@ -30,6 +31,8 @@ public class Enlace extends JButton
     private String alineado="";
     private int alto=0;
     private int ancho=0;
+    private String metodo="";
+    private Nodo metodo_;
     
     public Enlace()
     {
@@ -70,6 +73,26 @@ public class Enlace extends JButton
         this.cadena = cadena;
     }
 
+    public String getMetodo() {
+        return metodo;
+    }
+
+    public Nodo getMetodo_() {
+        return metodo_;
+    }
+
+    public void setMetodo(String metodo) {
+        this.metodo = metodo;
+    }
+
+    public void setMetodo_(Nodo metodo_) {
+        this.metodo_ = metodo_;
+    }
+
+    
+    
+    
+    
     public void setAlineado(String alineado) {
         this.alineado = alineado;
     }
