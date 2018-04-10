@@ -18,7 +18,7 @@ public class Caja extends JTextField
 {
     String ruta;
     String grupo;
-    String id;
+    String id="";
     String cadena;
     String alineado;
     int alto;

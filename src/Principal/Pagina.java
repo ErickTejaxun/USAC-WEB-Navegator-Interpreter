@@ -5744,7 +5744,11 @@ private static boolean esNumero(String cadena){
                                    if(pnl.getId().equals(id)){return true;}
                                    else
                                    {
-                                       result = existeElemento(id,pnl.getElementos());
+                                       result = false;
+                                       if(pnl.getElementos().isEmpty())
+                                       {
+                                           result =existeElemento(id,pnl.getElementos());
+                                       }                                       
                                    }
                                    break; 
                                case "spinner":
@@ -5756,7 +5760,11 @@ private static boolean esNumero(String cadena){
                                    if(tab.getId().equals(id)){return true;}
                                    else
                                    {
-                                       result = existeElemento(id,tab.getElementos());
+                                       result = false;
+                                       if(tab.getElementos().isEmpty())
+                                       {
+                                           result =existeElemento(id,tab.getElementos());
+                                       }
                                    }                                   
                                    break; 
                                case "texto":
@@ -5777,19 +5785,53 @@ private static boolean esNumero(String cadena){
     }
     
     
+    public boolean existeElementos(String id, ArrayList<Elemento> elementosLista)
+    {
+        return existeElement(id, panelPrincipal);
+    }
+    
+    public boolean existeElement(String id, Panel contenedor)
+    {
+        Component[] componentes = contenedor.getComponents();
+        boolean existe = false;
+        for(Component comp: componentes)
+        {
+            if(comp instanceof Panel){ Panel pnl = (Panel)comp; if(pnl.getId().equals(id)){return true;}else{ existe=existeElement(id,pnl);}}
+            if(comp instanceof Boton){ Boton item = (Boton)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Caja){ Caja item = (Caja)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof CajaOpciones){ CajaOpciones item = (CajaOpciones)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Enlace){ Enlace item = (Enlace)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Imagen){ Imagen item = (Imagen)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Spinner){ Spinner item = (Spinner)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Tab){ Tab item = (Tab)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof Texto){ Texto item = (Texto)comp; if(item.getId().equals(id)){return true;}}
+            if(comp instanceof areaTexto){ areaTexto item = (areaTexto)comp; if(item.getId().equals(id)){return true;}}            
+        }               
+        return existe;        
+    }    
+    
     public void modificarAtributo(String id, String atributo, Object valor)
     {
-        Component[] componentes = panelPrincipal.getComponents();
+        modificarAtri(id, atributo, valor, panelPrincipal);
+    }    
+    public void modificarAtri(String id, String atributo, Object valor, Panel contenedor)
+    {
+        Component[] componentes = contenedor.getComponents();
         for(Component comp: componentes)
         {
             if(valor instanceof String)
             {
+                if(comp instanceof Panel)
+                {
+                    Panel pan = (Panel)comp;
+                    modificarAtri(id, atributo, valor, pan);
+                }
                 String id_ = (String)valor;
                 switch(atributo)
                 {                    
                     case "id":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setId(id_);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; btn.setId(id_);}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setId(id_);}}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setId(id_);}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setId(id_);}
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setId(id_);}
@@ -5800,7 +5842,7 @@ private static boolean esNumero(String cadena){
                         break;
                     case "grupo":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setGrupo(id_);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; btn.setGrupo(id_);}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setGrupo(id_);}}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setGrupo(id_);}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setGrupo(id_);}
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setGrupo(id_);}
@@ -5811,7 +5853,7 @@ private static boolean esNumero(String cadena){
                         break;
                     case "alineado":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setAlineado(id_);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; btn.setAlineado(id_);}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setAlineado(id_);}}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setAlineado(id_);}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setAlineado(id_);}
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setAlineado(id_);}
@@ -5822,7 +5864,7 @@ private static boolean esNumero(String cadena){
                         break;   
                     case "text":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setTexto(id_);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; btn.setText(id_);}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setText(id_);}}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setText(id_);}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.addItem(id_);}
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setText(id_);}
@@ -5835,13 +5877,16 @@ private static boolean esNumero(String cadena){
                         if(comp instanceof Boton)
                         {
                             Boton btn = (Boton)comp; 
-                            if(esNumero(id_))
+                            if(id.equals(btn.getId()))
                             {
-                                btn.setFont(new Font(btn.getFont().getName(),btn.getFont().getStyle(),Integer.valueOf(id_)));
-                            }
-                            else
-                            {
-                                btn.setFont(new Font(id_,btn.getFont().getStyle(),btn.getFont().getSize()));
+                                if(esNumero(id_))
+                                {
+                                    btn.setFont(new Font(btn.getFont().getName(),btn.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    btn.setFont(new Font(id_,btn.getFont().getStyle(),btn.getFont().getSize()));
+                                }
                             }
                         }
                         if(comp instanceof Caja)
@@ -5907,7 +5952,7 @@ private static boolean esNumero(String cadena){
                         break;  
                     case "fondoelemento":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setBackground(colorFuente(id_));}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; btn.setBackground(colorFuente(id_));}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setBackground(colorFuente(id_));}}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setBackground(colorFuente(id_));}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setBackground(colorFuente(id_));}
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setBackground(colorFuente(id_));}
@@ -5919,7 +5964,7 @@ private static boolean esNumero(String cadena){
                         break;                        
                     case "visible":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setVisible(true);}if(id_.equals("false")){pnl.setVisible(false);}} }
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id_.equals("true")){btn.setVisible(true);}if(id_.equals("false")){btn.setVisible(false);} }
+                        if(comp instanceof Boton){Boton btn = (Boton)comp;if(id.equals(btn.getId())){ if(id_.equals("true")){btn.setVisible(true);}if(id_.equals("false")){btn.setVisible(false);} }}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id_.equals("true")){cjt.setVisible(true);}if(id_.equals("false")){cjt.setVisible(false);} }
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id_.equals("true")){cjtO.setVisible(true);}if(id_.equals("false")){cjtO.setVisible(false);} }
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id_.equals("true")){enl.setVisible(true);}if(id_.equals("false")){enl.setVisible(false);} }
@@ -5930,7 +5975,7 @@ private static boolean esNumero(String cadena){
                         break; 
                     case "colortext":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setForeground(colorFuente(id_));;}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; btn.setForeground(colorFuente(id_));}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setForeground(colorFuente(id_));}}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setForeground(colorFuente(id_));}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setForeground(colorFuente(id_));}
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setForeground(colorFuente(id_));}
@@ -5941,7 +5986,7 @@ private static boolean esNumero(String cadena){
                         break;  
                     case "opaque":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id_.equals("true")){btn.setOpaque(false);}if(id_.equals("false")){btn.setOpaque(true);} }
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){if(id_.equals("true")){btn.setOpaque(false);}if(id_.equals("false")){btn.setOpaque(true);} }}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id_.equals("true")){cjt.setOpaque(false);}if(id_.equals("false")){cjt.setOpaque(true);} }
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id_.equals("true")){cjtO.setOpaque(false);}if(id_.equals("false")){cjtO.setOpaque(true);} }
                         if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id_.equals("true")){enl.setOpaque(false);}if(id_.equals("false")){enl.setOpaque(true);} }
@@ -5951,6 +5996,8 @@ private static boolean esNumero(String cadena){
                         if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id_.equals("true")){areaT.setOpaque(false);}if(id_.equals("false")){areaT.setOpaque(true);} }
                         break;                        
                 }
+                
+                
             }// Si Valor es String
             
             if(valor instanceof Source.CJS.principal.Nodo)
