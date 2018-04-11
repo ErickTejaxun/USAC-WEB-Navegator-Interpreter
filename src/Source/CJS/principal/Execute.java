@@ -1451,6 +1451,7 @@ public class Execute {
                             asignacion(var, variable,variab );
                             }else{
                                 msjError(root, "error dimension vector");
+                                Navegador.mensaje("Posicion vector no válida");
                             }
                         }
                     

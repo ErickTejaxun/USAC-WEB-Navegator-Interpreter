@@ -3105,8 +3105,7 @@ public void calcularTamaño(Panel contenedor)
 }
 
 public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos los elementos.
-{           
-    //contenedor.removeAll();
+{               
     int val[] = new int[3];
     int x = 10;
     int y = 5;
@@ -3264,7 +3263,9 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
             case "imagen":
                 Imagen imagen =(Imagen)aux.getValor();
                 imagen.setBounds(x, y, imagen.getAncho(),imagen.getAlto());
-                ImageIcon icono = new ImageIcon(); 
+                ImageIcon icono = new ImageIcon();
+                imagen.removeMouseListener(mouseListenerImagen);
+                imagen.addMouseListener(mouseListenerImagen);                  
                 if(imagen.getRuta()!=null )
                 {
                     if(!imagen.getRuta().equals(""))
@@ -3365,15 +3366,13 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 break;                 
                 
             case "tabla":
-                Tab tabla =(Tab)aux.getValor(); 
-                tabla.removeAll();
+                Tab tabla =(Tab)aux.getValor();                 
                 tabla.setSize(tabla.getAncho(), tabla.getAlto());
-                tabla.setBackground(Color.white);
-                //tabla.setBorder(BorderFactory.createLineBorder(Color.black));
+                tabla.setBackground(Color.white);                
                 tabla.setPreferredSize(new java.awt.Dimension(tabla.getAncho(),tabla.getAlto()));                
                 aplicarEstilo(aux, contenedor);
-                contenedor.add(tabla);
-                //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
+                InterfazTabla(tabla);
+                contenedor.add(tabla);                
                 val = posicionPanel(tabla.getWidth(), tabla.getHeight(),  contenedor, saltoY, x, y); 
                 x  = val[0];
                 y  = val[1];
@@ -3459,6 +3458,8 @@ public void InterfazTabla(Tab contenedor)
                 Imagen imagen =(Imagen)aux.getValor();
                 imagen.setBounds(x, y, anchoCelda,altoCelda);
                 ImageIcon icono = new ImageIcon(); 
+                imagen.removeMouseListener(mouseListenerImagen);
+                imagen.addMouseListener(mouseListenerImagen);                
                 if(imagen.getRuta()!=null )
                 {
                     if(!imagen.getRuta().equals(""))
@@ -4090,6 +4091,64 @@ private static boolean esNumero(String cadena){
         }
     };    
     
+    
+    MouseListener mouseListenerImagen= new MouseListener() 
+    {
+
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) 
+        {                
+            Imagen boton = (Imagen)e.getSource();  
+            
+                                              
+            /*if(!boton.getRuta().equals(""))
+            {
+                try 
+                {
+                    //Mensaje("Abriendo nueva página.",boton.getRuta());  
+                    abrirEnlace(boton.getRuta());
+                } 
+                catch (IOException ex) 
+                {
+                    Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
+                }            
+            }**/
+
+            if(!boton.getMetodo().equals(""))
+            {
+                //Mensaje("Llamada a funcion.",boton.getMetodo());   
+                if(boton.getMetodo().length()>4)
+                {
+                    //mensajeEmergente("Metodo", boton.getMetodo());
+                    String metodo = boton.getMetodo().substring(0,boton.getMetodo().length()-2);
+                    //mensajeEmergente("Metodo", metodo);
+                    if(ejecucion!=null){ejecucion.Executemetodo(metodo);}
+                    
+                }
+                
+            }
+                       
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) 
+        {
+             
+        }
+    };       
     
     MouseListener listenerEnlace= new MouseListener() 
     {
