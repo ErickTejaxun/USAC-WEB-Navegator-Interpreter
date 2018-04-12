@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import static Principal.Navegador.botonAgregar;
+import Source.CJS.principal.Nodo;
 
 /**
  *
@@ -35,6 +36,8 @@ public class CajaOpciones extends JComboBox
     private int alto;
     private int ancho;
     private String metodo;
+    private Nodo metodo_;
+    
     
     public CajaOpciones()
     {
@@ -75,6 +78,10 @@ public class CajaOpciones extends JComboBox
 
     public String getRuta() {
         return ruta;
+    }
+
+    public void setMetodo_(Nodo metodo_) {
+        this.metodo_ = metodo_;
     }
 
     public String getGrupo() {

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Principal;
+import Source.CJS.principal.Nodo;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.awt.Color;
@@ -33,6 +34,7 @@ public class Panel extends JPanel
     private String estilo="";
     private String texto ="";
     private Color colorFuente = Color.BLACK;
+    private Nodo metodo_;
     
     public Panel()
     {       
@@ -65,6 +67,14 @@ public class Panel extends JPanel
 
     public void setEstilo(String estilo) {
         this.estilo = estilo;
+    }
+
+    public Nodo getMetodo_() {
+        return metodo_;
+    }
+
+    public void setMetodo_(Nodo metodo_) {
+        this.metodo_ = metodo_;
     }
 
     public Font getFuente() {

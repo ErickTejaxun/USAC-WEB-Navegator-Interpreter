@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Principal;
+import Source.CJS.principal.Nodo;
 import java.util.ArrayList;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ public class Tab extends JPanel
     private int ancho;
     private String metodo;
     private ArrayList<Elemento> elementos = new ArrayList();
+    private Nodo metodo_;
     
     public Tab()
     {              
@@ -55,6 +57,14 @@ public class Tab extends JPanel
 
     public String getCadena() {
         return cadena;
+    }
+
+    public void setMetodo_(Nodo metodo_) {
+        this.metodo_ = metodo_;
+    }
+
+    public Nodo getMetodo_() {
+        return metodo_;
     }
 
     public String getAlineado() {
