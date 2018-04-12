@@ -25,7 +25,7 @@ import static Principal.Navegador.botonAgregar;
  *
  * @author erick
  */
-public class CajaOpciones extends JComboBox<Object>
+public class CajaOpciones extends JComboBox
 {
     private String ruta;
     private String grupo;
@@ -40,7 +40,7 @@ public class CajaOpciones extends JComboBox<Object>
     {
         this.alto=30;
         this.ancho=100;
-        this.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Analisis Lexico", "Pagina Web Resultante", "Errores lexicos", "Errores Sintacticos", "Errores Semanticos" }));
+        //this.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Analisis Lexico", "Pagina Web Resultante", "Errores lexicos", "Errores Sintacticos", "Errores Semanticos" }));
         this.addActionListener(new java.awt.event.ActionListener() {
              public void actionPerformed(java.awt.event.ActionEvent evt) {
                  lista(evt);
@@ -251,10 +251,6 @@ public class CajaOpciones extends JComboBox<Object>
 
     public void setDataModel(ComboBoxModel<Object> dataModel) {
         this.dataModel = dataModel;
-    }
-
-    public void setRenderer(ListCellRenderer<? super Object> renderer) {
-        this.renderer = renderer;
     }
 
     public void setEditor(ComboBoxEditor editor) {

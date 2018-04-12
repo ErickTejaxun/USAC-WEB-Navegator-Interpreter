@@ -1139,18 +1139,19 @@ public void compilar(){
                         {
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {
-                                case "ruta":
-                                    enlace.setRuta(aux.getHijos().get(1).getValue());                                    
+                                
+                                case "ruta":                                    
+                                    enlace.setRuta(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "id":
-                                    enlace.setId(aux.getHijos().get(1).getValue());                                    
+                                    enlace.setId(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "grupo":
-                                    enlace.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    enlace.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "cadena":
-                                    enlace.setCadena(aux.getHijos().get(1).getValue());                                    
-                                    enlace.setText(enlace.getCadena());
+                                    enlace.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                    enlace.setText(quitarComillas(enlace.getCadena()));
                                     break; 
                                 case "ancho":                                                                        
                                     if (esNumero(aux.getHijos().get(1).getValue()))
@@ -1278,19 +1279,19 @@ public void compilar(){
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {
                                 case "ruta":
-                                    spinner.setRuta(aux.getHijos().get(1).getValue());                                    
+                                    spinner.setRuta(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "click":                                                                       
-                                    spinner.setMetodo(aux.getHijos().get(1).getValue());
+                                    spinner.setMetodo(quitarComillas(aux.getHijos().get(1).getValue()));
                                     break;                                     
                                 case "id":
-                                    spinner.setId(aux.getHijos().get(1).getValue());                                    
+                                    spinner.setId(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "grupo":
-                                    spinner.setGrupo(aux.getHijos().get(1).getValue());                                    
+                                    spinner.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
                                     break;
                                 case "entero":
-                                    spinner.setCadena(aux.getHijos().get(1).getValue());                                                                        
+                                    spinner.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                                                        
                                     break; 
                                 case "ancho":                                                                        
                                     if (esNumero(aux.getHijos().get(1).getValue()))
@@ -1345,7 +1346,7 @@ public void compilar(){
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {                                                                 
                                 case "id":
-                                    texto.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                    texto.setId(quitarComillas(aux.getHijos().get(1).getValue()));
                                     break;
                                 case "grupo":
                                     texto.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
@@ -1414,7 +1415,7 @@ public void compilar(){
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {                                                                 
                                 case "id":
-                                    area.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                    area.setId(quitarComillas(aux.getHijos().get(1).getValue()));
                                     break;
                                 case "grupo":
                                     area.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
@@ -1485,7 +1486,7 @@ public void compilar(){
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {                                                                 
                                 case "id":
-                                    caja.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                    caja.setId(quitarComillas(aux.getHijos().get(1).getValue()));
                                     break;
                                 case "grupo":
                                     caja.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
@@ -1555,7 +1556,7 @@ public void compilar(){
                             switch(aux.getHijos().get(0).getValue().toLowerCase())
                             {                                                                 
                                 case "id":
-                                    imagen.setName(quitarComillas(aux.getHijos().get(1).getValue()));
+                                    imagen.setId(quitarComillas(aux.getHijos().get(1).getValue()));
                                     break;
                                 case "grupo":
                                     imagen.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
@@ -1618,7 +1619,7 @@ public void compilar(){
 /*------------------------CAJA DE OPCIONES-----------------------*/                    
                 case "CAJAOPCIONES":
                     System.out.println("---------------------------IMAGEN---------------------");
-                    JComboBox cajaOpciones = new JComboBox();
+                    CajaOpciones cajaOpciones = new CajaOpciones();
                     cajaOpciones.setBounds(posX, posY, 100, 20);
                     int contadorOpciones = 0;
                     for(nodoChtml aux: raiz.getHijos())
@@ -1626,7 +1627,66 @@ public void compilar(){
                         System.out.println(aux.getValue());
                         switch(aux.getValue().toLowerCase())
                         {                                      
-                            /*------------OPCIONES----------*/                                        
+                            /*------------OPCIONES----------*/  
+                            case "elemento":
+                                switch(aux.getHijos().get(0).getValue().toLowerCase())
+                                {                                                                 
+                                    case "id":
+                                        cajaOpciones.setId(quitarComillas(aux.getHijos().get(1).getValue()));
+                                        break;
+                                    case "grupo":
+                                        cajaOpciones.setGrupo(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                        break;
+                                    case "cadena":
+                                        cajaOpciones.setCadena(quitarComillas(aux.getHijos().get(1).getValue()));                                    
+                                        //cajaOpciones.setText(imagen.getCadena());                                    
+                                        break; 
+                                    case "ancho":                                                                        
+                                        String numero = aux.getHijos().get(1).getValue();
+                                        numero = numero.substring(1,numero.length()-1);
+                                        if (esNumero(numero))
+                                        {
+                                            cajaOpciones.setAncho(Integer.valueOf(numero));
+                                        } 
+                                        break;
+                                    case "alto":            
+                                        numero = aux.getHijos().get(1).getValue();
+                                        numero = numero.substring(1,numero.length()-1);
+                                        if (esNumero(numero))
+                                        {
+                                            cajaOpciones.setAlto(Integer.valueOf(numero));
+                                        }     
+                                        break; 
+                                    case "alineado":                                                                        
+                                        switch(aux.getHijos().get(1).getValue())
+                                        {
+                                            case "\"izquierda\"":
+                                                cajaOpciones.setAlineado("izquierda");
+                                                cajaOpciones.setAlignmentX(LEFT_ALIGNMENT);
+                                                break;
+                                            case "\"derecha\"":
+                                                cajaOpciones.setAlineado("derecha");
+                                                cajaOpciones.setAlignmentX(RIGHT_ALIGNMENT);
+                                                break;  
+                                            case "\"centrado\"":
+                                                cajaOpciones.setAlineado("centrado");
+                                                cajaOpciones.setAlignmentX(CENTER_ALIGNMENT);
+                                                break;   
+                                            default :
+                                                filasErrores.addRow(new String[]{"CHTML",String.valueOf(aux.getHijos().get(1).getLinea()),String.valueOf(aux.getHijos().get(1).getColumna()),
+                                                    "Sintactico","Valor de alineacion incorrecto"});
+                                                break;                                          
+                                        }
+                                        break;  
+                                    case "click":                                                                       
+                                        cajaOpciones.setMetodo(aux.getHijos().get(1).getValue());
+                                        break; 
+                                    case "ruta":                                                                       
+                                        cajaOpciones.setRuta(aux.getHijos().get(1).getValue());
+                                        break;                                    
+                                }
+
+                                break;
                             case "opcion":
                                 
                                 String valor = "";                                
@@ -3356,8 +3416,10 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 //area.setBounds(posX, posY, area.getAncho(),area.getAlto());                                
                 JScrollPane nuevo = new JScrollPane(area);
                 nuevo.setBounds(x, y, area.getAncho(),area.getAlto());
-                area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto()));               
-                contenedor.add(nuevo); 
+                area.setPreferredSize(new java.awt.Dimension(area.getAncho(),area.getAlto())); 
+                aplicarEstilo(aux, contenedor);
+                //contenedor.add(nuevo); 
+                contenedor.add(area);
                 //System.out.println("Objeto insertado\t"+aux.getTipo()+" \tx: " +x + "\ty: "+ y);
                 val = posicionPanel(area.getAncho(), area.getAlto(),  contenedor, saltoY, x, y); 
                 x  = val[0];
@@ -4118,19 +4180,22 @@ private static boolean esNumero(String cadena){
                     Logger.getLogger(Pagina.class.getName()).log(Level.SEVERE, null, ex);
                 }            
             }**/
-
-            if(!boton.getMetodo().equals(""))
+            if(boton.getMetodo()!=null)
             {
-                //Mensaje("Llamada a funcion.",boton.getMetodo());   
-                if(boton.getMetodo().length()>4)
+
+                if(!boton.getMetodo().equals(""))
                 {
-                    //mensajeEmergente("Metodo", boton.getMetodo());
-                    String metodo = boton.getMetodo().substring(0,boton.getMetodo().length()-2);
-                    //mensajeEmergente("Metodo", metodo);
-                    if(ejecucion!=null){ejecucion.Executemetodo(metodo);}
-                    
-                }
-                
+                    //Mensaje("Llamada a funcion.",boton.getMetodo());   
+                    if(boton.getMetodo().length()>4)
+                    {
+                        //mensajeEmergente("Metodo", boton.getMetodo());
+                        String metodo = boton.getMetodo().substring(0,boton.getMetodo().length()-2);
+                        //mensajeEmergente("Metodo", metodo);
+                        if(ejecucion!=null){ejecucion.Executemetodo(metodo);}
+
+                    }
+
+                }                
             }
                        
         }
@@ -5752,7 +5817,7 @@ private static boolean esNumero(String cadena){
         erroresSemanticos.add(error);
     }
     
-    public boolean existeElemento(String id, ArrayList<Elemento> elementosLista)
+    public boolean existeElemento2(String id, ArrayList<Elemento> elementosLista)
     {
         boolean result=false;
         
@@ -5806,7 +5871,7 @@ private static boolean esNumero(String cadena){
                                        result = false;
                                        if(pnl.getElementos().isEmpty())
                                        {
-                                           result =existeElemento(id,pnl.getElementos());
+                                           result =existeElemento2(id,pnl.getElementos());
                                        }                                       
                                    }
                                    break; 
@@ -5822,7 +5887,7 @@ private static boolean esNumero(String cadena){
                                        result = false;
                                        if(tab.getElementos().isEmpty())
                                        {
-                                           result =existeElemento(id,tab.getElementos());
+                                           result =existeElemento2(id,tab.getElementos());
                                        }
                                    }                                   
                                    break; 
@@ -5844,30 +5909,33 @@ private static boolean esNumero(String cadena){
     }
     
     
-    public boolean existeElementos(String id, ArrayList<Elemento> elementosLista)
+    public boolean existeElemento(String id, ArrayList<Elemento> elementosLista)
     {
         return existeElement(id, panelPrincipal);
     }
     
     public boolean existeElement(String id, Panel contenedor)
     {
-        Component[] componentes = contenedor.getComponents();
+        Component[] componentes = contenedor.getComponents();        
         boolean existe = false;
+        if(id.equals("cuerpo")){return true;}
         for(Component comp: componentes)
         {
-            if(comp instanceof Panel){ Panel pnl = (Panel)comp; if(pnl.getId().equals(id)){return true;}else{ existe=existeElement(id,pnl);}}
-            if(comp instanceof Boton){ Boton item = (Boton)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof Caja){ Caja item = (Caja)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof CajaOpciones){ CajaOpciones item = (CajaOpciones)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof Enlace){ Enlace item = (Enlace)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof Imagen){ Imagen item = (Imagen)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof Spinner){ Spinner item = (Spinner)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof Tab){ Tab item = (Tab)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof Texto){ Texto item = (Texto)comp; if(item.getId().equals(id)){return true;}}
-            if(comp instanceof areaTexto){ areaTexto item = (areaTexto)comp; if(item.getId().equals(id)){return true;}}            
+            if(comp instanceof Panel && existe == false){ Panel pnl = (Panel)comp; if(pnl.getId().equals(id)){existe = true;}else{ existe=(existeElement(id,pnl));}}
+            if(comp instanceof Boton && existe == false){ Boton item = (Boton)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof Caja && existe == false){ Caja item = (Caja)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof CajaOpciones && existe == false){CajaOpciones item = (CajaOpciones)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof Enlace && existe == false){ Enlace item = (Enlace)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof Imagen && existe == false){ Imagen item = (Imagen)comp; if(item.getId()!=null){if(item.getId().equals(id)){existe = true;}}}
+            if(comp instanceof Spinner && existe == false){ Spinner item = (Spinner)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof Tab && existe == false){ Tab item = (Tab)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof Texto && existe == false){ Texto item = (Texto)comp; if(item.getId().equals(id)){existe = true;}}
+            if(comp instanceof areaTexto && existe == false){areaTexto item = (areaTexto)comp; if(item.getId().equals(id)){existe = true;}}            
         }               
+        //System.out.println(id + "\tResultado "+ existe +"\tPanel " + contenedor.getId());
         return existe;        
     }    
+
     
     public void modificarAtributo(String id, String atributo, Object valor)
     {
@@ -5891,43 +5959,43 @@ private static boolean esNumero(String cadena){
                     case "id":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setId(id_);}}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setId(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setId(id_);}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setId(id_);}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setId(id_);}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setId(id_);}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setId(id_);}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setId(id_);}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setId(id_);}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setId(id_);}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setId(id_);}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setId(id_);}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setId(id_);}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setId(id_);}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setId(id_);}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setId(id_);}}
                         break;
                     case "grupo":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setGrupo(id_);}}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setGrupo(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setGrupo(id_);}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setGrupo(id_);}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setGrupo(id_);}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setGrupo(id_);}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setGrupo(id_);}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setGrupo(id_);}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setGrupo(id_);}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setGrupo(id_);}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setGrupo(id_);}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setGrupo(id_);}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setGrupo(id_);}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp;  if(id.equals(spn.getId())){spn.setGrupo(id_);}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setGrupo(id_);}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setGrupo(id_);}}
                         break;
                     case "alineado":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setAlineado(id_);}}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setAlineado(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setAlineado(id_);}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setAlineado(id_);}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setAlineado(id_);}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setAlineado(id_);}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setAlineado(id_);}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setAlineado(id_);}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setAlineado(id_);}                        
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp;if(id.equals(cjt.getId())){cjt.setAlineado(id_);}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setAlineado(id_);}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setAlineado(id_);}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setAlineado(id_);}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setAlineado(id_);}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setAlineado(id_);}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setAlineado(id_);}}                      
                         break;   
-                    case "text":
+                    case "texto":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setTexto(id_);}}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setText(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setText(id_);}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.addItem(id_);}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setText(id_);}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setText(id_);}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setText(id_);}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; /*if(id.equals(cjtO.getId())){cjtO.setTexto(id_);}*/}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setText(id_);}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setText(id_);}}
                         if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(esNumero(id_)){spn.setValue(Integer.valueOf(id_));}}
                         if(comp instanceof Tab){Tab tab = (Tab)comp; }
                         if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setText(id_);}                       
@@ -5951,109 +6019,135 @@ private static boolean esNumero(String cadena){
                         if(comp instanceof Caja)
                         {
                             Caja cjt = (Caja)comp; 
-                            if(esNumero(id_))
+                            if(cjt.getId().equals(id))
                             {
-                                cjt.setFont(new Font(cjt.getFont().getName(),cjt.getFont().getStyle(),Integer.valueOf(id_)));
-                            }
-                            else
-                            {
-                                cjt.setFont(new Font(id_,cjt.getFont().getStyle(),cjt.getFont().getSize()));
+                                if(esNumero(id_))
+                                {
+                                    cjt.setFont(new Font(cjt.getFont().getName(),cjt.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    cjt.setFont(new Font(id_,cjt.getFont().getStyle(),cjt.getFont().getSize()));
+                                }
                             }
                         }      
                         if(comp instanceof CajaOpciones)
                         {
                             CajaOpciones cjtO = (CajaOpciones)comp; 
-                            if(esNumero(id_))
+                            if(cjtO.getId().equals(id))
                             {
-                                cjtO.setFont(new Font(cjtO.getFont().getName(),cjtO.getFont().getStyle(),Integer.valueOf(id_)));
-                            }
-                            else
-                            {
-                                cjtO.setFont(new Font(id_,cjtO.getFont().getStyle(),cjtO.getFont().getSize()));
+                                if(esNumero(id_))
+                                {
+                                    cjtO.setFont(new Font(cjtO.getFont().getName(),cjtO.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    cjtO.setFont(new Font(id_,cjtO.getFont().getStyle(),cjtO.getFont().getSize()));
+                                }
                             }
                         }   
                         if(comp instanceof Enlace)
                         {
                             Enlace enl = (Enlace)comp; 
-                            if(esNumero(id_))
+                            if(enl.getId().equals(id))
                             {
-                                enl.setFont(new Font(enl.getFont().getName(),enl.getFont().getStyle(),Integer.valueOf(id_)));
-                            }
-                            else
-                            {
-                                enl.setFont(new Font(id_,enl.getFont().getStyle(),enl.getFont().getSize()));
+                                if(esNumero(id_))
+                                {
+                                    enl.setFont(new Font(enl.getFont().getName(),enl.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    enl.setFont(new Font(id_,enl.getFont().getStyle(),enl.getFont().getSize()));
+                                }
                             }
                         }   
                         if(comp instanceof Spinner)
                         {
                             Spinner spn = (Spinner)comp; 
-                            if(esNumero(id_))
+                            if(spn.getId().equals(id))
                             {
-                                spn.setFont(new Font(spn.getFont().getName(),spn.getFont().getStyle(),Integer.valueOf(id_)));
-                            }
-                            else
-                            {
-                                spn.setFont(new Font(id_,spn.getFont().getStyle(),spn.getFont().getSize()));
+                                if(esNumero(id_))
+                                {
+                                    spn.setFont(new Font(spn.getFont().getName(),spn.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    spn.setFont(new Font(id_,spn.getFont().getStyle(),spn.getFont().getSize()));
+                                }
                             }
                         }   
                         if(comp instanceof areaTexto)
                         {
                             areaTexto areaT = (areaTexto)comp; 
-                            if(esNumero(id_))
+                            if(areaT.getId().equals(id))
                             {
-                                areaT.setFont(new Font(areaT.getFont().getName(),areaT.getFont().getStyle(),Integer.valueOf(id_)));
-                            }
-                            else
-                            {
-                                areaT.setFont(new Font(id_,areaT.getFont().getStyle(),areaT.getFont().getSize()));
+                                if(esNumero(id_))
+                                {
+                                    areaT.setFont(new Font(areaT.getFont().getName(),areaT.getFont().getStyle(),Integer.valueOf(id_)));
+                                }
+                                else
+                                {
+                                    areaT.setFont(new Font(id_,areaT.getFont().getStyle(),areaT.getFont().getSize()));
+                                }
                             }
                         }                                                                                              
                         break;  
                     case "fondoelemento":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setBackground(colorFuente(id_));}}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setBackground(colorFuente(id_));}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setBackground(colorFuente(id_));}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setBackground(colorFuente(id_));}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setBackground(colorFuente(id_));}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setBackground(colorFuente(id_));}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setBackground(colorFuente(id_));}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setBackground(colorFuente(id_));}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setBackground(colorFuente(id_));}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setBackground(colorFuente(id_));}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setBackground(colorFuente(id_));}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp;  if(id.equals(enl.getId())){enl.setBackground(colorFuente(id_));}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp;  if(id.equals(img.getId())){img.setBackground(colorFuente(id_));}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setBackground(colorFuente(id_));}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp;  if(id.equals(tab.getId())){tab.setBackground(colorFuente(id_));}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp;  if(id.equals(areaT.getId())){areaT.setBackground(colorFuente(id_));}}
                         if(id.equals("cuerpo")){panelPrincipal.setBackground(colorFuente(id_));}
                         break;                        
                     case "visible":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setVisible(true);}if(id_.equals("false")){pnl.setVisible(false);}} }
                         if(comp instanceof Boton){Boton btn = (Boton)comp;if(id.equals(btn.getId())){ if(id_.equals("true")){btn.setVisible(true);}if(id_.equals("false")){btn.setVisible(false);} }}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id_.equals("true")){cjt.setVisible(true);}if(id_.equals("false")){cjt.setVisible(false);} }
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id_.equals("true")){cjtO.setVisible(true);}if(id_.equals("false")){cjtO.setVisible(false);} }
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id_.equals("true")){enl.setVisible(true);}if(id_.equals("false")){enl.setVisible(false);} }
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id_.equals("true")){img.setVisible(true);}if(id_.equals("false")){img.setVisible(false);} }
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id_.equals("true")){spn.setVisible(true);}if(id_.equals("false")){spn.setVisible(false);} }
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id_.equals("true")){tab.setVisible(true);}if(id_.equals("false")){tab.setVisible(false);} }
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id_.equals("true")){areaT.setVisible(true);}if(id_.equals("false")){areaT.setVisible(false);} }
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){ if(id_.equals("true")){cjt.setVisible(true);}if(id_.equals("false")){cjt.setVisible(false);} }}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){ if(id_.equals("true")){cjtO.setVisible(true);}if(id_.equals("false")){cjtO.setVisible(false);} }}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){ if(id_.equals("true")){enl.setVisible(true);}if(id_.equals("false")){enl.setVisible(false);} }}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){ if(id_.equals("true")){img.setVisible(true);}if(id_.equals("false")){img.setVisible(false);} }}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){ if(id_.equals("true")){spn.setVisible(true);}if(id_.equals("false")){spn.setVisible(false);} }}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp;if(id.equals(tab.getId())){ if(id_.equals("true")){tab.setVisible(true);}if(id_.equals("false")){tab.setVisible(false);} }}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){ if(id_.equals("true")){areaT.setVisible(true);}if(id_.equals("false")){areaT.setVisible(false);} }}
                         break; 
                     case "colortext":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setForeground(colorFuente(id_));;}}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setForeground(colorFuente(id_));}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; cjt.setForeground(colorFuente(id_));}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; cjtO.setForeground(colorFuente(id_));}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; enl.setForeground(colorFuente(id_));}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; img.setForeground(colorFuente(id_));}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; spn.setForeground(colorFuente(id_));}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; tab.setForeground(colorFuente(id_));}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setForeground(colorFuente(id_));}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setForeground(colorFuente(id_));;}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp;if(id.equals(areaT.getId())){areaT.setForeground(colorFuente(id_));;}}
                         break;  
                     case "opaque":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
                         if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){if(id_.equals("true")){btn.setOpaque(false);}if(id_.equals("false")){btn.setOpaque(true);} }}
                         if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id_.equals("true")){cjt.setOpaque(false);}if(id_.equals("false")){cjt.setOpaque(true);} }
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id_.equals("true")){cjtO.setOpaque(false);}if(id_.equals("false")){cjtO.setOpaque(true);} }
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id_.equals("true")){enl.setOpaque(false);}if(id_.equals("false")){enl.setOpaque(true);} }
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id_.equals("true")){img.setOpaque(false);}if(id_.equals("false")){img.setOpaque(true);} }
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id_.equals("true")){spn.setOpaque(false);}if(id_.equals("false")){spn.setOpaque(true);} }
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id_.equals("true")){tab.setOpaque(false);}if(id_.equals("false")){tab.setOpaque(true);} }
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id_.equals("true")){areaT.setOpaque(false);}if(id_.equals("false")){areaT.setOpaque(true);} }
-                        break;                        
+                        if(comp instanceof CajaOpciones){CajaOpciones pnl= (CajaOpciones)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Enlace){Enlace pnl = (Enlace)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Imagen){Imagen pnl = (Imagen)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Spinner){Spinner pnl = (Spinner)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Tab){Tab pnl = (Tab)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof areaTexto){areaTexto pnl = (areaTexto)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        break;  
+                    case "click":
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){if(id_.equals("true")){btn.setOpaque(false);}if(id_.equals("false")){btn.setOpaque(true);} }}
+                        if(comp instanceof Caja){Caja pnl = (Caja)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof CajaOpciones){CajaOpciones pnl= (CajaOpciones)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Enlace){Enlace pnl = (Enlace)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Imagen){Imagen pnl = (Imagen)comp;if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Spinner){Spinner pnl = (Spinner)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof Tab){Tab pnl = (Tab)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        if(comp instanceof areaTexto){areaTexto pnl = (areaTexto)comp; if(id.equals(pnl.getId())){if(id_.equals("true")){pnl.setOpaque(false);}if(id_.equals("false")){pnl.setOpaque(true);} }}
+                        break;                         
                 }
                 
                 
