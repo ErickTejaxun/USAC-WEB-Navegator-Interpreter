@@ -346,7 +346,7 @@ public class Execute {
                     newFuntion.tipe = "void";
                     newFuntion.rol = "metodo";
                 
-                    newFuntion.name = funcion.hijos.get(0).valor;
+                    newFuntion.name = funcion.hijos.get(0).valor.toLowerCase();
                 
                     nameMetod=funcion.hijos.get(0).valor.toLowerCase();
                     String key;
@@ -364,7 +364,7 @@ public class Execute {
                     tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
                     
                 }else{
-                    Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion");
+                    Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion de observador");
                     TablaES.add(datos);
                 }
                   nameMetod="";

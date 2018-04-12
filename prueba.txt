@@ -190,500 +190,506 @@ node130[label = "VACCESO ",];
 node131[label = "VAR 
 montodisponible",];
 node132[label = "LIST_SENTE ",];
-node133[label = "RETORNAR ",];
-node134[label = "CAD 
-true",];
-node135[label = "LIST_SENTE ",];
-node136[label = "RETORNAR ",];
-node137[label = "CAD 
-false",];
-node138[label = "METFUNC ",];
-node139[label = "ID 
-validartotalautos",];
-node140[label = "LVAR ",];
-node141[label = "VAR 
-disponible",];
-node142[label = "LIST_SENTE ",];
-node143[label = "IF ",];
-node144[label = "< ",];
-node145[label = "VACCESO ",];
-node146[label = "VAR 
-disponible",];
-node147[label = "VACCESO ",];
-node148[label = "VAR 
-totalcarros",];
-node149[label = "LIST_SENTE ",];
-node150[label = "RETORNAR ",];
-node151[label = "CAD 
-true",];
-node152[label = "LIST_SENTE ",];
-node153[label = "RETORNAR ",];
-node154[label = "CAD 
-false",];
-node155[label = "METFUNC ",];
-node156[label = "ID 
-buy_mazda",];
-node157[label = "LIST_SENTE ",];
-node158[label = "DECLASIGVAR ",];
-node159[label = "LVAR ",];
-node160[label = "VAR 
-precio",];
-node161[label = "NUM 
-25000",];
-node162[label = "IF ",];
-node163[label = "&& ",];
-node164[label = "== ",];
-node165[label = "CALL_METFUN ",];
-node166[label = "ID 
-validarprecio",];
-node167[label = "LEXPR ",];
-node168[label = "- ",];
-node169[label = "VACCESO ",];
-node170[label = "VAR 
+node133[label = "ASIG_VAR ",];
+node134[label = "VAR 
 montodisponible",];
-node171[label = "NUM 
-25000",];
-node172[label = "CAD 
+node135[label = "VACCESO ",];
+node136[label = "VAR 
+disponible",];
+node137[label = "RETORNAR ",];
+node138[label = "CAD 
 true",];
-node173[label = "== ",];
-node174[label = "CALL_METFUN ",];
-node175[label = "ID 
+node139[label = "LIST_SENTE ",];
+node140[label = "RETORNAR ",];
+node141[label = "CAD 
+false",];
+node142[label = "METFUNC ",];
+node143[label = "ID 
 validartotalautos",];
-node176[label = "LEXPR ",];
-node177[label = "- ",];
-node178[label = "VACCESO ",];
-node179[label = "VAR 
+node144[label = "LVAR ",];
+node145[label = "VAR 
+disponible",];
+node146[label = "LIST_SENTE ",];
+node147[label = "IF ",];
+node148[label = "< ",];
+node149[label = "VACCESO ",];
+node150[label = "VAR 
+disponible",];
+node151[label = "VACCESO ",];
+node152[label = "VAR 
 totalcarros",];
-node180[label = "NUM 
-1",];
-node181[label = "CAD 
+node153[label = "LIST_SENTE ",];
+node154[label = "RETORNAR ",];
+node155[label = "CAD 
 true",];
-node182[label = "LIST_SENTE ",];
-node183[label = "ASIG_POSVECT ",];
-node184[label = "VAR 
-vectorprecios",];
-node185[label = "VACCESO ",];
-node186[label = "VAR 
-contadorcarro",];
-node187[label = "VACCESO ",];
-node188[label = "VAR 
+node156[label = "LIST_SENTE ",];
+node157[label = "RETORNAR ",];
+node158[label = "CAD 
+false",];
+node159[label = "METFUNC ",];
+node160[label = "ID 
+buy_mazda",];
+node161[label = "LIST_SENTE ",];
+node162[label = "DECLASIGVAR ",];
+node163[label = "LVAR ",];
+node164[label = "VAR 
 precio",];
-node189[label = "ASIG_VAR ",];
+node165[label = "NUM 
+25000",];
+node166[label = "IF ",];
+node167[label = "&& ",];
+node168[label = "== ",];
+node169[label = "CALL_METFUN ",];
+node170[label = "ID 
+validarprecio",];
+node171[label = "LEXPR ",];
+node172[label = "- ",];
+node173[label = "VACCESO ",];
+node174[label = "VAR 
+montodisponible",];
+node175[label = "NUM 
+25000",];
+node176[label = "CAD 
+true",];
+node177[label = "== ",];
+node178[label = "CALL_METFUN ",];
+node179[label = "ID 
+validartotalautos",];
+node180[label = "LEXPR ",];
+node181[label = "- ",];
+node182[label = "VACCESO ",];
+node183[label = "VAR 
+totalcarros",];
+node184[label = "NUM 
+1",];
+node185[label = "CAD 
+true",];
+node186[label = "LIST_SENTE ",];
+node187[label = "ASIG_POSVECT ",];
+node188[label = "VAR 
+vectorprecios",];
+node189[label = "VACCESO ",];
 node190[label = "VAR 
 contadorcarro",];
-node191[label = "+ ",];
-node192[label = "VACCESO ",];
-node193[label = "VAR 
-contadorcarro",];
-node194[label = "NUM 
-1",];
-node195[label = "ASIG_VAR ",];
-node196[label = "VAR 
-carrosdisponibles",];
-node197[label = "- ",];
-node198[label = "VACCESO ",];
-node199[label = "VAR 
-carrosdisponibles",];
-node200[label = "NUM 
-1",];
-node201[label = "ASIG_VAR ",];
-node202[label = "VAR 
-monto",];
-node203[label = "+ ",];
-node204[label = "VACCESO ",];
-node205[label = "VAR 
-monto",];
-node206[label = "VACCESO ",];
-node207[label = "VAR 
+node191[label = "VACCESO ",];
+node192[label = "VAR 
 precio",];
-node208[label = "MENSAJE ",];
-node209[label = "CAD 
-Compraste un Mazda",];
-node210[label = "LIST_SENTE ",];
-node211[label = "MENSAJE ",];
-node212[label = "+ ",];
+node193[label = "ASIG_VAR ",];
+node194[label = "VAR 
+contadorcarro",];
+node195[label = "+ ",];
+node196[label = "VACCESO ",];
+node197[label = "VAR 
+contadorcarro",];
+node198[label = "NUM 
+1",];
+node199[label = "ASIG_VAR ",];
+node200[label = "VAR 
+carrosdisponibles",];
+node201[label = "- ",];
+node202[label = "VACCESO ",];
+node203[label = "VAR 
+carrosdisponibles",];
+node204[label = "NUM 
+1",];
+node205[label = "ASIG_VAR ",];
+node206[label = "VAR 
+monto",];
+node207[label = "+ ",];
+node208[label = "VACCESO ",];
+node209[label = "VAR 
+monto",];
+node210[label = "VACCESO ",];
+node211[label = "VAR 
+precio",];
+node212[label = "MENSAJE ",];
 node213[label = "CAD 
+Compraste un Mazda",];
+node214[label = "LIST_SENTE ",];
+node215[label = "MENSAJE ",];
+node216[label = "+ ",];
+node217[label = "CAD 
 Unicamente le quedan Q",];
-node214[label = "VACCESO ",];
-node215[label = "VAR 
+node218[label = "VACCESO ",];
+node219[label = "VAR 
 monto",];
-node216[label = "METFUNC ",];
-node217[label = "ID 
+node220[label = "METFUNC ",];
+node221[label = "ID 
 buy_toyota",];
-node218[label = "LIST_SENTE ",];
-node219[label = "DECLASIGVAR ",];
-node220[label = "LVAR ",];
-node221[label = "VAR 
+node222[label = "LIST_SENTE ",];
+node223[label = "DECLASIGVAR ",];
+node224[label = "LVAR ",];
+node225[label = "VAR 
 precio",];
-node222[label = "NUM 
+node226[label = "NUM 
 39000",];
-node223[label = "IF ",];
-node224[label = "&& ",];
-node225[label = "== ",];
-node226[label = "CALL_METFUN ",];
-node227[label = "ID 
+node227[label = "IF ",];
+node228[label = "&& ",];
+node229[label = "== ",];
+node230[label = "CALL_METFUN ",];
+node231[label = "ID 
 validarprecio",];
-node228[label = "LEXPR ",];
-node229[label = "- ",];
-node230[label = "VACCESO ",];
-node231[label = "VAR 
+node232[label = "LEXPR ",];
+node233[label = "- ",];
+node234[label = "VACCESO ",];
+node235[label = "VAR 
 montodisponible",];
-node232[label = "VACCESO ",];
-node233[label = "VAR 
+node236[label = "VACCESO ",];
+node237[label = "VAR 
 precio",];
-node234[label = "CAD 
+node238[label = "CAD 
 true",];
-node235[label = "== ",];
-node236[label = "CALL_METFUN ",];
-node237[label = "ID 
+node239[label = "== ",];
+node240[label = "CALL_METFUN ",];
+node241[label = "ID 
 validartotalautos",];
-node238[label = "LEXPR ",];
-node239[label = "- ",];
-node240[label = "VACCESO ",];
-node241[label = "VAR 
+node242[label = "LEXPR ",];
+node243[label = "- ",];
+node244[label = "VACCESO ",];
+node245[label = "VAR 
 totalcarros",];
-node242[label = "NUM 
+node246[label = "NUM 
 1",];
-node243[label = "CAD 
+node247[label = "CAD 
 true",];
-node244[label = "LIST_SENTE ",];
-node245[label = "ASIG_POSVECT ",];
-node246[label = "VAR 
-vectorprecios",];
-node247[label = "VACCESO ",];
-node248[label = "VAR 
-contadorcarro",];
-node249[label = "VACCESO ",];
+node248[label = "LIST_SENTE ",];
+node249[label = "ASIG_POSVECT ",];
 node250[label = "VAR 
-precio",];
-node251[label = "ASIG_VAR ",];
+vectorprecios",];
+node251[label = "VACCESO ",];
 node252[label = "VAR 
 contadorcarro",];
-node253[label = "+ ",];
-node254[label = "VACCESO ",];
-node255[label = "VAR 
-contadorcarro",];
-node256[label = "NUM 
-1",];
-node257[label = "ASIG_VAR ",];
-node258[label = "VAR 
-carrosdisponibles",];
-node259[label = "- ",];
-node260[label = "VACCESO ",];
-node261[label = "VAR 
-carrosdisponibles",];
-node262[label = "NUM 
-1",];
-node263[label = "ASIG_VAR ",];
-node264[label = "VAR 
-monto",];
-node265[label = "+ ",];
-node266[label = "VACCESO ",];
-node267[label = "VAR 
-monto",];
-node268[label = "VACCESO ",];
-node269[label = "VAR 
+node253[label = "VACCESO ",];
+node254[label = "VAR 
 precio",];
-node270[label = "MENSAJE ",];
-node271[label = "CAD 
-Compraste un Toyota",];
-node272[label = "LIST_SENTE ",];
-node273[label = "MENSAJE ",];
-node274[label = "+ ",];
+node255[label = "ASIG_VAR ",];
+node256[label = "VAR 
+contadorcarro",];
+node257[label = "+ ",];
+node258[label = "VACCESO ",];
+node259[label = "VAR 
+contadorcarro",];
+node260[label = "NUM 
+1",];
+node261[label = "ASIG_VAR ",];
+node262[label = "VAR 
+carrosdisponibles",];
+node263[label = "- ",];
+node264[label = "VACCESO ",];
+node265[label = "VAR 
+carrosdisponibles",];
+node266[label = "NUM 
+1",];
+node267[label = "ASIG_VAR ",];
+node268[label = "VAR 
+monto",];
+node269[label = "+ ",];
+node270[label = "VACCESO ",];
+node271[label = "VAR 
+monto",];
+node272[label = "VACCESO ",];
+node273[label = "VAR 
+precio",];
+node274[label = "MENSAJE ",];
 node275[label = "CAD 
+Compraste un Toyota",];
+node276[label = "LIST_SENTE ",];
+node277[label = "MENSAJE ",];
+node278[label = "+ ",];
+node279[label = "CAD 
 Unicamente le quedan Q",];
-node276[label = "VACCESO ",];
-node277[label = "VAR 
+node280[label = "VACCESO ",];
+node281[label = "VAR 
 monto",];
-node278[label = "METFUNC ",];
-node279[label = "ID 
+node282[label = "METFUNC ",];
+node283[label = "ID 
 buy_ford",];
-node280[label = "LIST_SENTE ",];
-node281[label = "DECLASIGVAR ",];
-node282[label = "LVAR ",];
-node283[label = "VAR 
+node284[label = "LIST_SENTE ",];
+node285[label = "DECLASIGVAR ",];
+node286[label = "LVAR ",];
+node287[label = "VAR 
 precio",];
-node284[label = "NUM 
+node288[label = "NUM 
 55000",];
-node285[label = "IF ",];
-node286[label = "&& ",];
-node287[label = "== ",];
-node288[label = "CALL_METFUN ",];
-node289[label = "ID 
+node289[label = "IF ",];
+node290[label = "&& ",];
+node291[label = "== ",];
+node292[label = "CALL_METFUN ",];
+node293[label = "ID 
 validarprecio",];
-node290[label = "LEXPR ",];
-node291[label = "- ",];
-node292[label = "VACCESO ",];
-node293[label = "VAR 
+node294[label = "LEXPR ",];
+node295[label = "- ",];
+node296[label = "VACCESO ",];
+node297[label = "VAR 
 montodisponible",];
-node294[label = "VACCESO ",];
-node295[label = "VAR 
+node298[label = "VACCESO ",];
+node299[label = "VAR 
 precio",];
-node296[label = "CAD 
+node300[label = "CAD 
 true",];
-node297[label = "== ",];
-node298[label = "CALL_METFUN ",];
-node299[label = "ID 
+node301[label = "== ",];
+node302[label = "CALL_METFUN ",];
+node303[label = "ID 
 validartotalautos",];
-node300[label = "LEXPR ",];
-node301[label = "- ",];
-node302[label = "VACCESO ",];
-node303[label = "VAR 
+node304[label = "LEXPR ",];
+node305[label = "- ",];
+node306[label = "VACCESO ",];
+node307[label = "VAR 
 totalcarros",];
-node304[label = "NUM 
+node308[label = "NUM 
 1",];
-node305[label = "CAD 
+node309[label = "CAD 
 true",];
-node306[label = "LIST_SENTE ",];
-node307[label = "ASIG_POSVECT ",];
-node308[label = "VAR 
-vectorprecios",];
-node309[label = "VACCESO ",];
-node310[label = "VAR 
-contadorcarro",];
-node311[label = "VACCESO ",];
+node310[label = "LIST_SENTE ",];
+node311[label = "ASIG_POSVECT ",];
 node312[label = "VAR 
-precio",];
-node313[label = "ASIG_VAR ",];
+vectorprecios",];
+node313[label = "VACCESO ",];
 node314[label = "VAR 
 contadorcarro",];
-node315[label = "+ ",];
-node316[label = "VACCESO ",];
-node317[label = "VAR 
-contadorcarro",];
-node318[label = "NUM 
-1",];
-node319[label = "ASIG_VAR ",];
-node320[label = "VAR 
-carrosdisponibles",];
-node321[label = "- ",];
-node322[label = "VACCESO ",];
-node323[label = "VAR 
-carrosdisponibles",];
-node324[label = "NUM 
-1",];
-node325[label = "ASIG_VAR ",];
-node326[label = "VAR 
-monto",];
-node327[label = "+ ",];
-node328[label = "VACCESO ",];
-node329[label = "VAR 
-monto",];
-node330[label = "VACCESO ",];
-node331[label = "VAR 
+node315[label = "VACCESO ",];
+node316[label = "VAR 
 precio",];
-node332[label = "MENSAJE ",];
-node333[label = "CAD 
-Compraste un Ford",];
-node334[label = "LIST_SENTE ",];
-node335[label = "MENSAJE ",];
-node336[label = "+ ",];
+node317[label = "ASIG_VAR ",];
+node318[label = "VAR 
+contadorcarro",];
+node319[label = "+ ",];
+node320[label = "VACCESO ",];
+node321[label = "VAR 
+contadorcarro",];
+node322[label = "NUM 
+1",];
+node323[label = "ASIG_VAR ",];
+node324[label = "VAR 
+carrosdisponibles",];
+node325[label = "- ",];
+node326[label = "VACCESO ",];
+node327[label = "VAR 
+carrosdisponibles",];
+node328[label = "NUM 
+1",];
+node329[label = "ASIG_VAR ",];
+node330[label = "VAR 
+monto",];
+node331[label = "+ ",];
+node332[label = "VACCESO ",];
+node333[label = "VAR 
+monto",];
+node334[label = "VACCESO ",];
+node335[label = "VAR 
+precio",];
+node336[label = "MENSAJE ",];
 node337[label = "CAD 
+Compraste un Ford",];
+node338[label = "LIST_SENTE ",];
+node339[label = "MENSAJE ",];
+node340[label = "+ ",];
+node341[label = "CAD 
 Unicamente le quedan Q",];
-node338[label = "VACCESO ",];
-node339[label = "VAR 
+node342[label = "VACCESO ",];
+node343[label = "VAR 
 monto",];
-node340[label = "METFUNC ",];
-node341[label = "ID 
+node344[label = "METFUNC ",];
+node345[label = "ID 
 btn_meches",];
-node342[label = "LIST_SENTE ",];
-node343[label = "DECLASIGVAR ",];
-node344[label = "LVAR ",];
-node345[label = "VAR 
+node346[label = "LIST_SENTE ",];
+node347[label = "DECLASIGVAR ",];
+node348[label = "LVAR ",];
+node349[label = "VAR 
 precio",];
-node346[label = "NUM 
+node350[label = "NUM 
 54000",];
-node347[label = "IF ",];
-node348[label = "&& ",];
-node349[label = "== ",];
-node350[label = "CALL_METFUN ",];
-node351[label = "ID 
+node351[label = "IF ",];
+node352[label = "&& ",];
+node353[label = "== ",];
+node354[label = "CALL_METFUN ",];
+node355[label = "ID 
 validarprecio",];
-node352[label = "LEXPR ",];
-node353[label = "- ",];
-node354[label = "VACCESO ",];
-node355[label = "VAR 
+node356[label = "LEXPR ",];
+node357[label = "- ",];
+node358[label = "VACCESO ",];
+node359[label = "VAR 
 montodisponible",];
-node356[label = "NUM 
+node360[label = "NUM 
 54000",];
-node357[label = "CAD 
+node361[label = "CAD 
 true",];
-node358[label = "== ",];
-node359[label = "CALL_METFUN ",];
-node360[label = "ID 
+node362[label = "== ",];
+node363[label = "CALL_METFUN ",];
+node364[label = "ID 
 validartotalautos",];
-node361[label = "LEXPR ",];
-node362[label = "- ",];
-node363[label = "VACCESO ",];
-node364[label = "VAR 
+node365[label = "LEXPR ",];
+node366[label = "- ",];
+node367[label = "VACCESO ",];
+node368[label = "VAR 
 totalcarros",];
-node365[label = "NUM 
+node369[label = "NUM 
 1",];
-node366[label = "CAD 
+node370[label = "CAD 
 true",];
-node367[label = "LIST_SENTE ",];
-node368[label = "ASIG_POSVECT ",];
-node369[label = "VAR 
-vectorprecios",];
-node370[label = "VACCESO ",];
-node371[label = "VAR 
-contadorcarro",];
-node372[label = "VACCESO ",];
+node371[label = "LIST_SENTE ",];
+node372[label = "ASIG_POSVECT ",];
 node373[label = "VAR 
-precio",];
-node374[label = "ASIG_VAR ",];
+vectorprecios",];
+node374[label = "VACCESO ",];
 node375[label = "VAR 
 contadorcarro",];
-node376[label = "+ ",];
-node377[label = "VACCESO ",];
-node378[label = "VAR 
-contadorcarro",];
-node379[label = "NUM 
-1",];
-node380[label = "ASIG_VAR ",];
-node381[label = "VAR 
-carrosdisponibles",];
-node382[label = "- ",];
-node383[label = "VACCESO ",];
-node384[label = "VAR 
-carrosdisponibles",];
-node385[label = "NUM 
-1",];
-node386[label = "ASIG_VAR ",];
-node387[label = "VAR 
-monto",];
-node388[label = "+ ",];
-node389[label = "VACCESO ",];
-node390[label = "VAR 
-monto",];
-node391[label = "VACCESO ",];
-node392[label = "VAR 
+node376[label = "VACCESO ",];
+node377[label = "VAR 
 precio",];
-node393[label = "MENSAJE ",];
-node394[label = "CAD 
-Compraste un Mercedes Benz",];
-node395[label = "LIST_SENTE ",];
-node396[label = "MENSAJE ",];
-node397[label = "+ ",];
-node398[label = "CAD 
-Unicamente le quedan Q",];
-node399[label = "VACCESO ",];
-node400[label = "VAR 
+node378[label = "ASIG_VAR ",];
+node379[label = "VAR 
+contadorcarro",];
+node380[label = "+ ",];
+node381[label = "VACCESO ",];
+node382[label = "VAR 
+contadorcarro",];
+node383[label = "NUM 
+1",];
+node384[label = "ASIG_VAR ",];
+node385[label = "VAR 
+carrosdisponibles",];
+node386[label = "- ",];
+node387[label = "VACCESO ",];
+node388[label = "VAR 
+carrosdisponibles",];
+node389[label = "NUM 
+1",];
+node390[label = "ASIG_VAR ",];
+node391[label = "VAR 
 monto",];
-node401[label = "METFUNC ",];
-node402[label = "ID 
+node392[label = "+ ",];
+node393[label = "VACCESO ",];
+node394[label = "VAR 
+monto",];
+node395[label = "VACCESO ",];
+node396[label = "VAR 
+precio",];
+node397[label = "MENSAJE ",];
+node398[label = "CAD 
+Compraste un Mercedes Benz",];
+node399[label = "LIST_SENTE ",];
+node400[label = "MENSAJE ",];
+node401[label = "+ ",];
+node402[label = "CAD 
+Unicamente le quedan Q",];
+node403[label = "VACCESO ",];
+node404[label = "VAR 
+monto",];
+node405[label = "METFUNC ",];
+node406[label = "ID 
 ordenarburbuja",];
-node403[label = "LIST_SENTE ",];
-node404[label = "DECLVAR ",];
-node405[label = "LVAR ",];
-node406[label = "VAR 
+node407[label = "LIST_SENTE ",];
+node408[label = "DECLVAR ",];
+node409[label = "LVAR ",];
+node410[label = "VAR 
 i",];
-node407[label = "DECLVAR ",];
-node408[label = "LVAR ",];
-node409[label = "VAR 
+node411[label = "DECLVAR ",];
+node412[label = "LVAR ",];
+node413[label = "VAR 
 j",];
-node410[label = "DECLVAR ",];
-node411[label = "LVAR ",];
-node412[label = "VAR 
+node414[label = "DECLVAR ",];
+node415[label = "LVAR ",];
+node416[label = "VAR 
 aux",];
-node413[label = "FOR ",];
-node414[label = "ASIG_VAR ",];
-node415[label = "VAR 
-i",];
-node416[label = "NUM 
-0",];
-node417[label = "< ",];
-node418[label = "VACCESO ",];
+node417[label = "FOR ",];
+node418[label = "ASIG_VAR ",];
 node419[label = "VAR 
 i",];
-node420[label = "CPRIMITIVAS ",];
-node421[label = "VAR 
-vectorPrecios",];
-node422[label = "CONTEO 
-conteo",];
-node423[label = "INCR 
-++",];
-node424[label = "LIST_SENTE ",];
-node425[label = "FOR ",];
-node426[label = "ASIG_VAR ",];
-node427[label = "VAR 
-j",];
-node428[label = "NUM 
+node420[label = "NUM 
 0",];
-node429[label = "< ",];
-node430[label = "VACCESO ",];
+node421[label = "< ",];
+node422[label = "VACCESO ",];
+node423[label = "VAR 
+i",];
+node424[label = "CPRIMITIVAS ",];
+node425[label = "VAR 
+vectorPrecios",];
+node426[label = "CONTEO 
+conteo",];
+node427[label = "INCR 
+++",];
+node428[label = "LIST_SENTE ",];
+node429[label = "FOR ",];
+node430[label = "ASIG_VAR ",];
 node431[label = "VAR 
 j",];
-node432[label = "- ",];
-node433[label = "CPRIMITIVAS ",];
-node434[label = "VAR 
-vectorPrecios",];
-node435[label = "CONTEO 
-conteo",];
-node436[label = "NUM 
-1",];
-node437[label = "INCR 
-++",];
-node438[label = "LIST_SENTE ",];
-node439[label = "IF ",];
-node440[label = "> ",];
-node441[label = "VACCESOVECT ",];
-node442[label = "VAR 
-vectorprecios",];
-node443[label = "VACCESO ",];
-node444[label = "VAR 
+node432[label = "NUM 
+0",];
+node433[label = "< ",];
+node434[label = "VACCESO ",];
+node435[label = "VAR 
 j",];
+node436[label = "- ",];
+node437[label = "CPRIMITIVAS ",];
+node438[label = "VAR 
+vectorPrecios",];
+node439[label = "CONTEO 
+conteo",];
+node440[label = "NUM 
+1",];
+node441[label = "INCR 
+++",];
+node442[label = "LIST_SENTE ",];
+node443[label = "IF ",];
+node444[label = "> ",];
 node445[label = "VACCESOVECT ",];
 node446[label = "VAR 
 vectorprecios",];
-node447[label = "+ ",];
-node448[label = "VACCESO ",];
-node449[label = "VAR 
+node447[label = "VACCESO ",];
+node448[label = "VAR 
 j",];
-node450[label = "NUM 
-1",];
-node451[label = "LIST_SENTE ",];
-node452[label = "ASIG_VAR ",];
-node453[label = "VAR 
-aux",];
-node454[label = "VACCESOVECT ",];
-node455[label = "VAR 
+node449[label = "VACCESOVECT ",];
+node450[label = "VAR 
 vectorprecios",];
-node456[label = "VACCESO ",];
-node457[label = "VAR 
+node451[label = "+ ",];
+node452[label = "VACCESO ",];
+node453[label = "VAR 
 j",];
-node458[label = "ASIG_POSVECT ",];
+node454[label = "NUM 
+1",];
+node455[label = "LIST_SENTE ",];
+node456[label = "ASIG_VAR ",];
+node457[label = "VAR 
+aux",];
+node458[label = "VACCESOVECT ",];
 node459[label = "VAR 
 vectorprecios",];
 node460[label = "VACCESO ",];
 node461[label = "VAR 
 j",];
-node462[label = "VACCESOVECT ",];
+node462[label = "ASIG_POSVECT ",];
 node463[label = "VAR 
 vectorprecios",];
-node464[label = "+ ",];
-node465[label = "VACCESO ",];
-node466[label = "VAR 
+node464[label = "VACCESO ",];
+node465[label = "VAR 
 j",];
-node467[label = "NUM 
-1",];
-node468[label = "ASIG_POSVECT ",];
-node469[label = "VAR 
+node466[label = "VACCESOVECT ",];
+node467[label = "VAR 
 vectorprecios",];
-node470[label = "+ ",];
-node471[label = "VACCESO ",];
-node472[label = "VAR 
+node468[label = "+ ",];
+node469[label = "VACCESO ",];
+node470[label = "VAR 
 j",];
-node473[label = "NUM 
+node471[label = "NUM 
 1",];
-node474[label = "VACCESO ",];
-node475[label = "VAR 
+node472[label = "ASIG_POSVECT ",];
+node473[label = "VAR 
+vectorprecios",];
+node474[label = "+ ",];
+node475[label = "VACCESO ",];
+node476[label = "VAR 
+j",];
+node477[label = "NUM 
+1",];
+node478[label = "VACCESO ",];
+node479[label = "VAR 
 aux",];
-node476[label = "MENSAJE ",];
-node477[label = "CPRIMITIVAS ",];
-node478[label = "VAR 
+node480[label = "MENSAJE ",];
+node481[label = "CPRIMITIVAS ",];
+node482[label = "VAR 
 vectorPrecios",];
-node479[label = "ATEXTO 
+node483[label = "ATEXTO 
 atexto",];
 "node0"--"node1"
 "node1"--"node2"
@@ -819,349 +825,353 @@ atexto",];
 "node126"--"node132"
 "node132"--"node133"
 "node133"--"node134"
-"node126"--"node135"
+"node133"--"node135"
 "node135"--"node136"
-"node136"--"node137"
-"node1"--"node138"
-"node138"--"node139"
-"node138"--"node140"
+"node132"--"node137"
+"node137"--"node138"
+"node126"--"node139"
+"node139"--"node140"
 "node140"--"node141"
-"node138"--"node142"
+"node1"--"node142"
 "node142"--"node143"
-"node143"--"node144"
+"node142"--"node144"
 "node144"--"node145"
-"node145"--"node146"
-"node144"--"node147"
+"node142"--"node146"
+"node146"--"node147"
 "node147"--"node148"
-"node143"--"node149"
+"node148"--"node149"
 "node149"--"node150"
-"node150"--"node151"
-"node143"--"node152"
-"node152"--"node153"
+"node148"--"node151"
+"node151"--"node152"
+"node147"--"node153"
 "node153"--"node154"
-"node1"--"node155"
-"node155"--"node156"
-"node155"--"node157"
+"node154"--"node155"
+"node147"--"node156"
+"node156"--"node157"
 "node157"--"node158"
-"node158"--"node159"
+"node1"--"node159"
 "node159"--"node160"
-"node158"--"node161"
-"node157"--"node162"
+"node159"--"node161"
+"node161"--"node162"
 "node162"--"node163"
 "node163"--"node164"
-"node164"--"node165"
-"node165"--"node166"
-"node165"--"node167"
+"node162"--"node165"
+"node161"--"node166"
+"node166"--"node167"
 "node167"--"node168"
 "node168"--"node169"
 "node169"--"node170"
-"node168"--"node171"
-"node164"--"node172"
-"node163"--"node173"
+"node169"--"node171"
+"node171"--"node172"
+"node172"--"node173"
 "node173"--"node174"
-"node174"--"node175"
-"node174"--"node176"
-"node176"--"node177"
+"node172"--"node175"
+"node168"--"node176"
+"node167"--"node177"
 "node177"--"node178"
 "node178"--"node179"
-"node177"--"node180"
-"node173"--"node181"
-"node162"--"node182"
+"node178"--"node180"
+"node180"--"node181"
+"node181"--"node182"
 "node182"--"node183"
-"node183"--"node184"
-"node183"--"node185"
-"node185"--"node186"
-"node183"--"node187"
+"node181"--"node184"
+"node177"--"node185"
+"node166"--"node186"
+"node186"--"node187"
 "node187"--"node188"
-"node182"--"node189"
+"node187"--"node189"
 "node189"--"node190"
-"node189"--"node191"
+"node187"--"node191"
 "node191"--"node192"
-"node192"--"node193"
-"node191"--"node194"
-"node182"--"node195"
+"node186"--"node193"
+"node193"--"node194"
+"node193"--"node195"
 "node195"--"node196"
-"node195"--"node197"
-"node197"--"node198"
-"node198"--"node199"
-"node197"--"node200"
-"node182"--"node201"
+"node196"--"node197"
+"node195"--"node198"
+"node186"--"node199"
+"node199"--"node200"
+"node199"--"node201"
 "node201"--"node202"
-"node201"--"node203"
-"node203"--"node204"
-"node204"--"node205"
-"node203"--"node206"
-"node206"--"node207"
-"node182"--"node208"
+"node202"--"node203"
+"node201"--"node204"
+"node186"--"node205"
+"node205"--"node206"
+"node205"--"node207"
+"node207"--"node208"
 "node208"--"node209"
-"node162"--"node210"
+"node207"--"node210"
 "node210"--"node211"
-"node211"--"node212"
+"node186"--"node212"
 "node212"--"node213"
-"node212"--"node214"
+"node166"--"node214"
 "node214"--"node215"
-"node1"--"node216"
+"node215"--"node216"
 "node216"--"node217"
 "node216"--"node218"
 "node218"--"node219"
-"node219"--"node220"
+"node1"--"node220"
 "node220"--"node221"
-"node219"--"node222"
-"node218"--"node223"
+"node220"--"node222"
+"node222"--"node223"
 "node223"--"node224"
 "node224"--"node225"
-"node225"--"node226"
-"node226"--"node227"
-"node226"--"node228"
+"node223"--"node226"
+"node222"--"node227"
+"node227"--"node228"
 "node228"--"node229"
 "node229"--"node230"
 "node230"--"node231"
-"node229"--"node232"
+"node230"--"node232"
 "node232"--"node233"
-"node225"--"node234"
-"node224"--"node235"
-"node235"--"node236"
+"node233"--"node234"
+"node234"--"node235"
+"node233"--"node236"
 "node236"--"node237"
-"node236"--"node238"
-"node238"--"node239"
+"node229"--"node238"
+"node228"--"node239"
 "node239"--"node240"
 "node240"--"node241"
-"node239"--"node242"
-"node235"--"node243"
-"node223"--"node244"
+"node240"--"node242"
+"node242"--"node243"
+"node243"--"node244"
 "node244"--"node245"
-"node245"--"node246"
-"node245"--"node247"
-"node247"--"node248"
-"node245"--"node249"
+"node243"--"node246"
+"node239"--"node247"
+"node227"--"node248"
+"node248"--"node249"
 "node249"--"node250"
-"node244"--"node251"
+"node249"--"node251"
 "node251"--"node252"
-"node251"--"node253"
+"node249"--"node253"
 "node253"--"node254"
-"node254"--"node255"
-"node253"--"node256"
-"node244"--"node257"
+"node248"--"node255"
+"node255"--"node256"
+"node255"--"node257"
 "node257"--"node258"
-"node257"--"node259"
-"node259"--"node260"
-"node260"--"node261"
-"node259"--"node262"
-"node244"--"node263"
+"node258"--"node259"
+"node257"--"node260"
+"node248"--"node261"
+"node261"--"node262"
+"node261"--"node263"
 "node263"--"node264"
-"node263"--"node265"
-"node265"--"node266"
-"node266"--"node267"
-"node265"--"node268"
-"node268"--"node269"
-"node244"--"node270"
+"node264"--"node265"
+"node263"--"node266"
+"node248"--"node267"
+"node267"--"node268"
+"node267"--"node269"
+"node269"--"node270"
 "node270"--"node271"
-"node223"--"node272"
+"node269"--"node272"
 "node272"--"node273"
-"node273"--"node274"
+"node248"--"node274"
 "node274"--"node275"
-"node274"--"node276"
+"node227"--"node276"
 "node276"--"node277"
-"node1"--"node278"
+"node277"--"node278"
 "node278"--"node279"
 "node278"--"node280"
 "node280"--"node281"
-"node281"--"node282"
+"node1"--"node282"
 "node282"--"node283"
-"node281"--"node284"
-"node280"--"node285"
+"node282"--"node284"
+"node284"--"node285"
 "node285"--"node286"
 "node286"--"node287"
-"node287"--"node288"
-"node288"--"node289"
-"node288"--"node290"
+"node285"--"node288"
+"node284"--"node289"
+"node289"--"node290"
 "node290"--"node291"
 "node291"--"node292"
 "node292"--"node293"
-"node291"--"node294"
+"node292"--"node294"
 "node294"--"node295"
-"node287"--"node296"
-"node286"--"node297"
-"node297"--"node298"
+"node295"--"node296"
+"node296"--"node297"
+"node295"--"node298"
 "node298"--"node299"
-"node298"--"node300"
-"node300"--"node301"
+"node291"--"node300"
+"node290"--"node301"
 "node301"--"node302"
 "node302"--"node303"
-"node301"--"node304"
-"node297"--"node305"
-"node285"--"node306"
+"node302"--"node304"
+"node304"--"node305"
+"node305"--"node306"
 "node306"--"node307"
-"node307"--"node308"
-"node307"--"node309"
-"node309"--"node310"
-"node307"--"node311"
+"node305"--"node308"
+"node301"--"node309"
+"node289"--"node310"
+"node310"--"node311"
 "node311"--"node312"
-"node306"--"node313"
+"node311"--"node313"
 "node313"--"node314"
-"node313"--"node315"
+"node311"--"node315"
 "node315"--"node316"
-"node316"--"node317"
-"node315"--"node318"
-"node306"--"node319"
+"node310"--"node317"
+"node317"--"node318"
+"node317"--"node319"
 "node319"--"node320"
-"node319"--"node321"
-"node321"--"node322"
-"node322"--"node323"
-"node321"--"node324"
-"node306"--"node325"
+"node320"--"node321"
+"node319"--"node322"
+"node310"--"node323"
+"node323"--"node324"
+"node323"--"node325"
 "node325"--"node326"
-"node325"--"node327"
-"node327"--"node328"
-"node328"--"node329"
-"node327"--"node330"
-"node330"--"node331"
-"node306"--"node332"
+"node326"--"node327"
+"node325"--"node328"
+"node310"--"node329"
+"node329"--"node330"
+"node329"--"node331"
+"node331"--"node332"
 "node332"--"node333"
-"node285"--"node334"
+"node331"--"node334"
 "node334"--"node335"
-"node335"--"node336"
+"node310"--"node336"
 "node336"--"node337"
-"node336"--"node338"
+"node289"--"node338"
 "node338"--"node339"
-"node1"--"node340"
+"node339"--"node340"
 "node340"--"node341"
 "node340"--"node342"
 "node342"--"node343"
-"node343"--"node344"
+"node1"--"node344"
 "node344"--"node345"
-"node343"--"node346"
-"node342"--"node347"
+"node344"--"node346"
+"node346"--"node347"
 "node347"--"node348"
 "node348"--"node349"
-"node349"--"node350"
-"node350"--"node351"
-"node350"--"node352"
+"node347"--"node350"
+"node346"--"node351"
+"node351"--"node352"
 "node352"--"node353"
 "node353"--"node354"
 "node354"--"node355"
-"node353"--"node356"
-"node349"--"node357"
-"node348"--"node358"
+"node354"--"node356"
+"node356"--"node357"
+"node357"--"node358"
 "node358"--"node359"
-"node359"--"node360"
-"node359"--"node361"
-"node361"--"node362"
+"node357"--"node360"
+"node353"--"node361"
+"node352"--"node362"
 "node362"--"node363"
 "node363"--"node364"
-"node362"--"node365"
-"node358"--"node366"
-"node347"--"node367"
+"node363"--"node365"
+"node365"--"node366"
+"node366"--"node367"
 "node367"--"node368"
-"node368"--"node369"
-"node368"--"node370"
-"node370"--"node371"
-"node368"--"node372"
+"node366"--"node369"
+"node362"--"node370"
+"node351"--"node371"
+"node371"--"node372"
 "node372"--"node373"
-"node367"--"node374"
+"node372"--"node374"
 "node374"--"node375"
-"node374"--"node376"
+"node372"--"node376"
 "node376"--"node377"
-"node377"--"node378"
-"node376"--"node379"
-"node367"--"node380"
+"node371"--"node378"
+"node378"--"node379"
+"node378"--"node380"
 "node380"--"node381"
-"node380"--"node382"
-"node382"--"node383"
-"node383"--"node384"
-"node382"--"node385"
-"node367"--"node386"
+"node381"--"node382"
+"node380"--"node383"
+"node371"--"node384"
+"node384"--"node385"
+"node384"--"node386"
 "node386"--"node387"
-"node386"--"node388"
-"node388"--"node389"
-"node389"--"node390"
-"node388"--"node391"
-"node391"--"node392"
-"node367"--"node393"
+"node387"--"node388"
+"node386"--"node389"
+"node371"--"node390"
+"node390"--"node391"
+"node390"--"node392"
+"node392"--"node393"
 "node393"--"node394"
-"node347"--"node395"
+"node392"--"node395"
 "node395"--"node396"
-"node396"--"node397"
+"node371"--"node397"
 "node397"--"node398"
-"node397"--"node399"
+"node351"--"node399"
 "node399"--"node400"
-"node1"--"node401"
+"node400"--"node401"
 "node401"--"node402"
 "node401"--"node403"
 "node403"--"node404"
-"node404"--"node405"
+"node1"--"node405"
 "node405"--"node406"
-"node403"--"node407"
+"node405"--"node407"
 "node407"--"node408"
 "node408"--"node409"
-"node403"--"node410"
-"node410"--"node411"
+"node409"--"node410"
+"node407"--"node411"
 "node411"--"node412"
-"node403"--"node413"
-"node413"--"node414"
+"node412"--"node413"
+"node407"--"node414"
 "node414"--"node415"
-"node414"--"node416"
-"node413"--"node417"
+"node415"--"node416"
+"node407"--"node417"
 "node417"--"node418"
 "node418"--"node419"
-"node417"--"node420"
-"node420"--"node421"
-"node420"--"node422"
-"node413"--"node423"
-"node413"--"node424"
+"node418"--"node420"
+"node417"--"node421"
+"node421"--"node422"
+"node422"--"node423"
+"node421"--"node424"
 "node424"--"node425"
-"node425"--"node426"
-"node426"--"node427"
-"node426"--"node428"
-"node425"--"node429"
+"node424"--"node426"
+"node417"--"node427"
+"node417"--"node428"
+"node428"--"node429"
 "node429"--"node430"
 "node430"--"node431"
-"node429"--"node432"
-"node432"--"node433"
+"node430"--"node432"
+"node429"--"node433"
 "node433"--"node434"
-"node433"--"node435"
-"node432"--"node436"
-"node425"--"node437"
-"node425"--"node438"
-"node438"--"node439"
-"node439"--"node440"
-"node440"--"node441"
-"node441"--"node442"
-"node441"--"node443"
+"node434"--"node435"
+"node433"--"node436"
+"node436"--"node437"
+"node437"--"node438"
+"node437"--"node439"
+"node436"--"node440"
+"node429"--"node441"
+"node429"--"node442"
+"node442"--"node443"
 "node443"--"node444"
-"node440"--"node445"
+"node444"--"node445"
 "node445"--"node446"
 "node445"--"node447"
 "node447"--"node448"
-"node448"--"node449"
-"node447"--"node450"
-"node439"--"node451"
+"node444"--"node449"
+"node449"--"node450"
+"node449"--"node451"
 "node451"--"node452"
 "node452"--"node453"
-"node452"--"node454"
-"node454"--"node455"
-"node454"--"node456"
+"node451"--"node454"
+"node443"--"node455"
+"node455"--"node456"
 "node456"--"node457"
-"node451"--"node458"
+"node456"--"node458"
 "node458"--"node459"
 "node458"--"node460"
 "node460"--"node461"
-"node458"--"node462"
+"node455"--"node462"
 "node462"--"node463"
 "node462"--"node464"
 "node464"--"node465"
-"node465"--"node466"
-"node464"--"node467"
-"node451"--"node468"
+"node462"--"node466"
+"node466"--"node467"
+"node466"--"node468"
 "node468"--"node469"
-"node468"--"node470"
-"node470"--"node471"
-"node471"--"node472"
-"node470"--"node473"
-"node468"--"node474"
+"node469"--"node470"
+"node468"--"node471"
+"node455"--"node472"
+"node472"--"node473"
+"node472"--"node474"
 "node474"--"node475"
-"node403"--"node476"
-"node476"--"node477"
-"node477"--"node478"
-"node477"--"node479"
+"node475"--"node476"
+"node474"--"node477"
+"node472"--"node478"
+"node478"--"node479"
+"node407"--"node480"
+"node480"--"node481"
+"node481"--"node482"
+"node481"--"node483"
 }
