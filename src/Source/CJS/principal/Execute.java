@@ -326,7 +326,9 @@ public class Execute {
                     
                     /// 
                     
+
                     boolean existe=page.existeElemento(value.value);
+
                     if(existe){
                         value.isobjeto=true;
                         value.existe=true;
@@ -453,16 +455,20 @@ public class Execute {
                   Namefuncion=key;
                   //////////////key,nombre funcion
                   //////////////tipo.valor, tipo de evento
+
                   if(var.isobjeto && var.existe)
                   {
+
                       page.modificarAtributo(var.value, tipo.value, Namefuncion);
                       
                   }
                   
                   
+
                 }else if(raiz.hijos.get(2).token.equals("CALL_METFUN")){
                     
                     Nodo funcion=raiz.hijos.get(2);
+
                     //////tipo evento;; tipo.valor;
                     //////funcion sin parametros;; Nombre;
                     ///funcion con parametros usar Nodo
@@ -1314,7 +1320,9 @@ public class Execute {
                     
                     /// 
                     
+
                     boolean existe=page.existeElemento(value.value);
+
                     if(existe){
                         value.isobjeto=true;
                         value.existe=true;
@@ -1447,9 +1455,11 @@ public class Execute {
                   }
                   
                   
+
                 }else if(root.hijos.get(2).token.equals("CALL_METFUN")){
                     
                     Nodo funcion=root.hijos.get(2);
+
                     //////tipo evento;; tipo.valor;
                     //////funcion sin parametros;; Nombre;
                     ///funcion con parametros usar Nodo
@@ -1617,8 +1627,10 @@ public class Execute {
                 ///////////////////////////////////////////////////////////////////////////////
                 //buscar objeto
                 boolean existeobjeto=false;
+
                 existeobjeto=page.existeElemento(objj.value);
                 ////Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
+
                 if (existeobjeto) {
                     objj.existe=true;
                     objj.isobjeto=true;
