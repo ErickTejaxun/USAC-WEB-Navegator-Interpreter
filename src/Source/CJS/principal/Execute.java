@@ -1615,14 +1615,20 @@ public class Execute {
                 ///////////////////////////////////////////////////////////////////////////////
                 //buscar objeto
                 boolean existeobjeto=false;
-                
+                existeobjeto=page.existeElemento(objj.value,page.elementos);
+                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
+                    objj.existe=true;
+                    objj.isobjeto=true;
                     asignacion(var, root, objj);
                     
                 }else {
+                    var.isobjeto=false;
+                    var.existe=false;
                     msjError(root, "Objeto CHTML no existe");
                 }
                 
+
                 break;
             }
             case "SET_OBJ":{
@@ -1635,6 +1641,7 @@ public class Execute {
                 Simbolo valor=Expre(root.hijos.get(2));
                 
                 if (var.isobjeto && var.existe) {
+                    page.modificarAtributo(var.value, tipo.value, valor.value);
                     ///modificar objeto chtml
                     //
                     //
