@@ -618,7 +618,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objj.value);
-                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
+                ////Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
                     objj.existe=true;
                     objj.isobjeto=true;
@@ -664,7 +664,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objeto.value);
-                Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
+                ////Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
                     page.modificarAtributo(objeto.value, tipo.value, valor.value);
@@ -1504,7 +1504,7 @@ public class Execute {
                             asignacion(var, variable,variab );
                             }else{
                                 msjError(root, "error dimension vector");
-                                Navegador.mensaje("Posicion vector no válida");
+                                //Navegador.mensaje("Posicion vector no válida");
                             }
                         }
                     
@@ -1618,7 +1618,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objj.value);
-                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
+                ////Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
                     objj.existe=true;
                     objj.isobjeto=true;
@@ -1665,7 +1665,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objeto.value);
-                Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
+                ////Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
                                         
