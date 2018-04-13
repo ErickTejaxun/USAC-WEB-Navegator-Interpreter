@@ -1,0 +1,77 @@
+<CHTML>
+	<ENCABEZADO>
+		
+		<CCSS ruta="C:\Archivos de Entrada\archivo3\inicio.ccss";><FIN-CCSS>
+		<CJS ruta="C:\Archivos de Entrada\archivo3\inicio.cjs";><FIN-CJS>
+		<TITULO>Pagina 3 - Compi 2<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<CUERPO>
+
+		<salto-fin>
+
+		<PANEL id = "panel_1"; grupo= "bavbar"; ancho = "1000"; alto = "150"; alineado="centrado";>
+			<BOTON id = "bavbar_1"; grupo = "bavbar"; alto = "35"; ancho = "150"; ruta= "C:\Archivos de Entrada\archivo3\Chat.chtml";> Pagina Chat <FIN-BOTON>
+			<ENLACE id = "bavbar_2";  grupo = "bavbar"; alto = "35"; ancho = "100";  ruta= "C:\Archivos de Entrada\archivo3\Chat.chtml"; > Pagina Chat <FIN-ENLACE>			
+			<BOTON id = "bavbar_3";  grupo = "bavbar"; alto = "35"; ancho = "150"; ruta= "C:\Archivos de Entrada\archivo3\AcercaDe.chtml";> Pagina Acerca <FIN-BOTON>
+			<ENLACE id = "bavbar_4";  grupo = "bavbar"; alto = "35"; ancho = "100";  ruta= "C:\Archivos de Entrada\archivo3\AcercaDe.chtml"; > Pagina Acerca <FIN-ENLACE>			
+			<BOTON id = "bavbar_5";  grupo = "bavbar"; alto = "35"; ancho = "150"; ruta= "C:\Archivos de Entrada\archivo3\Facturacion.chtml";> Pagina Facturacion <FIN-BOTON>
+			<ENLACE id = "bavbar_6";  grupo = "bavbar"; alto = "35"; ancho = "100";  ruta= "C:\Archivos de Entrada\archivo3\Facturacion.chtml"; > Pagina Facturacion <FIN-ENLACE>
+		<FIN-PANEL>
+		<salto-fin>
+		<PANEL id= "panel_encabezado"; grupo="encabezado"; alineado="centrado"; alto= "200"; ancho="800";>
+			<TEXTO id= "encabezado_titulo"; grupo="encabezado"; >compiladores 2 - calificacion proyecto 1 - web electrodomesticos<FIN-TEXTO>
+		<FIN-PANEL>	
+		<salto-fin>		
+
+		<//- <PANEL alto="3000"; ancho="1000"; id="panel_imagen"; grupo="panel_imagen"; alineado="centrado";> -//>							<TABLA grupo="panel_imagen";> 
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val1"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen1.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val2"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen2.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val3"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen3.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val4"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen4.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val5"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen5.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val6"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen6.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val7"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen7.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val8"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen8.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val9"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen9.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val10"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen10.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val11"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen11.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val12"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen12.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val13"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen13.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val14"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen14.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val15"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen15.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val16"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen16.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val17"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen17.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val18"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen18.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val19"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen19.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val20"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen20.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val21"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen21.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val22"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen22.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val23"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen23.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val24"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen24.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+				<FIL_T>
+					<CT> <IMAGEN id= "imagen_val25"; grupo= "imagen_valor"; ruta="C:\Archivos de Entrada\archivo3\producto\imagen25.png";> <FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val26"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen26.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val27"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen27.png";><FIN-IMAGEN> <FIN-CT>
+					<CT> <IMAGEN id= "imagen_val28"; grupo= "imagen_valor"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen28.png";><FIN-IMAGEN> <FIN-CT>
+				<FIN-FIL_T>
+			<FIN-TABLA>	
+
+		<//- <FIN-PANEL> -//>
+
+		<PANEL id="panel_imagen"; grupo="panel_imagen"; alineado="centrado";<//- ancho="1000"; alto="600"; -//>>
+		<IMAGEN id= "imagen_id";  grupo="panel_imagen";   ruta= "C:\Archivos de Entrada\archivo3\producto\imagen26.png";><FIN-IMAGEN>
+		<FIN-PANEL>
+	<FIN-CUERPO>
+<FIN-CHTML>

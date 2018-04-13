@@ -1,0 +1,98 @@
+Panel_rediccionamiento [
+	Grupo (panel_redireccion);
+	alineadO := derecha;
+	FondoElemento := "yelow";
+	borde := [3, "blue", true];
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+	ID (panel_1);
+	FondoElemento := "blue";
+	borde := [8, "black", true];
+
+	ID (panel_2);
+	FondoElemento := "yellow";
+	borde := [3, "black", true];
+
+	ID (panel_3);
+	FondoElemento := "#64FF33";
+	borde := [2, "black", true];
+
+	//GRUPO botones de rediccionamiento
+	GRUPO (boton_redireccion);
+	LetrA := "Centaur";
+	TamTex := 10;
+	forMAto := Capital-t, cursiva;
+	ColorTExt := "blue";
+	BORDE := [2, "#37D206", false];
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+
+	GRUPO (hola);
+	LetrA := "Arial";
+	TamTex := 10;
+	forMAto := Capital-t, cursiva, negrilla;
+	ColorTExt := "blue";
+	BORDE := [2, "#37D206", false];
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+	ID(hola1);
+	ColorTExt := "black";
+]
+
+Panel_Titulo[
+	id (titulo_doc);
+	LetrA := "Times New Roman";
+	TamTex := 18.3;
+	forMAto := negrilla, Capital-t;
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+	id (panel_2);
+	grupo (titulo_doc);
+	alineadO := centrado;
+	borde := [4, "blue", true];
+	FondoElemento := "green";
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [false, Horizontal];
+]
+
+Panel_Saludo [
+	grupo(saludo);
+	alineadO := centrado;
+	FondoElemento := "green";
+	borde := [2, "black", true];
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+	id(panel_5);
+	FondoElemento := "black";
+
+	id(panel_5);
+	id(panel_6);
+	FondoElemento := "blue";
+
+	id(panel_6);
+	id(panel_7);
+	FondoElemento := "red";
+
+	id(panel_8);
+	FondoElemento := "gree";
+
+	id(saludo);
+	LetrA := "Arial";
+	TamTex := 15;
+	forMAto := Capital-t, cursiva, negrilla;
+	ColorTExt := "gray";
+	BORDE := [2, "#37D206", false];
+
+	id(area_1);
+	LetrA := "Arial";
+	TamTex := 12;
+	forMAto := Capital-t, cursiva;
+	ColorTExt := "white";
+	FondoElemento := "red";
+	BORDE := [2, "#37D206", false];
+]

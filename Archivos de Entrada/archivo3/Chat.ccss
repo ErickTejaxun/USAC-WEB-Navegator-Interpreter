@@ -1,0 +1,197 @@
+Panel_rediccionamiento [
+GRUPO(encabezado);
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 20;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+	FondoElemento := "blue";
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+Grupo (bavbar);
+	alineadO := centrado;
+	FondoElemento := "yellow";
+	borde := [3, "blue", true];
+	AutoRedimension := [false, VERTICAL];
+	AutoRedimension := [false, Horizontal];
+
+ID (bavbar_1);
+	FondoElemento := "blue";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "black";
+	Texto := "Chat";
+
+ID (bavbar_2);
+	FondoElemento := "red";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "white";
+	Texto := "Chat";
+
+ID (bavbar_3);
+	FondoElemento := "green";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "black";
+	Texto := "Inicio";
+ID (bavbar_4);
+	FondoElemento := "cian";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.000000001;
+	Colortext := "black";
+	Texto := "Inicio";
+ID (bavbar_5);
+	FondoElemento := "while";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.011111000;
+	Colortext := "black";
+	Texto := "Acerca De";
+ID (bavbar_6);
+	FondoElemento := "pink";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.011111000;
+	Colortext := "black";
+	Texto := "Acerca De";
+
+GRUPO (redi);
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 12;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+	FondoElemento := "Black";
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+ID (oculto);
+	FondoElemento := "pink";
+	borde := [2, "black", true];
+	Letra := "Arial";
+	Tamtex := 12.011111000;
+	Colortext := "black";
+ID (mensaje);
+	FondoElemento := "Red";
+	borde := [2, "blue", true];
+	Letra := "Arial";
+	Tamtex := 12.011111000;
+	Colortext := "black";
+GRUPO (imprimir);
+	FondoElemento := "Green";
+	borde := [2, "black", true];
+	Letra := "Arial";
+	Tamtex := 12.011111000;
+	Colortext := "black";
+
+]
+
+grupos [
+
+Grupo (	boton_val11	);
+	TexTO :=	"Hola!" ;
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 20;
+Grupo (	boton_val12	);
+	TexTO :=	"Saludando " ;
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 20;
+Grupo (	boton_val13	);
+	TexTO :=	"Bien Gracias" ;
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 18;
+	Colortext := "white";
+	forMAto := Capital-t, cursiva;
+	borde := [5, "black", true];
+Grupo (	boton_val14	);
+	TexTO :=	"Como Van" ;
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 18;
+	Colortext := "yellow";
+	forMAto := Capital-t, Negrilla;
+	borde := [5, "black", true];
+Grupo (	boton_val15	);
+	TexTO :=	"Viva la Calificacion Compi" ;
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 18;
+	Colortext := "red";
+	forMAto := Capital-t, cursiva;
+	borde := [5, "black", true];
+Grupo (	boton_val16	);
+	TexTO :=	" Este elemento es nuevo " ;
+Grupo (	boton_val17	);
+	TexTO :=	"Sale en Vacas " ;
+Grupo (	boton_val18	);
+	TexTO :=	"Cadena de Buena Suerte" ;
+Grupo (	boton_val19	);
+	TexTO :=	"Salida de Emergencia" ;
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 18;
+	Colortext := "blue";
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+Grupo (	boton_val20	);
+	TexTO :=	"Porque lo dices" ;
+	alineado := Centrado;
+	LetrA := "Arial";
+	TamTex := 12;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+]
+
+usuarios [
+Grupo (	boton_val1	);
+	TexTO :=	"Usuario 1	Dijo :" ;
+
+Grupo (	boton_val2	);
+	TexTO :=	"Usuario 2	Dijo :" ;
+
+Grupo (	boton_val3	);
+	TexTO :=	"Usuario 3	Dijo :" ;
+
+Grupo (	boton_val4	);
+	TexTO :=	"Usuario 4	Dijo :" ;
+
+Grupo (	boton_val5	);
+	TexTO :=	"Usuario 5	Dijo :" ;
+
+Grupo (	boton_val6	);
+	TexTO :=	"Usuario 6	Dijo :" ;
+
+Grupo (	boton_val7	);
+	TexTO :=	"Usuario 7	Dijo :" ;
+
+Grupo (	boton_val8	);
+	TexTO :=	"Usuario 8	Dijo :" ;
+
+Grupo (	boton_val9	);
+	TexTO :=	"Usuario 9	Dijo :" ;
+
+Grupo (	boton_val10	);
+	TexTO :=	"Usuario 10	Dijo :" ;
+
+GRUPO (ocultar);
+	Visible := true;
+
+GRUPO (no_ocultar);
+	Visible := false;
+
+id(usuario);
+	alineado := izquierda;
+	LetrA := "Centaur";
+	TamTex := 22;
+	Colortext := "blue";
+	forMAto := Capital-t, cursiva, Negrilla;
+]

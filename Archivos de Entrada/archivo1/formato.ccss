@@ -1,0 +1,100 @@
+
+//Archivo CSS de Requerimientos Minimos
+
+/*
+	Formato en el Panel principal el cual contiene el panel de redireccion y el titulo.
+	Los botones de este deberan de tomar el formato abajo 
+*/
+
+formato_panel_Principal
+[
+	//Panel de Redireccion
+		Grupo (f_redireccion);
+		alineadO := centrado;
+		FondoElemento := "oRANGE";
+		borde := [3, "blue", true];
+	//Panel de Redireccion
+
+	// Botones Redireccion
+		grUpO (f_b_redireccion);
+		alineadO := centrado;
+		//formaTO := Capital-T;
+		Letra := "Courier New";
+		TamTex := 12;
+	//Botones Redireccion
+
+	//panel titulo
+		grupo (f_p_titulo);
+		alineadO := centrado;
+		borde := [6, "Black", true];
+		FondoElemento := "green";
+		formato := capital-t;
+	//panel titulo
+	
+
+
+	//inicio del titulo doc
+		 id (titulo_pagina);
+		 LetrA := "Times New Roman";
+		 TamTex := 18.3;
+		 forMAto := negrilla, Capital-t;
+	 //fin - titulo doc
+ 
+	// panel central
+		id (panel_central);
+		FondoElemento := "black";
+	//panel central
+
+	//panel ingreso datos
+		 id (panel_ingreso_datos);
+		 alineadO := izquierda;
+		 FondoElemento := "cyan";
+		 borde := [5, "blue", false];
+	//panel ingreso datos
+
+	//inicio titulo_formulario
+		 ID (titulo_fomulario);
+		 LetrA := "Centaur";
+		 TamTex := 24;
+		 forMAto := negrilla, Capital-t, cursiva;
+		 ColorTExt := "blue";
+	//fin titulo_formulario
+	
+	//inicio formulario 1
+		 grupo (formulario_1);
+		 LetrA := "Centaur";
+		 TamTex := 14;
+		 forMAto := Capital-t, cursiva;
+		 ColorTExt := "blue";
+	//fin formulario 1
+	
+	//inicio formulario 2
+		grupo (formulario_2);
+		 LetrA := "Courier New";
+		 TamTex := 12;
+	//fin formulario 2
+
+	//panel salida datos
+		 ID (panel_salida_datos);
+		 alineadO := derecha;
+		 FondoElemento := "cyan";
+		 borde := [5, "blue", false];
+	//panel salida datos
+
+	//inicio grupo salida texto 1
+		 grupo (salida_texto_1);
+		 LetrA := "Arial";
+		 TamTex := 14;
+		 forMAto := negrilla;
+		 ColorTExt := "blue";
+	//fin grupo salida texto 1
+	
+	//inicio grupo salida texto 2
+		 grupo (salida_texto_2);
+		 LetrA := "Courier New";
+		 TamTex := 12;
+		 ColorTExt := "purple";
+	//fin grupo salida texto 2
+]
+
+
