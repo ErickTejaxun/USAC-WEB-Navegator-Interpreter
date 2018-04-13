@@ -594,7 +594,7 @@ public void analizar() throws IOException
         
         /*Generamos la gráfica del arbol.*/
         dibujador aux = new dibujador();           
-        aux.generarGrafica(raizChtml);
+        //aux.generarGrafica(raizChtml);
         
         /*Preparamos el panel a insertar a la página.*/
         posX = posY = xMax = yMax=  0;
@@ -3088,6 +3088,9 @@ public void calcularTamaño(Panel contenedor)
                         texto.setAlto(alto*25);
                         texto.setAncho(ancho*8);                    
                     }
+                    aplicarEstilo(aux, contenedor);
+                    texto.setAncho(texto.getAncho()*texto.getFont().getSize()/10);
+                    //texto.setAlto(texto.getAlto()*texto.getFont().getSize()/10);
                     texto.setPreferredSize(new java.awt.Dimension(texto.getAncho(),texto.getAlto()));
                     texto.setBounds(x, y, texto.getAncho(),texto.getAlto());                
                     x+= texto.getAncho();

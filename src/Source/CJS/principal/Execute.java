@@ -872,7 +872,7 @@ public class Execute {
             case "/":{
                 Simbolo val1=Expre((Nodo)expr.hijos.get(0));
                 Simbolo val2=Expre((Nodo)expr.hijos.get(1));
-                result=operar.multiplicar(val1, val2);
+                result=operar.dividir(val1, val2);
                 return result;
             
             }
@@ -893,7 +893,7 @@ public class Execute {
             case "^":{
                 Simbolo val1=Expre((Nodo)expr.hijos.get(0));
                 Simbolo val2=Expre((Nodo)expr.hijos.get(1));
-                result=operar.multiplicar(val1, val2);
+                result=operar.potencia(val1, val2);
                 return result;
             
             }
@@ -1748,6 +1748,7 @@ public class Execute {
                 
                 for(Nodo caso: lcaso.hijos){
                 
+                    if(expr.value.contains(".0")){expr.value = expr.value.substring(0,(expr.value.length()-2));}
                     caso.tipocase = expr.tipe;//le mandamos el tipo a los case
                     caso.valcase= expr.value;//mandamos el valor a los case
                     executeCode(caso);//nos indica si cumplio con algun case o no
@@ -1764,6 +1765,7 @@ public class Execute {
               
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 //System.out.println("otro caso " + expr.value);
+                if(expr.value.contains(".0")){}
                 if (expr.value.equals(root.valcase) || valcase.equals("true")) {//si cumple con un case o que se ejecute simultaneo el otro porque no vino un salir
                     //System.out.println("son iguales");
                     executeCode((Nodo) root.hijos.get(1));//si no vino salir en este case se ejecuta el resto
