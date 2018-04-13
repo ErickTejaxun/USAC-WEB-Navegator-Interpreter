@@ -32,8 +32,19 @@ public class Boton extends JButton
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo="";
+    private Object metodo;
     private Nodo metodo_;
+    private Object listo;
+    private Object modificado;
+    
+
+    public Object getListo() {
+        return listo;
+    }
+
+    public void setListo(Object listo) {
+        this.listo = listo;
+    }
     
     
     public Boton()
@@ -57,11 +68,11 @@ public class Boton extends JButton
 
     
     
-    public void setMetodo(String metodo) {
+    public void setMetodo(Object metodo) {
         this.metodo = metodo;
     }
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
     }
     
@@ -82,6 +93,14 @@ public class Boton extends JButton
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
+
+    public Object getModificado() {
+        return modificado;
     }
 
     public void setCadena(String cadena) {

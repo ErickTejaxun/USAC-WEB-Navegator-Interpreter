@@ -32,8 +32,10 @@ public class Spinner extends JSpinner
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo;
+    private Object metodo;
     private Nodo metodo_;
+    private Object listo;
+    private Object modificado;
 
     public Nodo getMetodo_() {
         return metodo_;
@@ -66,6 +68,14 @@ public class Spinner extends JSpinner
         this.cadena = cadena;
     }
 
+    public Object getListo() {
+        return listo;
+    }
+
+    public void setListo(Object listo) {
+        this.listo = listo;
+    }
+
     public void setAlineado(String alineado) {
         this.alineado = alineado;
     }
@@ -78,12 +88,19 @@ public class Spinner extends JSpinner
         this.ancho = ancho;
     }
 
-    public void setMetodo(String metodo) {
+    public void setMetodo( Object metodo) {
         this.metodo = metodo;
     }
 
     public void setUi(ComponentUI ui) {
         this.ui = ui;
+    }
+    public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
+
+    public Object getModificado() {
+        return modificado;
     }
 
     public void setListenerList(EventListenerList listenerList) {
@@ -122,7 +139,7 @@ public class Spinner extends JSpinner
         return ancho;
     }
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
     }
 

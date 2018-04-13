@@ -26,7 +26,7 @@ public class Panel extends JPanel
     private String alineado = "";
     private int alto;
     private int ancho;
-    private String metodo;
+    private Object metodo;
     private boolean flagPanel;
     private int inicio=0;
     private ArrayList<Elemento> elementos = new ArrayList();
@@ -35,6 +35,10 @@ public class Panel extends JPanel
     private String texto ="";
     private Color colorFuente = Color.BLACK;
     private Nodo metodo_;
+
+    
+    private Object listo=null;
+    private Object modificado = null;
     
     public Panel()
     {       
@@ -138,8 +142,28 @@ public class Panel extends JPanel
         return ancho;
     }
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
+    }
+
+    public void setMetodo(Object metodo) {
+        this.metodo = metodo;
+    }
+
+    public void setListo(Object listo) {
+        this.listo = listo;
+    }
+
+    public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
+
+    public Object getListo() {
+        return listo;
+    }
+
+    public Object getModificado() {
+        return modificado;
     }
 
     public ComponentUI getUi() {
@@ -254,9 +278,7 @@ public class Panel extends JPanel
         this.ancho = ancho;
     }
 
-    public void setMetodo(String metodo) {
-        this.metodo = metodo;
-    }
+
 
     public void setUi(ComponentUI ui) {
         this.ui = ui;

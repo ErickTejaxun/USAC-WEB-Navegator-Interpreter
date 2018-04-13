@@ -31,8 +31,14 @@ public class Enlace extends JButton
     private String alineado="";
     private int alto=0;
     private int ancho=0;
-    private String metodo="";
+    private Object metodo;
     private Nodo metodo_;
+    private Object listo;
+    private Object modificado;
+
+    public Object getListo() {
+        return listo;
+    }
     
     public Enlace()
     {
@@ -73,15 +79,27 @@ public class Enlace extends JButton
         this.cadena = cadena;
     }
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
     }
 
     public Nodo getMetodo_() {
         return metodo_;
     }
+    
+        public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
 
-    public void setMetodo(String metodo) {
+    public Object getModificado() {
+        return modificado;
+    }
+
+    public void setListo(Object listo) {
+        this.listo = listo;
+    }
+
+    public void setMetodo(Object metodo) {
         this.metodo = metodo;
     }
 

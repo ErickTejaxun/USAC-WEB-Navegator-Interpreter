@@ -17,16 +17,18 @@ import javax.swing.plaf.ComponentUI;
  */
 public class Tab extends JPanel
 {
-    private String ruta;
-    private String grupo;
-    private String id;
-    private String cadena;
+    private String ruta="";
+    private String grupo="";
+    private String id="";
+    private String cadena="";
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo;
+    private Object metodo;
     private ArrayList<Elemento> elementos = new ArrayList();
     private Nodo metodo_;
+    private Object listo;
+    private Object modificado;
     
     public Tab()
     {              
@@ -79,8 +81,15 @@ public class Tab extends JPanel
         return ancho;
     }
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
+    }
+    public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
+
+    public Object getModificado() {
+        return modificado;
     }
 
     public ComponentUI getUi() {
@@ -89,6 +98,14 @@ public class Tab extends JPanel
 
     public EventListenerList getListenerList() {
         return listenerList;
+    }
+
+    public void setListo(Object listo) {
+        this.listo = listo;
+    }
+
+    public Object getListo() {
+        return listo;
     }
 
     public static int getWHEN_FOCUSED() {
@@ -195,7 +212,7 @@ public class Tab extends JPanel
         this.ancho = ancho;
     }
 
-    public void setMetodo(String metodo) {
+    public void setMetodo(Object metodo) {
         this.metodo = metodo;
     }
 

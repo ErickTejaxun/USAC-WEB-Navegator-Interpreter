@@ -35,8 +35,11 @@ public class CajaOpciones extends JComboBox
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo;
+    private Object metodo;
     private Nodo metodo_;
+    private Object listo;
+    private Object modificado;
+    
     
     
     public CajaOpciones()
@@ -56,11 +59,11 @@ public class CajaOpciones extends JComboBox
         System.out.println("Hola perros");
     }
 
-    public void setMetodo(String metodo) {
+    public void setMetodo(Object metodo) {
         this.metodo = metodo;
     }
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
     }
     
@@ -86,6 +89,27 @@ public class CajaOpciones extends JComboBox
 
     public String getGrupo() {
         return grupo;
+    }
+
+    public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
+
+    public Object getModificado() {
+        return modificado;
+    }
+
+
+    public void setListo(Object listo) {
+        this.listo = listo;
+    }
+
+    public Nodo getMetodo_() {
+        return metodo_;
+    }
+
+    public Object getListo() {
+        return listo;
     }
 
     public String getId() {

@@ -29,10 +29,12 @@ public class Imagen extends JButton
     private String alineado;
     private int alto;
     private int ancho;
-    private String metodo;
+    private Object metodo;
     private Nodo metodo_;
+    private Object listo;
+    private Object modificado;
 
-    public String getMetodo() {
+    public Object getMetodo() {
         return metodo;
     }
 
@@ -42,7 +44,7 @@ public class Imagen extends JButton
         this.ancho=200;
     }
 
-    public void setMetodo(String metodo) {
+    public void setMetodo(Object metodo) {
         this.metodo = metodo;
     }
 
@@ -61,6 +63,13 @@ public class Imagen extends JButton
     public Nodo getMetodo_() {
         return metodo_;
     }
+    public void setModificado(Object modificado) {
+        this.modificado = modificado;
+    }
+
+    public Object getModificado() {
+        return modificado;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -76,6 +85,14 @@ public class Imagen extends JButton
 
     public void setAlto(int alto) {
         this.alto = alto;
+    }
+
+    public Object getListo() {
+        return listo;
+    }
+
+    public void setListo(Object listo) {
+        this.listo = listo;
     }
 
     public void setAncho(int ancho) {

@@ -1,4 +1,5 @@
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +18,6 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 import javax.swing.JTextArea;
-import javax.xml.bind.ParseConversionEvent;
 
 /**
  *
@@ -323,10 +323,21 @@ public class Execute {
                     operar.valorEval = variable;
                     
                     Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
-                    var.isobjeto=true;
+                    
                     /// 
-                    var.existe=false;
-                    asignacion(var, variable, value);
+                    
+                    boolean existe=page.existeElemento(value.value);
+                    if(existe){
+                        value.isobjeto=true;
+                        value.existe=true;
+
+                        asignacion(var, variable, value);
+                    
+                    }else{
+                        var.isobjeto=false;
+                        var.existe=false;
+                        msjError(raiz, "elemento chtml no existe: "+ value.value);
+                    }
                     
                 }
                 break;
@@ -348,7 +359,7 @@ public class Execute {
                 
                     newFuntion.name = funcion.hijos.get(0).valor.toLowerCase();
                 
-                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    namefucion=funcion.hijos.get(0).valor.toLowerCase();
                     String key;
                     
                     if(funcion.hijos.size()==2){
@@ -359,7 +370,7 @@ public class Execute {
                      
                     
                 }
-                newFuntion.name = key = nameMetod;
+                newFuntion.name = key = namefucion;
                 if(!tablaGlobal.containsKey(key)){
                     tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
                     
@@ -367,22 +378,34 @@ public class Execute {
                     Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion de observador");
                     TablaES.add(datos);
                 }
-                  nameMetod="";
+
                   namefucion=key;
                   //////////////namefuncion=key,nombre funcion
                   //////////////tipo.valor, tipo de evento
+                  if(tipo.value.equalsIgnoreCase("listo")){
+                      Executemetodo(namefucion.toLowerCase());
+                  }else{
+                      
+                        
+                        page.modificarAtributo("cuerpo", tipo.value, namefucion);
+                      
+                  }
+                  
                 }else if(raiz.hijos.get(1).token.equals("CALL_METFUN")){
                     
                     Nodo funcion=raiz.hijos.get(1);
-                    String Nombre="";///nombre funcion;
-                    if(funcion.hijos.size()==1){
-                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
-                    }
-                   
-                    namefucion=Nombre;
                     //////tipo evento;; tipo.valor;
                     //////funcion sin parametros;; Nombre;
                     ///funcion con parametros, usar tipo Nodo
+                    if(tipo.value.equalsIgnoreCase("listo")){
+                        callMetodo(funcion, new Simbolo(), 0);
+                  }else{
+                      
+                        
+                        page.modificarAtributo("cuerpo", tipo.value, funcion);
+                      
+                  }
+                    
                 }
                 break;
             }
@@ -407,7 +430,7 @@ public class Execute {
                 
                     newFuntion.name = funcion.hijos.get(0).valor;
                 
-                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    Namefuncion=funcion.hijos.get(0).valor.toLowerCase();
                     String key;
                     
                     if(funcion.hijos.size()==2){
@@ -418,7 +441,7 @@ public class Execute {
                      
                     
                 }
-                newFuntion.name = key = nameMetod;
+                newFuntion.name = key = Namefuncion;
                 if(!tablaGlobal.containsKey(key)){
                     tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
                     
@@ -426,28 +449,31 @@ public class Execute {
                     Terror datos = new Terror(key,raiz.row,raiz.col,"Error SEMANTICO","Ya existe funcion");
                     TablaES.add(datos);
                 }
-                  nameMetod="";
+     
                   Namefuncion=key;
                   //////////////key,nombre funcion
                   //////////////tipo.valor, tipo de evento
-                }else if(raiz.hijos.get(1).token.equals("CALL_METFUN")){
+                  if(var.isobjeto && var.existe)
+                  {
+                      page.modificarAtributo(var.value, tipo.value, Namefuncion);
+                      
+                  }
+                  
+                  
+                }else if(raiz.hijos.get(2).token.equals("CALL_METFUN")){
                     
-                    Nodo funcion=raiz.hijos.get(1);
-                    String Nombre="";///nombre funcion;
-                    if(funcion.hijos.size()==1){
-                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
-                    }
-                    Namefuncion=Nombre;
+                    Nodo funcion=raiz.hijos.get(2);
                     //////tipo evento;; tipo.valor;
                     //////funcion sin parametros;; Nombre;
                     ///funcion con parametros usar Nodo
+                    if(var.isobjeto && var.existe){
+                        page.modificarAtributo(var.value, tipo.value, funcion);
+                    }else{
+                    msjError(raiz, "Error no es elemento chtml, o no existe");
+                    }
                 }
                 
-                if(var.isobjeto && var.existe){
-                    
-                }else{
-                    msjError(raiz, "Error no es elemento chtml, o no existe");
-                }
+                
                 
                 break;
             }
@@ -591,7 +617,7 @@ public class Execute {
                 ///////////////////////////////////////////////////////////////////////////////
                 //buscar objeto
                 boolean existeobjeto=false;
-                existeobjeto=page.existeElemento(objj.value,page.elementos);
+                existeobjeto=page.existeElemento(objj.value);
                 Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
                     objj.existe=true;
@@ -599,6 +625,8 @@ public class Execute {
                     asignacion(var, raiz, objj);
                     
                 }else {
+                    var.isobjeto=false;
+                    var.existe=false;
                     msjError(raiz, "Objeto CHTML no existe");
                 }
                 
@@ -631,12 +659,11 @@ public class Execute {
             }
             case "SET_OBJETO":{
                 Simbolo objeto=Expre(raiz.hijos.get(0));
-                Simbolo tipo =Expre(raiz.hijos.get(1));
-                Simbolo valor=Expre(raiz.hijos.get(2));
-                
+                Simbolo tipo =Expre(raiz.hijos.get(1));                
+                Simbolo valor=Expre(raiz.hijos.get(2));                
                 //buscar objeto
                 boolean existeobjeto=false;
-                existeobjeto=page.existeElemento(objeto.value,page.elementos);
+                existeobjeto=page.existeElemento(objeto.value);
                 Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
@@ -1127,7 +1154,7 @@ public class Execute {
        
     }
     
-    protected Simbolo callMetodo(Nodo root, Simbolo valor, int opcion) {
+    public Simbolo callMetodo(Nodo root, Simbolo valor, int opcion) {
         String actualAmb = nameMetod;
         tiposMet = "";
         if (root.hijos.size() == 2) {
@@ -1145,6 +1172,7 @@ public class Execute {
             ejecut.tablaGlobal = this.tablaGlobal;
             ejecut.nameMetod = nameMetod;
             ejecut.tablitaObjetos = this.tablitaObjetos;
+            ejecut.page = this.page;
 
             if (funcion.parametro.isEmpty() && root.hijos.size() == 1) {//si no tiene parametros lo ejecuta
                 ejecut.executeCode(funcion.sentencias);
@@ -1283,10 +1311,21 @@ public class Execute {
                     operar.valorEval = variable;
                     
                     Simbolo var = operar.getVariable(variable.valor.toLowerCase(), Execute.this, new Simbolo());
-                    var.isobjeto=true;
+                    
                     /// 
-                    var.existe=false;
-                    asignacion(var, variable, value);
+                    
+                    boolean existe=page.existeElemento(value.value);
+                    if(existe){
+                        value.isobjeto=true;
+                        value.existe=true;
+
+                        asignacion(var, variable, value);
+                    
+                    }else{
+                        var.isobjeto=false;
+                        var.existe=false;
+                        msjError(root, "elemento chtml no existe: "+ value.value);
+                    }
                     
                 }
                 break;
@@ -1306,9 +1345,9 @@ public class Execute {
                     newFuntion.tipe = "void";
                     newFuntion.rol = "metodo";
                 
-                    newFuntion.name = funcion.hijos.get(0).valor;
+                    newFuntion.name = funcion.hijos.get(0).valor.toLowerCase();
                 
-                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    namefucion=funcion.hijos.get(0).valor.toLowerCase();
                     String key;
                     
                     if(funcion.hijos.size()==2){
@@ -1319,30 +1358,42 @@ public class Execute {
                      
                     
                 }
-                newFuntion.name = key = nameMetod;
+                newFuntion.name = key = namefucion;
                 if(!tablaGlobal.containsKey(key)){
                     tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
                     
                 }else{
-                    Terror datos = new Terror(key,root.row,root.col,"Error SEMANTICO","Ya existe funcion");
+                    Terror datos = new Terror(key,root.row,root.col,"Error SEMANTICO","Ya existe funcion de observador");
                     TablaES.add(datos);
                 }
-                  nameMetod="";
+
                   namefucion=key;
                   //////////////namefuncion=key,nombre funcion
                   //////////////tipo.valor, tipo de evento
+                  if(tipo.value.equalsIgnoreCase("listo")){
+                      Executemetodo(namefucion.toLowerCase());
+                  }else{
+                      
+                        
+                        page.modificarAtributo("cuerpo", tipo.value, namefucion);
+                      
+                  }
+                  
                 }else if(root.hijos.get(1).token.equals("CALL_METFUN")){
                     
                     Nodo funcion=root.hijos.get(1);
-                    String Nombre="";///nombre funcion;
-                    if(funcion.hijos.size()==1){
-                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
-                    }
-                   
-                    namefucion=Nombre;
                     //////tipo evento;; tipo.valor;
                     //////funcion sin parametros;; Nombre;
                     ///funcion con parametros, usar tipo Nodo
+                    if(tipo.value.equalsIgnoreCase("listo")){
+                        callMetodo(funcion, new Simbolo(), 0);
+                  }else{
+                      
+                        
+                        page.modificarAtributo("cuerpo", tipo.value, funcion);
+                      
+                  }
+                    
                 }
                 break;
             }
@@ -1367,7 +1418,7 @@ public class Execute {
                 
                     newFuntion.name = funcion.hijos.get(0).valor;
                 
-                    nameMetod=funcion.hijos.get(0).valor.toLowerCase();
+                    Namefuncion=funcion.hijos.get(0).valor.toLowerCase();
                     String key;
                     
                     if(funcion.hijos.size()==2){
@@ -1378,7 +1429,7 @@ public class Execute {
                      
                     
                 }
-                newFuntion.name = key = nameMetod;
+                newFuntion.name = key = Namefuncion;
                 if(!tablaGlobal.containsKey(key)){
                     tablaGlobal.put(key, newFuntion);//insertamos a la tabla Funciones
                     
@@ -1386,28 +1437,30 @@ public class Execute {
                     Terror datos = new Terror(key,root.row,root.col,"Error SEMANTICO","Ya existe funcion");
                     TablaES.add(datos);
                 }
-                  nameMetod="";
+     
                   Namefuncion=key;
                   //////////////key,nombre funcion
                   //////////////tipo.valor, tipo de evento
-                }else if(root.hijos.get(1).token.equals("CALL_METFUN")){
+                  if(var.isobjeto && var.existe){
+                      page.modificarAtributo(var.value, tipo.value, Namefuncion);
+                      
+                  }
+                  
+                  
+                }else if(root.hijos.get(2).token.equals("CALL_METFUN")){
                     
-                    Nodo funcion=root.hijos.get(1);
-                    String Nombre="";///nombre funcion;
-                    if(funcion.hijos.size()==1){
-                        Nombre=funcion.hijos.get(0).valor.toLowerCase();
-                    }
-                    Namefuncion=Nombre;
+                    Nodo funcion=root.hijos.get(2);
                     //////tipo evento;; tipo.valor;
                     //////funcion sin parametros;; Nombre;
                     ///funcion con parametros usar Nodo
+                    if(var.isobjeto && var.existe){
+                        page.modificarAtributo(var.value, tipo.value, funcion);
+                    }else{
+                    msjError(root, "Error no es elemento chtml, o no existe");
+                    }
                 }
                 
-                if(var.isobjeto && var.existe){
-                    
-                }else{
-                    msjError(root, "Error no es elemento chtml, o no existe");
-                }
+                
                 
                 break;
             }
@@ -1564,14 +1617,20 @@ public class Execute {
                 ///////////////////////////////////////////////////////////////////////////////
                 //buscar objeto
                 boolean existeobjeto=false;
-                
+                existeobjeto=page.existeElemento(objj.value);
+                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
+                    objj.existe=true;
+                    objj.isobjeto=true;
                     asignacion(var, root, objj);
                     
                 }else {
+                    var.isobjeto=false;
+                    var.existe=false;
                     msjError(root, "Objeto CHTML no existe");
                 }
                 
+
                 break;
             }
             case "SET_OBJ":{
@@ -1584,6 +1643,7 @@ public class Execute {
                 Simbolo valor=Expre(root.hijos.get(2));
                 
                 if (var.isobjeto && var.existe) {
+                    page.modificarAtributo(var.value, tipo.value, valor.value);
                     ///modificar objeto chtml
                     //
                     //
@@ -1604,7 +1664,7 @@ public class Execute {
                 
                 //buscar objeto
                 boolean existeobjeto=false;
-                existeobjeto=page.existeElemento(objeto.value,page.elementos);
+                existeobjeto=page.existeElemento(objeto.value);
                 Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
@@ -1892,12 +1952,14 @@ public class Execute {
         switch (operacion.token) {
             
             case "INCR": {//++
+                //++
                
                     operar.incrementar(variable);
                 
                 break;
             }
             case "DECR": {//--
+                //--
                
                     operar.decremetar(variable);
                 
@@ -1908,7 +1970,7 @@ public class Execute {
     }
         protected void msjError(Nodo root, String texto) {
         String val = (String) root.token;
-        TablaES.add(new Terror(val,root.row,root.col,"Error Semantico",texto));
+        TablaES.add(new Terror(val,root.row,root.col,"Error Semántico",texto));
     }
 
 }
