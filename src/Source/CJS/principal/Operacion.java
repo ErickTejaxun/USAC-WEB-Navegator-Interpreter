@@ -5,6 +5,7 @@
  */
 package Source.CJS.principal;
 
+import Source.CJS.Analizadores.Terror;
 import java.text.Collator;
 import java.util.StringTokenizer;
 
@@ -475,6 +476,7 @@ public class Operacion {
     private void msjError(String texto) {
         if (valorEval != null) {
             System.out.println("Error: "+ texto+": "+valorEval.row+": "+valorEval.col);
+            Execute.TablaES.add(new Terror(valorEval.valor, valorEval.row, valorEval.col, "Semantico", texto));
         }
     }
 
