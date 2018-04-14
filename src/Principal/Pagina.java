@@ -53,7 +53,12 @@ import Source.CJS.Analizadores.sintactico_cjs;
 import Source.CJS.principal.Execute;
 import java.awt.Component;
 import java.awt.LayoutManager;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.StringReader;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Iterator;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -70,11 +75,13 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     public ArrayList<Errores> erroresLexicos = new ArrayList();
     public ArrayList<Errores> erroresSemanticos = new ArrayList();
     public ArrayList<Errores> listaErrores = new ArrayList();  /* Errores */
-    
+    Hashtable<String, Opcion> opciones
+     = new Hashtable<String, Opcion>();
+        
     
     public ArrayList<Salida> listaConsola = new ArrayList();
     
-    
+    public ArrayList<String> salidas = new ArrayList();
     
     public static ArrayList<String> historial = new ArrayList();
     public String analisisLexico="";      
@@ -89,6 +96,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     public int contadorChtml=0;
     public int contadorPaginas=0;
     public String consolaSalida = "";
+    public String pathCcss ="";
     
     DefaultTableModel filasErrores = new DefaultTableModel(); 
     DefaultTableModel filasSalidas = new DefaultTableModel();
@@ -107,8 +115,13 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
     public Panel panelPrincipal = new Panel();
     public Execute ejecucion;
     
-    public String pathCjs="";    
-    
+    public String pathCjs="";  
+
+    public sintactico_cjs sintacticoCjs;
+    public lexico_cjs lexCjs;
+    public Source.CCSS.Analizadores.sintacticoCCSS sintacticoCcss;
+    public Source.CCSS.Analizadores.lexicoCCSS lexicoCcss;
+
     
     //JScrollPane scroll = new JScrollPane();
     /*Lista de elementos CCSS*/   
@@ -126,7 +139,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         filasSalidas.addColumn("Línea");
         filasSalidas.addColumn("Columna");
         filasSalidas.addColumn("Salida consola"); 
-        tablaSalida.setModel(filasSalidas);
+        //tablaSalida.setModel(filasSalidas);
         //this.panelContenido.add(scroll);
         
         //
@@ -146,7 +159,10 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         Panel = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
@@ -175,17 +191,29 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         jScrollPane5 = new javax.swing.JScrollPane();
         cjsArea1 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
-        scrollSalidas = new javax.swing.JScrollPane();
-        tablaSalida = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        contenedorSalidas = new javax.swing.JPanel();
         panelErrores = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         contenedorErrores = new javax.swing.JPanel();
 
-        jMenu1.setText("File");
+        jMenu1.setText("Favoritos :v");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
 
         setPreferredSize(new java.awt.Dimension(800, 800));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -379,23 +407,10 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
 
         jPanel4.setLayout(new javax.swing.OverlayLayout(jPanel4));
 
-        tablaSalida.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        contenedorSalidas.setLayout(new javax.swing.OverlayLayout(contenedorSalidas));
+        jScrollPane6.setViewportView(contenedorSalidas);
 
-            },
-            new String [] {
-                "Archivo", "Línea", "Columna", "Salida"
-            }
-        ));
-        scrollSalidas.setViewportView(tablaSalida);
-        if (tablaSalida.getColumnModel().getColumnCount() > 0) {
-            tablaSalida.getColumnModel().getColumn(0).setHeaderValue("Archivo");
-            tablaSalida.getColumnModel().getColumn(1).setHeaderValue("Línea");
-            tablaSalida.getColumnModel().getColumn(2).setHeaderValue("Columna");
-            tablaSalida.getColumnModel().getColumn(3).setHeaderValue("Salida");
-        }
-
-        jPanel4.add(scrollSalidas);
+        jPanel4.add(jScrollPane6);
 
         areaOpciones.addTab("Consolo Salida", jPanel4);
 
@@ -558,6 +573,10 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         scroll.add(panelPrincipal);
     }//GEN-LAST:event_scrollComponentResized
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     private void botonActionPerformed(java.awt.event.ActionEvent evt)
     {
        etiquetaNombre.setText("Has pulsado el botón " );	 
@@ -581,7 +600,7 @@ public void analizar() throws IOException
         elementos.clear();
         archivos.clear();
         compilar(); 
-        errores_consola();
+        
         if(
                 (!erroresLexicos.isEmpty())
                 ||(!erroresSintacticos.isEmpty())
@@ -639,7 +658,7 @@ public void analizar() throws IOException
         imprimirSemanticos(); 
         mostrarChtml();
         mostrarCjs();
-        
+        errores_consola();
         
         
         //
@@ -650,17 +669,17 @@ public void analizar() throws IOException
     {
         InputStream is = new FileInputStream(path);
         Reader reader = new InputStreamReader(is);        
-        lexico_cjs lex=new  lexico_cjs(new BufferedReader(reader));
-        sintactico_cjs sintactico=new sintactico_cjs(lex);
+        lexCjs=new  lexico_cjs(new BufferedReader(reader));
+        sintacticoCjs=new sintactico_cjs(lexCjs);
         try {
-            sintactico.parse();
-            if(sintactico.Raiz!=null){
+            sintacticoCjs.parse();
+            if(sintacticoCjs.Raiz!=null){
                 //graficar.graficar(sintactico.Raiz, "prueba");
                 System.out.println("graficado");
                 
                 ejecucion=new  Execute(this);
                 ejecucion.page = this;
-                ejecucion.addVariables_Funciones(sintactico.Raiz);
+                ejecucion.addVariables_Funciones(sintacticoCjs.Raiz);
                 ejecucion.InitialExecute();
                 
 
@@ -673,15 +692,19 @@ public void analizar() throws IOException
         }        
     }
 
-    public static void interpretarccss(String path) {
-        Source.CCSS.Analizadores.sintacticoCCSS pars;
+    public void interpretarccss(String path) {
+        
+        
+        
+        
         try {
             InputStream is = new FileInputStream(path);
             Reader reader = new InputStreamReader(is);
-            pars=new Source.CCSS.Analizadores.sintacticoCCSS(new Source.CCSS.Analizadores.lexicoCCSS(reader));
-            pars.parse(); 
+            lexicoCcss  = new Source.CCSS.Analizadores.lexicoCCSS(reader);
+            sintacticoCcss=new Source.CCSS.Analizadores.sintacticoCCSS( lexicoCcss);
+            sintacticoCcss.parse(); 
             
-            Source.CCSS.AST.nodo raiz = pars.getRaiz();
+            Source.CCSS.AST.nodo raiz = sintacticoCcss.getRaiz();
             Source.CCSS.Ejecucion.recorrerArbol.recorrido(raiz);            
             Source.CCSS.AST.graficarAST graficar = new Source.CCSS.AST.graficarAST(raiz);
             Source.CCSS.Ejecucion.listaElemento.imprimirBloque();
@@ -831,6 +854,7 @@ public void analizarArchivos()
             {
                 case "ccss":
                     /*Quitar lo static y poner que nos devuelva la lista.*/
+                    this.pathCcss = texto;
                     interpretarccss(texto);
                     break;
                 case "cjs":
@@ -915,7 +939,7 @@ public void limpiarSalidas()
         filasSalidas.addColumn("Línea");
         filasSalidas.addColumn("Columna");
         filasSalidas.addColumn("SalidaX"); 
-        tablaSalida.setModel(filasSalidas);
+        //tablaSalida.setModel(filasSalidas);
 }
 
 public void compilar(){
@@ -1133,6 +1157,7 @@ public void compilar(){
                     //Vemos todos los elementos :v
                     Enlace enlace = new Enlace();
                     enlace.setBackground(colorFondo);
+                    enlace.setOpaque(true);
                     for(nodoChtml aux: raiz.getHijos())
                     {                        
                         if(aux.getValue().equals("ELEMENTO"))
@@ -1690,6 +1715,8 @@ public void compilar(){
                             case "opcion":
                                 
                                 String valor = "";                                
+                                Opcion op = new Opcion();
+                                String item = "";
                                 for(nodoChtml opcion: aux.getHijos())
                                 {     
                                     if(opcion.getValue().equals("ELEMENTO"))
@@ -1700,18 +1727,39 @@ public void compilar(){
                                         switch(izquierda.getValue().toLowerCase())
                                         {
                                             case "valor":                                                                                                                           
-                                                valor = quitarComillas(derecha.getValue());
+                                                item = quitarComillas(derecha.getValue());
+                                                
                                                 break; 
-                                            case "cadena":                                                                       
+                                            case "cadena":
+                                                if(item.equals(""))
+                                                {
+                                                    item = quitarComillas(derecha.getValue());                                               
+                                                }
+                                                    
+                                                break;
+                                            case "click":                                                                       
+                                                    valor = quitarComillas(derecha.getValue());
+                                                    op.setMetodo(valor);
+                                                break;
+                                            case "grupo":                                                                       
+                                                    valor = quitarComillas(derecha.getValue());
+                                                    op.setGrupo(valor);
+                                                break;       
+                                            case "id":                                                                       
                                                 if(valor.equals(""))
                                                 {
                                                     valor = quitarComillas(derecha.getValue());
+                                                    op.setId(valor);
                                                 }
-                                                break;                                                
+                                                break;                                                   
+                                                
                                         }                                                        
                                     }
                                 }
-                                cajaOpciones.addItem(valor);
+                                op.setCadena(item);
+                                cajaOpciones.addItem(item);                                
+                                cajaOpciones.addOpcion(op);  
+                                addOpcion(op);
                                 break;                                                                                                    
                         }
                         contadorOpciones++;
@@ -3242,6 +3290,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 break;
             case "enlace":
                 Enlace enlace =(Enlace)aux.getValor();
+                enlace.setOpaque(false);
                 enlace.removeMouseListener(listenerEnlace);
                 enlace.addMouseListener(listenerEnlace);                
                 if(enlace.getAlto()==0 && enlace.getAncho()==0)
@@ -3323,8 +3372,9 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
             case "cajaOpciones":
                 CajaOpciones op = (CajaOpciones)aux.getValor();
                 JComboBox opciones =(JComboBox)aux.getValor();
+                opciones.addItemListener(changeClick);
                 opciones.setBounds(x, y, op.getAncho(), op.getAlto());    
-                opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));     
+                opciones.setPreferredSize(new java.awt.Dimension(op.getAncho(),op.getAlto()));     
                 aplicarEstiloGrupo(aux, contenedor);
                 aplicarEstiloId(aux, contenedor);
                 contenedor.add(opciones);
@@ -3367,6 +3417,7 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
             case "texto":
                 Texto texto =(Texto)aux.getValor();
                 //texto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                texto.setOpaque(false);
                 texto.setCadena(texto.getCadena().replace("\t", ""));
                 texto.setCadena(texto.getCadena().replace("\r", "\n"));
                 if(texto.getAlto()==0 && texto.getAncho()==0)
@@ -3632,18 +3683,20 @@ private static boolean esNumero(String cadena){
    public Color colorFuente(String color)
    {
        color = quitarComillas(color).toLowerCase();       
-       Color retorno = Color.BLACK ;
+       Color retorno = Color.WHITE ;
        System.out.println("Buscando color: \t "+color);
-       if(color.equals("#"))
+       
+       if(color.contains("#"))
        {
+            //Mensaje("Buscando color: \t "+color,"");           
             //Color colorFodo = new Color(int r, int g, int b, int a);
             //this.scroll.setBackground(colorFondo);
             int r,g,b,a;
             String hr,hg,hb,ha;
             String entrada= color;
-            hr = entrada.substring(2,4);
-            hg = entrada.substring(4,6);
-            hb = entrada.substring(6,8);
+            hr = entrada.substring(1,3);
+            hg = entrada.substring(3,5);
+            hb = entrada.substring(5,7);
 
             r = hexToDec(hr);
             g = hexToDec(hg);
@@ -4033,22 +4086,66 @@ private static boolean esNumero(String cadena){
         filasErrores.addColumn("Detalle"); 
         filasErrores.addColumn("Tipo");         
         filasErrores.addRow(new String[]{"Archivo","Linea","Columna","Detalle","Tipo"});
-        tablaErrores.setModel(filasErrores);        
+        tablaErrores.setModel(filasErrores);       
+        
+             
         
         String temporal=
         "Linea           Columna           Descripcion                TIPO";
+        
+        /*Errores CHTML*/
         for(int x=0;x<erroresLexicos.size();x++)
         {
-            filasErrores.addRow(new Object[]{this.PathActual(), erroresLexicos.get(x).linea,erroresLexicos.get(x).columna,erroresLexicos.get(x).getDescripcion(),"Lexico"});
-            temporal+="\n"+erroresLexicos.get(x).linea+"                "+erroresLexicos.get(x).columna+"          "+erroresLexicos.get(x).getDescripcion()+"       Lexico";          
+            if(!erroresLexicos.get(x).getDescripcion().equals("Caracter Ilegal: \""))
+            {
+                filasErrores.addRow(new Object[]{this.textRuta.getText(), erroresLexicos.get(x).linea,erroresLexicos.get(x).columna,erroresLexicos.get(x).getDescripcion(),"Lexico"});
+                temporal+="\n"+erroresLexicos.get(x).linea+"                "+erroresLexicos.get(x).columna+"          "+erroresLexicos.get(x).getDescripcion()+"       Lexico";                 
+            }
         }
         for(int x=0;x<erroresSintacticos.size();x++){
-            filasErrores.addRow(new Object[]{this.PathActual(), erroresSintacticos.get(x).linea,erroresSintacticos.get(x).columna,erroresSintacticos.get(x).getDescripcion(),"Sintactico"});
+            if(!erroresSintacticos.get(x).getDescripcion().equals(""))
+            {
+                filasErrores.addRow(new Object[]{this.textRuta.getText(), erroresSintacticos.get(x).linea,erroresSintacticos.get(x).columna,erroresSintacticos.get(x).getDescripcion(),"Sintactico"});                
+            }
         }
         for(int x=0;x<erroresSemanticos.size();x++)
         {
-            filasErrores.addRow(new Object[]{this.PathActual(), erroresSemanticos.get(x).linea,erroresSemanticos.get(x).columna,erroresSemanticos.get(x).getDescripcion(),"Semanticos"});
-        }                            
+            filasErrores.addRow(new Object[]{this.textRuta.getText(), erroresSemanticos.get(x).linea,erroresSemanticos.get(x).columna,erroresSemanticos.get(x).getDescripcion(),"Semanticos"});
+        }      
+        
+        
+        /*ERRORES CCSS*/
+        
+        for(Source.CCSS.errorCcss err : Source.CCSS.listaError.listaErrores)
+        {
+            filasErrores.addRow(new Object[]{this.pathCcss, err.fila, err.columna,err.descripcion,err.tipoerror});
+        }                               
+        /*ERRORES CJS*/
+        
+        for (Iterator i = lexico_cjs.TablaEL.iterator(); i.hasNext();) {
+          Source.CJS.Analizadores.Terror error = (Source.CJS.Analizadores.Terror) i.next();
+          filasErrores.addRow(new Object[]{this.pathCjs,error.getLinea(), error.getColumna(),error.getDescripcion(),"Lexico"});
+        }
+         lexico_cjs.TablaEL.clear();
+         
+        for (Iterator i = sintactico_cjs.TablaES.iterator(); i.hasNext();) {
+          Source.CJS.Analizadores.Terror error = (Source.CJS.Analizadores.Terror) i.next();
+          filasErrores.addRow(new Object[]{this.pathCjs,error.getLinea(), error.getColumna(),error.getDescripcion(),"Lexico"});
+        }
+         sintactico_cjs.TablaES.clear();         
+         
+
+         
+        for (Iterator i = Execute.TablaES.iterator(); i.hasNext();) {
+          Source.CJS.Analizadores.Terror error = (Source.CJS.Analizadores.Terror) i.next();
+          filasErrores.addRow(new Object[]{this.pathCjs,error.getLinea(), error.getColumna(),error.getDescripcion(),"Semantico"});
+        }         
+        
+        Execute.TablaES.clear();
+        
+         
+        
+        
         //tablaErrores.setText(temporal);
         //Mensaje(temporal, temporal);
 
@@ -4064,7 +4161,7 @@ private static boolean esNumero(String cadena){
     public void imprimirSalidaConsola()
     {                
         
-        JTable tablaSalida = new JTable();        
+      /*  JTable tablaSalida = new JTable();        
         DefaultTableModel filasSalida = new DefaultTableModel();        
         filasSalida.addColumn("Archivo");
         filasSalida.addColumn("Línea");
@@ -4081,7 +4178,7 @@ private static boolean esNumero(String cadena){
 
         JPanel salidaPanel = new JPanel();
         salidaPanel.add(tablaSalida);
-        scrollSalidas.add(salidaPanel);
+        scrollSalidas.add(salidaPanel);*/
         
         //System.out.println(temporal);                        
     }    
@@ -9748,7 +9845,26 @@ private static boolean esNumero(String cadena){
     
     public boolean existeElement(String id, Object contenedor)
     {
-               
+
+        Enumeration e = opciones.elements();
+        Object valor;
+
+        while( e.hasMoreElements() ){
+
+             valor = e.nextElement();
+             if (valor instanceof Opcion)
+             {
+                 Opcion op = (Opcion)valor;
+                 if(op.getId().equals(id))
+                 {
+                     return true;
+                 }
+             }
+        }
+
+         
+        
+        
         boolean existe = false;
         if(contenedor instanceof Panel)
         {
@@ -9800,6 +9916,31 @@ private static boolean esNumero(String cadena){
     @SuppressWarnings("empty-statement")
     public void modificarAtri(String id, String atributo, Object valor, Object contenedor)
     {
+
+        Enumeration e = opciones.elements();
+        Object val;
+
+        while( e.hasMoreElements() ){
+
+             val = e.nextElement();
+             if (val instanceof Opcion)
+             {
+                 Opcion op = (Opcion)val;
+                 if(op.getId().equals(id))
+                 {
+                     switch(atributo)
+                     {
+                         case "click":
+                             op.setMetodo(valor);                             
+                             break;                         
+                     }                     
+                 }
+                 //opciones.remove(op.getCadena());
+                 opciones.put( op.getCadena(), op);
+             }
+        }
+
+        
         Component[] componentes = null ;//;= contenedor.getComponents();
         if(contenedor instanceof Panel ){ componentes = ((Panel)contenedor).getComponents();}
         if(contenedor instanceof Tab ){ componentes = ((Tab)contenedor).getComponents();}
@@ -9855,15 +9996,15 @@ private static boolean esNumero(String cadena){
                         if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setAlineado(id_);}}                      
                         break;   
                     case "texto":
-                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setTexto(id_);}else{modificarAtri(id,atributo,valor,pnl);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setText(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setText(id_);}}
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setTexto(quitarComillas(id_));}else{modificarAtri(id,atributo,valor,pnl);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setText(quitarComillas(id_));}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setText(quitarComillas(id_));}}
                         if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; /*if(id.equals(cjtO.getId())){cjtO.setTexto(id_);}*/}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setText(id_);}}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setText(id_);}}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(esNumero(id_)){spn.setValue(Integer.valueOf(id_));}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setText(quitarComillas(id_));}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setText(quitarComillas(id_));}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(esNumero(id_)){spn.setValue(Integer.valueOf(quitarComillas(id_)));}}
                         if(comp instanceof Tab){Tab tab = (Tab)comp; modificarAtri(id,atributo,valor,tab);}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setText(id_);}                       
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; areaT.setText(quitarComillas(id_));}                       
                         break; 
                     case "ruta":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setRuta(id_);}else{modificarAtri(id,atributo,valor,pnl);}}
@@ -10326,6 +10467,87 @@ private static boolean esNumero(String cadena){
         //String path, int linea, int col, String out
     }
     
+    public void addOpcion(Opcion op)
+    {
+        if(!opciones.contains(op.getCadena().toLowerCase())){opciones.put(op.getCadena().toLowerCase(), op);}
+    }
+    
+    public void modOpcion(String id, String atributo, Object valor)
+    {
+        id = id.toLowerCase();
+        if(opciones.contains(id))
+        {
+            Opcion op = opciones.get(id);
+            switch(atributo)
+            {
+                case "click":
+                    op.setMetodo(valor);
+                    break;
+            }
+            opciones.remove(id);
+            addOpcion(op);
+        }
+    }
+        
+    ItemListener changeClick = new ItemListener() 
+    { 
+        public void itemStateChanged(ItemEvent e)  
+        { 
+            if(e.getSource() instanceof JComboBox)
+            {
+                JComboBox combo = (JComboBox)e.getSource();
+                if(combo.getSelectedItem().equals(e.getItem())) 
+                { 
+                    String seleccion = combo.getSelectedItem().toString().toLowerCase();
+                    if(opciones.containsKey(seleccion))
+                    {
+                        //Mensaje("",combo.getSelectedItem().toString());
+                        Opcion opcion = opciones.get(seleccion);
+                        if(opcion.getMetodo() instanceof String)
+                        {
+                            String met = (String)opcion.getMetodo();
+                            met = met.substring(0, met.length()-2);
+                            if(ejecucion!=null){ ejecucion.Executemetodo(met);}
+                        }
+                        if(opcion.getMetodo() instanceof Source.CJS.principal.Nodo)
+                        {
+                            Source.CJS.principal.Nodo nodo = (Source.CJS.principal.Nodo)opcion.getMetodo();
+                            if(ejecucion!=null){ ejecucion.callMetodo(nodo, new Source.CJS.principal.Simbolo(), 0);}
+                        }
+                    }
+                }                 
+            }
+
+        } 
+    };
+    
+    
+    public  void agregarSalida(String salida)
+    {
+        salidas.add(salida);
+        
+        JTable tablaSalida = new JTable();        
+        filasErrores = new DefaultTableModel();        
+        filasErrores.addColumn("Archivo");
+        filasErrores.addColumn("Línea");
+        filasErrores.addColumn("Columna");
+        filasErrores.addColumn("Salida");     
+        
+        
+        filasErrores.addRow(new String[]{"Archivo","Linea","Columna","Salida"});
+        tablaSalida.setModel(filasErrores);        
+        
+        for(String item : salidas)
+        {
+            filasErrores.addRow(new Object[]{this.pathCjs,0,0,item});
+        }                
+        contenedorSalidas.removeAll();
+        contenedorSalidas.add(tablaSalida);
+        //System.out.println(temporal);       
+        this.repaint();
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel Panel;
@@ -10342,10 +10564,14 @@ private static boolean esNumero(String cadena){
     private javax.swing.JTabbedPane cjs1;
     private javax.swing.JTextArea cjsArea1;
     private javax.swing.JPanel contenedorErrores;
+    private javax.swing.JPanel contenedorSalidas;
     private javax.swing.JLabel etiquetaNombre;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -10354,14 +10580,13 @@ private static boolean esNumero(String cadena){
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelErrores;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel scroll;
     private javax.swing.JScrollPane scrollPanel;
-    private javax.swing.JScrollPane scrollSalidas;
-    private javax.swing.JTable tablaSalida;
     private javax.swing.JTextField textRuta;
     // End of variables declaration//GEN-END:variables
 }

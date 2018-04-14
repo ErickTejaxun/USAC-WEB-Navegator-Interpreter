@@ -2,9 +2,9 @@
     < encabezado >
 < titulo > Historial< fin-titulo> 
 < fin-encabezado ><cuerpo>
-  <texto alto="30"; ancho="500"; >  <fin-texto> 
- <enlace alto="30"; ancho="200"; ruta="";> Ir  <fin-enlace>
- <texto alto="30"; ancho="300"; > Mon Apr 09 11:58:57 CST 2018 <fin-texto> 
+  <texto alto="30"; ancho="500"; > C:\Archivos de Entrada\archivo1\Principal.chtml <fin-texto> 
+ <enlace alto="30"; ancho="200"; ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Ir  <fin-enlace>
+ <texto alto="30"; ancho="300"; > Sat Apr 14 04:42:33 CST 2018 <fin-texto> 
  <salto-fin> 
 < fin-cuerpo >
 <fin-chtml>

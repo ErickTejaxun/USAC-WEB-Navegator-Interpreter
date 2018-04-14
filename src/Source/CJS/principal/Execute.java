@@ -624,7 +624,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objj.value);
-                ////Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
+                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
                 if (existeobjeto) {
                     objj.existe=true;
                     objj.isobjeto=true;
@@ -670,7 +670,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objeto.value);
-                ////Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
+                Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
                     page.modificarAtributo(objeto.value, tipo.value, valor.value);
@@ -1322,7 +1322,7 @@ public class Execute {
                     
 
                     boolean existe=page.existeElemento(value.value);
-
+                    Mensaje("Resultado de la busqueda "+ existe,value.value);
                     if(existe){
                         value.isobjeto=true;
                         value.existe=true;
@@ -1629,7 +1629,7 @@ public class Execute {
                 boolean existeobjeto=false;
 
                 existeobjeto=page.existeElemento(objj.value);
-                ////Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
+                Mensaje("Resultado de la busqueda "+ existeobjeto,objj.value);
 
                 if (existeobjeto) {
                     objj.existe=true;
@@ -1710,7 +1710,7 @@ public class Execute {
                 
                 Simbolo expr = Expre((Nodo) root.hijos.get(0));
                 System.out.println("Print( " + expr.value + " );");
-                //page.agregarSalidaConsola(page.pathCjs, 0, 0, expr.value);
+                page.agregarSalida(expr.value);
                 //Consola.writeln(expr.value);
                 break;
             }

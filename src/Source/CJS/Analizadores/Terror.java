@@ -10,8 +10,8 @@ package Source.CJS.Analizadores;
  * @author BARRIOS
  */
 public class Terror {
-     String lexema,tipo,descripcion;
-    int linea,columna;
+    public String lexema,tipo,descripcion;
+    public int linea,columna;
     
     public Terror(String le, int li, int co, String t,String de){
         lexema = le;
@@ -20,4 +20,46 @@ public class Terror {
         tipo = t;
         descripcion = de;
     }
+
+    public String getLexema() {
+        return lexema;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public int getLinea() {
+        return linea;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setLexema(String lexema) {
+        this.lexema = lexema;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setLinea(int linea) {
+        this.linea = linea;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+    
+    
 }

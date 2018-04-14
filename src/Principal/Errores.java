@@ -20,10 +20,11 @@ public class Errores {
     
     public Errores(String tipo, int linea, int columna, String valor)
     {
-        tipo=tipo;
-        linea= linea;
+        this.tipo=tipo;
+        this.linea= linea;
         this.columna = columna;
         this.texto = valor;
+        this.descripcion = valor;
     }
     
     public Errores(){

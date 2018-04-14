@@ -21,6 +21,8 @@ import javax.swing.event.EventListenerList;
 import javax.swing.plaf.ComponentUI;
 import static Principal.Navegador.botonAgregar;
 import Source.CJS.principal.Nodo;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
@@ -39,6 +41,8 @@ public class CajaOpciones extends JComboBox
     private Nodo metodo_;
     private Object listo;
     private Object modificado;
+    Hashtable<String, Opcion> opciones
+     = new Hashtable<String, Opcion>();
     
     
     
@@ -56,7 +60,7 @@ public class CajaOpciones extends JComboBox
     
     public void lista(java.awt.event.ActionEvent evt)
     {
-        System.out.println("Hola perros");
+        //System.out.println("Hola perros");
     }
 
     public void setMetodo(Object metodo) {
@@ -68,6 +72,27 @@ public class CajaOpciones extends JComboBox
     }
     
     
+    public void addOpcion(Opcion op)
+    {
+        if(!opciones.contains(op.getCadena())){opciones.put(op.getCadena(), op);}
+    }
+    
+    public void modOpcion(String id, String atributo, Object valor)
+    {
+        id = id.toLowerCase();
+        if(opciones.contains(id))
+        {
+            Opcion op = opciones.get(id);
+            switch(atributo)
+            {
+                case "click":
+                    op.setMetodo(valor);
+                    break;
+            }
+            opciones.remove(id);
+            addOpcion(op);
+        }
+    }
     
     public void actionPerformed(java.awt.event.ActionEvent evt) 
     {

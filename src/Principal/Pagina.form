@@ -10,10 +10,33 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Favoritos :v"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JMenuBar" name="jMenuBar2">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu3">
+          <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
@@ -483,58 +506,45 @@
                     </Constraint>
                   </Constraints>
                   <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="scrollSalidas">
-                      <AuxValues>
-                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                      </AuxValues>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane6">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="tablaSalida">
-                          <Properties>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="0">
-                                <Column editable="true" title="Archivo" type="java.lang.Object"/>
-                                <Column editable="true" title="L&#xed;nea" type="java.lang.Object"/>
-                                <Column editable="true" title="Columna" type="java.lang.Object"/>
-                                <Column editable="true" title="Salida" type="java.lang.Object"/>
-                              </Table>
-                            </Property>
-                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                              <TableColumnModel selectionModel="0">
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title value="Archivo"/>
-                                  <Editor/>
-                                  <Renderer/>
-                                </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title value="L&#xed;nea"/>
-                                  <Editor/>
-                                  <Renderer/>
-                                </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title value="Columna"/>
-                                  <Editor/>
-                                  <Renderer/>
-                                </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title value="Salida"/>
-                                  <Editor/>
-                                  <Renderer/>
-                                </Column>
-                              </TableColumnModel>
-                            </Property>
-                            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                            </Property>
-                          </Properties>
-                        </Component>
+                        <Container class="javax.swing.JPanel" name="contenedorSalidas">
+                          <LayoutCode>
+                            <CodeStatement>
+                              <CodeExpression id="7_contenedorSalidas">
+                                <CodeVariable name="contenedorSalidas" type="8194" declaredType="javax.swing.JPanel"/>
+                                <ExpressionOrigin>
+                                  <ExpressionProvider type="ComponentRef">
+                                    <ComponentRef name="contenedorSalidas"/>
+                                  </ExpressionProvider>
+                                </ExpressionOrigin>
+                              </CodeExpression>
+                              <StatementProvider type="CodeMethod">
+                                <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                              </StatementProvider>
+                              <Parameters>
+                                <CodeExpression id="8">
+                                  <ExpressionOrigin>
+                                    <ExpressionProvider type="CodeConstructor">
+                                      <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
+                                    </ExpressionProvider>
+                                    <Parameters>
+                                      <CodeExpression id="7_contenedorSalidas"/>
+                                    </Parameters>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </CodeStatement>
+                          </LayoutCode>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
                   <LayoutCode>
                     <CodeStatement>
-                      <CodeExpression id="7_jPanel4">
+                      <CodeExpression id="9_jPanel4">
                         <CodeVariable name="jPanel4" type="8194" declaredType="javax.swing.JPanel"/>
                         <ExpressionOrigin>
                           <ExpressionProvider type="ComponentRef">
@@ -546,13 +556,13 @@
                         <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="8">
+                        <CodeExpression id="10">
                           <ExpressionOrigin>
                             <ExpressionProvider type="CodeConstructor">
                               <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
                             </ExpressionProvider>
                             <Parameters>
-                              <CodeExpression id="7_jPanel4"/>
+                              <CodeExpression id="9_jPanel4"/>
                             </Parameters>
                           </ExpressionOrigin>
                         </CodeExpression>
@@ -576,7 +586,7 @@
                         <Container class="javax.swing.JPanel" name="contenedorErrores">
                           <LayoutCode>
                             <CodeStatement>
-                              <CodeExpression id="9_contenedorErrores">
+                              <CodeExpression id="11_contenedorErrores">
                                 <CodeVariable name="contenedorErrores" type="8194" declaredType="javax.swing.JPanel"/>
                                 <ExpressionOrigin>
                                   <ExpressionProvider type="ComponentRef">
@@ -588,13 +598,13 @@
                                 <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                               </StatementProvider>
                               <Parameters>
-                                <CodeExpression id="10">
+                                <CodeExpression id="12">
                                   <ExpressionOrigin>
                                     <ExpressionProvider type="CodeConstructor">
                                       <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
                                     </ExpressionProvider>
                                     <Parameters>
-                                      <CodeExpression id="9_contenedorErrores"/>
+                                      <CodeExpression id="11_contenedorErrores"/>
                                     </Parameters>
                                   </ExpressionOrigin>
                                 </CodeExpression>
@@ -607,7 +617,7 @@
                   </SubComponents>
                   <LayoutCode>
                     <CodeStatement>
-                      <CodeExpression id="11_panelErrores">
+                      <CodeExpression id="13_panelErrores">
                         <CodeVariable name="panelErrores" type="8194" declaredType="javax.swing.JPanel"/>
                         <ExpressionOrigin>
                           <ExpressionProvider type="ComponentRef">
@@ -619,13 +629,13 @@
                         <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                       </StatementProvider>
                       <Parameters>
-                        <CodeExpression id="12">
+                        <CodeExpression id="14">
                           <ExpressionOrigin>
                             <ExpressionProvider type="CodeConstructor">
                               <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
                             </ExpressionProvider>
                             <Parameters>
-                              <CodeExpression id="11_panelErrores"/>
+                              <CodeExpression id="13_panelErrores"/>
                             </Parameters>
                           </ExpressionOrigin>
                         </CodeExpression>
@@ -638,7 +648,7 @@
           </SubComponents>
           <LayoutCode>
             <CodeStatement>
-              <CodeExpression id="13_panelOpciones">
+              <CodeExpression id="15_panelOpciones">
                 <CodeVariable name="panelOpciones" type="8194" declaredType="javax.swing.JPanel"/>
                 <ExpressionOrigin>
                   <ExpressionProvider type="ComponentRef">
@@ -650,13 +660,13 @@
                 <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="14">
+                <CodeExpression id="16">
                   <ExpressionOrigin>
                     <ExpressionProvider type="CodeConstructor">
                       <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
                     </ExpressionProvider>
                     <Parameters>
-                      <CodeExpression id="13_panelOpciones"/>
+                      <CodeExpression id="15_panelOpciones"/>
                     </Parameters>
                   </ExpressionOrigin>
                 </CodeExpression>
@@ -669,7 +679,7 @@
   </SubComponents>
   <LayoutCode>
     <CodeStatement>
-      <CodeExpression id="15">
+      <CodeExpression id="17">
         <ExpressionOrigin>
           <ExpressionProvider type="ComponentRef">
             <ComponentRef name="."/>
@@ -680,13 +690,13 @@
         <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="16">
+        <CodeExpression id="18">
           <ExpressionOrigin>
             <ExpressionProvider type="CodeConstructor">
               <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
             </ExpressionProvider>
             <Parameters>
-              <CodeExpression id="15"/>
+              <CodeExpression id="17"/>
             </Parameters>
           </ExpressionOrigin>
         </CodeExpression>

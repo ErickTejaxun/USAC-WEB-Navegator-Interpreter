@@ -13,7 +13,7 @@ import Source.CCSS.*;
  * @author erick
  */
 public class listaError {
-    static ArrayList<errorCcss>  listaErrores = new ArrayList<>();
+    public static ArrayList<errorCcss>  listaErrores = new ArrayList<>();
     
     public static void agregarError(String tipo, String descripcion, int fila, int columna){
         errorCcss error = new errorCcss("",tipo, descripcion, fila, columna);
