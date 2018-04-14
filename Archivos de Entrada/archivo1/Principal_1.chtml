@@ -1,0 +1,153 @@
+
+
+<//- Archivo de calificación de requerimientos minimos -//>
+<CHTML>
+	<//- Contenido encabezado -//>
+	<ENCABEZADO>
+		<//- Archivos CCSS de requerimientos minimos -//>
+		<CCSS ruta="C:\Archivos de Entrada\archivo1\formato.ccss";><FIN-CCSS>
+		
+		<//- Archivos CJS de requerimientos minimos -//>
+		<CJS ruta="C:\Archivos de Entrada\archivo1\codigo.cjs";><FIN-CJS> 
+
+		<TITULO>Pagina Requerimientos Minimos<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	 
+	<CUERPO fondo="mm";>
+	<//-al ingresar los elementos deberá de iniciar desde la parte inicial de la página -//>
+		<//-área de botones para rediccionar -//>
+		<PANEL id = "panel_principal";>
+			<PANEL id = "p_redirecion";  alto="150"; ancho = "930";  grupo="f_redireccion";>
+				<BOTON grupo = "f_b_redireccion"; alto = "35"; ancho = "120"; ruta= "C:\Archivos de Entrada\archivo2\carros_ventas.chtml";>Informacion<FIN-BOTON>
+				<BOTON grupo = "f_b_redireccion"; alto = "35"; ancho = "160"; ruta= "C:\Archivos de Entrada\archivo3\Inicio.chtml";>Tabla Estudiante<FIN-BOTON>
+				<BOTON grupo = "f_b_redireccion"; alto = "35"; ancho = "100"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Incio1.chtml";> Principal <FIN-BOTON>
+				<SALTO-FIN>
+					<ENLACE  ruta="C:\Archivos de Entrada\archivo1\Principal.chtml";> Primer Archivo <FIN-ENLACE>
+					<//- <SALTO-FIN> -//>
+					<ENLACE  ruta="C:\Archivos de Entrada\archivo2\informacion_ventas.chtml";> Segundo Archivo <FIN-ENLACE>
+					<//- <SALTO-FIN> -//>
+					<ENLACE  ruta="C:\Archivos de Entrada\archivo3\Inicio.chtml";> Tercer Archivo <FIN-ENLACE>
+					<//- <SALTO-FIN> -//>
+					<ENLACE  ruta="C:\Archivos de Entrada\Entrada 4 _1\Incio1.chtml";> Cuarto Archivo <FIN-ENLACE>
+					<//- <SALTO-FIN> -//>
+			<FIN-PANEL>
+			<SALTO-FIN>
+			<PANEL id = "p_titulo"; grupo="f_p_titulo"; ancho = "930"; alto = "70";>
+				<//- esta linea contiene salto de linea en el texto -//>
+				<TEXTO id="titulo_pagina"; grupo= "titulo";>Calificacion Compiladores 2
+				Proyecto 1<FIN-TEXTO>
+			<FIN-PANEL>
+			 <//- Se agregaron tres saltos de linea -//>
+			<SALTO-FIN>
+			<SALTO-FIN>
+			<SALTO-FIN>
+		<FIN-PANEL>
+		<SALTO-FIN>
+
+
+		<PANEL id = "panel_central"; grupo="titulo"; <//-  ancho = "1200"; alto = "1500"; -//>>
+			<PANEL id = "panel_ingreso_datos"; <//- alto ="430"; ancho="600"; -//> grupo="formulario_1";>
+				<PANEL id = "panel_datos";>
+					<TEXTO alto= "30"; ancho ="210"; id="titulo_fomulario"; grupo="formulario_1";>Formulario de Notas:<FIN-TEXTO>
+					<SALTO-FIN>
+					<SALTO-FIN>
+					<SALTO-FIN>
+					<TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Nota Proyecto 1: <FIN-TEXTO>
+					<SPINNER ancho = "50"; alto ="25"; id="nota_1"; id="nota_1"; grupo="formulario_2";>4<FIN-SPINNER>
+					<//- ingreso de espacios en blanco para las separaciones entre etiquetas -//>
+					<TEXTO> <FIN-TEXTO>
+					<TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Nota Proyecto 2: <FIN-TEXTO>
+					<SPINNER ancho = "50"; alto ="25"; id="nota_2"; id="nota_2"; grupo="formulario_2";>7<FIN-SPINNER>
+					<//- se agregó dos salto de linea entre elementos -//>
+					<SALTO-FIN>
+					<SALTO-FIN>
+					<TEXTO alto= "16"; ancho ="120"; grupo="formulario_1";>Nombre Estudiante:<FIN-TEXTO>
+					<CAJA_TEXTO alto= "20"; ancho ="200"; id="nombre"; grupo="formulario_2";>Nombre<FIN-CAJA_TEXTO>
+					<SALTO-FIN>
+					<TEXTO alto= "16"; ancho ="80"; grupo="formulario_1";>Comentario:<FIN-TEXTO>
+					<TEXTO_A alto="95"; ancho="200"; id="comentario"; grupo="formulario_2";><FIN-TEXTO_A>
+					<SALTO-FIN>
+					<CAJA id="caja_1"; grupo="formulario_2";>
+						<OPCION valor= "promedio"; >Promedio<FIN-OPCION>
+						<OPCION valor= "suma"; >Suma<FIN-OPCION>
+						<OPCION valor= "resta"; >Resta<FIN-OPCION>
+						<OPCION valor= "multiplicar"; >Multiplicacion<FIN-OPCION>
+						<OPCION valor= "7"; >Modulo P1 % 7<FIN-OPCION>
+						<OPCION valor= "11"; >Modulo P2 % 11<FIN-OPCION>
+					<FIN-CAJA>
+					<SALTO-FIN>
+					<BOTON click="operacion_datos()"; alto= "30"; ancho ="100"; id="boto_cal"; grupo="formulario_2";> Calcular <FIN-BOTON>
+					<BOTON click="vetor1()"; alto= "30"; ancho ="100"; id="vec1"; grupo="formulario_2";> Vector 1 <FIN-BOTON>
+					<BOTON click="vetor2()"; alto= "30"; ancho ="100"; id="vec2"; grupo="formulario_2";> Vector 2 <FIN-BOTON>
+					<BOTON click="vetor3()"; alto= "30"; ancho ="100"; id="vec3"; grupo="formulario_2";> Vector 3 <FIN-BOTON>
+					<BOTON click="vetor4()"; alto= "30"; ancho ="100"; id="vec4"; grupo="formulario_2";> Vector 4 <FIN-BOTON>
+				<FIN-PANEL>
+				<SALTO-FIN>
+				<PANEL id = "panel_operaciones";>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar7()";>7<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar8()";>8<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar9()";>9<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operardiv()";>/<FIN-BOTON>
+					<SALTO-FIN>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar4()";>4<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar5()";>5<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar6()";>6<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operarpor()";>*<FIN-BOTON>
+					<SALTO-FIN>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar1()";>1<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar2()";>2<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operar3()";>3<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operarmenos()";>-<FIN-BOTON>
+					<SALTO-FIN>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "50"; click="operar0()";>0<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operarPunto()";>.<FIN-BOTON>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "45"; click="operarmas()";>+<FIN-BOTON>
+					<SALTO-FIN>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "100"; click="enter()";>Enter<FIN-BOTON>					
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "100"; click="operarigual()";>=<FIN-BOTON>
+					<SALTO-FIN>
+					<BOTON grupo = "f_b_calcula"; alto = "25"; ancho = "100"; click="operarLimpiar()";>LIMPIAR<FIN-BOTON>
+				<FIN-PANEL>
+				<SALTO-FIN>
+				<SALTO-FIN>
+				<BOTON ID="btn_formato"; grupo = "f_b_calcula"; alto = "25"; ancho = "100"; >Cambiar Formato Paneles<FIN-BOTON>
+			<FIN-PANEL>
+			<TEXTO> <FIN-TEXTO>
+		 
+			<PANEL id = "panel_salida_datos"; <//-alto ="430"; ancho="380";-//>>
+				<PANEL id= "panel_sDatos";>
+					<TEXTO grupo = "salida_texto_1";>Opcion Seleccionada:<FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_opcion";>--------<FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO grupo = "salida_texto_1";>Nombre del Estudiante<FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nombre"; >--------<FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO grupo = "salida_texto_1";>Resultado: <FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_resultado"; >--------<FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO grupo = "salida_texto_1";>Comentario Realizado<FIN-TEXTO>
+					<TEXTO alto = "120"; ancho="200"; grupo = "salida_texto_2"; id= "r_comentario"; >--------<FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO grupo = "salida_texto_1";>Nota P1:<FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nota_1"; >--------<FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO grupo = "salida_texto_1";>Nota P2:<FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_nota_2"; >--------<FIN-TEXTO>
+					<SALTO-FIN>
+					<IMAGEN alto = "90"; ancho = "200"; id="imagen_1";><FIN-IMAGEN>
+				<FIN-PANEL>
+				<SALTO-FIN>
+				<PANEL id = "salida_operaciones";>					
+					<TEXTO grupo = "salida_texto_1";>Operacion<FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_cadena_operacion"; > <FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO grupo = "salida_texto_1";>Resultado:<FIN-TEXTO>
+					<TEXTO alto = "15"; ancho="55"; grupo = "salida_texto_2"; id= "r_resultado_opera"; ><FIN-TEXTO>
+					<SALTO-FIN>
+					<IMAGEN alto = "90"; ancho = "200"; id="imagen_operacion";><FIN-IMAGEN>
+				<FIN-PANEL>
+			<FIN-PANEL>
+		<FIN-PANEL>
+	 <FIN-CUERPO>
+<FIN-CHTML>
+

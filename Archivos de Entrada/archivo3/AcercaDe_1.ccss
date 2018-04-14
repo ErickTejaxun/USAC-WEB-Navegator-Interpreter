@@ -1,0 +1,103 @@
+Panel_rediccionamiento [
+GRUPO(encabezado);
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 20;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+	FondoElemento := "blue";
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+Grupo (bavbar);
+	alineadO := centrado;
+	FondoElemento := "yelow";
+	borde := [3, "blue", true];
+	AutoRedimension := [false, VERTICAL];
+	AutoRedimension := [false, Horizontal];
+
+ID (bavbar_1);
+	FondoElemento := "blue";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "black";
+	Texto := "Chat";
+
+ID (bavbar_2);
+	FondoElemento := "red";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "white";
+	Texto := "Chat";
+
+ID (bavbar_3);
+	FondoElemento := "green";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "black";
+	Texto := "Inicio";
+ID (bavbar_4);
+	FondoElemento := "cian";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.000000001;
+	Colortext := "black";
+	Texto := "Inicio";
+ID (bavbar_5);
+	FondoElemento := "while";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.011111000;
+	Colortext := "black";
+	Texto := "Facturacion";
+ID (bavbar_6);
+	FondoElemento := "pink";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.011111000;
+	Colortext := "black";
+	Texto := "Facturacion";
+
+GRUPO (panel_botones);
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 12;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+	FondoElemento := "Black";
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+
+ID (limpiar);
+	FondoElemento := "pink";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 12.011111000;
+	Colortext := "black";
+ID (Imprimir);
+	FondoElemento := "Green";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 12.011111000;
+	Colortext := "black";
+
+GRUPO (contorno);
+	borde := [3, "black", true];
+
+GRUPO (no_contorno);
+	borde := [0, "black", true];
+
+GRUPO (opaco);
+	Opaque := true;
+GRUPO (no_opaco);
+	Opaque := false;
+
+GRUPO (visible1);
+	VISible := true;
+GRUPO (no_visible);
+	Visible := false;
+
+]

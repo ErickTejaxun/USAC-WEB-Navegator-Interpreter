@@ -1,0 +1,68 @@
+<CHTML>
+	<ENCABEZADO>
+		<CJS ruta="C:\Archivos de Entrada\archivo3\chat.cjs";> <FIN-CJS>
+		<CCSS ruta="C:\Archivos de Entrada\archivo3\chat.ccss";> <FIN-CCSS>
+		<TITULO>Chat<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<CUERPO>
+		<PANEL id= "panel_encabezado"; grupo="encabezado"; alineado="derecha"; alto= "200"; ancho="800";>
+			<TEXTO id= "encabezado_titulo"; >Compiladores 2 - Calificacion Proyecto 1 - Web Chat<FIN-TEXTO>
+		<FIN-PANEL>		
+		<salto-fin>
+		<PANEL id = "panel_1"; grupo= "bavbar"; ancho = "1000"; alto = "200"; alineado="derecha";>
+			<BOTON id = "bavbar_1"; grupo = "bavbar"; alto = "35"; ancho = "150"; ruta= "C:\Archivos de Entrada\archivo3\Chat.chtml";> Pagina Chat <FIN-BOTON>
+			<ENLACE id = "bavbar_2";  grupo = "bavbar"; alto = "35"; ancho = "100";  ruta= "C:\Archivos de Entrada\archivo3\Chat.chtml"; > Pagina Chat <FIN-ENLACE>			
+			<BOTON id = "bavbar_3";  grupo = "bavbar"; alto = "35"; ancho = "150"; ruta= "C:\Archivos de Entrada\archivo3\AcercaDe.chtml";> Pagina Acerca <FIN-BOTON>
+			<ENLACE id = "bavbar_4";  grupo = "bavbar"; alto = "35"; ancho = "100";  ruta= "C:\Archivos de Entrada\archivo3\AcercaDe.chtml"; > Pagina Acerca <FIN-ENLACE>			
+			<BOTON id = "bavbar_5";  grupo = "bavbar"; alto = "35"; ancho = "150"; ruta= "C:\Archivos de Entrada\archivo3\Facturacion.chtml";> Pagina Facturacion <FIN-BOTON>
+			<ENLACE id = "bavbar_6";  grupo = "bavbar"; alto = "35"; ancho = "100";  ruta= "C:\Archivos de Entrada\archivo3\Facturacion.chtml"; > Pagina Facturacion <FIN-ENLACE>
+		<FIN-PANEL>
+		<SALTO-FIN>
+		<PANEL  id ="panel_botones"; grupo ="redi";>
+			<CAJA grupo ="redi"; alto="40"; ancho="100";>
+				<OPCION id= "boton_val1"; grupo= "boton_valor";> Usuario 1 <FIN-OPCION>
+				<OPCION id= "boton_val2"; grupo= "boton_valor";> Usuario 2 <FIN-OPCION>
+				<OPCION id= "boton_val3"; grupo= "boton_valor";> Usuario 3 <FIN-OPCION>
+				<OPCION id= "boton_val4"; grupo= "boton_valor";> Usuario 4 <FIN-OPCION>
+			
+			
+				<OPCION id= "boton_val5"; grupo= "boton_valor";> Usuario 5 <FIN-OPCION>
+				<OPCION id= "boton_val6"; grupo= "boton_valor";> Usuario 6 <FIN-OPCION>
+				<OPCION id= "boton_val7"; grupo= "boton_valor";> Usuario 7 <FIN-OPCION>
+				<OPCION id= "boton_val8"; grupo= "boton_valor";> Usuario 8 <FIN-OPCION>
+			
+				<OPCION id= "boton_val9"; grupo= "boton_valor";> Usuario 9 <FIN-OPCION>
+				<OPCION id= "boton_val10"; grupo= "boton_valor";> Usuario 10 <FIN-OPCION>
+			<FIN-CAJA>
+
+			<TEXTO ancho="100"; alto="1"; grupo="separador";>     <FIN-TEXTO>
+
+			<CAJA  alto="40"; ancho="100"; >
+				<OPCION id= "boton_val11"; grupo= "boton_valor";> Hola! <FIN-OPCION>
+				<OPCION id= "boton_val12"; grupo= "boton_valor";> Saludando <FIN-OPCION>
+				<OPCION id= "boton_val13"; grupo= "boton_valor";> Bien Gracias <FIN-OPCION>
+				<OPCION id= "boton_val14"; grupo= "boton_valor";> Como Van <FIN-OPCION>
+			
+			
+				<OPCION id= "boton_val15"; grupo= "boton_valor";> Viva la Calificacion Compi <FIN-OPCION>
+				<OPCION id= "boton_val16"; grupo= "boton_valor";> Este elemento es nuevo <FIN-OPCION>
+				<OPCION id= "boton_val17"; grupo= "boton_valor";> Sale en Vacas <FIN-OPCION>
+				<OPCION id= "boton_val18"; grupo= "boton_valor";> Cadena de Buena Suerte <FIN-OPCION>
+			
+				<OPCION id= "boton_val19"; grupo= "boton_valor";> Salida de Emergencia <FIN-OPCION>
+				<OPCION id= "boton_val20"; grupo= "boton_valor";> Porque lo dices <FIN-OPCION>
+			<FIN-CAJA>
+
+			<SALTO-FIN><SALTO-FIN><SALTO-FIN>
+
+			<BOTON id= "nuevoid"; click="Ocultar()"; alto="30"; ancho="200";> Ocultar Area de texto <FIN-BOTON>
+			<TEXTO id="usuario"; grupo="ocultar"; alto = "100";  ancho ="100";>Ocultar<FIN-TEXTO>
+			<SALTO-FIN><SALTO-FIN><SALTO-FIN>
+			<TEXTO id="mensaje"; grupo="ocultar"; alto = "100";  ancho ="100";>Mensaje <FIN-TEXTO>
+			<SALTO-FIN><SALTO-FIN><SALTO-FIN>
+			<BOTON id= "a1"; grupo= "imprimir"; click="Mensaje()";> Saludo <FIN-BOTON>
+			<SALTO-FIN>
+			<IMAGEN ancho="100"; alto="100"; id= "imagen_id"; grupo="imagen"; ruta= "C:\Archivos de Entrada\archivo3\producto\imagen2.png";>C:\Archivos de Entrada\archivo3\producto\imagen2.png <FIN-IMAGEN>
+		<FIN-PANEL>
+	<FIN-CUERPO>
+<FIN-CHTML>

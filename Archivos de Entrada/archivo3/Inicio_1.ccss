@@ -1,0 +1,74 @@
+Panel_rediccionamiento [
+GRUPO(encabezado);
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 10;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [2, "black", true];
+	FondoElemento := "blue";
+
+	id(panel_encabezado);
+	fondoElemento := "yellow";
+
+Grupo (bavbar);
+	alineadO := centrado;
+	FondoElemento := "yellow";
+	borde := [3, "blue", true];
+	AutoRedimension := [false, VERTICAL];
+	AutoRedimension := [false, Horizontal];
+
+ID (bavbar_1);
+	FondoElemento := "blue";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "black";
+	Texto := "Chat";
+
+ID (bavbar_2);
+	FondoElemento := "red";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "white";
+	Texto := "Chat";
+
+ID (bavbar_3);
+	FondoElemento := "green";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 13.0068;
+	Colortext := "black";
+	Texto := "Acerca De";
+ID (bavbar_4);
+	FondoElemento := "cian";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.000000001;
+	Colortext := "black";
+	Texto := "Acerca De";
+ID (bavbar_5);
+	FondoElemento := "while";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.011111000;
+	Colortext := "black";
+	Texto := "Facturacion";
+ID (bavbar_6);
+	FondoElemento := "pink";
+	borde := [1, "black", true];
+	Letra := "Courier New";
+	Tamtex := 10.011111000;
+	Colortext := "black";
+	Texto := "Facturacion";
+
+GRUPO (panel_imagen);
+	alineado := Centrado;
+	LetrA := "Centaur";
+	TamTex := 12;
+	forMAto := Capital-t, cursiva, Negrilla;
+	borde := [5, "black", true];
+	FondoElemento := "Black";
+	AutoRedimension := [true, VERTICAL];
+	AutoRedimension := [true, Horizontal];
+]

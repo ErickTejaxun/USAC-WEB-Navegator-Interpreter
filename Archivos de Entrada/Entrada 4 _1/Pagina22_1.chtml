@@ -1,0 +1,106 @@
+<//- Inicio CHTML -//>
+<CHTML>
+	<//- Contenido encabezado -//>
+	<ENCABEZADO>
+		<CJS ruta="C:\Archivos de Entrada\Entrada 4 _1\Pagina22.cjs";><FIN-CJS>
+		<CCSS ruta="C:\Archivos de Entrada\Entrada 4 _1\archivo_2.ccss";><FIN-CCSS>
+			<CCSS ruta="C:\Archivos de Entrada\Entrada 4 _1\archivo_0.ccss";><FIN-CCSS>
+	
+		<TITULO>Pagina 2 - Compi 2<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<//- Este sera el panel principal que contendra a todos los elementos -//>
+	<CUERPO>
+		<PANEL id = "panel_1"; grupo= "panel_redireccion"; ancho = "800"; alto = "150";>
+			<PANEL  id = "panel_2"; grupo= "panel_redireccion"; ancho = "700"; alto = "100";>
+				<PANEL id = "panel_3"; grupo= "panel_redireccion"; ancho = "600"; alto = "50";> 
+					<BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "80"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml";> Calculo de Operaciones <FIN-BOTON>
+					<BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "80"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Inicio1.chtml";> Inicio <FIN-BOTON>
+					<BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "80"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina33.chtml";> Grafo de estados <FIN-BOTON>
+					<ENLACE grupo = "boton_redireccion"; alto = "35"; ancho = "80";  ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml";> Calculo de Operaciones <FIN-ENLACE>
+					<ENLACE grupo = "boton_redireccion"; alto = "35"; ancho = "80";  ruta= "C:\Archivos de Entrada\Entrada 4 _1\Inicio1.chtml";> Inicio <FIN-ENLACE>
+					<ENLACE grupo = "boton_redireccion"; alto = "35"; ancho = "80";  ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina33.chtml";> Grafo de estados <FIN-ENLACE>
+				<FIN-PANEL>
+				<TEXTO id= "hola1"; grupo= "hola";> Hola <FIN-TEXTO>
+			<FIN-PANEL>
+				<TEXTO id= "hola2"; grupo= "hola";> Hola <FIN-TEXTO>
+		<FIN-PANEL>
+		<SALTO-FIN>
+		<SALTO-FIN>
+		<SALTO-FIN>
+		<PANEL id = "panel_4"; grupo= "titulo"; ancho = "716"; alto = "50";>
+			<//- esta linea contiene salto de linea en el texto -//>
+			<TEXTO id= "titulo_doc"; grupo= "titulo";>Calificacion Compiladores 2 - Proyecto 2 - Fichero 2 - Ordenamiento Listas<FIN-TEXTO>
+		<FIN-PANEL>
+		<//- Se agregaron tres saltos de linea -//>
+		<SALTO-FIN>
+		<SALTO-FIN>
+		<SALTO-FIN>
+
+		<PANEL id = "panel_5"; grupo= "formulario_1"; ancho = "716"; alto = "320";>
+
+			<PANEL id = "panel_6"; alto = "700"; ancho= "1000"; grupo= "formulario_1";>
+				
+				<PANEL id = "panel_7"; alto = "600"; ancho= "500"; grupo= "formulario_1";>
+					<TEXTO alto= "16"; ancho = "150"; grupo= "formulario_1";> Botones Eleccion <FIN-TEXTO>
+					<SALTO-FIN>
+					<BOTON alto= "30"; ancho = "150"; id= "boton_1"; grupo= "boton_operacion"; click="espuma()";> Ordenamiento Burbuja <FIN-BOTON>
+					<TEXTO>                 <FIN-TEXTO>
+					<BOTON alto= "30"; ancho = "150"; id= "boton_2"; grupo= "boton_operacion"; > Ordenamiento Quick Sort <FIN-BOTON>
+					<SALTO-FIN>
+					<SALTO-FIN>
+					<BOTON alto= "30"; ancho = "150"; id= "boton_3"; grupo= "boton_operacion";> Busqueda Binaria <FIN-BOTON>
+					<TEXTO>       <FIN-TEXTO>
+					<BOTON alto= "30"; ancho = "150"; id= "boton_33"; grupo= "boton_operacion";> Busqueda Lineal <FIN-BOTON>
+					<TEXTO>       <FIN-TEXTO>
+					<BOTON alto= "30"; ancho = "150"; id= "limpiar"; grupo= "boton_operacion"; click="limpiar_Arreglos()"; > Limpiar <FIN-BOTON>
+					<SALTO-FIN>
+			
+
+					
+					<TABLA> 
+						<FIL_T>
+							<CT><BOTON id= "boton_val1"; grupo= "boton_valor";> -10  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val2"; grupo= "boton_valor";> -3  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val3"; grupo= "boton_valor";> -1  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val4"; grupo= "boton_valor";> 0  <FIN-BOTON><FIN-CT>
+						<FIN-FIL_T>
+						<FIL_T>
+							<CT><BOTON id= "boton_val5"; grupo= "boton_valor";> 7  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val6"; grupo= "boton_valor";> 11  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val7"; grupo= "boton_valor";> 17  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val8"; grupo= "boton_valor";> 19  <FIN-BOTON><FIN-CT>
+						<FIN-FIL_T>
+						<FIL_T>
+							<CT><BOTON id= "boton_val9"; grupo= "boton_valor";> 23  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val10"; grupo= "boton_valor";> 35  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val11"; grupo= "boton_valor";> 42  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val12"; grupo= "boton_valor";> 55  <FIN-BOTON><FIN-CT>
+						<FIN-FIL_T>
+						<FIL_T>
+							<CT><BOTON id= "boton_val13"; grupo= "boton_valor";> 68  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val14"; grupo= "boton_valor";> 72  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val15"; grupo= "boton_valor";> 76  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val16"; grupo= "boton_valor";> 82  <FIN-BOTON><FIN-CT>
+						<FIN-FIL_T>
+						<FIL_T>
+							<CT><BOTON id= "boton_val17"; grupo= "boton_valor";> 88  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val18"; grupo= "boton_valor";> 90  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val19"; grupo= "boton_valor";> 93  <FIN-BOTON><FIN-CT>
+							<CT><BOTON id= "boton_val20"; grupo= "boton_valor";> 100  <FIN-BOTON><FIN-CT>
+						<FIN-FIL_T>
+					<FIN-TABLA>
+					
+					<SALTO-FIN>
+				<FIN-PANEL>
+				
+				<TEXTO>    <FIN-TEXTO>
+
+				<PANEL id = "panel_8"; alto = "600"; ancho= "500"; grupo= "formulario_1";>
+					<TEXTO alto= "16"; ancho = "100"; grupo= "formulario_1";> Botones Eleccion <FIN-TEXTO>
+					<SALTO-FIN>
+					<TEXTO_A alto= "450"; ancho = "400";  id="area_1"; >  <FIN-TEXTO_A>
+				<FIN-PANEL>
+			<FIN-PANEL>
+		<FIN-PANEL>
+	<FIN-CUERPO>
+<FIN-CHTML>

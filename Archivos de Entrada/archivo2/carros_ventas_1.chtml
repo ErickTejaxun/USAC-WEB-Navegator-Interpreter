@@ -1,0 +1,67 @@
+<CHTML>
+	<//- Contenido encabezado -//>
+	<ENCABEZADO>
+		<CJS  ruta="C:\Archivos de Entrada\archivo2\ventas.cjs";><FIN-CJS>
+		<CCSS ruta="C:\Archivos de Entrada\archivo2\inicio.ccss";><FIN-CCSS>
+		<TITULO>"Carros - venta de carros"<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<CUERPO>
+		<PANEL id = "panel_carrito"; grupo="grupoCarrito";alineado="derecha"; ancho = "800"; alto = "50";> 
+			<BOTON click="ordenarburbuja()";> "Ver Total" <FIN-BOTON>
+		<FIN-PANEL>
+		<SALTO-FIN>
+		<PANEL id = "panel_cantidad"; grupo="grupoCarrito";alineado="derecha"; ancho = "800"; alto = "250";> 
+			<TEXTO id="cantidad_carrito"; grupo="parrafo"; alto="50"; ancho="300";>"Seleccione el monto que desea gastar: "<FIN-TEXTO>
+			<SALTO-FIN>
+			<BOTON id="btm1";click="monto1()";> "Q250000" <FIN-BOTON>
+			<BOTON id="btm2";click="monto2()";> "Q400000" <FIN-BOTON>
+		<FIN-PANEL>
+		<salto-fin>
+		<PANEL id = "panel_galeria"; grupo="grupoCarrito";alineado="derecha"; <//-ancho = "716"; alto = "500";-//>> 
+			<TEXTO id="cantidad_carrito"; grupo="parrafo"; alto="50"; ancho="300";>"Ingrese la marca de vehiculos que desea comprar: "<FIN-TEXTO>
+			<SALTO-FIN>
+			<IMAGEN id="mazda"; click="buy_mazda()"; alto="50"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros\mazda.jpeg";><FIN-IMAGEN>
+			<IMAGEN  id="toyota"; click="buy_toyota()"; alto="50"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros\Toyota.jpeg" ;><FIN-IMAGEN>
+			<IMAGEN id="ford"; click="buy_ford()"; alto="50"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros\Toyota.jpeg";><FIN-IMAGEN>
+			<IMAGEN  id="meches"; click="btn_meches()";alto="50"; ancho="200";  ruta="C:\Archivos de Entrada\archivo2\carros\meches.jpg";><FIN-IMAGEN>
+		<FIN-PANEL>
+		<SALTO-FIN>
+		<SALTO-FIN>
+			<TEXTO grupo="titulo"; alto="50"; ancho="100";>"Productos"<FIN-TEXTO>
+			<SALTO-FIN>
+			<TABLA id="tabla1"; grupo="tablas";>
+				<FIL_T> 
+					<CB>informacion<FIN-CB> 
+					<CB>precio<FIN-CB> 
+					<CB>img<FIN-CB> 
+					<CB> " " <FIN-CB> 
+				<FIN-FIL_T> 
+				<FIL_T> 
+					<CT>"Mazda 3 2005, color Rojo. NITIDO!!!!"<FIN-CT> 
+					<CT>25000<FIN-CT> 
+					<CT><IMAGEN  alto="50"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros\mazda.jpeg";><FIN-IMAGEN><FIN-CT> 
+					<CT><BOTON  alto="50"; ancho="200"; click="buy_mazda()"; > "Añadir al carrito" <FIN-BOTON><FIN-CT> 
+				<FIN-FIL_T> 
+				<FIL_T> 
+					<CT>"Toyota 2014, color gris. BUEN ESTADO!!"<FIN-CT> 
+					<CT>39000<FIN-CT> 
+					<CT><IMAGEN  alto="50"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros\Toyota.jpeg" ;><FIN-IMAGEN><FIN-CT> 
+					<CT><BOTON click="buy_toyota()";> "Añadir al carrito" <FIN-BOTON><FIN-CT> 
+				<FIN-FIL_T> 
+				<FIL_T> 
+					<CT>"Ford focus 2015, color negro. NITIDO!!!!"<FIN-CT> 
+					<CT>55000<FIN-CT> 
+					<CT><IMAGEN  alto="50"; ancho="200"; ruta="C:\Archivos de Entrada\archivo2\carros\Toyota.jpeg";><FIN-IMAGEN><FIN-CT> 
+					<CT><BOTON click="buy_ford()";> "Añadir al carrito" <FIN-BOTON><FIN-CT> 
+				<FIN-FIL_T> 
+				<FIL_T> 
+					<CT>"Mercedez Benz 2013, color blanco. TODA PRUEBA!!"<FIN-CT> 
+					<CT>54000<FIN-CT> 
+					<CT><IMAGEN alto="50"; ancho="200";  ruta="C:\Archivos de Entrada\archivo2\carros\Toyota.jpeg";><FIN-IMAGEN><FIN-CT> 
+					<CT><BOTON click="btn_meches()";> "Añadir al carrito" <FIN-BOTON><FIN-CT> 
+				<FIN-FIL_T> 
+			<FIN-TABLA>
+		<TEXTO >"Gracias por su compra"<FIN-TEXTO>
+		<SALTO-FIN>
+	<FIN-CUERPO>
+<FIN-CHTML>

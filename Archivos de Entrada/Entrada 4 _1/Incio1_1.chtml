@@ -1,0 +1,48 @@
+<//- Inicio CHTML -//>
+<CHTML>
+	<//- Contenido encabezado -//>
+	<ENCABEZADO>
+		<CJS ruta="C:\Archivos de Entrada\Entrada 4 _1\Pagina11.cjs";> <FIN-CJS>
+		<CCSS ruta="C:\Archivos de Entrada\Entrada 4 _1\archivo_0.ccss";> <FIN-CCSS>
+		<TITULO>Principal - Compi 2<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<//- Este sera el panel principal que contendra a todos los elementos -//>
+	<CUERPO>
+		<PANEL id = "panel_1"; grupo= "panel_redireccion"; ancho = "800"; alto = "150";>
+			<PANEL  id = "panel_2"; grupo= "panel_redireccion"; ancho = "700"; alto = "100";>
+				<PANEL id = "panel_3"; grupo= "panel_redireccion"; ancho = "600"; alto = "50";> 
+					<BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "80"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml";> Calculo de Operaciones <FIN-BOTON>
+					<BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "80"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina22.chtml";> Ordenamiento de Lista  <FIN-BOTON>
+					<BOTON grupo = "boton_redireccion"; alto = "35"; ancho = "80"; ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina33.chtml";> Grafo de estados <FIN-BOTON>
+					<ENLACE grupo = "boton_redireccion"; alto = "35"; ancho = "80";  ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina11.chtml";> Calculo de Operaciones <FIN-ENLACE>
+					<ENLACE grupo = "boton_redireccion"; alto = "35"; ancho = "80";  ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina22.chtml";> Ordenamiento de Lista <FIN-ENLACE>
+					<ENLACE grupo = "boton_redireccion"; alto = "35"; ancho = "80";  ruta= "C:\Archivos de Entrada\Entrada 4 _1\Pagina33.chtml";> Grafo de estados <FIN-ENLACE>
+				<FIN-PANEL>
+				<TEXTO id="hola1"; grupo= "hola";> Hola <FIN-TEXTO>
+			<FIN-PANEL>
+				<TEXTO id="hola2"; grupo= "hola";> Hola <FIN-TEXTO>
+		<FIN-PANEL>
+		<SALTO-FIN>
+		<PANEL id = "panel_4"; grupo= "titulo_doc"; ancho = "800"; alto = "150";>
+			<TEXTO id= "titulo_doc"; grupo= "titulo";>Calificacion Compiladores 2 Proyecto 2<FIN-TEXTO>
+		<FIN-PANEL>
+		<SALTO-FIN>
+		<SALTO-FIN>
+		<SALTO-FIN>
+		<PANEL id = "panel_5"; grupo = "saludo"; ancho = "800"; alto = "400";>
+			<PANEL id = "panel_6"; grupo = "saludo"; ancho = "750"; alto = "450";>
+				<PANEL id = "panel_7"; grupo = "saludo"; ancho = "700"; alto = "400";>
+					<PANEL id = "panel_8"; grupo = "saludo"; ancho = "600"; alto = "350";>
+						<PANEL id = "panel_9"; grupo = "saludo"; ancho = "500"; alto = "300";>
+							<PANEL id = "panel_10"; grupo = "saludo"; ancho = "400"; alto = "250";>
+								<PANEL id = "panel_11"; grupo = "saludo"; ancho = "300"; alto = "200";>
+									<TEXTO id= "saludo"; grupo = "saludo";> Hola Mundo<FIN-TEXTO>
+								<FIN-PANEL>
+							<FIN-PANEL>
+						<FIN-PANEL>
+					<FIN-PANEL>
+				<FIN-PANEL>
+			<FIN-PANEL>
+		<FIN-PANEL>
+	<FIN-CUERPO>
+<FIN-CHTML>

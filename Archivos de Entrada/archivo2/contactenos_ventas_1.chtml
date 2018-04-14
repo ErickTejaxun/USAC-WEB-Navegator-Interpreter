@@ -1,0 +1,56 @@
+<CHTML>
+	<ENCABEZADO>
+		<CJS  ruta="C:\Archivos de Entrada\archivo2\informacion_ventas.cjs";><FIN-CJS>
+		<CCSS ruta="C:\Archivos de Entrada\archivo2\inicio.ccss";><FIN-CCSS>
+		<TITULO>"Contactenos"<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<CUERPO >
+	<panel id="panelPrincipal"; grupo="grupoPaneles";  ancho="800"; alto="300"; alineado="derecha";>
+		<texto> "Ingrese la fecha de nacimiento" <fin-texto>
+		<SPINNER id="dia"; alto="50"; ancho="200";> 0 <FIN-SPINNER>
+		<CAJA id="mes";>
+			<OPCION valor="1";>Uno<FIN-OPCION>
+			<OPCION valor="2";>Dos<FIN-OPCION>
+			<OPCION valor="3";>Tres<FIN-OPCION>
+			<OPCION valor="4";>4<FIN-OPCION>
+			<OPCION valor="5";>Cinco<FIN-OPCION>
+			<OPCION valor="6";>6<FIN-OPCION>
+			<OPCION valor="7";>7<FIN-OPCION>
+			<OPCION valor="8";>8<FIN-OPCION>
+			<OPCION valor="9";>nueve<FIN-OPCION>
+			<OPCION valor="10";>10<FIN-OPCION>
+			<OPCION valor="11";>11<FIN-OPCION>
+			<OPCION valor="12";>12<FIN-OPCION>
+		<FIN-CAJA>
+		<SPINNER id="anio"; > 1990 <FIN-SPINNER>
+		<salto-FIN>
+		<texto> "Ingrese su correo electronico" <fin-texto>
+		<CAJA_TEXTO id="cajatexto_1"; grupo="grupo_cajas_1"; alto="50"; ancho="200";> "no olvide la @" <FIN-CAJA_TEXTO>
+		<sAlto-fin>
+		<texto> "Desea que le enviemos notificaciones a su correo electronico" <fin-texto>
+		<BOTON id="btnaceptar"; grupo="grupo_botones_1";click="aceptarnotificaciones()"; alto="50"; ancho="100";> "Aceptar" <FIN-BOTON>
+	<FIN-PANEL>	
+	<sAlto-fin>
+	<panel id="Galeria"; grupo="grupoPaneles";alto="300"; ancho="800"; alineado="derecha";>
+		<texto id="titulogaleria"; alto ="30"; ancho="250";> "Remitente" <fin-texto>
+		<sAlto-fin>
+		<IMAGEN id="carro1";click="infomazda()"; ruta="C:\Archivos de Entrada\archivo2\carros\mazda.jpeg"; grupo="grupo_1";  alto="50"; ancho="200";>C:\Archivos de Entrada\archivo2\carros\mazda.jpeg<FIN-IMAGEN>
+		<sAlto-fin>
+		<IMAGEN id="carro2";click="infoMB()"; ruta="C:\Archivos de Entrada\archivo2\carros\carros\meches.jpg"; grupo="grupo_1";  alto="50"; ancho="200";>C:\Archivos de Entrada\archivo2\carros\meches.jpg<FIN-IMAGEN>
+		<sAlto-fin>
+		<IMAGEN id="carro3";click="infotoyota()";  alto="50"; ancho="200";> C:\Archivos de Entrada\archivo2\carros\Toyota.jpeg <FIN-IMAGEN>
+	<fin-panel>
+	<SALTO-FIN>
+	<panel id="panelCuerpoCorreo";alto="400"; ancho="800";  grupo="grupoPaneles"; alineado="derecha";>
+		<texto> "Remitente" <fin-texto>
+		<CAJA_TEXTO id="cajaremitente";  grupo="grupo_cajas_1"; alto="50"; ancho="200";> "Ingrese su nombre" <FIN-CAJA_TEXTO>
+		<sAlto-fin>
+		<TEXTO_A id="mensaje"; grupo="grupo_areass_1"; alto="200"; ancho="500"; > "Ingrese el cuerpo del mensaje" <FIN-TEXTO_A>
+		<salto-fin>
+		<BOTON id="btnenviar"; click="activarConexion()"; grupo="grupo_botones_1"; alto="50"; ancho="100";> "Enviar" <FIN-BOTON>
+		<BOTON click="activarConexion()"; alto="50"; ancho="100";> "Enviar" <FIN-BOTON>
+	<fin-panel>
+	<sAlto-fin>
+	<ENLACE ruta= "C:\Archivos de Entrada\archivo2\carros_ventas.chtml";> "Vea nuestra galeria de automoviles de ultimo modelo" <FIN-ENLACE>
+	<FIN-CUERPO>
+<FIN-CHTML>

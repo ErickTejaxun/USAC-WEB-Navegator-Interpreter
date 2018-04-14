@@ -1,0 +1,27 @@
+<CHTML>
+	<ENCABEZADO>
+		<CJS  ruta="C:\Archivos de Entrada\archivo2\informacion_ventas.cjs";><FIN-CJS>
+		<CCSS ruta="C:\Archivos de Entrada\archivo2\inicio.ccss";><FIN-CCSS>
+		
+		<TITULO>"Index - venta de carros"<FIN-TITULO>
+	<FIN-ENCABEZADO>
+	<CUERPO>
+		<PANEL id = "panel_menu";  ancho = "800"; alto = "200";> 
+			<BOTON id="btn1";grupo = "boton_redireccion"; alto = "50"; ancho = "140"; ruta= "C:\Archivos de Entrada\archivo2\carros_ventas.chtml";>"Carros en venta"<FIN-BOTON>			
+			<BOTON  id="btn2"; grupo = "boton_redireccion"; alto = "50"; ancho = "140"; ruta= "C:\Archivos de Entrada\archivo2\contactenos_ventas.chtml";>"Contactenos"<FIN-BOTON>
+		<FIN-PANEL>
+		<PANEL id = "panel_info"; ancho = "800"; alto = "200";>
+			<TEXTO grupo="titulo"; ancho="100"; alto="100";>"Venta de automoviles"<FIN-TEXTO>
+			<TEXTO grupo="parrafo";>"Venta de carros nuevos y usados
+				ideales para todo tipo de familias."<FIN-TEXTO>
+		<FIN-PANEL>
+		<PANEL id = "panel_mision"; ancho = "800"; alto = "200";>
+			<TEXTO grupo="titulo"; ancho="50"; alto="70";>"Mision"<FIN-TEXTO>
+			<TEXTO grupo="parrafo"; ancho="400"; alto="100";>"Proveer al pueblo de Guatemala de vehiculos buenos y confiables a" <FIN-TEXTO><TEXTO grupo="negrita";> "muy bajo precio"<FIN-TEXTO>
+		<FIN-PANEL>
+		<PANEL id = "panel_vision"; ancho = "800"; alto = "200";>
+			<TEXTO grupo="titulo"; ancho="50"; alto="70"; >"Vision"<FIN-TEXTO>
+			<TEXTO grupo="parrafo";  ancho="400"; alto="100";>"Ser la maxima venta de automoviles en el mercado"<FIN-TEXTO>
+		<FIN-PANEL>
+	<FIN-CUERPO>
+<FIN-CHTML>
