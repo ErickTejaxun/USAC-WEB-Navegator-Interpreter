@@ -1677,7 +1677,7 @@ public class Execute {
                 //buscar objeto
                 boolean existeobjeto=false;
                 existeobjeto=page.existeElemento(objeto.value);
-                ////Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
+                Mensaje("Resultado de la busqueda "+ existeobjeto, objeto.value);
                 if (existeobjeto) {
                     //modificarlo
                                         

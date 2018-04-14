@@ -30,7 +30,7 @@ public class CajaOpciones extends JComboBox
 {
     private String ruta;
     private String grupo;
-    private String id;
+    private String id="";
     private String cadena;
     private String alineado;
     private int alto;

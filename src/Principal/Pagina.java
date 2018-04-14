@@ -502,7 +502,7 @@ public class Pagina extends javax.swing.JPanel implements ActionListener{
         {
             panelOpciones.setVisible(true);            
             flagOpciones = 1;
-        }
+        }else
         if(flagOpciones==1)
         {
             panelOpciones.setVisible(false);
@@ -3321,8 +3321,9 @@ public void Interfaz(Panel contenedor) // Este metodo genera un panel con todos 
                 saltoY = val[2];                 
                 break;                
             case "cajaOpciones":
+                CajaOpciones op = (CajaOpciones)aux.getValor();
                 JComboBox opciones =(JComboBox)aux.getValor();
-                opciones.setBounds(x, y, opciones.getWidth(), opciones.getHeight());    
+                opciones.setBounds(x, y, op.getAncho(), op.getAlto());    
                 opciones.setPreferredSize(new java.awt.Dimension(opciones.getWidth(),opciones.getHeight()));     
                 aplicarEstiloGrupo(aux, contenedor);
                 aplicarEstiloId(aux, contenedor);
@@ -3630,7 +3631,7 @@ private static boolean esNumero(String cadena){
    
    public Color colorFuente(String color)
    {
-       color = quitarComillas(color);       
+       color = quitarComillas(color).toLowerCase();       
        Color retorno = Color.BLACK ;
        System.out.println("Buscando color: \t "+color);
        if(color.equals("#"))
@@ -3718,7 +3719,7 @@ private static boolean esNumero(String cadena){
    {
        Color retorno = Color.white ;
        System.out.println("Buscando color: \t "+raiz.getValue());
-        switch(raiz.getValue())
+        switch(raiz.getValue().toLowerCase())
         {
             case "\"blue\"":
                 retorno = Color.blue;
@@ -4281,6 +4282,1966 @@ private static boolean esNumero(String cadena){
                 analizar();                
         }    
     }
+    
+
+    
+    public void actualizarEstilos(String id, String grupo, Object comp)
+  {      
+        Source.CCSS.Ejecucion.nodoLista  estilo = null;
+        if(comp instanceof Panel)
+        { 
+            Panel item = (Panel)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosPanel(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(null,item.getId());
+            if(estilo!=null)
+            {
+                 cambiosPanel(item ,estilo);
+            }            
+        }
+        if(comp instanceof Tab)
+        { 
+            Tab item = (Tab)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosTab(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(null,item.getId());
+            if(estilo!=null)
+            {
+                 cambiosTab(item ,estilo);
+            }            
+        }      
+        if(comp instanceof Boton)
+        { 
+            Boton item = (Boton)comp; 
+            estilo =buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosBoton(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosBoton(item ,estilo);
+            }            
+        }           
+        if(comp instanceof Texto)
+        { 
+            Texto item = (Texto)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosTexto(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosTexto(item ,estilo);
+            }            
+        }    
+        if(comp instanceof Caja)
+        { 
+            Caja item = (Caja)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosCaja(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosCaja(item ,estilo);
+            }            
+        }      
+        if(comp instanceof Enlace)
+        { 
+            Enlace item = (Enlace)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosEnlace(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosEnlace(item ,estilo);
+            }            
+        }  
+        if(comp instanceof Imagen)
+        { 
+            Imagen item = (Imagen)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosImagen(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosImagen(item ,estilo);
+            }            
+        }  
+        if(comp instanceof Spinner)
+        { 
+            Spinner item = (Spinner)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosSpinner(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosSpinner(item ,estilo);
+            }            
+        }   
+        
+        if(comp instanceof areaTexto)
+        { 
+            areaTexto item = (areaTexto)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosAreaTexto(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosAreaTexto(item ,estilo);
+            }            
+        }        
+                                                 
+        if(comp instanceof CajaOpciones)
+        { 
+            CajaOpciones item = (CajaOpciones)comp; 
+            estilo = buscarEstilo(item.getGrupo(),null);
+            if(estilo!=null)
+            {
+                 cambiosCajaOpciones(item ,estilo);
+            }
+            estilo = null;
+            estilo = buscarEstilo(item.getId(), null);
+            if(estilo!=null)
+            {
+                 cambiosCajaOpciones(item ,estilo);
+            }            
+        }                                                              
+        this.repaint();
+        
+    }
+    public void cambiosCajaOpciones(CajaOpciones objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        //objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        //objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;                                    
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosAreaTexto(areaTexto objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "capital-t":
+                                    String[] palabras = objeto.getText().split(" ");
+                                    String cadena = "";
+                                    if(palabras.length>0)
+                                    {
+                                        for(String palabra: palabras)
+                                        {
+                                            if(palabra.length()>2)
+                                            {
+                                                palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length()) + " ";                                                       
+                                                cadena = cadena + palabra;                                                            
+                                            }
+                                        }
+                                    }
+                                    objeto.setText(cadena);
+                                    break;
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosSpinner(Spinner objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        //objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        //objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                    
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosImagen(Imagen objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "capital-t":
+                                    String[] palabras = objeto.getText().split(" ");
+                                    String cadena = "";
+                                    if(palabras.length>0)
+                                    {
+                                        for(String palabra: palabras)
+                                        {
+                                            if(palabra.length()>2)
+                                            {
+                                                palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length()) + " ";                                                       
+                                                cadena = cadena + palabra;                                                            
+                                            }
+                                        }
+                                    }
+                                    objeto.setText(cadena);
+                                    break;
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosEnlace(Enlace objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "capital-t":
+                                    String[] palabras = objeto.getText().split(" ");
+                                    String cadena = "";
+                                    if(palabras.length>0)
+                                    {
+                                        for(String palabra: palabras)
+                                        {
+                                            if(palabra.length()>2)
+                                            {
+                                                palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length()) + " ";                                                       
+                                                cadena = cadena + palabra;                                                            
+                                            }
+                                        }
+                                    }
+                                    objeto.setText(cadena);
+                                    break;
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosCaja(Caja objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "capital-t":
+                                    String[] palabras = objeto.getText().split(" ");
+                                    String cadena = "";
+                                    if(palabras.length>0)
+                                    {
+                                        for(String palabra: palabras)
+                                        {
+                                            if(palabra.length()>2)
+                                            {
+                                                palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length()) + " ";                                                       
+                                                cadena = cadena + palabra;                                                            
+                                            }
+                                        }
+                                    }
+                                    objeto.setText(cadena);
+                                    break;
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosTexto(Texto objeto ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        objeto.setText(objeto.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        objeto.setText(objeto.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(objeto.getFont().getStyle()==2)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),1,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(objeto.getFont().getSize()==1)
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),3,objeto.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        objeto.setFont(new Font(objeto.getFont().getName(),2,objeto.getFont().getSize()));
+                                    }
+                                    break;
+                                case "capital-t":
+                                    String[] palabras = objeto.getText().split(" ");
+                                    String cadena = "";
+                                    if(palabras.length>0)
+                                    {
+                                        for(String palabra: palabras)
+                                        {
+                                            if(palabra.length()>2)
+                                            {
+                                                palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length()) + " ";                                                       
+                                                cadena = cadena + palabra;                                                            
+                                            }
+                                        }
+                                    }
+                                    objeto.setText(cadena);
+                                    break;
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    objeto.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    objeto.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    objeto.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                objeto.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();                                                                                
+                                objeto.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = objeto.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                objeto.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            objeto.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                objeto.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    objeto.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            objeto.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //objeto.setColorFuente(colorFuente(valor));
+                                objeto.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosTab(Tab tab ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        //tab.setText(tab.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        //tab.setText(tab.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(tab.getFont().getStyle()==2)
+                                    {
+                                        tab.setFont(new Font(tab.getFont().getName(),3,tab.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        tab.setFont(new Font(tab.getFont().getName(),1,tab.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(tab.getFont().getSize()==1)
+                                    {
+                                        tab.setFont(new Font(tab.getFont().getName(),3,tab.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        tab.setFont(new Font(tab.getFont().getName(),2,tab.getFont().getSize()));
+                                    }
+                                    break;                                    
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    tab.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    tab.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    tab.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //tab.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = tab.getFont();                                                                                
+                                tab.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = tab.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                tab.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            tab.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                tab.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //tab.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    tab.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            tab.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //tab.setColorFuente(colorFuente(valor));
+                                tab.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosPanel(Panel panel ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        //panel.setText(panel.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        //panel.setText(panel.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(panel.getFont().getStyle()==2)
+                                    {
+                                        panel.setFont(new Font(panel.getFont().getName(),3,panel.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        panel.setFont(new Font(panel.getFont().getName(),1,panel.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(panel.getFont().getSize()==1)
+                                    {
+                                        panel.setFont(new Font(panel.getFont().getName(),3,panel.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        panel.setFont(new Font(panel.getFont().getName(),2,panel.getFont().getSize()));
+                                    }
+                                    break;
+
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    panel.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    panel.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    panel.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //panel.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = panel.getFont();                                                                                
+                                panel.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = panel.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                panel.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            panel.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                panel.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //panel.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    panel.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            panel.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //panel.setColorFuente(colorFuente(valor));
+                                panel.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }    
+    public void cambiosBoton(Boton boton ,Source.CCSS.Ejecucion.nodoLista nodoEstilo )
+    {
+        if(nodoEstilo!=null)
+        {
+            for(Object estiloElemento: nodoEstilo.getAtributos())
+            {
+                if(estiloElemento instanceof ArrayList)
+                { 
+                    ArrayList arreglo = (ArrayList)estiloElemento;
+                    for(Object element: arreglo)
+                    {
+                        if(element instanceof Source.CCSS.AST.nodo)
+                        {
+                            Source.CCSS.AST.nodo elementArray = (Source.CCSS.AST.nodo)element;
+                            switch(quitarComillas(elementArray.texto).toLowerCase())
+                            {
+                                case "minuscula":                                                
+                                        boton.setText(boton.getText().toLowerCase());                                                    
+                                    break;
+                                case "mayuscula": 
+                                        boton.setText(boton.getText().toUpperCase());                                                                                                        
+                                    break;
+                                case "negrilla":
+                                    if(boton.getFont().getStyle()==2)
+                                    {
+                                        boton.setFont(new Font(boton.getFont().getName(),3,boton.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        boton.setFont(new Font(boton.getFont().getName(),1,boton.getFont().getSize()));
+                                    }
+                                    break;
+                                case "cursiva":
+                                    if(boton.getFont().getSize()==1)
+                                    {
+                                        boton.setFont(new Font(boton.getFont().getName(),3,boton.getFont().getSize()));
+                                    }
+                                    else
+                                    {
+                                        boton.setFont(new Font(boton.getFont().getName(),2,boton.getFont().getSize()));
+                                    }
+                                    break;
+                                case "capital-t":
+                                    String[] palabras = boton.getText().split(" ");
+                                    String cadena = "";
+                                    if(palabras.length>0)
+                                    {
+                                        for(String palabra: palabras)
+                                        {
+                                            if(palabra.length()>2)
+                                            {
+                                                palabra = palabra.substring(0,1).toUpperCase() + palabra.substring(1,palabra.length()) + " ";                                                       
+                                                cadena = cadena + palabra;                                                            
+                                            }
+                                        }
+                                    }
+                                    boton.setText(cadena);
+                                    break;
+                            }//Fin switch formato
+                        }// Fin verificacion de tipo Source.CCSS. nodo                                
+                    }// Fin for de array
+                }// Fin verificacion tipo arrayList 
+                if(estiloElemento instanceof Source.CCSS.Ejecucion.tipoEstilo)
+                {
+                    Source.CCSS.Ejecucion.tipoEstilo estilo = (Source.CCSS.Ejecucion.tipoEstilo)estiloElemento;
+                    switch(estilo.getNombre().toLowerCase())
+                    {
+                        case "alineado":
+                            String valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor();}
+                            switch(valor.toLowerCase())
+                            {
+                                case "izquierda": 
+                                    boton.setAlignmentX(LEFT_ALIGNMENT);
+                                    break;
+                                case "derecha": 
+                                    boton.setAlignmentX(RIGHT_ALIGNMENT);
+                                    break;
+                                case "centrado": 
+                                    boton.setAlignmentX(CENTER_ALIGNMENT);
+                                    break;                                                
+                            }
+                            break;// Fin caso alineado                                    
+                        case "texto":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                boton.setText(valor);
+                            }                                    
+                            break;                                    
+                        case "letra":
+                            valor ="";
+                            if(estilo.getValor() instanceof String){ valor = (String)estilo.getValor(); valor= quitarComillas(valor);}                                                                   
+                            try 
+                            {
+                                Font fuente = boton.getFont();                                                                                
+                                boton.setFont(new Font(valor, fuente.getStyle(), fuente.getSize()));   
+                            } 
+                            catch (Exception e)
+                            {
+                            }                               
+                            break;  // Fin caso letra
+                        case "tamtex":
+                            Double tamTex = 0.00;
+                            if(estilo.getValor() instanceof Double){ tamTex = (Double)estilo.getValor();}                                                                   
+                            try 
+                            {
+                                Font fuente = boton.getFont();  
+                                if(tamTex==0){tamTex = (double)fuente.getSize();}
+                                int tamText = Integer.valueOf(tamTex.intValue());
+                                boton.setFont(new Font(fuente.getName(), fuente.getStyle(), tamText));   
+                            } 
+                            catch (Exception e){}  
+                            break; //Fin caso tamtex
+                        case "visible":
+                            valor ="";
+                            Boolean visibilidad = true;
+                            if(estilo.getValor() instanceof Boolean){ visibilidad = (Boolean)estilo.getValor();}   
+                            boton.setVisible(visibilidad);
+                            break;//Fin visible 
+                        case "fondoelemento":
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                valor = quitarComillas(valor);
+                                boton.setBackground(colorFuente(valor));
+                                //valor = (String)estilo.getValor();
+                                //panel.setColorFuente(colorFuente(valor));
+                            }
+                            break;//Fin colortext  
+
+                        case "borde":
+                            valor = "";
+                            if(estilo.getValor() instanceof ArrayList)
+                            {
+                                ArrayList arreglo = (ArrayList)estilo.getValor();
+                                String color ="";
+                                Boolean borde = true;
+                                int grosor = 10;
+
+                                for(Object item : arreglo )
+                                {
+                                    if(item instanceof String)
+                                    {
+                                        color = quitarComillas((String)item);
+                                    }
+                                    if(item instanceof Boolean)
+                                    {                                                                                                                                                        
+                                         borde = (Boolean)item;                                                                                                       
+                                    }
+                                    if(item instanceof Double)
+                                    {
+                                        Double auxiliar = (Double)item;
+                                        grosor = auxiliar.intValue();
+                                    }
+                                }                                            
+                                if(!color.equals(""))
+                                {
+                                    boton.setBorder(new LineBorder(colorFuente(color),grosor, borde));
+                                }                                            
+                            }
+                            break; // Fin caso borde   
+                        case "opaque":
+                            valor ="";
+                            Boolean opacacidad = true;
+                            if(estilo.getValor() instanceof Boolean){ opacacidad = (Boolean)estilo.getValor();}   
+                            boton.setOpaque(!opacacidad);
+                            break;//Fin Opacacidad      
+                        case "colortexto":                                        
+                            valor ="";
+                            if(estilo.getValor() instanceof String)
+                            {
+                                valor = (String)estilo.getValor();
+                                //boton.setColorFuente(colorFuente(valor));
+                                boton.setForeground(colorFuente(valor));
+                            }
+                            break;//Fin colortext                                          
+                    }// Fin switch                                                                                                    
+                } // Fin if instancia estilo
+            }//Fin for
+        }//Fin if !=null
+
+        
+    }
+    
     
     public void aplicarEstiloGrupo(Elemento elemento, Object container)
     {   
@@ -7659,16 +9620,16 @@ private static boolean esNumero(String cadena){
         {    
             if(grupo!=null)
             {
-                if(nodo.getIdentificador().equals(grupo) && nodo.getTipo().toLowerCase().equals("grupo") && !grupo.equals(""))
+                if(nodo.getIdentificador().equals(grupo))
                 {
-                    estiloEncon = nodo;                                
+                    return nodo;
                 }                
             }
             if(id!=null)
             {
-                if(nodo.getIdentificador().equals(id) && nodo.getTipo().toLowerCase().equals("id") && !id.equals(""))
+                if(nodo.getIdentificador().equals(id) )
                 {
-                    estiloEncon = nodo;                                
+                    return nodo;                                
                 }                
             }            
 
@@ -7857,26 +9818,30 @@ private static boolean esNumero(String cadena){
                 switch(atributo)
                 {                    
                     case "id":
-                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setId(id_);}else{modificarAtri(id,atributo,valor,pnl);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setId(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setId(id_);}}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setId(id_);}}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setId(id_);}}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setId(id_);}}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setId(id_);}}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setId(id_);}else{modificarAtri(id,atributo,valor,tab);}}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setId(id_);}}
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setId(id_); actualizarEstilos(pnl.getId(),pnl.getGrupo(),pnl);}else{modificarAtri(id,atributo,valor,pnl);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setId(id_);actualizarEstilos(btn.getId(),btn.getGrupo(),btn);}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setId(id_);actualizarEstilos(cjt.getId(),cjt.getGrupo(),cjt);}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setId(id_);actualizarEstilos(cjtO.getId(),cjtO.getGrupo(),cjtO);}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setId(id_);actualizarEstilos(enl.getId(),enl.getGrupo(),enl);}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setId(id_);actualizarEstilos(img.getId(),img.getGrupo(),img);}}
+                        if(comp instanceof Texto){Texto img = (Texto)comp; if(id.equals(img.getId())){img.setId(id_);actualizarEstilos(img.getId(),img.getGrupo(),img);}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setId(id_);actualizarEstilos(spn.getId(),spn.getGrupo(),spn);}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setId(id_);}else{modificarAtri(id,atributo,valor,tab);actualizarEstilos(tab.getId(),tab.getGrupo(),tab);}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setId(id_);actualizarEstilos(areaT.getId(),areaT.getGrupo(),areaT);}}
                         break;
                     case "grupo":
-                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setGrupo(id_);}else{modificarAtri(id,atributo,valor,pnl);}}
-                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){btn.setGrupo(id_);}}
-                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setGrupo(id_);}}
-                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setGrupo(id_);}}
-                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setGrupo(id_);}}
-                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setGrupo(id_);}}
-                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp;  if(id.equals(spn.getId())){spn.setGrupo(id_);}}
-                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setGrupo(id_);}else{modificarAtri(id,atributo,valor,tab);}}
-                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setGrupo(id_);}}
+                        if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setGrupo(id_); actualizarEstilos(pnl.getId(),pnl.getGrupo(),pnl);}else{modificarAtri(id,atributo,valor,pnl);}}
+                        if(comp instanceof Boton){Boton btn = (Boton)comp; if(id.equals(btn.getId())){
+                            btn.setGrupo(id_);
+                            actualizarEstilos(btn.getId(),btn.getGrupo(),btn);}}
+                        if(comp instanceof Caja){Caja cjt = (Caja)comp; if(id.equals(cjt.getId())){cjt.setGrupo(id_);actualizarEstilos(cjt.getId(),cjt.getGrupo(),cjt);}}
+                        if(comp instanceof CajaOpciones){CajaOpciones cjtO= (CajaOpciones)comp; if(id.equals(cjtO.getId())){cjtO.setGrupo(id_);actualizarEstilos(cjtO.getId(),cjtO.getGrupo(),cjtO);}}
+                        if(comp instanceof Enlace){Enlace enl = (Enlace)comp; if(id.equals(enl.getId())){enl.setGrupo(id_);actualizarEstilos(enl.getId(),enl.getGrupo(),enl);}}
+                        if(comp instanceof Texto){Texto enl = (Texto)comp; if(id.equals(enl.getId())){enl.setGrupo(id_);actualizarEstilos(enl.getId(),enl.getGrupo(),enl);}}
+                        if(comp instanceof Imagen){Imagen img = (Imagen)comp; if(id.equals(img.getId())){img.setGrupo(id_);actualizarEstilos(img.getId(),img.getGrupo(),img);}}
+                        if(comp instanceof Spinner){Spinner spn = (Spinner)comp; if(id.equals(spn.getId())){spn.setGrupo(id_);actualizarEstilos(spn.getId(),spn.getGrupo(),spn);}}
+                        if(comp instanceof Tab){Tab tab = (Tab)comp; if(id.equals(tab.getId())){tab.setGrupo(id_);}else{modificarAtri(id,atributo,valor,tab);actualizarEstilos(tab.getId(),tab.getGrupo(),tab);}}
+                        if(comp instanceof areaTexto){areaTexto areaT = (areaTexto)comp; if(id.equals(areaT.getId())){areaT.setGrupo(id_);actualizarEstilos(areaT.getId(),areaT.getGrupo(),areaT);}}
                         break;
                     case "alineado":
                         if(comp instanceof Panel){Panel pnl = (Panel)comp; if(id.equals(pnl.getId())){pnl.setAlineado(id_);}else{modificarAtri(id,atributo,valor,pnl);}}
